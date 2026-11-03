@@ -1,0 +1,143 @@
+---
+title: "Half of car-page leads now start at entry points I designed"
+seoTitle: "New entry points on VinFast's car pages | Leo Lam Nguyen"
+description: "Three new ways to reach the form on VinFast's car pages. Half of all leads now start there."
+order: 2
+company: VinFast
+year: "2026"
+role: Requirements lead
+team: "Web team (build), tag admin, my manager (scope)"
+timeline: "Sep to Oct 2026"
+stages: [Discover, Define, Decide, Measure]
+tools: [GA4, Google Tag Manager, Excel]
+note: "Updated November 2026. More data in December."
+tiles:
+  - { value: "54%", label: "Car-page leads via new entry points", note: "first nine days after launch" }
+  - { value: "+41%", label: "Leads per 1,000 visits", note: "first nine days after launch" }
+  - { value: "4", label: "Ways to reach the form", note: "was one, at the very bottom" }
+glance:
+  problem: "After a redesign, VinFast's car pages collected far fewer leads per visit, and the only form sat at the bottom of a long page."
+  did: "I mapped where the page lost people and designed three new ways to reach the form, each with its own tag."
+  role: "Diagnosis, spec and tracking. The web team built and shipped it."
+roles:
+  mine: "The button map, the entry point spec, the tracking spec (a position tag and an ID on every call to action), content checks before launch, and the analysis."
+  team: "The web team built and released it, the tag admin published the tags, my manager set the scope, and the website planning team approved the launch."
+next: b2b-website-leads
+card:
+  teaser: "After a redesign, VinFast's car pages collected far fewer leads per visit, and the only form sat at the very bottom. I designed three new ways to reach it, each with its own tag. Within nine days, half of all leads came through them, and leads per 1,000 visits rose 41%."
+  result: "54% of car-page leads via the new entry points"
+  image: "../../assets/images/cases/car/live-hero.jpg"
+  imageAlt: "The live VF 9 product page hero, with the starting price and one deposit button."
+  imageCaption: "Live on the VF 9 page."
+  imageKind: wide
+ogImage: /og/car-product-pages.png
+---
+import { Image } from 'astro:assets';
+import EntryMap from '../../components/case/visuals/EntryMap.astro';
+import ShareBars from '../../components/case/visuals/ShareBars.astro';
+import heroBefore from '../../assets/images/cases/car/hero-before.jpg';
+import sectionBefore from '../../assets/images/cases/car/section-before.png';
+import propHero from '../../assets/images/cases/car/proposal-hero.png';
+import propForm from '../../assets/images/cases/car/proposal-form.png';
+import propSticky from '../../assets/images/cases/car/proposal-sticky.png';
+import liveHero from '../../assets/images/cases/car/live-hero.jpg';
+import liveForm from '../../assets/images/cases/car/live-form.jpg';
+
+<Section id="problem" title="A new design, and the lead pop-up was gone">
+
+In late September VinFast moved its car product pages to a new domain with a new design, and the lead pop-up went away with it. Visitors kept coming, but leads per visit dropped sharply. For a car brand, those leads are the start of the sales pipeline.
+
+</Section>
+
+<Section id="found" title="Ten buttons a page, and none of them opened the form">
+
+People still came to research a car, scrolled, and left. I mapped every button on every car page: ten per page. Seven sent people to the online shop to place a deposit, and two only scrolled them to the bottom. The only way to leave contact details was the form at the very end, so anyone who made up their mind halfway down had to scroll all the way or leave.
+
+<Figure caption="Before: two buttons competing in the hero, and a section button that scrolled to the bottom.">
+  <Image src={heroBefore} alt="The hero before: two buttons side by side, deposit and test drive." widths={[480, 800, 1200]} sizes="(min-width: 1100px) 680px, 100vw" />
+  <Image src={sectionBefore} alt="The design section before: a consultation button that only scrolled to the bottom of the page." widths={[480, 800, 1200]} sizes="(min-width: 1100px) 680px, 100vw" />
+</Figure>
+
+</Section>
+
+<Section id="decisions" title="Entry points now, the section rework later">
+
+<Decisions>
+<Decision title="Entry points first">
+
+Reworking every section would take months. New ways to reach the form could ship in weeks, so I went with entry points first, cars before scooters. The section rework became <a href="/work#cost-tool" class="ul">its own proposal</a>.
+
+</Decision>
+<Decision title="One button in the hero">
+
+Deposit and test drive competed for people who had just arrived. I put the starting price up top with one deposit button. People who are ready press it, everyone else keeps reading, and test drive still lives in the header.
+
+</Decision>
+<Decision title="Open the form in place">
+
+A consultation button already sat right after the photos of the car, where interest peaks, but it scrolled people to the bottom. I specified it to open the form where they are.
+
+</Decision>
+<Decision title="A header button, from the designer">
+
+I proposed a sticky bar that appears after the hero. The UI designer pointed out that too many fixed elements would crowd the page and suggested the header's test-drive button open the consultation form too. That became the third entry point.
+
+</Decision>
+<Decision title="Three required fields">
+
+Research favors fewer fields, but the CRM can't create a lead without a name, phone number and email. I kept all three and wrote the trade-off down.
+
+</Decision>
+<Decision title="A tag on every entry point">
+
+The default was one generic lead event. I gave every entry point its own position tag, which is how I can show exactly where leads now start.
+
+</Decision>
+</Decisions>
+
+<Figure frame="sand" caption="From my proposal to the web team.">
+  <Image src={propHero} alt="Proposal: one deposit button under the car's key numbers." widths={[480, 775]} sizes="(min-width: 1100px) 650px, 100vw" />
+  <Image src={propForm} alt="Proposal: the consultation form opening over the page instead of scrolling to the bottom." widths={[480, 800, 1200]} sizes="(min-width: 1100px) 650px, 100vw" />
+  <Image src={propSticky} alt="Proposal: a sticky bar with the starting price and a consultation button." widths={[480, 800, 1103]} sizes="(min-width: 1100px) 650px, 100vw" />
+</Figure>
+
+</Section>
+
+<Section id="shipped" title="Four ways to reach the form, each tagged">
+
+Live on 23 October across VinFast's car product pages.
+
+<EntryMap />
+
+<Figure caption="Live on the VF 9 page.">
+  <Image src={liveHero} alt="The live VF 9 page: starting price and one deposit button in the hero." widths={[480, 800, 1015]} sizes="(min-width: 1100px) 680px, 100vw" />
+  <Image src={liveForm} alt="The live VF 9 page: a consultation form next to the design section." widths={[480, 800, 1015]} sizes="(min-width: 1100px) 680px, 100vw" />
+</Figure>
+
+</Section>
+
+<Section id="results" title="Half of car-page leads now start at the new entry points">
+
+In the first nine days, 54% of car-page leads came through the new entry points, and leads per 1,000 visits rose 41%.
+
+<ShareBars
+  label="Share of car-page leads by entry point. Before launch, all leads came from the bottom form. In the first nine days after launch, 54% came from the new entry points."
+  caption="Car-page leads by entry point, 23 to 31 October."
+  nameWidth="64px"
+  rows={[
+    { name: 'Before', segments: [{ text: 'Bottom form 100%', pct: 100 }] },
+    { name: 'After', segments: [{ text: 'New entry points 54%', pct: 54, hl: true }, { text: 'Bottom form', pct: 46 }] },
+  ]}
+/>
+
+Next, I re-measure at six weeks in early December and join leads to deposits in the CRM mid-December.
+
+</Section>
+
+<Section id="learned" title="Small changes in the right place come first">
+
+- A tag on every entry point costs almost nothing and pays off on day one. It's why I can show where half the leads now start.
+- Four ways to reach the form shipped in weeks; the section rework would have taken months.
+- Next: the mid-page cost tool and form I've already prototyped, so more of the people who read the page leave their details.
+
+</Section>

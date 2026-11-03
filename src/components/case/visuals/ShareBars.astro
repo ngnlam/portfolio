@@ -1,0 +1,51 @@
+---
+// Recreated horizontal share bars: one row per period, each row split into segments.
+// Used for "leads by entry point" and "form completion". Pass a full sentence as `label`.
+interface Segment { text: string; pct: number; hl?: boolean }
+interface Row { name: string; segments: Segment[] }
+interface Props {
+  rows: Row[];
+  label: string;
+  caption?: string;
+  nameWidth?: string;
+}
+const { rows, label, caption, nameWidth = '72px' } = Astro.props;
+---
+<figure class="figure share">
+  <div role="img" aria-label={label} class="share__box" style={`--name:${nameWidth}`}>
+    {rows.map((r) => (
+      <div class="share__row" aria-hidden="true">
+        <span class="lbl lbl--sm share__name">{r.name}</span>
+        <div class="share__bar">
+          {r.segments.map((s, i) => (
+            <div
+              class:list={['share__seg', s.hl && 'share__seg--hl', i === r.segments.length - 1 && r.segments.reduce((a, b) => a + b.pct, 0) < 100 && 'share__seg--edge']}
+              style={`width:${s.pct}%`}
+            >{s.text}</div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+  {caption && <figcaption class="figure__caption muted">{caption}</figcaption>}
+</figure>
+
+<style>
+  .share { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .share__box {
+    background: var(--color-white); border: var(--line); border-radius: var(--radius-md);
+    padding: 20px; display: flex; flex-direction: column; gap: 14px;
+  }
+  @media (min-width: 640px) { .share__box { padding: 24px; } }
+  .share__row { display: flex; align-items: center; gap: 12px; }
+  .share__name { flex: 0 0 var(--name); }
+  .share__bar { flex: 1 1 auto; min-width: 0; height: 32px; display: flex; border: var(--line); border-radius: 8px; overflow: hidden; background: var(--color-cream); }
+  .share__seg {
+    background: var(--color-silver); display: flex; align-items: center;
+    padding-left: 10px; font-size: 13px; line-height: 1.2; white-space: nowrap; overflow: hidden;
+  }
+  .share__seg + .share__seg { border-left: var(--line); }
+  .share__seg--edge { border-right: var(--line); }
+  .share__seg--hl { background: var(--color-sun); font-weight: 600; }
+  .figure__caption { font-size: 14px; line-height: 1.5; }
+</style>

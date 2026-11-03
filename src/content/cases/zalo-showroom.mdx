@@ -1,0 +1,127 @@
+---
+title: "VinFast's showroom inside Zalo: 30 models, every lead straight to the sales system"
+seoTitle: "VinFast's showroom inside Zalo | Leo Lam Nguyen"
+description: "A Zalo Mini App with 30 VinFast models and a consultation form that sends every lead to the sales system with its source. I was the business owner."
+order: 1
+company: VinFast
+year: "2026"
+role: Product owner
+team: "A growth manager (idea, sign-off), a vendor team (design, build), Salesforce and DMS teams (lead intake), legal and data protection"
+timeline: "Sep to Nov 2026"
+status: "Passed acceptance testing, launching next"
+stages: [Discover, Define, Decide, Ship]
+tools: [Zalo, Figma, Excel]
+tiles:
+  - { value: "30", label: "Models checked one by one", note: "13 cars and 17 scooters" }
+  - { value: "95", label: "Acceptance checks", note: "all passed" }
+  - { value: "81", label: "Product codes mapped", note: "so every model reaches the sales system" }
+glance:
+  problem: "To learn about or buy a VinFast, people had to go to the website. The team wanted VinFast where customers already spend their day: inside Zalo."
+  did: "I took the mini app from an approved idea to a release that passed acceptance testing: scope, lead tracking, legal checks, content audits and testing."
+  role: "Product owner. A vendor team designed and built the app."
+roles:
+  mine: "Scope with the growth manager, tracking requirements, setting up the app on Zalo's portal, legal and data protection, content and design audits, the 81-code mapping, a demo screen, acceptance testing and the checklist."
+  team: "The growth manager proposed the idea and signed off testing; a vendor team designed and built the app; the Salesforce and sales system teams set up lead intake; legal and the data protection officer reviewed it."
+next: car-product-pages
+card:
+  teaser: "To learn about or buy a VinFast, people had to go to the website. As business owner, I took a mini app inside Zalo from an approved idea to a release that passed all 95 acceptance checks. Launch is next."
+  result: "95 acceptance checks passed"
+  image: "../../assets/images/cases/zalo/home.png"
+  imageAlt: "The mini app's home screen inside Zalo: a promo banner, electric cars and electric scooters with starting prices, and a Get a consultation button."
+  imageCaption: "The mini app's home screen."
+  imageKind: phone
+ogImage: /og/zalo-showroom.png
+---
+import { Image } from 'astro:assets';
+import PhoneRow from '../../components/case/visuals/PhoneRow.astro';
+import UatTables from '../../components/case/visuals/UatTables.astro';
+import zHome from '../../assets/images/cases/zalo/home.png';
+import zList from '../../assets/images/cases/zalo/listing.png';
+import zFeliz from '../../assets/images/cases/zalo/feliz.png';
+import zForm from '../../assets/images/cases/zalo/form.jpg';
+import zThanks from '../../assets/images/cases/zalo/thanks.jpg';
+import zError from '../../assets/images/cases/zalo/form-error.png';
+
+<Section id="problem" title="Customers live in Zalo. The showroom lived on the website.">
+
+In August the company approved a sales channel inside Zalo: browse cars and scooters, see each model, ask for a consultation. In September I was made business owner. Every lead had to land in the same sales system as every other channel, and be counted as Zalo.
+
+</Section>
+
+<Section id="found" title="Zalo leads were hiding under Facebook">
+
+1. **Zalo had no source of its own.** Checking the sales system showed more than a thousand leads since 2025 logged as Facebook that had really come from Zalo. So a dedicated lead source went into the requirements in the first week.
+2. **A deposit button changes the rules.** Legal advised that taking deposits online would bring the full e-commerce ordering rules into play.
+3. **The build drifted from the website.** My audit against the website found most car prices out of date, missing colors and specs, and a model that was no longer on sale. A second audit of 17 scooter screens in Figma found missing, extra and duplicated models.
+
+</Section>
+
+<Section id="decisions" title="Lead capture first, deposits later">
+
+<Decisions>
+<Decision title="Phase 1 is four screens">
+
+Home, a listing, a page per model and a consultation form. Deposits, e-contracts and test-drive booking moved to phase 2: a new sales system was due in October, so a deposit flow built now would be built twice.
+
+</Decision>
+<Decision title="The form lives inside the app">
+
+Sending people to the website meant a frame inside a frame, so the form was built into the app.
+
+</Decision>
+<Decision title="A lead source of its own">
+
+Every lead reaches the sales system tagged as Zalo Mini App, with UTM source and campaign fields. I ruled out writing campaign names into the subject field, because it already held three kinds of content and marks records the system creates. I proposed the same UTM fields for every channel.
+
+</Decision>
+<Decision title="Collect only what's needed">
+
+The app reads only the Zalo user ID and sends the form straight to VinFast's servers. That's why the data protection officer agreed no data processing agreement with Zalo was needed.
+
+</Decision>
+</Decisions>
+
+</Section>
+
+<Section id="shipped" title="Four screens, 30 models, one form">
+
+- Home with cars and scooters; cars split into personal and service vehicles, scooters into premium, mid-range and everyday; a page per model with colors, price and specs; a Get a consultation button at the bottom of every screen.
+- Tracking requirements in the BRD, and the mini app set up on Zalo's developer portal.
+- Content and design audits, with fix lists for the vendor.
+- A mapping of 81 product codes so Salesforce and the sales system recognize every model.
+- A demo screen for a new scooter, Feliz 2027, for the vendor's designer to follow.
+- The acceptance checklist: 30 models, each checked for images and colors, price and specs, and a lead reaching the sales system; plus 5 checks on the form.
+
+<PhoneRow
+  caption="Screens from acceptance testing, and the car listing from the design file, before the final model list. Phone number blurred."
+  screens={[
+    { src: zHome, alt: 'The mini app home screen: a banner, electric cars and electric scooters with starting prices, and a Get a consultation button.' },
+    { src: zList, alt: 'The car listing in the design file: personal electric cars and service vehicles, each with a starting price.' },
+    { src: zFeliz, alt: 'A scooter page in the mini app: colors, price, highlights and the consultation button.' },
+    { src: zForm, alt: 'The consultation form, with the phone number blurred.' },
+    { src: zThanks, alt: 'The thank-you screen after a request is sent.' },
+  ]}
+/>
+
+<UatTables />
+
+<Figure caption="A form rule at work: a phone number in the wrong format is blocked." class="zalo-error">
+  <Image src={zError} alt="The form blocking a phone number in the wrong format, with an example of the right format." widths={[387]} sizes="360px" style="max-width: 360px" />
+</Figure>
+
+</Section>
+
+<Section id="results" title="95 checks passed. Launch is next.">
+
+- All 95 acceptance checks passed in late October, and the growth manager signed off.
+- Testing caught the form accepting only two models, one car and one scooter: the app had reused an outdated model list from an older app. The 81-code mapping fixed it before sign-off.
+- The vendor is doing its final flow review before the app goes live. From day one, every Zalo lead will be countable on its own.
+
+</Section>
+
+<Section id="learned" title="The risky part was the data we reused">
+
+- The form broke because of a model list copied from an older app, not because of new code. Now I check reused data first.
+- Agreeing the lead source in week one meant the measurement was ready before the screens were.
+
+</Section>

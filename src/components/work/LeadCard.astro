@@ -1,0 +1,54 @@
+---
+// Recreated morning lead card. Company and people replaced with placeholders.
+---
+<figure class="lead">
+  <div class="lead__card">
+    <div class="lead__head">
+      <span class="lbl lbl--sm">New lead, morning digest</span>
+      <span class="lbl lbl--sm lead__score">Score 9 of 10</span>
+    </div>
+    <div class="lead__body">
+      <div class="lead__top">
+        <div>
+          <div class="d lead__co">[Company]</div>
+          <div class="lead__sub muted">Medical AI, United States</div>
+        </div>
+        <span class="lead__urg">Urgency: high</span>
+      </div>
+      <dl class="lead__facts">
+        <dt class="lbl lbl--sm muted">Signal</dt><dd>Regulatory approval announced this week</dd>
+        <dt class="lbl lbl--sm muted">Why now</dt><dd>A new product needs more labeled imaging data</dd>
+        <dt class="lbl lbl--sm muted">Contacts</dt><dd>[Name], CEO<br />[Name], CTO</dd>
+      </dl>
+      <div class="lead__draft">
+        <span class="lbl lbl--sm clay">Draft email</span>
+        <p>Hi [Name], congratulations on the approval. Teams scaling a model after clearance usually need more labeled data, fast. We collect and annotate...</p>
+      </div>
+      <div class="lead__actions" aria-hidden="true">
+        <span class="lead__btn lead__btn--p">Contacted</span>
+        <span class="lead__btn">Not a fit</span>
+        <span class="lead__btn">Open LinkedIn draft</span>
+      </div>
+    </div>
+  </div>
+  <figcaption class="lbl lbl--sm muted">Recreated; company and names removed</figcaption>
+</figure>
+
+<style>
+  .lead { margin: 0; max-width: 520px; display: flex; flex-direction: column; gap: 10px; }
+  .lead__card { background: var(--color-white); border: var(--line); border-radius: var(--radius-md); overflow: hidden; }
+  .lead__head { padding: 12px 16px; border-bottom: var(--line); display: flex; justify-content: space-between; align-items: center; gap: 10px; background: var(--color-sun-soft); }
+  .lead__score { background: var(--color-white); border: var(--line); border-radius: 999px; padding: 3px 10px; white-space: nowrap; }
+  .lead__body { padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+  .lead__top { display: flex; justify-content: space-between; gap: 12px; }
+  .lead__co { font-size: 22px; line-height: 1.1; }
+  .lead__sub { font-size: 13px; margin-top: 4px; }
+  .lead__urg { align-self: flex-start; font-size: 12px; font-weight: 600; border: var(--line); border-radius: 999px; padding: 3px 10px; white-space: nowrap; }
+  .lead__facts { display: grid; grid-template-columns: 96px 1fr; gap: 8px 12px; font-size: 14px; line-height: 1.45; }
+  .lead__facts dt { padding-top: 2px; }
+  .lead__draft { background: var(--color-cream); border: var(--line); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 4px; }
+  .lead__draft p { font-size: 13px; line-height: 1.5; }
+  .lead__actions { display: flex; flex-wrap: wrap; gap: 8px; }
+  .lead__btn { font-size: 13px; font-weight: 600; border: var(--line); border-radius: 999px; padding: 6px 12px; }
+  .lead__btn--p { background: var(--color-sun); }
+</style>

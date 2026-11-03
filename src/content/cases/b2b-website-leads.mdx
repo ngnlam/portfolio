@@ -1,0 +1,164 @@
+---
+title: "A website that turns visitors into enquiries BD can act on"
+seoTitle: "A B2B website that turns visitors into enquiries | Leo Lam Nguyen"
+description: "Sitemap, lead capture, tracking and routing for VinDynamics' website. Form completion rose from 50% to 71% once people started."
+order: 3
+company: VinDynamics
+year: "2026"
+role: Product owner
+team: "A web vendor (build), an outside designer (page design, with me), a teammate (ad platform tags), BD (lead owners)"
+timeline: "Apr to Aug 2026"
+stages: [Discover, Define, Decide, Ship, Measure]
+tools: [GA4, Google Tag Manager, Looker Studio, Power Automate]
+tiles:
+  - { value: "71%", label: "Finished the form once started", note: "up from 50%" }
+  - { value: "4", label: "Places to leave details", note: "along a visitor's path, ranked P1 to P3" }
+  - { value: "<1 min", label: "Form to the right person", note: "in Microsoft Teams" }
+glance:
+  problem: "In April 2026 VinDynamics' website had no event tracking. Enquiries landed in a raw email inbox, and nobody could tell what a visitor wanted or which page brought them."
+  did: "I wrote the roadmap, laid out the sitemap and navigation for the revamp, planned where and how visitors could leave their details, specified the tracking, and built the routing that sends every enquiry to the right person."
+  role: "Product owner for the site's growth side. I set the design direction with an outside designer, and a web vendor built it."
+roles:
+  mine: "The roadmap, sitemap and navigation, the design direction with the designer, a 12-page audit, the growth element plan, the vendor brief, tracking specs, homepage tag setup, lead routing, the sample email brief, acceptance testing, the weekly report and SEO."
+  team: "The web vendor built the site, forms and email; an outside designer designed the pages; a teammate owned ad platform tags and conversion import; BD owns the leads."
+next: dyno-requirements
+card:
+  teaser: "VinDynamics' site had no tracking and sent every enquiry to an inbox. I laid out the sitemap and navigation, ranked where visitors could leave their details, specified the tracking and routed every enquiry to the right person."
+  result: "Form completion up from 50% to 71%"
+  image: "../../assets/images/cases/web/plan-home.png"
+  imageAlt: "A homepage mockup with Get Sample Data and Talk to Our Team buttons in the menu, and a sample request form beside the hero."
+  imageCaption: "From my growth element plan: two buttons in the menu and a sample form on the homepage."
+  imageKind: wide
+ogImage: /og/b2b-website-leads.png
+---
+import { Image } from 'astro:assets';
+import Sitemap from '../../components/case/visuals/Sitemap.astro';
+import ShareBars from '../../components/case/visuals/ShareBars.astro';
+import planHome from '../../assets/images/cases/web/plan-home.png';
+import planDataset from '../../assets/images/cases/web/plan-dataset.png';
+import planChat from '../../assets/images/cases/web/plan-chat.png';
+import planExit from '../../assets/images/cases/web/plan-exit.png';
+import contactForm from '../../assets/images/cases/web/contact-form.png';
+import sampleEmail from '../../assets/images/cases/web/sample-email.png';
+import teamsCard from '../../assets/images/cases/web/teams-card.png';
+import flowCard from '../../assets/images/cases/web/flow-card.png';
+import flowSwitch from '../../assets/images/cases/web/flow-switch.png';
+
+<Section id="problem" title="No tracking, and enquiries buried in an inbox">
+
+For a company selling robot training data, the website is where an AI lab first asks for a sample. The revamp brief put it plainly: no event tracking, and no record of what visitors did. Enquiries that did come in sat in an inbox, so BD heard about them late and couldn't tell a buyer from a job seeker.
+
+</Section>
+
+<Section id="found" title="Buyers read first, then ask for a sample">
+
+1. **Buyers research before they talk.** B2B teams in AI and robotics read a lot before contacting anyone. Put the right offer where they are reading, a free sample, and they leave their details.
+2. **"Saw the form" couldn't be measured.** There was no event for it, and the form sat at the bottom of every page, so scrolling down counted as seeing it.
+3. **Leads arrived without context.** The form didn't ask what someone was interested in, and job applications came through the same form as B2B enquiries.
+4. **News readers had no next step.** Articles ended without a call to action.
+
+</Section>
+
+<Section id="decisions" title="A free sample, offered in four places">
+
+<Decisions>
+<Decision title="A sample, not a newsletter">
+
+The default was a newsletter sign-up. I made a free sample dataset the main offer, because someone asking for data is telling you what they want to buy.
+
+</Decision>
+<Decision title="Four places to leave details, ranked">
+
+P1: two buttons fixed in the menu, Get Sample Data and Talk to Our Team, plus a form at the end of the homepage and on each dataset page with the dataset already filled in. P2: an exit popup on desktop, shown once per session after 45 seconds and 30% of the page. P3: a chat bubble on product and Data Factory pages that opens after 90 seconds. Encord and Labelbox use the same menu pattern.
+
+</Decision>
+<Decision title="Fewer fields where intent is lower">
+
+Two fields on the exit popup, four on the sample form, five on Talk to Our Team, where the person already wants a conversation.
+
+</Decision>
+<Decision title="One door, one lead event">
+
+Samples only come through a form, so `generate_lead` is the single end point and every lead is counted once. Each form records where it sat and what the person is interested in.
+
+</Decision>
+<Decision title="Defer what isn't ready">
+
+A resources hub (no content yet) and a humanoid product page (not on sale yet) moved to a later phase.
+
+</Decision>
+<Decision title="Track intent, nothing else">
+
+The Data Factory spec has 13 events across discovery, evaluation and lead capture. I cut video plays, section scrolls and page-size changes.
+
+</Decision>
+</Decisions>
+
+<Figure frame="dark" wide caption="From my growth element plan.">
+  <Image src={planHome} alt="Mockup: the homepage with two buttons in the menu, Get sample data and Talk to our team, and a sample request form beside the hero." widths={[480, 880, 1200, 1600, 1815]} sizes="(min-width: 1100px) 860px, 100vw" />
+  <Image src={planDataset} alt="Mockup: a dataset page with a request form on the right and the dataset type already filled in." widths={[480, 880, 1200, 1600]} sizes="(min-width: 1100px) 860px, 100vw" />
+  <FigureRow min="160px">
+    <Image src={planChat} alt="Mockup: the chat bubble asking which kind of data the visitor needs." widths={[240, 479]} sizes="(min-width: 1100px) 240px, 50vw" />
+    <Image src={planExit} alt="Mockup: the exit popup offering a free sample dataset, second step asking for a work email." widths={[480, 1004]} sizes="(min-width: 1100px) 600px, 100vw" />
+  </FigureRow>
+</Figure>
+
+</Section>
+
+<Section id="shipped" title="From sitemap to the Teams card">
+
+- **Roadmap (April):** a brand asset with full tracking and an SEO base by June, steady organic growth through December, a sales touchpoint from 2027.
+- **Sitemap and navigation** for the revamp, including which button leads where, and the design direction, worked out with the outside designer.
+- **Growth element plan:** the four places to leave details on the site, plus off-site entry points: LinkedIn lead forms, a gated sample on Hugging Face, search ads and QR codes at events.
+- **Tracking specs** for the new homepage and the Data Factory pages. I set up the homepage tags in Google Tag Manager myself.
+- **Lead routing:** each enquiry posts to Microsoft Teams as a card with five buttons (B2B sales, recruiting, procurement, brand, unclear), and a Power Automate flow sends it on.
+- **Sample email:** a download link arrives within minutes of a request. The vendor built it from my brief.
+- **Weekly website report,** which I own, with Looker Studio dashboards fed from BigQuery. I also owned SEO for the site.
+
+The new homepage went live on 27 June.
+
+<Sitemap />
+
+<Figure caption="Live: the Contact us form, with test entries blurred, and the email that sends the sample.">
+  <FigureRow min="240px">
+    <Image src={contactForm} alt="The Contact us form on the live site, with the test entries blurred." widths={[480, 978]} sizes="(min-width: 1100px) 300px, 100vw" />
+    <Image src={sampleEmail} alt="The email that sends the sample: the dataset requested, a download button and a button to contact sales." widths={[480, 1100]} sizes="(min-width: 1100px) 380px, 100vw" />
+  </FigureRow>
+</Figure>
+
+<Figure caption="The Teams card, with the lead's details blurred, and the two Power Automate flows behind it.">
+  <Image src={teamsCard} alt="A new-lead card in Microsoft Teams, with the lead's details blurred and buttons to tag the type of lead." widths={[480, 800, 1142]} sizes="(min-width: 1100px) 680px, 100vw" />
+  <FigureRow min="220px">
+    <Image src={flowCard} alt="Power Automate flow one: read new rows, post a card to Teams and wait for a response, then update the row." widths={[480, 900]} sizes="(min-width: 1100px) 260px, 100vw" />
+    <Image src={flowSwitch} alt="Power Automate flow two: read tagged rows, then a switch that routes each lead to Sales B2B, Recruitment, Procurement or Brand." widths={[480, 800, 1600]} sizes="(min-width: 1100px) 420px, 100vw" />
+  </FigureRow>
+</Figure>
+
+</Section>
+
+<Section id="results" title="Seven in ten people who start the form now finish it">
+
+<ShareBars
+  label="Among people who started the contact form, 50% finished it before the redesign and 71% after."
+  caption="Share of people who finished the form once they'd started. Source: the website dashboard."
+  nameWidth="120px"
+  rows={[
+    { name: 'Before redesign', segments: [{ text: '50%', pct: 50 }] },
+    { name: 'After redesign', segments: [{ text: '71%', pct: 71, hl: true }] },
+  ]}
+/>
+
+- Among people who started the form, completion rose from 50% to 71% after the redesign.
+- Every enquiry reaches the right person in Teams in under a minute, so BD stopped sorting leads and compiling the spreadsheet by hand.
+- The first B2B meeting request through the website came in mid-June and moved to an NDA the following week.
+- After launch, tracking showed that 96% of people who opened the form never started it, which put the first fields at the top of the next round of fixes.
+- Reports now leave out test traffic and job applications, so BD sees real enquiries.
+
+</Section>
+
+<Section id="learned" title="Fix the measurement before judging the redesign">
+
+- Test traffic and job seekers made up a big share of early "leads", and any before and after built on them would have been noise.
+- Tracking belongs in the first brief. The new homepage's own elements weren't in the vendor's original brief and had to be added later. Now I write the tracking spec alongside the sitemap.
+
+</Section>

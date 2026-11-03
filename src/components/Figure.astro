@@ -48,7 +48,8 @@ const finalWidths = src ? (usable.length ? usable : [src.width]) : [];
 <style>
   .figure { margin: 0; display: flex; flex-direction: column; gap: 10px; }
   @media (min-width: 1100px) {
-    .figure--wide { width: calc(100% + 200px); max-width: none; }
+    /* Bleed up to 200px to the right, never past the gutter (from 1100px the space grows to 200px by about 1210px). */
+    .figure--wide { width: calc(100% + min(200px, 100vw - 1010px)); max-width: none; }
   }
   .figure__frame { display: flex; flex-direction: column; gap: 12px; }
   .figure__frame--white, .figure__frame--sand, .figure__frame--dark {

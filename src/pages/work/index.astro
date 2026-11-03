@@ -1,0 +1,399 @@
+---
+// Work: the four case studies, then twelve smaller projects grouped by kind, then side projects.
+// Case rows come from src/content/cases (card fields). Smaller projects come from src/data/work.ts.
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/Button.astro';
+import Icon from '../../components/Icon.astro';
+import RoleChip from '../../components/RoleChip.astro';
+import ToolChips from '../../components/ToolChips.astro';
+import Pipeline from '../../components/work/Pipeline.astro';
+import LeadCard from '../../components/work/LeadCard.astro';
+import { LOGOS } from '../../data/logos';
+import { COMPANY_LOGO } from '../../data/case';
+import { WORK_GROUPS, SIDE_PROJECTS } from '../../data/work';
+
+const cases = (await getCollection('cases')).sort((a, b) => a.data.order - b.data.order);
+for (const c of cases) {
+  if (!c.data.card?.image) throw new Error(`Case "${c.id}" needs card.image, card.imageAlt and card.teaser for the Work page`);
+}
+
+const anchors = [
+  { label: 'Case studies', href: '#case-studies' },
+  { label: 'New products', href: '#new-products' },
+  { label: 'Live products', href: '#live-products' },
+  { label: 'Data', href: '#data' },
+  { label: 'Side projects', href: '#side-projects' },
+];
+const logoHeight = { VinFast: 46, VinDynamics: 48, 'Xanh SM': 32 } as const;
+---
+<BaseLayout
+  title="Work | Leo Lam Nguyen"
+  description="Product case studies from VinFast, VinDynamics and Xanh SM, with the decisions and the numbers."
+  current="work"
+>
+  <section class="container work-top">
+    <h1 class="d h-display">Work</h1>
+    <nav class="work-anchors" aria-label="Sections on this page">
+      {anchors.map((a, i) => (
+        <a href={a.href} class:list={['lbl', 'work-anchors__link', i === 0 && 'is-first']}>{a.label}</a>
+      ))}
+    </nav>
+  </section>
+
+  <div id="case-studies" class="cases">
+    <header class="container cases__head">
+      <span class="lbl clay">Case studies</span>
+      <h2 class="d h-section">The four I'd walk you through first</h2>
+    </header>
+
+    {cases.map((c, i) => {
+      const card = c.data.card!;
+      const logo = LOGOS[COMPANY_LOGO[c.data.company]];
+      const kind = card.imageKind ?? 'wide';
+      return (
+        <section class:list={['case-row-wrap', i === 0 && 'case-row-wrap--band']} aria-labelledby={`case-${c.id}`}>
+          <div class:list={['container', 'case-row', i === 0 && 'case-row--first', i % 2 === 1 && 'case-row--rev']}>
+            <figure class:list={['case-row__fig', `case-row__fig--${kind}`]}>
+              <Image
+                src={card.image!}
+                alt={card.imageAlt ?? ''}
+                widths={kind === 'phone' ? [230, 460] : [480, 800, 1200]}
+                sizes={kind === 'phone' ? '230px' : kind === 'photo' ? '(min-width: 900px) 420px, 90vw' : '(min-width: 900px) 640px, 90vw'}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                class="case-row__img"
+              />
+              {card.imageCaption && <figcaption class="case-row__cap muted">{card.imageCaption}</figcaption>}
+            </figure>
+            <div class="case-row__text">
+              <span class="case-row__brand">
+                <Image src={logo.src} alt={logo.name} height={logoHeight[c.data.company]} densities={[1, 2]} class="case-row__logo" />
+                <span class="lbl lbl--sm muted">{c.data.year}</span>
+              </span>
+              <h3 id={`case-${c.id}`} class="d case-row__title">{c.data.title}</h3>
+              <p class="case-row__teaser">{card.teaser}</p>
+              <dl class="case-facts">
+                <div class="case-facts__item"><dt class="lbl lbl--sm muted">Role</dt><dd>{c.data.role}</dd></div>
+                <div class="case-facts__item"><dt class="lbl lbl--sm muted">Timeline</dt><dd>{c.data.timeline}</dd></div>
+                <div class="case-facts__item case-facts__item--result"><dt class="lbl lbl--sm muted">Result</dt><dd>{card.result}</dd></div>
+              </dl>
+              <div>
+                <Button
+                  href={`/work/${c.id}`}
+                  variant={i === 0 ? 'primary' : 'secondary'}
+                  block
+                  class={i === 0 ? undefined : 'case-row__btn--alt'}
+                  event="case_card_click"
+                  eventData={{ case: c.id, from: 'work' }}
+                  aria-describedby={`case-${c.id}`}
+                >Read the case study</Button>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    })}
+  </div>
+
+  <section class="container more" aria-labelledby="more-title">
+    <div class="more__head">
+      <span class="lbl clay">More projects</span>
+      <h2 id="more-title" class="d h-section">Twelve more, grouped by kind</h2>
+    </div>
+
+    {WORK_GROUPS.map((g) => (
+      <div id={g.id} class="group">
+        <h3 class="d group__title">{g.name}</h3>
+        <ul class="rows" role="list">
+          {g.rows.map((r) => (
+            <li class="row">
+              <details id={r.id} class="row__details" open={r.id === 'lead-engine'}>
+                <summary class="row__summary" data-umami-event="short_case_expand" data-umami-event-item={r.id}>
+                  <span class="row__main">
+                    <span class="row__title">{r.title}</span>
+                    <span class="row__problem"><span class="lbl lbl--sm clay row__problem-lbl">Problem</span>{r.problem}</span>
+                  </span>
+                  <span class="row__meta">
+                    <RoleChip role={r.role} />
+                    <span class="row__co">
+                      <span class="d row__company">{r.company}</span>
+                      <span class="lbl lbl--sm muted">{r.year}</span>
+                    </span>
+                  </span>
+                  <span class="row__toggle" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.6" fill="none" /></svg>
+                  </span>
+                </summary>
+                <div class="row__body">
+                  <div class="row__cols">
+                    <div class="row__col">
+                      <span class="lbl lbl--sm clay">What I decided</span>
+                      <p>{r.decided}</p>
+                    </div>
+                    <div class="row__col">
+                      <span class="lbl lbl--sm clay">Outcome</span>
+                      <p>{r.outcome}</p>
+                    </div>
+                  </div>
+                  {r.visual === 'lead-engine' && (
+                    <div class="row__visual">
+                      <Pipeline />
+                      <LeadCard />
+                    </div>
+                  )}
+                  {r.images.map((im) => (
+                    <figure class="row__fig" style={`max-width:${im.maxWidth}`}>
+                      <Image src={im.img} alt={im.alt} widths={[480, 820, 1200, 1640].filter((w) => w <= im.img.width)} sizes={`(min-width: 900px) ${im.maxWidth === '100%' ? '1100px' : im.maxWidth}, 100vw`} class="row__img" />
+                      {im.caption && <figcaption class="row__cap muted">{im.caption}</figcaption>}
+                    </figure>
+                  ))}
+                  {r.links.length > 0 && (
+                    <div class="row__links">
+                      {r.links.map((l) => (
+                        <Button href={l.href} variant="secondary" size="sm" target="_blank">
+                          {l.label}<Icon name="arrowUpRight" size={16} />
+                        </Button>
+                      ))}
+                    </div>
+                  )}
+                  <ToolChips tools={r.tools} />
+                </div>
+              </details>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+
+    <div id="side-projects" class="group">
+      <h3 class="d group__title">Side projects</h3>
+      <ul class="rows" role="list">
+        {SIDE_PROJECTS.map((p) => (
+          <li class="row">
+            {p.href ? (
+              <a href={p.href} class="side">
+                <span class="side__title">{p.title}</span>
+                <span class="side__line muted">{p.line}</span>
+                <span class="side__role"><RoleChip role={p.role} /></span>
+                <span class="side__go" aria-hidden="true"><Icon name="arrowUpRight" size={16} /></span>
+              </a>
+            ) : (
+              <div class="side side--static">
+                <span class="side__title">{p.title}</span>
+                <span class="side__line muted">{p.line}</span>
+                <span class="side__role"><RoleChip role={p.role} /></span>
+                <span class="side__go side__go--empty" aria-hidden="true"></span>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ---------- top ---------- */
+  .work-top { padding-block: 40px 40px; display: flex; flex-direction: column; gap: 24px; }
+  @media (min-width: 900px) { .work-top { padding-block: 96px 64px; gap: 28px; } }
+  .work-anchors {
+    display: flex; gap: 8px;
+    overflow-x: auto; scrollbar-width: none;
+    margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter);
+  }
+  .work-anchors::-webkit-scrollbar { display: none; }
+  @media (min-width: 640px) { .work-anchors { flex-wrap: wrap; overflow: visible; margin-inline: 0; padding-inline: 0; } }
+  .work-anchors__link {
+    flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 44px;
+    padding: 0 14px; border: var(--line); border-radius: var(--radius-pill);
+    text-decoration: none; white-space: nowrap;
+  }
+  .work-anchors__link:hover { background: var(--color-white); color: var(--text); }
+  .work-anchors__link.is-first { background: var(--color-sun-soft); }
+  @media (min-width: 900px) { .work-anchors__link.is-first { background: var(--color-white); } }
+
+  /* ---------- case studies ---------- */
+  .cases__head { display: flex; flex-direction: column; gap: 12px; padding-bottom: 24px; }
+  @media (min-width: 900px) { .cases__head { padding-bottom: 40px; } }
+
+  .case-row-wrap { padding-bottom: 16px; }
+  @media (min-width: 900px) {
+    .case-row-wrap { padding-bottom: 0; padding-top: 120px; }
+    .case-row-wrap--band {
+      padding-block: 80px;
+      background: var(--color-sun-soft);
+      border-block: var(--line);
+    }
+  }
+
+  .case-row {
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  /* Phones: each case is a card. */
+  @media (max-width: 899.98px) {
+    .case-row {
+      width: auto;
+      margin-inline: var(--gutter);
+      padding: 12px 12px 20px;
+      background: var(--color-white);
+      border: var(--line); border-radius: var(--radius-md);
+    }
+    .case-row--first { background: var(--color-sun-soft); }
+  }
+  @media (min-width: 900px) {
+    .case-row { flex-direction: row; align-items: center; gap: 48px; }
+    .case-row--rev { flex-direction: row-reverse; }
+  }
+
+  .case-row__fig {
+    margin: 0; min-width: 0;
+    background: var(--color-sand);
+    border: var(--line); border-radius: 12px;
+    padding: 12px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .case-row--first .case-row__fig { background: var(--color-cream); }
+  @media (min-width: 900px) {
+    .case-row__fig { flex: 7 1 520px; padding: 32px; border-radius: var(--radius-lg); gap: 14px; }
+  }
+  .case-row__fig--phone, .case-row__fig--photo { align-items: center; }
+  .case-row__fig :global(.case-row__img) {
+    width: 100%; height: auto;
+    border: var(--line); border-radius: 12px; background: var(--color-white);
+  }
+  .case-row__fig--phone :global(.case-row__img) { width: min(230px, 70%); border-radius: 28px; }
+  .case-row__fig--photo :global(.case-row__img) { max-width: 420px; }
+  .case-row__cap { font-size: 13px; line-height: 1.5; align-self: stretch; }
+
+  .case-row__text { min-width: 0; display: flex; flex-direction: column; gap: 16px; padding-inline: 4px; }
+  @media (min-width: 900px) { .case-row__text { flex: 5 1 380px; gap: 20px; padding-inline: 0; } }
+  .case-row__brand { display: flex; align-items: center; gap: 12px; }
+  .case-row__text :global(.case-row__logo) { height: 36px; width: auto; }
+  @media (min-width: 900px) { .case-row__text :global(.case-row__logo) { height: 46px; } }
+  .case-row__title { font-size: clamp(26px, 3.2vw, 46px); line-height: 1.08; }
+  .case-row__teaser { font-size: 16px; line-height: 1.6; }
+  @media (min-width: 900px) { .case-row__teaser { font-size: 18px; } }
+
+  .case-facts {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-block: var(--line);
+  }
+  .case-facts__item { padding: 12px 12px 12px 0; display: flex; flex-direction: column; gap: 6px; }
+  .case-facts__item dd { font-size: 14px; line-height: 1.4; }
+  .case-facts__item + .case-facts__item:not(.case-facts__item--result) { padding-left: 12px; border-left: 1px solid rgb(31 34 38 / 0.2); }
+  .case-facts__item--result { grid-column: 1 / -1; border-top: 1px solid rgb(31 34 38 / 0.2); }
+  .case-facts__item--result dd { font-weight: 600; }
+  @media (min-width: 900px) {
+    .case-facts { grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 1.3fr); }
+    .case-facts__item { padding-block: 14px; }
+    .case-facts__item dd { font-size: 15px; }
+    .case-facts__item--result { grid-column: auto; border-top: 0; padding-left: 12px; padding-right: 0; border-left: 1px solid rgb(31 34 38 / 0.2); }
+  }
+  @media (min-width: 900px) {
+    .case-row__text :global(.case-row__btn--alt) { background: var(--color-sun); }
+  }
+
+  /* ---------- more projects ---------- */
+  .more { padding-block: 64px 96px; display: flex; flex-direction: column; gap: 48px; }
+  @media (min-width: 900px) { .more { padding-block: 128px; gap: 56px; } }
+  .more__head { border-top: 1px solid rgb(31 34 38 / 0.25); padding-top: 48px; display: flex; flex-direction: column; gap: 12px; }
+  @media (min-width: 900px) { .more__head { padding-top: 64px; } }
+
+  .group { display: flex; flex-direction: column; }
+  .group__title { font-size: 22px; font-weight: 500; color: var(--color-clay); padding-bottom: 14px; border-bottom: var(--line); }
+  @media (min-width: 900px) { .group__title { font-size: 24px; } }
+  .rows { list-style: none; margin: 0; padding: 0; }
+  .row { border-bottom: 1px solid rgb(31 34 38 / 0.2); }
+
+  .row__summary {
+    list-style: none; cursor: pointer;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "main toggle" "meta meta";
+    gap: 10px 16px;
+    padding: 18px 4px;
+  }
+  .row__summary::-webkit-details-marker { display: none; }
+  .row__summary:hover { background: var(--color-white); }
+  .row__main { grid-area: main; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+  .row__title { font-size: 17px; font-weight: 500; line-height: 1.35; }
+  .row__problem { font-size: 15px; line-height: 1.5; color: var(--text-muted); }
+  .row__problem-lbl { margin-right: 8px; }
+  .row__meta { grid-area: meta; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .row__co { display: inline-flex; align-items: baseline; gap: 8px; }
+  .row__company { font-size: 15px; white-space: nowrap; }
+  .row__toggle {
+    grid-area: toggle; align-self: start;
+    width: 32px; height: 32px; border: var(--line); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform var(--dur) var(--ease), background-color var(--dur) var(--ease);
+  }
+  .row__details[open] .row__toggle { transform: rotate(45deg); background: var(--color-sun); }
+  .row__details[open] .row__summary { background: var(--color-white); }
+  @media (min-width: 900px) {
+    .row__summary {
+      grid-template-columns: minmax(0, 1fr) 210px 112px auto;
+      grid-template-areas: "main meta-role meta-co toggle";
+      align-items: center; gap: 16px 24px; padding: 20px 12px; min-height: 64px;
+    }
+    .row__title { font-size: 18px; }
+    .row__meta { display: contents; }
+    .row__meta > :global(.role-chip) { grid-area: meta-role; justify-self: start; }
+    .row__co { grid-area: meta-co; flex-direction: column; align-items: flex-start; gap: 2px; }
+    .row__toggle { align-self: center; }
+  }
+
+  .row__body { padding: 8px 4px 32px; display: flex; flex-direction: column; gap: 24px; background: var(--color-white); }
+  @media (min-width: 900px) { .row__body { padding: 8px 12px 32px; } }
+  .row__cols { display: flex; flex-wrap: wrap; gap: 24px 32px; }
+  .row__col { flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+  .row__col p { font-size: 16px; line-height: 1.65; }
+  .row__visual { display: flex; flex-direction: column; gap: 16px; }
+  .row__fig { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+  .row__fig :global(.row__img) { width: 100%; height: auto; border: var(--line); border-radius: 12px; background: var(--color-white); }
+  .row__cap { font-size: 13px; line-height: 1.5; }
+  .row__links { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  /* ---------- side projects ---------- */
+  .side {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "title go" "line line" "role role";
+    gap: 8px 16px; align-items: center;
+    padding: 18px 4px;
+    text-decoration: none; color: var(--text);
+  }
+  a.side:hover { background: var(--color-white); color: var(--text); }
+  .side__title { grid-area: title; font-size: 17px; font-weight: 500; }
+  .side__line { grid-area: line; font-size: 15px; line-height: 1.5; }
+  .side__role { grid-area: role; display: flex; }
+  .side__go {
+    grid-area: go; width: 32px; height: 32px; border: var(--line); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .side__go--empty { border-color: transparent; }
+  @media (min-width: 900px) {
+    .side {
+      grid-template-columns: minmax(0, 2fr) minmax(0, 3fr) 210px auto;
+      grid-template-areas: "title line role go";
+      gap: 16px 24px; padding: 18px 12px; min-height: 64px;
+    }
+    .side__title { font-size: 18px; }
+  }
+</style>
+
+<script>
+  // Open a project row when the page is opened at its anchor, e.g. /work#cost-tool.
+  const openFromHash = () => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (el instanceof HTMLDetailsElement && !el.open) {
+      el.open = true;
+      el.scrollIntoView({ block: 'start' });
+    }
+  };
+  openFromHash();
+  window.addEventListener('hashchange', openFromHash);
+</script>

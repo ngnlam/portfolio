@@ -1,0 +1,30 @@
+---
+// A row of phone screenshots on a sand panel. Each screen keeps its own alt text.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+interface Screen { src: ImageMetadata; alt: string }
+interface Props { screens: Screen[]; caption?: string }
+const { screens, caption } = Astro.props;
+---
+<figure class="figure phones">
+  <div class="phones__panel">
+    {screens.map((s) => (
+      <Image src={s.src} alt={s.alt} widths={[220, 330].filter((w) => w <= s.src.width).concat(s.src.width < 220 ? [s.src.width] : [])} sizes="110px" class="phones__img" loading="lazy" />
+    ))}
+  </div>
+  {caption && <figcaption class="figure__caption muted">{caption}</figcaption>}
+</figure>
+
+<style>
+  .phones { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .phones__panel {
+    background: var(--color-sand); border: var(--line); border-radius: var(--radius-md);
+    padding: 16px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; align-items: flex-start;
+  }
+  @media (min-width: 640px) { .phones__panel { padding: 20px; gap: 16px; } }
+  .phones :global(.phones__img) {
+    width: 92px; height: auto; border: var(--line); border-radius: 12px; background: var(--color-white);
+  }
+  @media (min-width: 640px) { .phones :global(.phones__img) { width: 110px; border-radius: 16px; } }
+  .figure__caption { font-size: 14px; line-height: 1.5; }
+</style>

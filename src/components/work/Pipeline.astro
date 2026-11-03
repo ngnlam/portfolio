@@ -1,0 +1,64 @@
+---
+// Recreated: the outbound lead pipeline Leo built in n8n. A row of six steps on desktop,
+// a numbered two-column grid on phones. One image for screen readers.
+const steps = [
+  { t: 'Signal watch', s: 'Funding, launches, approvals, research papers', d: 'M4 12h3l3-7 4 14 3-7h3' },
+  { t: 'Claude scores', s: 'Relevance, sector, urgency', d: 'M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z' },
+  { t: 'Hunter finds contacts', s: 'Two decision makers', d: 'M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM20 20l-4-4' },
+  { t: 'Claude drafts', s: 'An email and a LinkedIn message', d: 'M4 6h16v12H4zM4 7l8 6 8-6' },
+  { t: 'Morning card in Teams', s: 'Up to 20 companies a day', d: 'M4 5h16v11H9l-5 4z' },
+  { t: 'BD reviews and sends', s: 'A person sends every message', d: 'M5 12l4 4 10-10' },
+];
+const label =
+  'The outbound pipeline, recreated: signal watch, Claude scores, Hunter finds contacts, Claude drafts an email and a LinkedIn message, a morning card in Teams with up to 20 companies a day, and BD reviews and sends every message.';
+---
+<div class="pipe" role="img" aria-label={label}>
+  <div class="pipe__head" aria-hidden="true">
+    <span class="lbl lbl--sm">Outbound pipeline, built in n8n</span>
+    <span class="lbl lbl--sm pipe__tag">Recreated</span>
+  </div>
+  <ol class="pipe__steps" aria-hidden="true">
+    {steps.map((s, i) => (
+      <li class="pipe__node">
+        <span class="pipe__ic">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d={s.d} /></svg>
+        </span>
+        <span class="lbl lbl--sm muted pipe__num">{i + 1}</span>
+        <b class="pipe__t">{s.t}</b>
+        <span class="pipe__s">{s.s}</span>
+      </li>
+    ))}
+  </ol>
+</div>
+
+<style>
+  .pipe { background: var(--color-sand); border: var(--line); border-radius: var(--radius-md); padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+  @media (min-width: 900px) { .pipe { padding: 24px; } }
+  .pipe__head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .pipe__tag { background: var(--color-white); border: var(--line); border-radius: 999px; padding: 4px 10px; }
+  .pipe__steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .pipe__node {
+    position: relative; background: var(--color-white); border: var(--line); border-radius: 14px;
+    padding: 12px; display: flex; flex-direction: column; gap: 6px;
+  }
+  .pipe__ic {
+    width: 34px; height: 34px; border-radius: 10px; border: var(--line); background: var(--color-sun-soft);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .pipe__num { position: absolute; top: 10px; right: 12px; }
+  .pipe__t { font-size: 14px; font-weight: 600; line-height: 1.3; }
+  .pipe__s { font-size: 12px; line-height: 1.4; color: var(--text-muted); }
+  @media (min-width: 900px) {
+    .pipe__steps { display: flex; gap: 0; align-items: stretch; }
+    .pipe__node { flex: 1 1 0; min-width: 0; }
+    .pipe__num { display: none; }
+    .pipe__node + .pipe__node { margin-left: 26px; }
+    .pipe__node + .pipe__node::before {
+      content: ''; position: absolute; left: -26px; top: 50%; width: 20px; height: 2px; background: var(--color-graphite);
+    }
+    .pipe__node + .pipe__node::after {
+      content: ''; position: absolute; left: -9px; top: calc(50% - 4px);
+      border-left: 7px solid var(--color-graphite); border-top: 5px solid transparent; border-bottom: 5px solid transparent;
+    }
+  }
+</style>

@@ -1,0 +1,55 @@
+---
+// Recreated: a long car page with the four ways to reach the form.
+---
+<figure class="figure entry-map">
+  <div
+    role="img"
+    aria-label="A long product page with four ways to reach the form: a header button, a button in the car section, a sticky bar and the original form at the bottom."
+    class="entry-map__frame"
+  >
+    <div class="entry-map__page" aria-hidden="true">
+      <div class="entry-map__bar"><span class="entry-map__pill entry-map__pill--sm"></span></div>
+      <div class="entry-map__block" style="height: 84px"></div>
+      <div class="entry-map__block entry-map__block--btn" style="height: 64px"><span class="entry-map__pill entry-map__pill--md"></span></div>
+      <div class="entry-map__block" style="height: 44px"></div>
+      <div class="entry-map__form"></div>
+      <div class="entry-map__sticky"></div>
+    </div>
+    <div class="entry-map__labels lbl" aria-hidden="true">
+      <span>Header button</span>
+      <span>Section button</span>
+      <span class="muted">Original form, bottom</span>
+      <span>Sticky bar</span>
+    </div>
+  </div>
+  <figcaption class="figure__caption muted">Four ways to reach the form, each with its own position tag.</figcaption>
+</figure>
+
+<style>
+  .entry-map { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .entry-map__frame {
+    background: var(--color-sand); border: var(--line); border-radius: var(--radius-md);
+    padding: 16px; display: flex; gap: 12px; justify-content: center;
+  }
+  @media (min-width: 640px) { .entry-map__frame { padding: 24px; gap: 20px; } }
+  .entry-map__page {
+    width: 130px; flex: 0 0 auto;
+    background: var(--color-white); border: var(--line); border-radius: 12px;
+    padding: 10px; display: flex; flex-direction: column; gap: 8px;
+  }
+  @media (min-width: 640px) { .entry-map__page { width: 200px; } }
+  .entry-map__bar { height: 26px; border-radius: 6px; background: var(--color-silver); display: flex; justify-content: flex-end; align-items: center; padding: 0 6px; }
+  .entry-map__block { border-radius: 6px; background: var(--color-sand); }
+  .entry-map__block--btn { display: flex; align-items: flex-end; padding: 6px; }
+  .entry-map__pill { display: block; height: 14px; border-radius: 999px; background: var(--color-sun); border: var(--line); }
+  .entry-map__pill--sm { width: 48px; }
+  .entry-map__pill--md { width: 64px; }
+  .entry-map__form { height: 40px; border-radius: 6px; border: 1.5px dashed var(--color-graphite); }
+  .entry-map__sticky { height: 20px; border-radius: 999px; background: var(--color-sun); border: var(--line); }
+  .entry-map__labels {
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: 4px 0; font-size: 11px; text-transform: none; letter-spacing: 0;
+  }
+  @media (min-width: 640px) { .entry-map__labels { font-size: 12px; } }
+  .figure__caption { font-size: 14px; line-height: 1.5; }
+</style>

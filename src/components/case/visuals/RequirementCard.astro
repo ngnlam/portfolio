@@ -1,0 +1,68 @@
+---
+// Recreated from Leo's parking requirement spec (shortened): scope lines with a reason,
+// and the six-step order the user stories follow.
+import Flow from './Flow.astro';
+const rows: { line: string; status: 'In' | 'Out' | 'To decide'; why: string }[] = [
+  { line: 'Spot cars parked or charging against the rules, on patrol', status: 'In', why: '' },
+  { line: "Alert the guard's app", status: 'In', why: '' },
+  { line: 'Leave a notice on the car', status: 'To decide', why: 'Open item, to confirm with the client' },
+  { line: 'Remind drivers still in their cars', status: 'Out', why: 'No reliable way to detect it' },
+  { line: 'Dyno calls reception itself', status: 'Out', why: 'Guards must be able to overrule a false alert' },
+  { line: 'Trace owners through CCTV', status: 'Out', why: 'The camera system already does it' },
+  { line: 'Decide what to do about a violation', status: 'Out', why: "The guard's call" },
+];
+---
+<figure class="figure req">
+  <div class="req__card">
+    <div class="req__head">
+      <span class="req__title">Requirement spec: parking violations</span>
+      <span class="lbl lbl--sm muted">7 of 13 scope lines shown</span>
+    </div>
+    <table class="req__table">
+      <caption class="sr-only">Scope lines from the parking requirement, with their status and the reason</caption>
+      <thead>
+        <tr><th scope="col" class="lbl lbl--sm">Scope line</th><th scope="col" class="lbl lbl--sm">Status</th><th scope="col" class="lbl lbl--sm">Why</th></tr>
+      </thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr>
+            <td>{r.line}</td>
+            <td class="req__status"><span class:list={['req__pill', `req__pill--${r.status === 'In' ? 'in' : r.status === 'Out' ? 'out' : 'open'}`]}>{r.status}</span></td>
+            <td class="muted">{r.why}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    <div class="req__foot">
+      <span class="lbl lbl--sm muted">User stories follow the life of an alert</span>
+      <Flow
+        tone="plain"
+        steps={['Capture', 'Decision', 'Uncertainty', 'Handoff', 'Tracking and closing', 'Recording']}
+        label="User stories grouped by the life of an alert: capture, decision, uncertainty, handoff, tracking and closing, recording."
+      />
+    </div>
+  </div>
+  <figcaption class="figure__caption muted">Recreated from my requirement spec. Content shortened.</figcaption>
+</figure>
+
+<style>
+  .req { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .req__card { background: var(--color-white); border: var(--line); border-radius: var(--radius-md); overflow: hidden; }
+  .req__head {
+    background: var(--color-sand); border-bottom: var(--line); padding: 14px 18px;
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px;
+  }
+  .req__title { font-weight: 600; }
+  .req__table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.45; }
+  @media (min-width: 640px) { .req__table { font-size: 15px; } }
+  .req__table th { text-align: left; font-weight: 500; padding: 8px 12px; }
+  .req__table td { padding: 10px 12px; border-top: 1px solid rgb(31 34 38 / 0.15); vertical-align: top; }
+  @media (min-width: 640px) { .req__table th, .req__table td { padding-inline: 14px; } }
+  .req__status { white-space: nowrap; }
+  .req__pill { display: inline-block; padding: 2px 10px; border: var(--line); border-radius: 999px; font-size: 13px; font-weight: 600; }
+  .req__pill--in { background: var(--color-sun); }
+  .req__pill--out { background: var(--color-silver); }
+  .req__pill--open { background: var(--color-white); }
+  .req__foot { border-top: var(--line); padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; }
+  .figure__caption { font-size: 14px; line-height: 1.5; }
+</style>

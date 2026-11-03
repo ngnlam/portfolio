@@ -1,0 +1,35 @@
+---
+// Recreated from Leo's acceptance test sheet (real results, shortened).
+import DataTable from './DataTable.astro';
+---
+<figure class="figure uat">
+  <div class="uat__stack">
+    <DataTable
+      caption="Checks per model"
+      head={['Check', 'Cars, 13 models', 'Scooters, 17 models']}
+      rows={[
+        ['Images and colors', '13 of 13 passed', '17 of 17 passed'],
+        ['Price and specs', '13 of 13 passed', '17 of 17 passed'],
+        ['Lead reaches the sales system', '13 of 13 passed', '17 of 17 passed'],
+      ]}
+    />
+    <DataTable
+      caption="Checks on the form"
+      head={['Form check', 'Expected', 'Result']}
+      rows={[
+        ['Required field left empty', "Can't send; the missing field is named", 'Pass'],
+        ['Phone number in the wrong format', "Error shown; can't send", 'Pass'],
+        ['Consent box not ticked', "Can't send", 'Pass'],
+        ['Valid request', 'Success message shown', 'Pass'],
+        ['Lead in the sales system', 'Name, phone, email, lead source and business unit all correct', 'Pass'],
+      ]}
+    />
+  </div>
+  <figcaption class="figure__caption muted">Recreated from my acceptance test sheet: 90 checks across 30 models, 5 on the form.</figcaption>
+</figure>
+
+<style>
+  .uat { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .uat__stack { display: flex; flex-direction: column; gap: 12px; }
+  .figure__caption { font-size: 14px; line-height: 1.5; }
+</style>

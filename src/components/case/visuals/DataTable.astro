@@ -1,0 +1,33 @@
+---
+// A small bordered table used inside case figures. The last column is bold.
+interface Props {
+  head: string[];
+  rows: string[][];
+  caption?: string;
+  boldLast?: boolean;
+}
+const { head, rows, caption, boldLast = true } = Astro.props;
+---
+<div class="dtable">
+  <table>
+    {caption && <caption class="sr-only">{caption}</caption>}
+    <thead><tr>{head.map((h) => <th scope="col" class="lbl lbl--sm">{h}</th>)}</tr></thead>
+    <tbody>
+      {rows.map((r) => (
+        <tr>{r.map((c, j) => <td class:list={[boldLast && j === r.length - 1 && 'dtable__strong']}>{c}</td>)}</tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .dtable { border: var(--line); border-radius: var(--radius-md); background: var(--color-white); overflow: hidden; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.45; }
+  @media (min-width: 640px) { table { font-size: 15px; } }
+  thead tr { background: var(--color-sand); }
+  th { text-align: left; font-weight: 500; padding: 10px 12px; border-bottom: var(--line); vertical-align: bottom; }
+  td { padding: 10px 12px; vertical-align: top; }
+  @media (min-width: 640px) { th, td { padding: 12px 16px; } }
+  tbody tr + tr td { border-top: 1px solid rgb(31 34 38 / 0.15); }
+  .dtable__strong { font-weight: 600; }
+</style>

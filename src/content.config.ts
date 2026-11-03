@@ -26,6 +26,8 @@ const cases = defineCollection({
       team: z.string(),
       timeline: z.string(),
       status: z.string().optional(),
+      /** Optional short line next to "Skip to the results", e.g. when the data was last updated. */
+      note: z.string().optional(),
       /** Stages Leo led; the others render as outlined pills. */
       stages: z.array(z.enum(STAGES)).min(1),
       tools: z.array(toolName).max(4).default([]),
@@ -41,6 +43,10 @@ const cases = defineCollection({
           result: z.string(),
           image: image().optional(),
           imageAlt: z.string().optional(),
+          /** Caption under the card image on Work. */
+          imageCaption: z.string().optional(),
+          /** How the Work page frames the image: a phone screen, a wide screenshot or a photo. */
+          imageKind: z.enum(['phone', 'wide', 'photo']).default('wide'),
         })
         .optional(),
       /** Path under /public, e.g. /og/zalo-showroom.png. Falls back to the default OG image. */

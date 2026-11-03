@@ -1,0 +1,121 @@
+---
+title: "From a client's wish list to requirements for Dyno, a security robot"
+seoTitle: "Requirements for Dyno, a security robot | Leo Lam Nguyen"
+description: "From a site visit in parking basements to requirements engineering could build: 18 user stories cut to 6, with 21 acceptance criteria."
+order: 4
+company: VinDynamics
+year: "2026"
+role: Requirements lead
+team: "Two teammates (site research, team BRD), a senior PM (review), engineering (build), VCS security staff (users)"
+timeline: "Aug 2026"
+status: "Requirements handed to engineering"
+stages: [Discover, Define, Decide]
+tiles:
+  - { value: "72 min", label: "Recorded interviews", note: "with security staff, plus 54 site photos" }
+  - { value: "6", label: "User stories", note: "cut down from 18 in three rounds" }
+  - { value: "21", label: "Acceptance criteria", note: "engineering can test against" }
+glance:
+  problem: "VCS wanted Dyno, VinDynamics' humanoid robot, to patrol its parking basements. The brief was a wish list, with nothing on how guards actually work or what the robot should do when it finds something."
+  did: "I went into the basements with two teammates, interviewed the security staff, and turned what we saw into two business requirement documents and a requirement spec engineering could build from."
+  role: "I drove two of the five priority use cases, parking violations and trash or flammable items, owned the parking requirement, and wrote the BRD framework the whole team used."
+roles:
+  mine: "Driving the parking and trash use cases, the parking requirement spec, the BRD framework and template, the flow diagrams. A teammate had scouted the parking use case earlier; I verified it and built the trash use case from scratch."
+  team: "Two teammates ran the site visit with me and co-own the combined BRD; a senior PM reviewed the structure; engineering builds; VCS security staff were interviewed and confirmed their quotes in writing."
+next: zalo-showroom
+card:
+  teaser: "A client wanted Dyno, VinDynamics' humanoid robot, to patrol its parking basements, and the brief was a wish list. I went on site, interviewed the guards and wrote requirements that I handed to engineering."
+  result: "18 user stories cut to 6, with 21 acceptance criteria"
+  image: "../../assets/images/work/dyno.jpg"
+  imageAlt: "Dyno, a silver and green humanoid robot, standing in an underground parking basement."
+  imageCaption: "Dyno in a parking basement."
+  imageKind: photo
+ogImage: /og/dyno-requirements.png
+---
+import { Image } from 'astro:assets';
+import RequirementCard from '../../components/case/visuals/RequirementCard.astro';
+import dynoWide from '../../assets/images/cases/dyno/dyno-wide.jpg';
+import dynoClose from '../../assets/images/cases/dyno/dyno-close.jpg';
+import uc5Main from '../../assets/images/cases/dyno/uc5-main.png';
+import uc5Lost from '../../assets/images/cases/dyno/uc5-lost.png';
+
+<Section id="problem" title="A wish list, not a requirement">
+
+VCS listed tasks it hoped a security robot could take over. Engineering needed to know which tasks to build first, what exactly Dyno must detect, and who acts on an alert. With a vague brief, months of perception work could go into the wrong thing.
+
+<Figure caption="Dyno in a parking basement.">
+  <FigureRow min="200px">
+    <Image src={dynoWide} alt="Dyno standing in an underground car park, under pipes and lights, in front of a yellow and black striped wall." widths={[480, 900]} sizes="(min-width: 1100px) 420px, 100vw" style="height: 300px; object-fit: cover;" />
+    <Image src={dynoClose} alt="A closer view of Dyno, a humanoid robot with a green chest panel." widths={[480, 900]} sizes="(min-width: 1100px) 260px, 100vw" style="height: 300px; object-fit: cover;" />
+  </FigureRow>
+</Figure>
+
+</Section>
+
+<Section id="found" title="The real job happens on a scooter, at walking pace">
+
+1. **The guard's real round.** A guard rides the basement on an electric scooter at walking pace, about 90 minutes a round, then goes back to the desk to check plates and rewind camera footage. One guard covers more than a thousand parking spaces. Dyno's value is spotting and alerting during the round, so nobody has to rebuild it from footage afterward.
+2. **A hard limit on the robot.** The battery lasts about two hours and a round takes 90 minutes. That one fact decides the operating model, so I put it at the top of the open questions.
+3. **Three questions decide what happens to an object.** The brief sorted items by where they were. On site, the guards' choice came down to three questions: does it belong to someone, can one person carry it, and is it hazardous. Each answer leads somewhere different: the nearest bin, a safe spot and a call to housekeeping, the contractor who left it, or the lost property desk.
+4. **Evidence comes before touching.** Guards had been caught in disputes when an owner claimed something was missing. So before anyone picks up someone's belongings, three things must be true: the spot is on camera, a witness is present, and the contents are filmed.
+5. **A guard's job doesn't end at reporting.** They hand the problem to the right team with a deadline, then come back about 15 minutes later to check it's done. A robot that only sends alerts would skip the part guards care about.
+6. **A cheaper signal for charging violations.** The first idea was to connect to the chargers' live data. The color of the charger's LED gives the same signal with no integration.
+
+<Figure wide caption="Two of my flow diagrams for the trash use case, kept in Vietnamese as written.">
+  <Image src={uc5Main} alt="Flow diagram in Vietnamese: a guard's patrol and what happens when trash or an unknown object is found, branching on whether it is valuable, whether one person can carry it, whether it is hazardous and whether a contractor is registered for the area." widths={[800, 1200, 1800, 2400]} sizes="(min-width: 1100px) 880px, 100vw" />
+  <Image src={uc5Lost} alt="Flow diagram in Vietnamese: the lost property sub-process, from securing evidence on camera with a witness to returning the item once the owner's description and ID match." widths={[800, 1200, 1800, 2400]} sizes="(min-width: 1100px) 880px, 100vw" />
+</Figure>
+
+</Section>
+
+<Section id="decisions" title="Four calls that shaped the spec">
+
+<Decisions>
+<Decision title="Describe today's job before the robot's">
+
+Every BRD opens with how the work is done now: outcome states first, each phase as an actor and action table, corner cases as signal and action pairs. I turned this into the template the team used for every use case.
+
+</Decision>
+<Decision title="Cut stories until each one changes what gets built">
+
+The parking requirement went from 18 user stories to 13, then 6, grouped by the life of an alert: capture, decision, uncertainty, handoff, tracking and closing, recording.
+
+</Decision>
+<Decision title="Leave decisions with people">
+
+I ruled out four requests and wrote the reason next to each: reminding drivers still in their cars (no reliable way to detect it), Dyno calling reception itself (guards must be able to overrule a false alert), tracing owners through CCTV (the camera system already does it), and deciding what to do about a violation (the guard's call).
+
+</Decision>
+<Decision title="Label targets as assumptions">
+
+I proposed thresholds, such as detection rates by violation type and alerts reaching the guard's app within 10 seconds, and marked each as an assumption to confirm with users. Engineering got a starting point without mistaking it for a promise.
+
+</Decision>
+</Decisions>
+
+</Section>
+
+<Section id="shipped" title="Two BRDs, one spec, one shared template">
+
+- Two BRDs, parking violations and trash or flammable items.
+- A requirement spec for parking violations: 13 scope lines, 7 violation types, 10 alert fields, 8 open items, 21 acceptance criteria.
+- The BRD framework and template the team used across use cases.
+- Flow diagrams, embedded in the team's combined BRD at a teammate's request.
+
+<RequirementCard />
+
+</Section>
+
+<Section id="results" title="Handed to engineering, partly built">
+
+- I handed the requirements to engineering at the end of August, when I moved to VinFast.
+- Engineering built parts of parking violation detection from them.
+- The team's combined BRD, with 14 pain points and 6 personas, carries my flow diagrams.
+
+</Section>
+
+<Section id="learned" title="Time on site paid for itself">
+
+- Three things we saw in one visit, the scooter round, the evidence rule and the charger lights, changed the requirement more than any meeting.
+- A requirement is finished when an engineer can test it. That's why every story ends in acceptance criteria instead of a description.
+
+</Section>

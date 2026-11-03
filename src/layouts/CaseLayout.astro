@@ -68,8 +68,9 @@ const jsonLd = {
     </dl>
     <ToolChips tools={data.tools} />
     <Tiles tiles={data.tiles} />
-    <div>
+    <div class="case-head__skip">
       <Button href="#results" variant="secondary" event="skip_to_result" eventData={{ case: slug }}>Skip to the results</Button>
+      {data.note && <span class="case-head__note muted">{data.note}</span>}
     </div>
   </section>
 
@@ -131,6 +132,8 @@ const jsonLd = {
   .case-head__brand { display: flex; align-items: center; gap: 12px; }
   .case-head :global(.case-head__logo) { height: 40px; width: auto; }
   @media (min-width: 900px) { .case-head :global(.case-head__logo) { height: 52px; } }
+  .case-head__skip { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+  .case-head__note { font-size: 14px; line-height: 1.45; }
   .case-head__title { font-size: clamp(34px, 4.6vw, 64px); line-height: 1.05; max-width: 960px; }
 
   .case-meta {
