@@ -69,7 +69,7 @@ const jsonLd = {
     <ToolChips tools={data.tools} />
     <Tiles tiles={data.tiles} />
     <div class="case-head__skip">
-      <Button href="#results" variant="secondary" event="skip_to_result" eventData={{ case: slug }}>Skip to the results</Button>
+      <Button href="#results" variant="secondary" block event="skip_to_result" eventData={{ case: slug }}>Skip to the results</Button>
       {data.note && <span class="case-head__note muted">{data.note}</span>}
     </div>
   </section>

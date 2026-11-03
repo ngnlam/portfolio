@@ -279,7 +279,7 @@ const logoHeight = { VinFast: 46, VinDynamics: 48, 'Xanh SM': 32 } as const;
     display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
     border-block: var(--line);
   }
-  .case-facts__item { padding: 12px 12px 12px 0; display: flex; flex-direction: column; gap: 6px; }
+  .case-facts__item { padding: 10px 12px 10px 0; display: flex; flex-direction: column; gap: 4px; }
   .case-facts__item dd { font-size: 14px; line-height: 1.4; }
   .case-facts__item + .case-facts__item:not(.case-facts__item--result) { padding-left: 12px; border-left: 1px solid rgb(31 34 38 / 0.2); }
   .case-facts__item--result { grid-column: 1 / -1; border-top: 1px solid rgb(31 34 38 / 0.2); }
@@ -312,13 +312,14 @@ const logoHeight = { VinFast: 46, VinDynamics: 48, 'Xanh SM': 32 } as const;
     grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas: "main toggle" "meta meta";
     gap: 10px 16px;
-    padding: 18px 4px;
+    padding: 16px 4px;
   }
   .row__summary::-webkit-details-marker { display: none; }
   .row__summary:hover { background: var(--color-white); }
   .row__main { grid-area: main; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
-  .row__title { font-size: 17px; font-weight: 500; line-height: 1.35; }
-  .row__problem { font-size: 15px; line-height: 1.5; color: var(--text-muted); }
+  .row__title { font-size: 16px; font-weight: 500; line-height: 1.35; }
+  .row__problem { font-size: 14px; line-height: 1.5; color: var(--text-muted); }
+  @media (min-width: 900px) { .row__problem { font-size: 15px; } }
   .row__problem-lbl { margin-right: 8px; }
   .row__meta { grid-area: meta; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
   .row__co { display: inline-flex; align-items: baseline; gap: 8px; }
@@ -348,7 +349,8 @@ const logoHeight = { VinFast: 46, VinDynamics: 48, 'Xanh SM': 32 } as const;
   @media (min-width: 900px) { .row__body { padding: 8px 12px 32px; } }
   .row__cols { display: flex; flex-wrap: wrap; gap: 24px 32px; }
   .row__col { flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
-  .row__col p { font-size: 16px; line-height: 1.65; }
+  .row__col p { font-size: 15px; line-height: 1.6; }
+  @media (min-width: 900px) { .row__col p { font-size: 16px; line-height: 1.65; } }
   .row__visual { display: flex; flex-direction: column; gap: 16px; }
   .row__fig { margin: 0; display: flex; flex-direction: column; gap: 8px; }
   .row__fig :global(.row__img) { width: 100%; height: auto; border: var(--line); border-radius: 12px; background: var(--color-white); }
@@ -365,8 +367,9 @@ const logoHeight = { VinFast: 46, VinDynamics: 48, 'Xanh SM': 32 } as const;
     text-decoration: none; color: var(--text);
   }
   a.side:hover { background: var(--color-white); color: var(--text); }
-  .side__title { grid-area: title; font-size: 17px; font-weight: 500; }
-  .side__line { grid-area: line; font-size: 15px; line-height: 1.5; }
+  .side__title { grid-area: title; font-size: 16px; font-weight: 500; }
+  .side__line { grid-area: line; font-size: 14px; line-height: 1.5; }
+  @media (min-width: 900px) { .side__line { font-size: 15px; } }
   .side__role { grid-area: role; display: flex; }
   .side__go {
     grid-area: go; width: 32px; height: 32px; border: var(--line); border-radius: 50%;

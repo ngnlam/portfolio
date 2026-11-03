@@ -34,6 +34,12 @@
   @media (min-width: 900px) { .ea { padding: 40px; min-height: 520px; } }
 
   .ea-app { flex: 1 1 auto; display: flex; flex-direction: column; }
+  /* Reserve the start screen's height until the script renders it, so the page below does not jump (CLS). */
+  html.js .ea-app:empty { min-height: 360px; }
+  @media (min-width: 360px) { html.js .ea-app:empty { min-height: 390px; } }
+  @media (min-width: 390px) { html.js .ea-app:empty { min-height: 412px; } }
+  @media (min-width: 412px) { html.js .ea-app:empty { min-height: 428px; } }
+  @media (min-width: 900px) { html.js .ea-app:empty { min-height: 438px; } }
   .ea-nojs { font-size: 17px; line-height: 1.55; padding: 20px; border: 1.5px dashed var(--border-dashed); border-radius: var(--radius-md); background: var(--color-white); }
   html.js .ea-nojs { display: none; }
   html:not(.js) .ea-app { display: none; }

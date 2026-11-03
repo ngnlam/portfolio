@@ -28,12 +28,14 @@ const label = `Stages of the product work in this case. Yellow stages are the on
   .stage-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
   .stage-strip__list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
   .stage {
-    padding: 6px 14px;
+    padding: 5px 10px;
     border: var(--line);
     border-radius: var(--radius-pill);
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.3;
   }
+  @media (min-width: 640px) { .stage { padding: 6px 14px; font-size: 14px; } }
+  @media (max-width: 639.98px) { .stage-strip__list { gap: 6px; } }
   .stage--led { background: var(--color-sun); font-weight: 600; color: var(--text); }
   .stage--team { background: transparent; font-weight: 500; color: var(--text-muted); }
   .stage-strip__legend { display: inline-flex; align-items: center; gap: 6px; }

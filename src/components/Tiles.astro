@@ -23,16 +23,23 @@ const { tiles, highlight = 0, class: className } = Astro.props;
 </ul>
 
 <style>
-  .tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; max-width: 960px; }
-  @media (min-width: 640px) { .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  /* Phones: two tiles side by side, the third full width. From 640px: three in a row. */
+  .tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-width: 960px; }
+  .tiles > :last-child:nth-child(odd) { grid-column: 1 / -1; }
+  @media (min-width: 640px) {
+    .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tiles > :last-child:nth-child(odd) { grid-column: auto; }
+  }
   .tile {
     background: var(--color-white);
     border: var(--line);
     border-radius: var(--radius-md);
-    padding: 20px;
+    padding: 16px;
     display: flex; flex-direction: column; gap: 8px;
   }
+  @media (min-width: 640px) { .tile { padding: 20px; } }
   .tile--hl { background: var(--color-sun-soft); }
-  .tile__value { font-size: clamp(44px, 4.4vw, 56px); line-height: 1; }
+  .tile__value { font-size: 38px; line-height: 1; }
+  @media (min-width: 640px) { .tile__value { font-size: clamp(44px, 4.4vw, 56px); } }
   .tile__note { font-size: 14px; line-height: 1.45; }
 </style>

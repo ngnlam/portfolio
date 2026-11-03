@@ -3,7 +3,7 @@
 import Button from './Button.astro';
 import { SITE } from '../data/site';
 
-const page = Astro.url.pathname;
+const page = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/') || '/';
 ---
 <footer id="talk" class="site-footer">
   <div class="band band--sun">
