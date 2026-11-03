@@ -1,24 +1,95 @@
 ---
-// Placeholder until the Energy audit tool is ported (build plan, stage 2).
-// Kept out of search results until then.
+// Energy audit (Lab). Copy: docs/content.md 6.2 and 6.3; build notes: docs/case-studies.md 4.
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Button from '../../components/Button.astro';
+import Icon from '../../components/Icon.astro';
+import EnergyAudit from '../../components/energy/EnergyAudit.astro';
+
+const decisions = [
+  "No account, and nothing leaves your browser. You can use it in five minutes without signing up, and there's no data for me to look after.",
+  'No AI in the first version. Simple rules are enough to turn a map into three suggestions, and it keeps the tool instant and free.',
+  'A map instead of a score. A score tells you how you feel. A map tells you what to change.',
+  'Buttons instead of drag and drop on phones. Dragging dots on a small screen is fiddly, and tapping a score is fast.',
+];
 ---
 <BaseLayout
   title="Energy audit | Leo Lam Nguyen"
   description="See which parts of your week give you energy and which drain them. Free, private, about five minutes."
   current="lab"
-  noindex
+  ogImage="/og/energy-audit.png"
+  ogImageAlt="Energy audit: a free five-minute tool by Leo Lam Nguyen"
 >
-  <section class="container stub" aria-labelledby="ea-title">
-    <h1 id="ea-title" class="d h-display">Energy audit</h1>
-    <p class="stub__text">The tool is moving to this page. Check back soon.</p>
-    <div><Button href="/lab" variant="secondary" block>Back to the Lab</Button></div>
+  <section class="ea-head" aria-labelledby="ea-title">
+    <a href="/lab" class="ul ea-head__back">Back to the Lab</a>
+    <h1 id="ea-title" class="d ea-head__title">Energy audit</h1>
+    <p class="ea-head__intro">Most weeks are planned around time. This one is about energy. List what fills your week, score how each thing leaves you feeling, and see what to change. It takes about five minutes.</p>
+    <p class="ea-head__privacy"><Icon name="lock" size={16} />Everything you type stays in your browser. Nothing is sent anywhere.</p>
+  </section>
+
+  <EnergyAudit />
+
+  <section class="band band--sand notes" aria-labelledby="notes-title">
+    <div class="notes__inner">
+      <h2 id="notes-title" class="d h-section">Build notes</h2>
+      <div class="notes__pair">
+        <div class="notes__block">
+          <span class="lbl lbl--sm clay">Why I built it</span>
+          <p>I read a lot about motivation and productivity. One idea keeps proving useful: "Manage your energy, not your time", from a 2007 Harvard Business Review article by Tony Schwartz and Catherine McCarthy. I wanted a five-minute way to apply it to a real week.</p>
+        </div>
+        <div class="notes__block">
+          <span class="lbl lbl--sm clay">Who it's for</span>
+          <p>People whose weeks are full and who still end them tired, without knowing which parts did it.</p>
+        </div>
+      </div>
+      <div class="notes__block">
+        <span class="lbl lbl--sm clay">Decisions</span>
+        <ul class="notes__list">
+          {decisions.map((d) => <li>{d}</li>)}
+        </ul>
+      </div>
+      <div class="notes__trio">
+        <div class="notes__block">
+          <span class="lbl lbl--sm clay">What I measure</span>
+          <p class="notes__small">How many people who start the audit finish it, and how many save their map. If people start and drop off at scoring, the scoring step is too long.</p>
+        </div>
+        <div class="notes__block">
+          <span class="lbl lbl--sm clay">What I learned</span>
+          <p class="notes__small">I'll write this after the first month of real use.</p>
+        </div>
+        <div class="notes__block">
+          <span class="lbl lbl--sm clay">What's next</span>
+          <p class="notes__small">Comparing weeks side by side, so you can see whether the changes stuck.</p>
+        </div>
+      </div>
+    </div>
   </section>
 </BaseLayout>
 
 <style>
-  .stub { padding-block: 56px 96px; display: flex; flex-direction: column; gap: 24px; }
-  @media (min-width: 900px) { .stub { padding-block: 120px 144px; } }
-  .stub__text { font-size: 19px; line-height: 1.55; max-width: 560px; }
+  .ea-head {
+    width: 100%; max-width: calc(960px + 2 * var(--gutter)); margin-inline: auto;
+    padding: 32px var(--gutter) 28px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  @media (min-width: 900px) { .ea-head { padding-block: 72px 40px; gap: 20px; } }
+  .ea-head__back { align-self: flex-start; font-size: 15px; font-weight: 500; padding-block: 10px; }
+  .ea-head__title { font-size: clamp(44px, 5vw, 64px); line-height: 1.02; letter-spacing: -0.03em; }
+  .ea-head__intro { font-size: 18px; line-height: 1.55; max-width: 680px; }
+  @media (min-width: 900px) { .ea-head__intro { font-size: 21px; } }
+  .ea-head__privacy { display: flex; align-items: flex-start; gap: 8px; font-size: 15px; color: var(--text-muted); }
+  .ea-head__privacy :global(svg) { flex: 0 0 16px; margin-top: 3px; }
+
+  .notes { border-bottom: 0; }
+  .notes__inner {
+    width: 100%; max-width: calc(960px + 2 * var(--gutter)); margin-inline: auto;
+    padding: 56px var(--gutter) 64px;
+    display: flex; flex-direction: column; gap: 32px;
+  }
+  @media (min-width: 900px) { .notes__inner { padding-block: 96px; gap: 40px; } }
+  .notes__pair, .notes__trio { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  @media (min-width: 640px) { .notes__pair { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; } }
+  @media (min-width: 900px) { .notes__trio { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; } }
+  .notes__block { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  .notes__block p { font-size: 17px; line-height: 1.65; }
+  .notes__block .notes__small { font-size: 16px; line-height: 1.6; }
+  .notes__list { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 10px; font-size: 17px; line-height: 1.6; }
 </style>
