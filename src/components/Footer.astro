@@ -1,0 +1,42 @@
+---
+// "Let's talk" band and copyright. id="talk" is the target of every Say hello link.
+import Button from './Button.astro';
+import { SITE } from '../data/site';
+
+const page = Astro.url.pathname;
+---
+<footer id="talk" class="site-footer">
+  <div class="band band--sun">
+    <div class="container site-footer__talk">
+      <h2 class="d h-section site-footer__title">Got a product that runs on guesses? Let's talk.</h2>
+      <div class="site-footer__actions">
+        <Button href={`mailto:${SITE.email}`} variant="white" block event="contact_click" eventData={{ channel: 'email', page }}>Email me</Button>
+        <Button href={SITE.linkedin} variant="secondary" block event="contact_click" eventData={{ channel: 'linkedin', page }}>LinkedIn</Button>
+      </div>
+    </div>
+  </div>
+  <div class="container site-footer__base">
+    <span>&copy; 2026 {SITE.name}</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer__talk {
+    padding-block: 56px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  @media (min-width: 900px) {
+    .site-footer__talk {
+      padding-block: 96px;
+      flex-direction: row; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 32px;
+    }
+    .site-footer__title { flex: 1 1 560px; min-width: 0; }
+  }
+  .site-footer__actions { display: flex; flex-direction: column; gap: 16px; }
+  @media (min-width: 640px) { .site-footer__actions { flex-direction: row; flex-wrap: wrap; } }
+  .site-footer__base {
+    padding-block: 20px 32px;
+    font-size: 14px; color: var(--text-muted);
+  }
+  @media (min-width: 900px) { .site-footer__base { padding-block: 24px; font-size: 15px; } }
+</style>

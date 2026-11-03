@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/Button.astro';
+import Icon from '../../components/Icon.astro';
+import EnergyMapPreview from '../../components/EnergyMapPreview.astro';
+import type { IconName } from '../../data/icons';
+
+const steps: { icon: IconName; text: string }[] = [
+  { icon: 'pen', text: 'List 5 to 15 things you did this week.' },
+  { icon: 'measure', text: 'Score how each one left you, and how much it matters.' },
+  { icon: 'check', text: 'Get a map and three suggestions. Save it as an image.' },
+];
+---
+<BaseLayout
+  title="Lab | Leo Lam Nguyen"
+  description="Small tools for understanding your own week. Start with the Energy audit."
+  current="lab"
+>
+  <section class="container lab-intro" aria-labelledby="lab-title">
+    <h1 id="lab-title" class="d h-display">Lab</h1>
+    <p class="lab-intro__sub">Small products I build on weekends and use on weekdays.</p>
+  </section>
+
+  <section class="container lab-list" aria-labelledby="ea-title">
+    <article class="ea-card">
+      <span class="sticker ea-card__sticker">About five minutes</span>
+      <h2 id="ea-title" class="d ea-card__title">Energy audit</h2>
+      <p class="ea-card__desc">See which parts of your week give you energy and which ones drain it. Then decide what to change.</p>
+      <EnergyMapPreview class="ea-card__map" />
+      <ol class="ea-card__steps" role="list">
+        {steps.map((s) => (
+          <li class="ea-step">
+            <span class="ic ea-step__ic"><Icon name={s.icon} /></span>
+            <span class="ea-step__text">{s.text}</span>
+          </li>
+        ))}
+      </ol>
+      <div class="ea-card__actions">
+        <Button href="/lab/energy-audit" variant="white" block event="lab_open" eventData={{ tool: 'energy-audit' }}>Try it</Button>
+        <span class="ea-card__privacy"><Icon name="lock" size={18} />Your answers stay in your browser. No account needed.</span>
+      </div>
+    </article>
+  </section>
+</BaseLayout>
+
+<style>
+  .lab-intro { padding-block: 40px 32px; display: flex; flex-direction: column; gap: 16px; }
+  @media (min-width: 900px) { .lab-intro { padding-block: 96px 64px; gap: 24px; } }
+  .lab-intro__sub { font-size: 19px; line-height: 1.55; max-width: 640px; }
+  @media (min-width: 900px) { .lab-intro__sub { font-size: 24px; line-height: 1.5; } }
+
+  .lab-list { padding-block: 16px 64px; }
+  @media (min-width: 900px) { .lab-list { padding-block: 0 128px; } }
+
+  .ea-card {
+    position: relative;
+    background: var(--color-sun);
+    border: var(--line); border-radius: var(--radius-lg);
+    padding: 28px 20px 24px;
+    display: grid; gap: 18px;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "title" "desc" "map" "steps" "actions";
+  }
+  @media (min-width: 900px) {
+    .ea-card {
+      padding: 56px;
+      column-gap: 56px; row-gap: 24px;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-areas: "title map" "desc map" "steps map" "actions map";
+      align-items: start;
+    }
+  }
+  .ea-card__sticker { position: absolute; top: -16px; right: 16px; transform: rotate(5deg); }
+  @media (min-width: 900px) { .ea-card__sticker { top: -18px; right: 48px; } }
+  .ea-card__title { grid-area: title; font-size: 36px; line-height: 1.05; }
+  @media (min-width: 900px) { .ea-card__title { font-size: clamp(40px, 4vw, 56px); line-height: 1.02; } }
+  .ea-card__desc { grid-area: desc; font-size: 17px; line-height: 1.55; max-width: 480px; }
+  @media (min-width: 900px) { .ea-card__desc { font-size: 20px; } }
+  .ea-card :global(.ea-card__map) { grid-area: map; }
+  @media (min-width: 900px) { .ea-card :global(.ea-card__map) { align-self: center; } }
+  .ea-card__steps { grid-area: steps; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  @media (min-width: 900px) { .ea-card__steps { gap: 12px; } }
+  .ea-step { display: flex; gap: 12px; align-items: flex-start; }
+  @media (min-width: 900px) { .ea-step { gap: 14px; } }
+  .ea-step__ic { background: var(--color-white); }
+  .ea-step__text { font-size: 16px; line-height: 1.5; padding-top: 8px; }
+  @media (min-width: 900px) { .ea-step__text { font-size: 17px; padding-top: 10px; } }
+  .ea-card__actions { grid-area: actions; display: flex; flex-direction: column; gap: 14px; }
+  @media (min-width: 640px) { .ea-card__actions { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 16px 24px; padding-top: 8px; } }
+  .ea-card__privacy { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; }
+  @media (min-width: 900px) { .ea-card__privacy { font-size: 15px; } }
+</style>

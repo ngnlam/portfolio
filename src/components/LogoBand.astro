@@ -1,0 +1,73 @@
+---
+// "Where I've worked" logos in original colors.
+// variant "band": full-width white band (Home, desktop).
+// variant "grid": 3 x 2 grid (Home hero, mobile).
+// variant "row": wrapping row (About).
+import { Image } from 'astro:assets';
+import { LOGOS, WORKED_AT } from '../data/logos';
+
+interface Props {
+  variant: 'band' | 'grid' | 'row';
+  class?: string;
+}
+const { variant, class: className } = Astro.props;
+const items = WORKED_AT.map(({ key, h }) => {
+  const logo = LOGOS[key];
+  const height = variant === 'band' ? h.band : variant === 'grid' ? h.bandMobile : h.about;
+  const heightMobile = variant === 'row' ? h.aboutMobile : height;
+  return { ...logo, height, heightMobile };
+});
+---
+{variant === 'band' ? (
+  <section class:list={['logo-band band band--white', className]} aria-label="Where I've worked">
+    <div class="container logo-band__inner">
+      <span class="lbl muted">Where I've worked</span>
+      <ul class="logo-band__list" role="list">
+        {items.map((l) => (
+          <li><Image src={l.src} alt={l.name} height={l.height} densities={[1, 2]} style={`height:${l.height}px;width:auto`} /></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+) : (
+  <ul class:list={['logos', `logos--${variant}`, className]} aria-label="Where I've worked" role="list">
+    {items.map((l) => (
+      <li>
+        <Image
+          src={l.src}
+          alt={l.name}
+          height={l.height}
+          densities={[1, 2]}
+          style={`--h:${l.height}px;--hm:${l.heightMobile}px`}
+          class="logos__img"
+        />
+      </li>
+    ))}
+  </ul>
+)}
+
+<style>
+  .logo-band__inner {
+    padding-block: 28px;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 20px 56px;
+  }
+  .logo-band__list {
+    flex: 1 1 640px;
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 32px;
+  }
+  .logo-band__list :global(img) { display: block; width: auto; }
+
+  .logos { list-style: none; margin: 0; padding: 0; }
+  .logos :global(.logos__img) { display: block; width: auto; max-width: 100%; height: var(--hm); }
+  @media (min-width: 900px) {
+    .logos :global(.logos__img) { height: var(--h); }
+  }
+  .logos--grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px 12px;
+    align-items: center; justify-items: center;
+  }
+  .logos--row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
+</style>

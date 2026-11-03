@@ -1,0 +1,237 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import LogoBand from '../components/LogoBand.astro';
+import Portrait from '../components/Portrait.astro';
+import Polaroid from '../components/Polaroid.astro';
+import quotesData from '../data/quotes.json';
+import teamPhoto from '../assets/images/about/team-xanhsm.jpg';
+import outsidePhoto from '../assets/images/about/outside-work.jpg';
+
+const quotes = quotesData as { text: string; who: string }[];
+const studies = [
+  { when: '2026 to 2028', what: 'MSc in Data Science', where: 'Liverpool John Moores University' },
+  { when: '2026 to 2028', what: 'Executive Diploma in Data Science and AI', where: 'IIIT Bangalore' },
+  { when: 'In progress', what: 'Certified Analytics Professional', where: 'INFORMS' },
+];
+---
+<BaseLayout
+  title="About | Leo Lam Nguyen"
+  description="Digital product builder in Hanoi. Product, growth and data work at Xanh SM, VinDynamics and VinFast."
+  current="about"
+>
+  <section class="container intro" aria-labelledby="about-title">
+    <div class="intro__text">
+      <h1 id="about-title" class="d h-display">About</h1>
+      <p class="intro__lead">Hi, I'm Leo. I build digital products in Hanoi, and right now I'm on the growth team at VinFast.</p>
+      <p class="intro__body">Most of my work starts the same way: look at what people actually do, decide what to change, ship it with the team, and check whether it worked. I build with SQL, automation tools and AI when that's the fastest way to find out.</p>
+    </div>
+    <div class="intro__portrait">
+      <Portrait maxWidth="400px" />
+    </div>
+  </section>
+
+  <section class="container story" aria-labelledby="story-title">
+    <div class="story__text">
+      <h2 id="story-title" class="d h-section">How I got here</h2>
+      <p>My first jobs were in marketing: copywriting and planning for clients on Upwork, digital campaigns for VinFast's electric scooters, and a new pen line at Hong Ha that started with four months of field research across 15 stores.</p>
+      <p>At Xanh SM I started in growth: while I ran organic driver recruitment, the online share of new drivers went from 24% to 53%, and a National Day campaign I ran reached more than 7.7 million riders. Then I moved to automating rider journeys. That's where marketing turned into product work for me: deciding what the app should say, to whom and when, then testing it every week.</p>
+      <p>At VinDynamics I wrote the requirements for a security robot, ran the company website as a lead product, and built a lead engine and a marketing data warehouse on my own. Now I'm back at VinFast, working on car pages, a showroom inside Zalo and lead capture.</p>
+      <div class="story__logos">
+        <LogoBand variant="row" />
+      </div>
+    </div>
+    <div class="story__aside">
+      <Polaroid
+        src={teamPhoto}
+        alt="Leo at a Xanh SM team session, sitting with colleagues in team shirts."
+        caption="Xanh SM, with the team."
+        rotate={2}
+        maxWidth="320px"
+        class="story__polaroid"
+      />
+      <div class="award">
+        <span class="ic"><Icon name="award" /></span>
+        <div class="award__text">
+          <span class="lbl clay">Recognition</span>
+          <span class="award__title">Advanced Employee of the Year 2025, Xanh SM</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="people" class="band band--sand" aria-labelledby="people-title">
+    <div class="container people">
+      <h2 id="people-title" class="d h-section">What colleagues say</h2>
+      <ul class="people__grid" role="list">
+        {quotes.map((q) => (
+          <li class="quote-card">
+            <figure class="quote-card__fig">
+              <blockquote>
+                <span class="d quote-card__mark" aria-hidden="true">&ldquo;</span>
+                <p class="d quote-card__text">{q.text}</p>
+              </blockquote>
+              <figcaption class="lbl lbl--sm quote-card__who">{q.who}</figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="container study" aria-labelledby="study-title">
+    <div class="study__head">
+      <h2 id="study-title" class="d h-section">Currently studying</h2>
+      <p class="study__aside">Mostly so my opinions come with confidence intervals.</p>
+    </div>
+    <ul class="study__list" role="list">
+      {studies.map((s) => (
+        <li class="study__item">
+          <span class="lbl muted">{s.when}</span>
+          <span class="d study__what">{s.what}</span>
+          <span class="study__where muted">{s.where}</span>
+        </li>
+      ))}
+    </ul>
+    <p class="study__note muted">Before that: BA in International Business Management, University of the West of England, 2:1.</p>
+  </section>
+
+  <section class="container outside" aria-labelledby="outside-title">
+    <div class="outside__photo">
+      <Polaroid
+        src={outsidePhoto}
+        alt="Leo in a white shirt and tinted glasses by a tree-lined river, with rowing boats behind him."
+        caption="Offline, for once."
+        rotate={-2}
+        aspect="4 / 5"
+        maxWidth="420px"
+      />
+    </div>
+    <div class="outside__text">
+      <h2 id="outside-title" class="d h-section">Outside work</h2>
+      <p>I read a lot about psychology and motivation, mostly to understand why people, me included, do what they do. Some of that turns into small tools in the Lab.</p>
+      <div><Button href="/lab" variant="secondary" block>Visit the Lab</Button></div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Intro */
+  .intro {
+    padding-block: 40px 48px;
+    display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px;
+  }
+  @media (min-width: 900px) {
+    .intro { padding-block: 96px; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 64px; align-items: center; }
+  }
+  .intro__text { display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 900px) { .intro__text { gap: 28px; } }
+  .intro__lead { font-size: 21px; line-height: 1.45; max-width: 620px; }
+  .intro__body { font-size: 17px; line-height: 1.65; max-width: 620px; }
+  @media (min-width: 900px) {
+    .intro__lead { font-size: 26px; }
+    .intro__body { font-size: 19px; }
+  }
+  .intro__portrait { display: flex; justify-content: center; }
+
+  /* Story */
+  .story {
+    padding-block: 0 56px;
+    display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px;
+  }
+  @media (min-width: 900px) {
+    .story { padding-block: 24px 120px; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 64px; align-items: start; }
+  }
+  .story__text { display: flex; flex-direction: column; gap: 18px; }
+  @media (min-width: 900px) { .story__text { gap: 24px; } }
+  .story__text p { font-size: 17px; line-height: 1.65; max-width: 640px; }
+  @media (min-width: 900px) { .story__text p { font-size: 19px; } }
+  .story__logos { padding-top: 18px; border-top: 1px solid rgb(31 34 38 / 0.15); }
+  @media (min-width: 900px) { .story__logos { padding-top: 24px; } }
+  .story__aside { display: flex; flex-direction: column; align-items: center; gap: 24px; padding-top: 16px; }
+  @media (min-width: 900px) { .story__aside { gap: 32px; padding-top: 72px; } }
+  .story :global(.story__polaroid) { max-width: 260px; }
+  @media (min-width: 900px) { .story :global(.story__polaroid) { max-width: 320px; } }
+  .award {
+    width: 100%; max-width: 360px;
+    background: var(--color-white);
+    border: var(--line); border-radius: var(--radius-md);
+    padding: 16px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  @media (min-width: 900px) { .award { padding: 20px; } }
+  .award__text { display: flex; flex-direction: column; gap: 6px; }
+  .award__title { font-weight: 600; font-size: 17px; line-height: 1.35; }
+
+  /* Quotes */
+  .people { padding-block: 48px; display: flex; flex-direction: column; gap: 16px; }
+  @media (min-width: 900px) { .people { padding-block: 96px; gap: 40px; } }
+  .people__grid {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px;
+  }
+  @media (min-width: 640px) { .people__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; } }
+  @media (min-width: 1100px) { .people__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; } }
+  .quote-card {
+    background: var(--color-white);
+    border: var(--line); border-radius: 14px;
+    padding: 18px;
+    display: flex;
+  }
+  @media (min-width: 900px) { .quote-card { border-radius: var(--radius-md); padding: 24px; } }
+  .quote-card__fig { margin: 0; display: flex; flex-direction: column; gap: 14px; width: 100%; }
+  @media (min-width: 900px) { .quote-card__fig { gap: 18px; } }
+  .quote-card__mark { display: block; font-size: 56px; line-height: 0.5; color: var(--color-clay); padding-top: 18px; }
+  .quote-card__text { font-size: 20px; font-weight: 500; line-height: 1.3; }
+  @media (min-width: 900px) { .quote-card__text { font-size: 22px; } }
+  .quote-card__who {
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border-dashed);
+    font-weight: 500;
+  }
+
+  /* Study */
+  .study { padding-top: 56px; display: flex; flex-direction: column; gap: 14px; }
+  @media (min-width: 900px) { .study { padding-top: 120px; gap: 28px; } }
+  .study__head { display: flex; flex-direction: column; gap: 14px; }
+  @media (min-width: 900px) {
+    .study__head { flex-direction: row; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px 48px; }
+  }
+  .study__aside { font-size: 16px; line-height: 1.55; max-width: 500px; }
+  @media (min-width: 900px) { .study__aside { font-size: 18px; } }
+  .study__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  @media (min-width: 900px) { .study__list { flex-direction: row; flex-wrap: wrap; gap: 0 32px; } }
+  .study__item {
+    display: flex; flex-direction: column; gap: 6px;
+    padding: 14px 0;
+    border-top: var(--line);
+  }
+  @media (min-width: 900px) { .study__item { flex: 1 1 260px; gap: 8px; padding: 20px 0; } }
+  .study__what { font-size: 21px; line-height: 1.15; }
+  .study__where { font-size: 15px; }
+  @media (min-width: 900px) {
+    .study__what { font-size: 24px; }
+    .study__where { font-size: 16px; }
+  }
+  .study__note { font-size: 14px; line-height: 1.5; }
+  @media (min-width: 900px) { .study__note { font-size: 16px; } }
+
+  /* Outside work */
+  .outside {
+    padding-block: 56px;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  @media (min-width: 900px) {
+    .outside { padding-block: 120px; flex-direction: row; flex-wrap: wrap; gap: 80px; align-items: center; }
+    .outside__photo { flex: 0 1 420px; min-width: 0; }
+    .outside__text { flex: 1 1 480px; min-width: 0; }
+  }
+  .outside__photo { padding-inline: 24px 24px; padding-bottom: 12px; }
+  @media (min-width: 900px) { .outside__photo { padding: 0; } }
+  .outside__text { display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 900px) { .outside__text { gap: 24px; } }
+  .outside__text p { font-size: 17px; line-height: 1.6; max-width: 560px; }
+  @media (min-width: 900px) { .outside__text p { font-size: 20px; } }
+</style>

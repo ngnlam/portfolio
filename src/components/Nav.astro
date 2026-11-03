@@ -1,0 +1,135 @@
+---
+// Site header. Desktop: name, links, Say hello. Mobile: name and a menu button
+// that opens a panel. Without JavaScript the panel stays open, so links still work.
+import Icon from './Icon.astro';
+import { NAV, SITE, type NavKey } from '../data/site';
+
+interface Props {
+  current?: NavKey | null;
+}
+const { current = null } = Astro.props;
+---
+<header class="site-header">
+  <nav class="container site-nav" aria-label="Main">
+    <a href="/" class="d site-nav__name">{SITE.name}</a>
+
+    <div class="site-nav__desktop">
+      {NAV.map((item) => (
+        <a
+          href={item.href}
+          class:list={['site-nav__link', current === item.key && 'is-current']}
+          aria-current={current === item.key ? 'page' : undefined}
+        >{item.label}</a>
+      ))}
+      <a href="#talk" class="btn btn-s btn-sm">Say hello</a>
+    </div>
+
+    <button
+      type="button"
+      class="site-nav__toggle"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      data-menu-toggle
+    >
+      <span class="sr-only" data-menu-label>Open menu</span>
+      <span data-menu-icon-open><Icon name="menu" size={20} /></span>
+      <span data-menu-icon-close hidden><Icon name="close" size={20} /></span>
+    </button>
+  </nav>
+
+  <div id="mobile-menu" class="site-menu" data-menu>
+    <ul class="container site-menu__list" role="list">
+      {NAV.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class:list={['site-menu__link d', current === item.key && 'is-current']}
+            aria-current={current === item.key ? 'page' : undefined}
+          >{item.label}</a>
+        </li>
+      ))}
+      <li><a href="#talk" class="btn btn-p btn-block site-menu__cta" data-menu-close>Say hello</a></li>
+    </ul>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    background: var(--color-cream);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  @media (min-width: 900px) {
+    .site-header { position: sticky; top: 0; z-index: 20; }
+  }
+  .site-nav {
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    padding-block: 12px;
+  }
+  @media (min-width: 900px) { .site-nav { padding-block: 12px; min-height: 68px; } }
+  .site-nav__name { font-size: 19px; text-decoration: none; }
+  @media (min-width: 900px) { .site-nav__name { font-size: 22px; } }
+
+  .site-nav__desktop { display: none; }
+  @media (min-width: 900px) {
+    .site-nav__desktop { display: flex; align-items: center; gap: 32px; }
+  }
+  .site-nav__link {
+    font-weight: 500; font-size: 16px;
+    padding: 6px 10px; border-radius: var(--radius-sm);
+    text-decoration: none;
+    min-height: 44px; display: inline-flex; align-items: center;
+  }
+  .site-nav__link.is-current { background: var(--color-sun-soft); font-weight: 600; }
+
+  .site-nav__toggle {
+    width: 44px; height: 44px;
+    border: var(--line); border-radius: var(--radius-pill);
+    background: transparent;
+    display: inline-flex; align-items: center; justify-content: center;
+    cursor: pointer; padding: 0;
+  }
+  @media (min-width: 900px) { .site-nav__toggle { display: none; } }
+  :global(html:not(.js)) .site-nav__toggle { display: none; }
+
+  .site-menu { border-top: 1px solid var(--border-subtle); }
+  :global(html.js) .site-menu:not(.is-open) { display: none; }
+  @media (min-width: 900px) { .site-menu { display: none !important; } }
+  .site-menu__list {
+    list-style: none; margin: 0;
+    padding-block: 12px 20px;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .site-menu__link {
+    display: flex; align-items: center;
+    min-height: 48px; padding: 0 8px;
+    font-size: 26px; text-decoration: none;
+    border-radius: var(--radius-sm);
+  }
+  .site-menu__link.is-current { background: var(--color-sun-soft); }
+  .site-menu__cta { margin-top: 12px; }
+</style>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.querySelector<HTMLElement>('[data-menu]');
+  if (toggle && menu) {
+    const label = toggle.querySelector<HTMLElement>('[data-menu-label]')!;
+    const iconOpen = toggle.querySelector<HTMLElement>('[data-menu-icon-open]')!;
+    const iconClose = toggle.querySelector<HTMLElement>('[data-menu-icon-close]')!;
+    const set = (open: boolean) => {
+      menu.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      label.textContent = open ? 'Close menu' : 'Open menu';
+      iconOpen.hidden = open;
+      iconClose.hidden = !open;
+    };
+    toggle.addEventListener('click', () => set(toggle.getAttribute('aria-expanded') !== 'true'));
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => set(false)));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.classList.contains('is-open')) {
+        set(false);
+        toggle.focus();
+      }
+    });
+  }
+</script>

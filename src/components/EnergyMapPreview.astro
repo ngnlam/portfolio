@@ -1,0 +1,38 @@
+---
+// Decorative 2 x 2 preview of the Energy audit map (Home and Lab). Hidden from screen readers.
+interface Props { class?: string }
+const { class: className } = Astro.props;
+---
+<div class:list={['emap', className]} aria-hidden="true">
+  <div class="emap__q"><span class="lbl lbl--sm">Redesign</span><span class="emap__dot" style="left:30%;top:55%;--s:18px;--c:var(--color-clay)"></span><span class="emap__dot" style="left:62%;top:38%;--s:14px;--c:var(--color-clay)"></span></div>
+  <div class="emap__q emap__q--hl"><span class="lbl lbl--sm">Protect</span><span class="emap__dot" style="left:55%;top:50%;--s:22px;--c:var(--color-sun)"></span><span class="emap__dot" style="left:25%;top:66%;--s:14px;--c:var(--color-sun)"></span></div>
+  <div class="emap__q"><span class="lbl lbl--sm">Drop</span><span class="emap__dot" style="left:40%;top:48%;--s:16px;--c:var(--color-silver)"></span></div>
+  <div class="emap__q"><span class="lbl lbl--sm">Enjoy, within limits</span><span class="emap__dot" style="left:58%;top:56%;--s:16px;--c:var(--color-silver)"></span></div>
+</div>
+
+<style>
+  .emap {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    max-width: 520px;
+  }
+  .emap__q {
+    position: relative;
+    background: var(--color-white);
+    border: var(--line);
+    border-radius: var(--radius-md);
+    padding: 14px;
+  }
+  .emap__q--hl { background: var(--color-sun-soft); }
+  .emap__q .lbl { display: block; }
+  .emap__dot {
+    position: absolute;
+    width: var(--s); height: var(--s);
+    border-radius: 50%;
+    background: var(--c);
+    border: var(--line);
+  }
+</style>

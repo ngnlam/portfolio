@@ -1,0 +1,53 @@
+---
+// Portrait on a sun card with an arched top. `sticker` adds the "Hi, I'm Leo" pill (Home only).
+import { Image } from 'astro:assets';
+import portrait from '../assets/images/brand/portrait.jpg';
+
+interface Props {
+  sticker?: string;
+  maxWidth?: string;
+  loading?: 'eager' | 'lazy';
+  class?: string;
+}
+const { sticker, maxWidth = '440px', loading = 'eager', class: className } = Astro.props;
+---
+<div class:list={['portrait', className]} style={`--maxw:${maxWidth}`}>
+  <Image
+    src={portrait}
+    alt="Portrait of Leo Lam Nguyen in round black glasses and a white shirt."
+    widths={[320, 480, 640, 800]}
+    sizes="(min-width: 900px) 360px, 80vw"
+    loading={loading}
+    fetchpriority={loading === 'eager' ? 'high' : undefined}
+    class="portrait__img"
+  />
+  {sticker && <span class="sticker portrait__sticker">{sticker}</span>}
+</div>
+
+<style>
+  .portrait {
+    position: relative;
+    width: 100%;
+    max-width: var(--maxw);
+    aspect-ratio: 4 / 5;
+    background: var(--color-sun);
+    border: var(--line);
+    border-radius: var(--radius-lg);
+  }
+  .portrait :global(.portrait__img) {
+    position: absolute; left: 10%; bottom: 0;
+    width: 80%; height: 88%;
+    object-fit: cover; object-position: center top;
+    border-radius: 160px 160px 0 0;
+  }
+  @media (min-width: 900px) {
+    .portrait :global(.portrait__img) { border-radius: 200px 200px 0 0; }
+  }
+  .portrait__sticker {
+    position: absolute; top: 20px; left: 12px;
+    transform: rotate(-6deg);
+  }
+  @media (min-width: 900px) {
+    .portrait__sticker { top: 28px; left: -28px; }
+  }
+</style>

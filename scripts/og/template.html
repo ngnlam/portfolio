@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+/*FONTS*/
+* { box-sizing: border-box; margin: 0; }
+body { width: 1200px; height: 630px; background: #FFF8EC; color: #1F2226; font-family: 'Inter', sans-serif; overflow: hidden; }
+.wrap { position: relative; width: 1200px; height: 630px; display: flex; }
+.text { flex: 1 1 auto; padding: 64px 0 56px 72px; display: flex; flex-direction: column; justify-content: space-between; }
+.label { font-family: 'Mono', monospace; font-size: 22px; letter-spacing: 0.04em; text-transform: uppercase; color: #5E6168; }
+.name { font-family: 'Bricolage', sans-serif; font-weight: 700; font-size: 40px; letter-spacing: -0.02em; }
+.line { font-family: 'Bricolage', sans-serif; font-weight: 700; font-size: 58px; line-height: 1.04; letter-spacing: -0.03em; max-width: 640px; }
+.hl { background: #FFE6A3; padding: 0 8px; border-radius: 8px; }
+.case-title { font-family: 'Bricolage', sans-serif; font-weight: 700; font-size: 54px; line-height: 1.06; letter-spacing: -0.03em; max-width: 680px; }
+.panel { position: relative; flex: 0 0 400px; margin: 48px 56px 0 0; background: #FFC93C; border: 3px solid #1F2226; border-bottom: 0; border-radius: 32px 32px 0 0; overflow: hidden; }
+.panel img { position: absolute; left: 10%; bottom: 0; width: 80%; height: 90%; object-fit: cover; object-position: center top; border-radius: 200px 200px 0 0; }
+.sticker { position: absolute; top: 74px; right: 380px; transform: rotate(-6deg); background: #8A5A3B; color: #FFF8EC; border: 3px solid #1F2226; border-radius: 999px; padding: 12px 22px; font-family: 'Bricolage', sans-serif; font-weight: 700; font-size: 26px; z-index: 2; }
+.rule { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: #1F2226; }
+.case .home-only { display: none; }
+.home .case-only { display: none; }
+</style>
+</head>
+<body class="{{MODE}}">
+<div class="wrap">
+  <div class="text">
+    <span class="label home-only">Digital product builder in Hanoi</span>
+    <span class="label case-only">{{LABEL}}</span>
+    <p class="line home-only">I turn what users <span class="hl">actually do</span> into what a product should do next.</p>
+    <p class="case-title case-only">{{TITLE}}</p>
+    <span class="name">Leo Lam Nguyen</span>
+  </div>
+  <div class="panel"><img src="{{PORTRAIT}}" alt=""></div>
+  <span class="sticker home-only">Hi, I'm Leo</span>
+  <div class="rule"></div>
+</div>
+</body>
+</html>

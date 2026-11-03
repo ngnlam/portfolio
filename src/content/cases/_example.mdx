@@ -1,0 +1,45 @@
+---
+# Template for a case study. Files starting with "_" are not built.
+# Copy to src/content/cases/<slug>.mdx; the file name is the URL: /work/<slug>
+title: "Short outcome title, as it appears on the page"
+seoTitle: "Page title for the browser tab | Leo Lam Nguyen"
+description: "One or two sentences for search results and link previews (content.md §9)."
+order: 1
+company: VinFast            # VinFast | VinDynamics | Xanh SM
+year: "2026"
+role: Product owner         # Product owner | Requirements lead | Builder | Analyst
+team: "Who else was involved, in a few words"
+timeline: "Sep to Nov 2026"
+status: "Optional, e.g. Passed acceptance testing, launching next"
+stages: [Discover, Define, Decide, Ship]   # the stages Leo led
+tools: [Zalo, Figma, Excel]                # max 4, names from src/data/tools.ts
+tiles:
+  - { value: "30", label: "Models checked one by one", note: "13 cars and 17 scooters" }
+  - { value: "95", label: "Acceptance checks", note: "all passed" }
+  - { value: "81", label: "Product codes mapped", note: "so every model reaches the sales system" }
+glance:
+  problem: "One or two sentences."
+  did: "One or two sentences."
+  role: "One sentence."
+roles:
+  mine: "What Leo did."
+  team: "What the team did."
+next: other-case-slug
+# card: { teaser: "...", result: "...", image: "../../assets/images/cases/x.png", imageAlt: "..." }
+# ogImage: /og/<slug>.png   (render with scripts/og/render-og.cjs)
+---
+
+{/* Sections use fixed ids: problem, found, decisions, shipped, results, learned.
+    The kicker comes from the id; the title is this case's own headline. */}
+
+<Section id="problem" title="Customers live in Zalo. The showroom lived on the website.">
+Body paragraphs in plain Markdown.
+</Section>
+
+<Section id="decisions" title="Lead capture first, deposits later">
+<Decisions>
+<Decision title="Phase 1 is four screens">
+Why, in a short paragraph.
+</Decision>
+</Decisions>
+</Section>

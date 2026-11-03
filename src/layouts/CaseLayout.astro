@@ -1,0 +1,277 @@
+---
+// Case study page. Header (logo, title, stages, meta, tools, tiles), then a
+// side nav and the article: At a glance, the MDX body (Sections), Who did what,
+// and the next case. All copy comes from the case's frontmatter and MDX.
+import { Image } from 'astro:assets';
+import BaseLayout from './BaseLayout.astro';
+import StageStrip from '../components/StageStrip.astro';
+import ToolChips from '../components/ToolChips.astro';
+import Tiles from '../components/Tiles.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import { LOGOS } from '../data/logos';
+import { CASE_TOC, COMPANY_LOGO } from '../data/case';
+import { SITE } from '../data/site';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  slug: string;
+  data: CollectionEntry<'cases'>['data'];
+  next: { slug: string; title: string };
+}
+const { slug, data, next } = Astro.props;
+const logo = LOGOS[COMPANY_LOGO[data.company]];
+const meta = [
+  { k: 'Role', v: data.role },
+  { k: 'Team', v: data.team },
+  { k: 'Timeline', v: data.timeline },
+  { k: 'Company', v: data.company },
+  ...(data.status ? [{ k: 'Status', v: data.status }] : []),
+];
+const ogImage = data.ogImage ?? SITE.defaultOg;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: data.title,
+  description: data.description,
+  image: new URL(ogImage, Astro.site).href,
+  author: { '@type': 'Person', name: SITE.name, url: SITE.url },
+  publisher: { '@type': 'Person', name: SITE.name },
+  mainEntityOfPage: new URL(`/work/${slug}`, Astro.site).href,
+  ...(data.published ? { datePublished: data.published.toISOString().slice(0, 10) } : {}),
+};
+---
+<BaseLayout
+  title={data.seoTitle}
+  description={data.description}
+  current="work"
+  ogImage={ogImage}
+  ogImageAlt={data.title}
+  ogType="article"
+  jsonLd={jsonLd}
+>
+  <section class="container case-head" data-case={slug}>
+    <a href="/work" class="ul case-head__back">Back to all work</a>
+    <span class="case-head__brand">
+      <Image src={logo.src} alt={logo.name} height={52} densities={[1, 2]} class="case-head__logo" />
+      <span class="lbl lbl--sm muted">{data.year}</span>
+    </span>
+    <h1 class="d case-head__title">{data.title}</h1>
+    <StageStrip led={data.stages} />
+    <dl class="case-meta">
+      {meta.map((m) => (
+        <div class="case-meta__item">
+          <dt class="lbl lbl--sm muted">{m.k}</dt>
+          <dd>{m.v}</dd>
+        </div>
+      ))}
+    </dl>
+    <ToolChips tools={data.tools} />
+    <Tiles tiles={data.tiles} />
+    <div>
+      <Button href="#results" variant="secondary" event="skip_to_result" eventData={{ case: slug }}>Skip to the results</Button>
+    </div>
+  </section>
+
+  <div class="container case-body">
+    <nav class="case-toc" aria-label="Sections">
+      {CASE_TOC.map((t, i) => (
+        <a href={`#${t.id}`} class:list={['case-toc__link', i === 0 && 'is-current']}>{t.label}</a>
+      ))}
+    </nav>
+
+    <article class="case-article">
+      <section id="glance" class="case-glance" aria-labelledby="h-glance">
+        <h2 id="h-glance" class="lbl lbl--sm clay case-glance__title">At a glance</h2>
+        <dl class="case-glance__list">
+          <div><dt class="lbl lbl--sm clay">Problem</dt><dd>{data.glance.problem}</dd></div>
+          <div><dt class="lbl lbl--sm clay">What I did</dt><dd>{data.glance.did}</dd></div>
+          <div><dt class="lbl lbl--sm clay">My role</dt><dd>{data.glance.role}</dd></div>
+        </dl>
+      </section>
+
+      <slot />
+
+      <section id="role" class="case-role" aria-labelledby="h-role">
+        <h2 id="h-role" class="lbl lbl--sm case-role__title">Who did what</h2>
+        <div class="case-role__col">
+          <span class="d case-role__who">Mine</span>
+          <p>{data.roles.mine}</p>
+        </div>
+        <div class="case-role__col case-role__col--team">
+          <span class="d case-role__who">The team's</span>
+          <p>{data.roles.team}</p>
+        </div>
+      </section>
+
+      <a
+        href={`/work/${next.slug}`}
+        class="card case-next"
+        data-umami-event="next_case_click"
+        data-umami-event-from={slug}
+        data-umami-event-to={next.slug}
+      >
+        <span class="case-next__text">
+          <span class="lbl lbl--sm muted">Next case</span>
+          <span class="d case-next__title">{next.title}</span>
+        </span>
+        <span class="ic case-next__ic"><Icon name="arrowRight" /></span>
+      </a>
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .case-head {
+    padding-block: 32px 48px;
+    display: flex; flex-direction: column; gap: 24px;
+  }
+  @media (min-width: 900px) { .case-head { padding-block: 48px 64px; gap: 28px; } }
+  .case-head__back { font-size: 15px; font-weight: 500; align-self: flex-start; }
+  .case-head__brand { display: flex; align-items: center; gap: 12px; }
+  .case-head :global(.case-head__logo) { height: 40px; width: auto; }
+  @media (min-width: 900px) { .case-head :global(.case-head__logo) { height: 52px; } }
+  .case-head__title { font-size: clamp(34px, 4.6vw, 64px); line-height: 1.05; max-width: 960px; }
+
+  .case-meta {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-block: var(--line);
+    max-width: 960px;
+  }
+  .case-meta__item { padding: 14px 12px 14px 0; display: flex; flex-direction: column; gap: 6px; }
+  .case-meta__item dd { font-size: 15px; line-height: 1.45; }
+  .case-meta__item:nth-child(n + 3) { border-top: 1px solid rgb(31 34 38 / 0.2); }
+  .case-meta__item:nth-child(even) { padding-left: 12px; border-left: 1px solid rgb(31 34 38 / 0.2); }
+  .case-meta__item:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  @media (min-width: 900px) {
+    .case-meta { display: flex; flex-wrap: wrap; }
+    .case-meta__item { flex: 1 1 140px; padding: 16px; border-top: 0 !important; }
+    .case-meta__item:first-child { padding-left: 0; }
+    .case-meta__item + .case-meta__item { border-left: 1px solid rgb(31 34 38 / 0.2); }
+    .case-meta__item:nth-child(even) { padding-left: 16px; }
+    .case-meta__item dd { font-size: 16px; }
+  }
+
+  .case-body {
+    padding-bottom: clamp(64px, 9vw, 128px);
+    display: flex; gap: 64px; align-items: flex-start;
+  }
+  .case-toc { display: none; }
+  @media (min-width: 1100px) {
+    .case-toc {
+      flex: 0 0 200px;
+      position: sticky; top: calc(var(--header-h) + 32px);
+      display: flex; flex-direction: column; gap: 12px;
+      padding-top: 8px;
+    }
+  }
+  .case-toc__link { font-size: 14px; color: var(--text-muted); text-decoration: none; }
+  .case-toc__link:hover, .case-toc__link.is-current { color: var(--text); }
+  .case-toc__link.is-current { font-weight: 600; }
+
+  .case-article {
+    flex: 1 1 auto; min-width: 0; max-width: var(--reading);
+    display: flex; flex-direction: column; gap: 56px;
+  }
+  @media (min-width: 900px) { .case-article { gap: 64px; } }
+
+  .case-glance {
+    background: var(--color-white);
+    border: var(--line); border-radius: var(--radius-md);
+    padding: 24px;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  @media (min-width: 900px) { .case-glance { padding: 32px; } }
+  .case-glance__title { margin: 0; font-weight: 500; }
+  .case-glance__list { display: flex; flex-direction: column; gap: 16px; }
+  .case-glance__list > div { display: flex; flex-direction: column; gap: 6px; }
+  @media (min-width: 640px) {
+    .case-glance__list > div { flex-direction: row; gap: 20px; }
+    .case-glance__list dt { flex: 0 0 120px; padding-top: 4px; }
+  }
+  .case-glance__list dd { font-size: 17px; line-height: 1.6; }
+
+  .case-role {
+    border: var(--line); border-radius: var(--radius-md);
+    background: var(--color-white);
+    overflow: hidden;
+    display: flex; flex-wrap: wrap;
+  }
+  .case-role__title {
+    flex: 1 1 100%; margin: 0;
+    padding: 16px 24px;
+    font-weight: 500;
+    background: var(--color-sand);
+    border-bottom: var(--line);
+  }
+  .case-role__col { flex: 1 1 260px; padding: 24px; display: flex; flex-direction: column; gap: 10px; }
+  .case-role__col p { font-size: 16px; line-height: 1.6; }
+  .case-role__col--team { border-top: 1px solid rgb(31 34 38 / 0.2); }
+  @media (min-width: 640px) {
+    .case-role__col--team { border-top: 0; border-left: 1px solid rgb(31 34 38 / 0.2); }
+  }
+  .case-role__who { font-size: 22px; font-weight: 500; }
+
+  .case-next {
+    display: flex; justify-content: space-between; align-items: center; gap: 20px;
+    padding: 24px;
+    background: var(--color-sand);
+  }
+  @media (min-width: 900px) { .case-next { padding: 28px; } }
+  .case-next__text { display: flex; flex-direction: column; gap: 10px; }
+  .case-next__title { font-size: clamp(22px, 2.4vw, 28px); line-height: 1.15; }
+  .case-next__ic { background: var(--color-white); }
+
+  /* Prose inside MDX sections */
+  .case-article :global(.case-section) { display: flex; flex-direction: column; gap: 20px; }
+  .case-article :global(.prose) { display: flex; flex-direction: column; gap: 20px; }
+  .case-article :global(.prose p),
+  .case-article :global(.prose li) { font-size: 17px; line-height: 1.65; }
+  @media (min-width: 900px) {
+    .case-article :global(.prose p),
+    .case-article :global(.prose li) { font-size: 18px; }
+  }
+  .case-article :global(.prose ol),
+  .case-article :global(.prose ul:not([role='list'])) {
+    margin: 0; padding-left: 22px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .case-article :global(.prose strong) { font-weight: 600; }
+</style>
+
+<script>
+  // Highlight the side-nav link for the section in view.
+  const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.case-toc__link'));
+  const targets = links
+    .map((a) => document.getElementById(a.hash.slice(1)))
+    .filter((el): el is HTMLElement => !!el);
+  if (links.length && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          links.forEach((a) => a.classList.toggle('is-current', a.hash === `#${e.target.id}`));
+        }
+      },
+      { rootMargin: '-30% 0px -60% 0px' },
+    );
+    targets.forEach((t) => io.observe(t));
+  }
+
+  // Scroll depth events (50% and 90%) for Umami, once each per page view.
+  const caseSlug = document.querySelector<HTMLElement>('[data-case]')?.dataset.case;
+  const sent = new Set<number>();
+  const onScroll = () => {
+    const doc = document.documentElement;
+    const depth = (window.scrollY + window.innerHeight) / doc.scrollHeight;
+    for (const mark of [50, 90]) {
+      if (depth * 100 >= mark && !sent.has(mark)) {
+        sent.add(mark);
+        const umami = (window as unknown as { umami?: { track: (n: string, d?: object) => void } }).umami;
+        umami?.track('case_scroll', { case: caseSlug, depth: mark });
+      }
+    }
+    if (sent.size === 2) window.removeEventListener('scroll', onScroll);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+</script>

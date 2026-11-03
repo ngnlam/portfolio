@@ -1,0 +1,184 @@
+---
+// Rotating colleague quotes (Home). 8 seconds per quote; pauses on hover and
+// focus; prev, next and pause buttons; no auto-rotation with reduced motion.
+// Without JavaScript it shows the first quote and hides the controls.
+import Icon from './Icon.astro';
+import quotesData from '../data/quotes.json';
+
+interface Props {
+  title?: string;
+  moreHref?: string;
+  moreLabel?: string;
+  interval?: number;
+}
+const {
+  title = 'What colleagues say',
+  moreHref = '/about#people',
+  moreLabel = 'Read more from colleagues',
+  interval = 8000,
+} = Astro.props;
+const quotes = quotesData as { text: string; who: string }[];
+const first = quotes[0];
+---
+<section class="quotes band band--sand" aria-labelledby="quotes-title">
+  <div class="container quotes__inner">
+    <h2 id="quotes-title" class="lbl muted quotes__title">{title}</h2>
+    <figure class="quotes__fig" data-quotes data-interval={interval}>
+      <blockquote class="quotes__quote" aria-live="off" data-q-region>
+        <span class="d quotes__mark" aria-hidden="true">&ldquo;</span>
+        <p class="d quotes__text" data-q-text>{first.text}</p>
+      </blockquote>
+      <figcaption class="lbl quotes__who" data-q-who>{first.who}</figcaption>
+      <div class="quotes__controls" data-q-controls>
+        <button type="button" class="qbtn" data-q-prev aria-label="Previous quote"><Icon name="chevronLeft" size={18} strokeWidth={1.8} /></button>
+        <div class="quotes__dots" aria-hidden="true">
+          {quotes.map((_, i) => <span class:list={['quotes__dot', i === 0 && 'is-active']} data-q-dot></span>)}
+        </div>
+        <span class="lbl lbl--sm muted quotes__count" data-q-count>1 of {quotes.length}</span>
+        <button type="button" class="qbtn" data-q-next aria-label="Next quote"><Icon name="chevronRight" size={18} strokeWidth={1.8} /></button>
+        <button type="button" class="qbtn" data-q-toggle aria-label="Pause quotes">
+          <span data-q-icon-pause><Icon name="pause" size={16} strokeWidth={2} /></span>
+          <span data-q-icon-play hidden><Icon name="play" size={16} strokeWidth={2} /></span>
+        </button>
+      </div>
+      <a href={moreHref} class="ul quotes__more">{moreLabel}</a>
+    </figure>
+    <script type="application/json" data-q-data set:html={JSON.stringify(quotes)} />
+  </div>
+</section>
+
+<style>
+  .quotes__inner {
+    padding-block: 56px;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  @media (min-width: 900px) {
+    .quotes__inner { padding-block: 96px; flex-direction: row; gap: 64px; align-items: flex-start; }
+    .quotes__title { flex: 0 0 200px; padding-top: 14px; }
+  }
+  .quotes__title { margin: 0; font-weight: 500; }
+  .quotes__fig {
+    flex: 1 1 auto; min-width: 0; margin: 0;
+    display: grid; gap: 20px;
+    grid-template-areas: "quote" "who" "controls" "more";
+  }
+  @media (min-width: 900px) {
+    .quotes__fig {
+      gap: 24px;
+      grid-template-columns: 1fr auto;
+      grid-template-areas: "quote quote" "who more" "controls controls";
+      align-items: center;
+    }
+  }
+  .quotes__quote { grid-area: quote; position: relative; margin: 0; min-height: 300px; }
+  @media (min-width: 900px) { .quotes__quote { min-height: 190px; } }
+  .quotes__mark {
+    display: block;
+    font-size: 72px; line-height: 0.6; padding-top: 24px;
+    color: var(--color-clay);
+  }
+  @media (min-width: 900px) {
+    .quotes__mark { position: absolute; left: -4px; top: -40px; font-size: 96px; line-height: 1; padding-top: 0; }
+  }
+  .quotes__text {
+    font-size: 26px; line-height: 1.22; font-weight: 500;
+    transition: opacity 220ms ease;
+  }
+  @media (min-width: 900px) {
+    .quotes__text { padding-top: 28px; font-size: clamp(28px, 2.8vw, 38px); line-height: 1.2; }
+  }
+  .quotes__who { grid-area: who; font-weight: 500; transition: opacity 220ms ease; }
+  .quotes__more { grid-area: more; font-size: 17px; justify-self: start; }
+  @media (min-width: 900px) { .quotes__more { justify-self: end; } }
+  .is-fading { opacity: 0; }
+
+  .quotes__controls { grid-area: controls; display: none; align-items: center; gap: 12px; flex-wrap: wrap; }
+  :global(html.js) .quotes__controls { display: flex; }
+  .quotes__dots { display: flex; gap: 8px; align-items: center; }
+  .quotes__dot {
+    display: inline-block; width: 10px; height: 10px;
+    border-radius: var(--radius-pill); border: var(--line);
+    background: transparent;
+    transition: width 200ms ease, background-color 200ms ease;
+  }
+  .quotes__dot.is-active { width: 28px; background: var(--color-graphite); }
+  .qbtn {
+    width: 44px; height: 44px;
+    border: var(--line); border-radius: var(--radius-pill);
+    background: var(--color-cream);
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0; cursor: pointer; color: var(--text);
+  }
+  .qbtn:hover { background: var(--color-sun-soft); }
+  @media (prefers-reduced-motion: reduce) {
+    .quotes__text, .quotes__who, .quotes__dot { transition: none; }
+  }
+</style>
+
+<script>
+  function initQuotes(root: HTMLElement) {
+    const dataEl = root.parentElement?.querySelector<HTMLScriptElement>('[data-q-data]');
+    if (!dataEl) return;
+    const quotes: { text: string; who: string }[] = JSON.parse(dataEl.textContent || '[]');
+    if (quotes.length < 2) return;
+    const text = root.querySelector<HTMLElement>('[data-q-text]')!;
+    const who = root.querySelector<HTMLElement>('[data-q-who]')!;
+    const region = root.querySelector<HTMLElement>('[data-q-region]')!;
+    const count = root.querySelector<HTMLElement>('[data-q-count]')!;
+    const dots = Array.from(root.querySelectorAll<HTMLElement>('[data-q-dot]'));
+    const toggle = root.querySelector<HTMLButtonElement>('[data-q-toggle]')!;
+    const iconPause = root.querySelector<HTMLElement>('[data-q-icon-pause]')!;
+    const iconPlay = root.querySelector<HTMLElement>('[data-q-icon-play]')!;
+    const interval = Number(root.dataset.interval) || 8000;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let i = 0;
+    let playing = !reduce;
+    let hold = false;
+    let fadeTimer: number | undefined;
+
+    function show(n: number, announce: boolean) {
+      const next = ((n % quotes.length) + quotes.length) % quotes.length;
+      region.setAttribute('aria-live', announce ? 'polite' : 'off');
+      const swap = () => {
+        i = next;
+        text.textContent = quotes[i].text;
+        who.textContent = quotes[i].who;
+        count.textContent = `${i + 1} of ${quotes.length}`;
+        dots.forEach((d, k) => d.classList.toggle('is-active', k === i));
+        text.classList.remove('is-fading');
+        who.classList.remove('is-fading');
+      };
+      if (reduce) return swap();
+      text.classList.add('is-fading');
+      who.classList.add('is-fading');
+      window.clearTimeout(fadeTimer);
+      fadeTimer = window.setTimeout(swap, 220);
+    }
+
+    function setPlaying(p: boolean) {
+      playing = p;
+      toggle.setAttribute('aria-label', p ? 'Pause quotes' : 'Play quotes');
+      iconPause.hidden = !p;
+      iconPlay.hidden = p;
+    }
+
+    setPlaying(playing);
+    root.querySelector('[data-q-prev]')!.addEventListener('click', () => show(i - 1, true));
+    root.querySelector('[data-q-next]')!.addEventListener('click', () => show(i + 1, true));
+    toggle.addEventListener('click', () => setPlaying(!playing));
+    root.addEventListener('mouseenter', () => (hold = true));
+    root.addEventListener('mouseleave', () => (hold = false));
+    root.addEventListener('focusin', () => (hold = true));
+    root.addEventListener('focusout', (e) => {
+      if (!root.contains(e.relatedTarget as Node)) hold = false;
+    });
+
+    window.setInterval(() => {
+      if (!playing || hold || document.hidden) return;
+      show(i + 1, false);
+    }, interval);
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-quotes]').forEach(initQuotes);
+</script>

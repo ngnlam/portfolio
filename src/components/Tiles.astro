@@ -1,0 +1,38 @@
+---
+// The three number tiles under a case title. The first tile is highlighted.
+interface Tile {
+  value: string;
+  label: string;
+  note?: string;
+}
+interface Props {
+  tiles: Tile[];
+  highlight?: number;
+  class?: string;
+}
+const { tiles, highlight = 0, class: className } = Astro.props;
+---
+<ul class:list={['tiles', className]} role="list">
+  {tiles.map((t, i) => (
+    <li class:list={['tile', i === highlight && 'tile--hl']}>
+      <span class="d tile__value">{t.value}</span>
+      <span class="lbl lbl--sm tile__label">{t.label}</span>
+      {t.note && <span class="tile__note muted">{t.note}</span>}
+    </li>
+  ))}
+</ul>
+
+<style>
+  .tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; max-width: 960px; }
+  @media (min-width: 640px) { .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .tile {
+    background: var(--color-white);
+    border: var(--line);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .tile--hl { background: var(--color-sun-soft); }
+  .tile__value { font-size: clamp(44px, 4.4vw, 56px); line-height: 1; }
+  .tile__note { font-size: 14px; line-height: 1.45; }
+</style>

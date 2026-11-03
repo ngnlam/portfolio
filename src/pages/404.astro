@@ -1,0 +1,72 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import chillGuy from '../assets/images/misc/chill-guy.jpg';
+---
+<BaseLayout title="Page not found | Leo Lam Nguyen" noindex>
+  <section class="container nf" aria-labelledby="nf-title">
+    <div class="nf__text">
+      <span class="lbl muted">404</span>
+      <h1 id="nf-title" class="d nf__title">This page didn't ship.</h1>
+      <p class="nf__sub">The link might be old, or I moved things around. Stay calm and pick a way out.</p>
+    </div>
+    <div class="nf__art">
+      <div class="nf__circle">
+        <figure class="nf__photo">
+          <Image src={chillGuy} alt={'Leo in a suit holding a "Chill guy" sign and a phone.'} widths={[150, 200, 380]} sizes="(min-width: 900px) 200px, 150px" />
+        </figure>
+      </div>
+    </div>
+    <div class="nf__actions">
+      <Button href="/" variant="primary" block>Back to home</Button>
+      <Button href="/work" variant="secondary" block>See the work</Button>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf {
+    padding-block: 48px 64px;
+    display: grid; gap: 20px;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "text" "art" "actions";
+  }
+  @media (min-width: 900px) {
+    .nf {
+      padding-block: 120px 144px;
+      column-gap: 64px; row-gap: 28px;
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      grid-template-areas: "text art" "actions art";
+      align-items: center;
+    }
+  }
+  .nf__text { grid-area: text; display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 900px) { .nf__text { gap: 28px; align-self: end; } }
+  .nf__title { font-size: clamp(44px, 5.8vw, 84px); line-height: 1.02; letter-spacing: -0.03em; }
+  .nf__sub { font-size: 18px; line-height: 1.55; max-width: 520px; }
+  @media (min-width: 900px) { .nf__sub { font-size: 21px; } }
+  .nf__art { grid-area: art; display: flex; justify-content: center; padding-block: 16px; }
+  .nf__circle {
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: var(--color-sun);
+    border: var(--line);
+    display: flex; align-items: center; justify-content: center;
+  }
+  @media (min-width: 900px) { .nf__circle { width: 380px; height: 380px; } }
+  .nf__photo {
+    /* Canvas sizes are content widths (150/200px) plus padding and border. */
+    margin: 0; width: 169px;
+    background: var(--color-white);
+    border: var(--line); border-radius: var(--radius-sm);
+    padding: 8px;
+    box-shadow: var(--shadow-pop);
+    transform: rotate(6deg);
+  }
+  @media (min-width: 900px) { .nf__photo { width: 219px; } }
+  .nf__photo :global(img) { width: 100%; border-radius: 4px; }
+  .nf__actions { grid-area: actions; display: flex; flex-direction: column; gap: 12px; }
+  @media (min-width: 640px) { .nf__actions { flex-direction: row; flex-wrap: wrap; gap: 16px; } }
+  @media (min-width: 900px) { .nf__actions { align-self: start; padding-top: 8px; } }
+</style>

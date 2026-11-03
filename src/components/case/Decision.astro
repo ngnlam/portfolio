@@ -1,0 +1,30 @@
+---
+// One decision: a short bold title, then the reasoning (slot).
+interface Props { title: string }
+const { title } = Astro.props;
+---
+<li class="decision">
+  <span class="decision__head">
+    <span class="lbl lbl--sm clay decision__num" aria-hidden="true"></span>
+    <span class="decision__title">{title}</span>
+  </span>
+  <div class="decision__body"><slot /></div>
+</li>
+
+<style>
+  .decision {
+    counter-increment: decision;
+    display: flex; flex-direction: column; gap: 8px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgb(31 34 38 / 0.2);
+  }
+  @media (min-width: 640px) {
+    .decision { flex-direction: row; gap: 20px; }
+    .decision__head { flex: 0 0 200px; }
+    .decision__body { flex: 1 1 auto; min-width: 0; }
+  }
+  .decision__head { display: flex; gap: 10px; align-items: baseline; }
+  .decision__num::before { content: counter(decision, decimal-leading-zero); }
+  .decision__title { font-weight: 600; font-size: 17px; line-height: 1.35; }
+  .decision__body :global(p) { font-size: 17px; line-height: 1.6; }
+</style>

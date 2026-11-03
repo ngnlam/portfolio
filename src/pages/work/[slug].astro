@@ -1,0 +1,28 @@
+---
+// One page per case in src/content/cases. Order and the next-case loop come from frontmatter.
+import { getCollection, render } from 'astro:content';
+import CaseLayout from '../../layouts/CaseLayout.astro';
+import Section from '../../components/case/Section.astro';
+import Decisions from '../../components/case/Decisions.astro';
+import Decision from '../../components/case/Decision.astro';
+import FigureRow from '../../components/case/FigureRow.astro';
+import Figure from '../../components/Figure.astro';
+
+export async function getStaticPaths() {
+  const cases = (await getCollection('cases')).sort((a, b) => a.data.order - b.data.order);
+  return cases.map((entry) => {
+    const next = cases.find((c) => c.id === entry.data.next);
+    if (!next) throw new Error(`Case "${entry.id}": next case "${entry.data.next}" not found`);
+    return {
+      params: { slug: entry.id },
+      props: { entry, next: { slug: next.id, title: next.data.title } },
+    };
+  });
+}
+
+const { entry, next } = Astro.props;
+const { Content } = await render(entry);
+---
+<CaseLayout slug={entry.id} data={entry.data} next={next}>
+  <Content components={{ Section, Decisions, Decision, Figure, FigureRow }} />
+</CaseLayout>

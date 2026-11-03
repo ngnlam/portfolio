@@ -1,0 +1,24 @@
+---
+// Placeholder until the Energy audit tool is ported (build plan, stage 2).
+// Kept out of search results until then.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/Button.astro';
+---
+<BaseLayout
+  title="Energy audit | Leo Lam Nguyen"
+  description="See which parts of your week give you energy and which drain them. Free, private, about five minutes."
+  current="lab"
+  noindex
+>
+  <section class="container stub" aria-labelledby="ea-title">
+    <h1 id="ea-title" class="d h-display">Energy audit</h1>
+    <p class="stub__text">The tool is moving to this page. Check back soon.</p>
+    <div><Button href="/lab" variant="secondary" block>Back to the Lab</Button></div>
+  </section>
+</BaseLayout>
+
+<style>
+  .stub { padding-block: 56px 96px; display: flex; flex-direction: column; gap: 24px; }
+  @media (min-width: 900px) { .stub { padding-block: 120px 144px; } }
+  .stub__text { font-size: 19px; line-height: 1.55; max-width: 560px; }
+</style>

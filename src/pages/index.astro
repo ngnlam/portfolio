@@ -1,0 +1,294 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import LogoBand from '../components/LogoBand.astro';
+import Portrait from '../components/Portrait.astro';
+import QuoteRotator from '../components/QuoteRotator.astro';
+import EnergyMapPreview from '../components/EnergyMapPreview.astro';
+import { LOGOS } from '../data/logos';
+import { SITE } from '../data/site';
+import vf9Hero from '../assets/images/home/vf9-live-hero.jpg';
+import vf9Form from '../assets/images/home/vf9-live-form.jpg';
+import zaloHome from '../assets/images/home/zalo-home.png';
+import dynoHome from '../assets/images/home/dyno-home.jpg';
+
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: SITE.name,
+  jobTitle: SITE.role,
+  url: SITE.url,
+  image: new URL('/og/default.png', SITE.url).href,
+  sameAs: [SITE.linkedin],
+  address: { '@type': 'PostalAddress', addressLocality: 'Hanoi', addressCountry: 'VN' },
+};
+const entryPoints = [
+  { label: 'Header button', tag: 'New', isNew: true },
+  { label: 'Section button', tag: 'New', isNew: true },
+  { label: 'Sticky bar', tag: 'New', isNew: true },
+  { label: 'Form at the bottom', tag: 'The original', isNew: false },
+];
+---
+<BaseLayout
+  title="Leo Lam Nguyen | Digital Product Builder"
+  description="I turn what users actually do into what a product should do next. Case studies from VinFast and VinDynamics."
+  jsonLd={person}
+>
+  <section class="container hero" aria-labelledby="hero-title">
+    <div class="hero__text">
+      <span class="lbl muted">Digital product builder in Hanoi</span>
+      <h1 id="hero-title" class="d h-hero">I turn what users <span class="hero__hl">actually do</span> into what a product should do next.</h1>
+      <p class="hero__sub">Then I ship it, measure it, and make it better.</p>
+      <div class="hero__actions">
+        <Button href="/work" variant="primary" block>See the work</Button>
+        <Button href="#talk" variant="secondary" block>Say hello</Button>
+      </div>
+      <LogoBand variant="grid" class="only-mobile hero__logos" />
+    </div>
+    <div class="hero__portrait">
+      <Portrait sticker="Hi, I'm Leo" />
+    </div>
+  </section>
+
+  <LogoBand variant="band" class="only-desktop" />
+
+  <section class="container work section" aria-labelledby="work-title">
+    <div class="work__head">
+      <h2 id="work-title" class="d h-section">Three projects I'd walk you through first</h2>
+      <Button href="/work" variant="secondary" class="only-desktop-inline">See all work</Button>
+    </div>
+
+    <div class="bento">
+      <a
+        href="/work/car-product-pages"
+        class="card case-card case-card--lg"
+        data-umami-event="case_card_click"
+        data-umami-event-case="car-product-pages"
+        data-umami-event-from="home"
+      >
+        <span class="case-card__brand">
+          <Image src={LOGOS.vinfast.src} alt="VinFast" height={36} densities={[1, 2]} class="case-card__logo" />
+          <span class="lbl lbl--sm muted">2026</span>
+        </span>
+        <div class="vf-media">
+          <div class="vf-media__shots">
+            <Image src={vf9Hero} alt="The live VF 9 product page, with the starting price and one deposit button in the hero." widths={[400, 700, 1015]} sizes="(min-width: 900px) 420px, 90vw" class="vf-media__img vf-media__img--hero" />
+            <Image src={vf9Form} alt="Further down the live VF 9 page, a consultation form next to the design section." widths={[400, 700, 1015]} sizes="420px" class="vf-media__img only-desktop" />
+          </div>
+          <div class="vf-media__list">
+            <span class="lbl lbl--sm muted only-desktop">Four ways to reach the form</span>
+            <ol class="entry-list" aria-label="Four ways to reach the form">
+              {entryPoints.map((e) => (
+                <li class="entry-list__item">
+                  <span class:list={['entry-list__label', e.isNew && 'is-new']}>{e.label}</span>
+                  <span class="lbl lbl--sm muted">{e.tag}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+        <h3 class="d case-card__title case-card__title--lg">Half of car-page leads now start at entry points I designed</h3>
+        <span class="case-card__result dash-top">
+          <span class="lbl">54% of car-page leads via the new entry points</span>
+          <span class="only-desktop"><Icon name="arrowUpRight" size={22} /></span>
+        </span>
+      </a>
+
+      <div class="bento__side">
+        <a
+          href="/work/zalo-showroom"
+          class="card case-card"
+          data-umami-event="case_card_click"
+          data-umami-event-case="zalo-showroom"
+          data-umami-event-from="home"
+        >
+          <span class="case-card__brand">
+            <Image src={LOGOS.vinfast.src} alt="VinFast" height={32} densities={[1, 2]} class="case-card__logo case-card__logo--sm" />
+            <span class="lbl lbl--sm muted">2026</span>
+          </span>
+          <div class="zalo-media">
+            <Image src={zaloHome} alt="The home screen of VinFast's Zalo Mini App: a promo banner, then electric cars and scooters with their starting prices." widths={[132, 264]} sizes="132px" class="zalo-media__img" />
+          </div>
+          <h3 class="d case-card__title">VinFast's showroom inside Zalo</h3>
+          <span class="case-card__result dash-top"><span class="lbl">30 models, 95 checks passed</span></span>
+        </a>
+
+        <a
+          href="/work/dyno-requirements"
+          class="card case-card"
+          data-umami-event="case_card_click"
+          data-umami-event-case="dyno-requirements"
+          data-umami-event-from="home"
+        >
+          <span class="case-card__brand">
+            <Image src={LOGOS.vindynamics.src} alt="VinDynamics" height={40} densities={[1, 2]} class="case-card__logo case-card__logo--vd" />
+            <span class="lbl lbl--sm muted">2026</span>
+          </span>
+          <Image src={dynoHome} alt="Dyno, VinDynamics' humanoid robot, standing in a parking basement." widths={[400, 700, 900]} sizes="(min-width: 900px) 360px, 90vw" class="dyno-media" />
+          <h3 class="d case-card__title case-card__title--sm">From a client's wish list to requirements for Dyno, a security robot</h3>
+          <span class="case-card__result dash-top"><span class="lbl">18 user stories cut to 6</span></span>
+        </a>
+      </div>
+    </div>
+
+    <Button href="/work" variant="secondary" class="only-mobile-flex">See all work</Button>
+  </section>
+
+  <QuoteRotator />
+
+  <section class="container lab section" aria-labelledby="lab-title">
+    <h2 id="lab-title" class="d h-section">Small tools I built because I needed them</h2>
+    <div class="lab__card">
+      <div class="lab__text">
+        <h3 class="d lab__title">Energy audit</h3>
+        <p class="lab__desc">See which parts of your week give you energy and which ones drain it. Then decide what to change.</p>
+        <div><Button href="/lab/energy-audit" variant="primary" block>Try it</Button></div>
+      </div>
+      <EnergyMapPreview class="only-desktop-grid lab__map" />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .only-desktop-inline { display: none; }
+  .only-mobile-flex { display: flex; }
+  .only-desktop-grid { display: none !important; }
+  @media (min-width: 900px) {
+    .only-desktop-inline { display: inline-flex; }
+    .only-mobile-flex { display: none; }
+    .only-desktop-grid { display: grid !important; }
+  }
+
+  /* Hero */
+  .hero {
+    padding-block: 40px 64px;
+    display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px;
+  }
+  @media (min-width: 900px) {
+    .hero {
+      padding-block: 96px 112px;
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      gap: 48px; align-items: center;
+    }
+  }
+  .hero__text { display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 900px) { .hero__text { gap: 24px; } }
+  .hero__hl { background: var(--color-sun-soft); padding: 0 4px; border-radius: 4px; }
+  @media (min-width: 900px) { .hero__hl { padding: 0 6px; border-radius: 6px; } }
+  .hero__sub { font-size: 19px; line-height: 1.55; max-width: 560px; }
+  @media (min-width: 900px) { .hero__sub { font-size: 21px; } }
+  .hero__actions { display: flex; flex-direction: column; gap: 12px; padding-top: 4px; }
+  @media (min-width: 640px) { .hero__actions { flex-direction: row; flex-wrap: wrap; gap: 16px; padding-top: 8px; } }
+  .hero :global(.hero__logos) { margin-top: 8px; padding-top: 20px; border-top: 1px solid rgb(31 34 38 / 0.15); }
+  @media (max-width: 899px) { .hero :global(.hero__logos) { display: grid; } }
+  .hero__portrait { display: flex; justify-content: center; }
+
+  /* Selected work */
+  .work { display: flex; flex-direction: column; gap: 24px; padding-top: 0; }
+  @media (min-width: 900px) { .work { gap: 40px; padding-top: clamp(64px, 9vw, 112px); } }
+  .work__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px; }
+  .bento { display: flex; flex-direction: column; gap: 16px; }
+  @media (min-width: 900px) {
+    .bento { flex-direction: row; gap: 24px; align-items: stretch; }
+    /* Two classes so this wins over the later `.case-card { flex: 1 1 auto }`. */
+    .bento > .case-card--lg { flex: 2 1 560px; }
+    .bento__side { flex: 1 1 320px; }
+  }
+  .bento__side { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+  @media (min-width: 900px) { .bento__side { gap: 24px; } }
+
+  .case-card { padding: 20px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  @media (min-width: 900px) {
+    .case-card { flex: 1 1 auto; padding: 28px; gap: 16px; }
+    .case-card--lg { padding: 32px; gap: 24px; }
+  }
+  .case-card__brand { display: flex; align-items: center; gap: 10px; }
+  .case-card :global(.case-card__logo) { height: 30px; width: auto; }
+  .case-card :global(.case-card__logo--vd) { height: 36px; }
+  @media (min-width: 900px) {
+    .case-card :global(.case-card__logo) { height: 36px; }
+    .case-card :global(.case-card__logo--sm) { height: 32px; }
+    .case-card :global(.case-card__logo--vd) { height: 40px; }
+  }
+  .case-card__title { font-size: 24px; line-height: 1.15; }
+  @media (min-width: 900px) {
+    .case-card__title { font-size: 28px; }
+    .case-card__title--sm { font-size: 26px; }
+    .case-card__title--lg { font-size: clamp(28px, 2.6vw, 36px); line-height: 1.12; }
+  }
+  .case-card__result {
+    margin-top: auto;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    font-weight: 500;
+  }
+  .case-card__result .lbl { font-weight: 500; }
+
+  .vf-media {
+    background: var(--color-sand);
+    border-radius: 12px; padding: 14px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  @media (min-width: 900px) {
+    .vf-media { flex: 1 1 auto; border-radius: var(--radius-md); padding: 24px; flex-direction: row; gap: 24px; }
+    .vf-media__shots { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; justify-content: center; gap: 12px; }
+    .vf-media__list { flex: 0 0 264px; display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+  }
+  .vf-media :global(.vf-media__img) { width: 100%; border: var(--line); border-radius: 10px; }
+  .vf-media :global(.vf-media__img--hero) { height: 150px; object-fit: cover; object-position: center top; }
+  @media (min-width: 900px) {
+    .vf-media :global(.vf-media__img--hero) { height: auto; }
+  }
+  .entry-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  @media (min-width: 900px) { .entry-list { gap: 8px; } }
+  .entry-list__item { display: flex; align-items: center; gap: 8px; }
+  .entry-list__label {
+    flex: 1 1 auto;
+    background: var(--color-white);
+    border: var(--line); border-radius: 10px;
+    padding: 8px 10px; font-size: 14px; font-weight: 500;
+  }
+  .entry-list__label.is-new { background: var(--color-sun-soft); }
+  @media (min-width: 900px) { .entry-list__label { padding: 10px 12px; font-size: 15px; } }
+
+  .zalo-media {
+    height: 168px;
+    background: var(--color-sand);
+    border: var(--line); border-radius: 10px;
+    overflow: hidden;
+    display: flex; justify-content: center;
+    padding-top: 14px;
+  }
+  @media (min-width: 900px) { .zalo-media { height: 140px; padding-top: 16px; } }
+  .zalo-media :global(.zalo-media__img) {
+    width: 132px; height: auto; align-self: flex-start;
+    border: var(--line); border-radius: 12px 12px 0 0;
+  }
+  .case-card :global(.dyno-media) {
+    width: 100%; height: 168px;
+    object-fit: cover; object-position: center 12%;
+    border: var(--line); border-radius: 10px;
+  }
+  @media (min-width: 900px) { .case-card :global(.dyno-media) { height: 140px; } }
+
+  /* Lab teaser */
+  .lab { display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 900px) { .lab { gap: 40px; } }
+  .lab__card {
+    background: var(--color-sand);
+    border: var(--line); border-radius: var(--radius-lg);
+    padding: 24px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  @media (min-width: 900px) {
+    .lab__card { padding: 48px; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 48px; }
+    .lab__text { flex: 1 1 380px; min-width: 0; }
+    .lab :global(.lab__map) { flex: 1 1 360px; min-width: 0; }
+  }
+  .lab__text { display: flex; flex-direction: column; gap: 16px; }
+  @media (min-width: 900px) { .lab__text { gap: 20px; } }
+  .lab__title { font-size: clamp(32px, 3.4vw, 48px); line-height: 1.05; }
+  .lab__desc { font-size: 17px; line-height: 1.55; max-width: 460px; }
+  @media (min-width: 900px) { .lab__desc { font-size: 19px; } }
+</style>

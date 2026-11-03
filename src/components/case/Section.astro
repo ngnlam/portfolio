@@ -1,0 +1,19 @@
+---
+// One case section: fixed kicker (from the id) + the case's own headline, then prose.
+// Use in MDX: <Section id="problem" title="A wish list, not a requirement"> ... </Section>
+import SectionHeading from '../SectionHeading.astro';
+import { KICKERS, type SectionId } from '../../data/case';
+
+interface Props {
+  id: SectionId;
+  title: string;
+}
+const { id, title } = Astro.props;
+if (!(id in KICKERS)) throw new Error(`Section id "${id}" must be one of: ${Object.keys(KICKERS).join(', ')}`);
+---
+<section id={id} class="case-section" aria-labelledby={`h-${id}`}>
+  <SectionHeading id={`h-${id}`} kicker={KICKERS[id]} title={title} />
+  <div class="prose">
+    <slot />
+  </div>
+</section>

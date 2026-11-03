@@ -1,0 +1,44 @@
+---
+// The five product stages. Stages Leo led are filled sun; the rest are outlined.
+import { STAGES, type Stage } from '../data/tools';
+
+interface Props {
+  led: Stage[];
+  class?: string;
+}
+const { led, class: className } = Astro.props;
+for (const s of led) {
+  if (!STAGES.includes(s)) throw new Error(`Unknown stage "${s}". Use: ${STAGES.join(', ')}`);
+}
+const ledList = STAGES.filter((s) => led.includes(s));
+const label = `Stages of the product work in this case. Yellow stages are the ones I led: ${ledList.join(', ')}.`;
+---
+<div class:list={['stage-strip', className]}>
+  <ol class="stage-strip__list" aria-label={label}>
+    {STAGES.map((s) => (
+      <li class:list={['stage', led.includes(s) ? 'stage--led' : 'stage--team']}>{s}</li>
+    ))}
+  </ol>
+  <span class="lbl lbl--sm muted stage-strip__legend">
+    <span class="stage-strip__dot" aria-hidden="true"></span>Yellow: the stages I led
+  </span>
+</div>
+
+<style>
+  .stage-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+  .stage-strip__list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .stage {
+    padding: 6px 14px;
+    border: var(--line);
+    border-radius: var(--radius-pill);
+    font-size: 14px;
+    line-height: 1.3;
+  }
+  .stage--led { background: var(--color-sun); font-weight: 600; color: var(--text); }
+  .stage--team { background: transparent; font-weight: 500; color: var(--text-muted); }
+  .stage-strip__legend { display: inline-flex; align-items: center; gap: 6px; }
+  .stage-strip__dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--color-sun); border: var(--line);
+  }
+</style>

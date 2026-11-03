@@ -1,0 +1,38 @@
+---
+// Pill button rendered as a link. Variants: primary (sun), secondary (outline), white.
+// `event` adds an Umami event name; `eventData` adds event properties.
+interface Props {
+  href: string;
+  variant?: 'primary' | 'secondary' | 'white';
+  size?: 'md' | 'sm';
+  block?: boolean;
+  event?: string;
+  eventData?: Record<string, string>;
+  class?: string;
+  [key: string]: unknown;
+}
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  block = false,
+  event,
+  eventData = {},
+  class: className,
+  ...rest
+} = Astro.props;
+const variantClass = { primary: 'btn-p', secondary: 'btn-s', white: 'btn-w' }[variant];
+const external = /^https?:\/\//.test(href);
+const dataAttrs: Record<string, string> = {};
+if (event) {
+  dataAttrs['data-umami-event'] = event;
+  for (const [k, v] of Object.entries(eventData)) dataAttrs[`data-umami-event-${k}`] = v;
+}
+---
+<a
+  href={href}
+  class:list={['btn', variantClass, size === 'sm' && 'btn-sm', block && 'btn-block', className]}
+  rel={external ? 'noopener' : undefined}
+  {...dataAttrs}
+  {...rest}
+><slot /></a>

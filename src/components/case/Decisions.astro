@@ -1,0 +1,12 @@
+---
+// Numbered list of decisions. Wrap <Decision> items in it; numbers (01, 02...) are automatic.
+---
+<ol class="decisions" role="list"><slot /></ol>
+
+<style>
+  .decisions {
+    list-style: none; margin: 0; padding: 0;
+    counter-reset: decision;
+    border-top: var(--line);
+  }
+</style>

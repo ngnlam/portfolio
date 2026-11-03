@@ -1,0 +1,22 @@
+---
+// Case section heading: a fixed mono kicker above a case-specific headline
+// (labels-and-headings.md §4). The id goes on the heading so the side nav can link to it.
+interface Props {
+  id: string;
+  kicker: string;
+  title: string;
+  level?: 2 | 3;
+  class?: string;
+}
+const { id, kicker, title, level = 2, class: className } = Astro.props;
+const Tag = level === 2 ? 'h2' : 'h3';
+---
+<div class:list={['section-heading', className]}>
+  <span class="lbl lbl--sm clay">{kicker}</span>
+  <Tag id={id} class="d section-heading__title">{title}</Tag>
+</div>
+
+<style>
+  .section-heading { display: flex; flex-direction: column; gap: 10px; }
+  .section-heading__title { font-size: clamp(28px, 3vw, 36px); line-height: 1.1; }
+</style>

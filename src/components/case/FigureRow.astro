@@ -1,0 +1,11 @@
+---
+// Lay several <Figure>s or images side by side; they stack on phones.
+interface Props { min?: string; wide?: boolean }
+const { min = '220px', wide = false } = Astro.props;
+---
+<div class:list={['figure-row', wide && 'figure-row--wide']} style={`--min:${min}`}><slot /></div>
+
+<style>
+  .figure-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(var(--min), 100%), 1fr)); gap: 12px; align-items: start; }
+  @media (min-width: 1100px) { .figure-row--wide { width: calc(100% + 200px); } }
+</style>

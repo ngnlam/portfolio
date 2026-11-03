@@ -1,0 +1,33 @@
+---
+// "Tools" row: named software only, max 4 (labels-and-headings.md §2c).
+import Icon from './Icon.astro';
+import { getTool } from '../data/tools';
+
+interface Props {
+  tools: string[];
+  label?: string;
+  class?: string;
+}
+const { tools, label = 'Tools', class: className } = Astro.props;
+if (tools.length > 4) throw new Error(`A Tools row takes at most 4 names, got ${tools.length}: ${tools.join(', ')}`);
+const items = tools.map((name) => ({ name, ...getTool(name) }));
+---
+{items.length > 0 && (
+  <div class:list={['tool-chips', className]}>
+    <span class="lbl muted tool-chips__label">{label}</span>
+    <ul class="tool-chips__list" role="list">
+      {items.map((t) => (
+        <li class="chip">
+          {t.logo ? <Fragment set:html={t.logo} /> : <Icon name={t.icon!} size={16} strokeWidth={1.6} />}
+          <span>{t.name}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
+
+<style>
+  .tool-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .tool-chips__label { font-size: 12px; margin-right: 4px; }
+  .tool-chips__list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+</style>

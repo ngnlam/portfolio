@@ -1,0 +1,18 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# Netlify local state (written when a site is linked)
+.netlify/
+
+# env files
+.env
+.env.*
+!.env.example
+
+# OS and editor
+.DS_Store
+*.log

@@ -1,0 +1,14 @@
+---
+// One role per project, from the four allowed words (labels-and-headings.md §2a).
+import { ROLES, type Role } from '../data/tools';
+
+interface Props {
+  role: Role;
+  class?: string;
+}
+const { role, class: className } = Astro.props;
+if (!ROLES.includes(role)) {
+  throw new Error(`Unknown role "${role}". Use one of: ${ROLES.join(', ')}`);
+}
+---
+<span class:list={['role-chip', className]}>{role}</span>
