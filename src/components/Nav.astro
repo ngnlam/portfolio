@@ -2,6 +2,7 @@
 // Site header. Desktop: name, links, Say hello. Mobile: name and a menu button
 // that opens a panel. Without JavaScript the panel stays open, so links still work.
 import Icon from './Icon.astro';
+import Logo from './Logo.astro';
 import { NAV, SITE, type NavKey } from '../data/site';
 
 interface Props {
@@ -11,7 +12,10 @@ const { current = null } = Astro.props;
 ---
 <header class="site-header">
   <nav class="container site-nav" aria-label="Main">
-    <a href="/" class="d site-nav__name">{SITE.name}</a>
+    <a href="/" class="site-nav__name" aria-label={SITE.name}>
+      <Logo class="site-nav__logo" height={22} />
+      <span class="d site-nav__rest">Lam Nguyen</span>
+    </a>
 
     <div class="site-nav__desktop">
       {NAV.map((item) => (
@@ -66,8 +70,19 @@ const { current = null } = Astro.props;
     padding-block: 12px;
   }
   @media (min-width: 900px) { .site-nav { padding-block: 12px; min-height: 68px; } }
-  .site-nav__name { font-size: 19px; text-decoration: none; }
-  @media (min-width: 900px) { .site-nav__name { font-size: 22px; } }
+  /* leo_ wordmark plus "Lam Nguyen", sitting on one baseline. */
+  /* Inline layout so the SVG bottom sits on the text baseline. The SVG has 3.8% of its
+     height below the baseline (the o's overshoot), hence the small negative offset. */
+  .site-nav__name {
+    display: inline-block; padding-block: 10px; line-height: 24px; white-space: nowrap;
+    color: var(--color-graphite); text-decoration: none;
+  }
+  .site-nav__name :global(.site-nav__logo) { display: inline-block; height: 19px; width: auto; vertical-align: -0.7px; }
+  .site-nav__rest { margin-left: 8px; font-weight: 700; font-size: 15px; color: var(--color-stone); }
+  @media (min-width: 900px) {
+    .site-nav__name :global(.site-nav__logo) { height: 24px; vertical-align: -0.9px; }
+    .site-nav__rest { margin-left: 10px; font-size: 18px; }
+  }
 
   .site-nav__desktop { display: none; }
   @media (min-width: 900px) {

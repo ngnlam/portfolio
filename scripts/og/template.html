@@ -9,7 +9,8 @@ body { width: 1200px; height: 630px; background: #FFF8EC; color: #1F2226; font-f
 .wrap { position: relative; width: 1200px; height: 630px; display: flex; }
 .text { flex: 1 1 auto; padding: 64px 0 56px 72px; display: flex; flex-direction: column; justify-content: space-between; }
 .label { font-family: 'Mono', monospace; font-size: 22px; letter-spacing: 0.04em; text-transform: uppercase; color: #5E6168; }
-.name { font-family: 'Bricolage', sans-serif; font-weight: 700; font-size: 40px; letter-spacing: -0.02em; }
+.name { display: flex; align-items: center; gap: 18px; font-family: 'Bricolage', sans-serif; font-weight: 700; font-size: 40px; letter-spacing: -0.02em; }
+.mark { flex: none; display: block; }
 .line { font-family: 'Bricolage', sans-serif; font-weight: 700; font-size: 58px; line-height: 1.04; letter-spacing: -0.03em; max-width: 640px; }
 .hl { background: #FFE6A3; padding: 0 8px; border-radius: 8px; }
 .case-title { font-family: 'Bricolage', sans-serif; font-weight: 700; font-size: 54px; line-height: 1.06; letter-spacing: -0.03em; max-width: 680px; }
@@ -28,7 +29,7 @@ body { width: 1200px; height: 630px; background: #FFF8EC; color: #1F2226; font-f
     <span class="label case-only">{{LABEL}}</span>
     <p class="line home-only">I turn what users <span class="hl">actually do</span> into what a product should do next.</p>
     <p class="case-title case-only">{{TITLE}}</p>
-    <span class="name">Leo Lam Nguyen</span>
+    <span class="name">{{MARK}}Leo Lam Nguyen</span>
   </div>
   <div class="panel"><img src="{{PORTRAIT}}" alt=""></div>
   <span class="sticker home-only">Hi, I'm Leo</span>

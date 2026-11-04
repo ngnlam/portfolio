@@ -6,7 +6,8 @@ Leo Lam Nguyen's portfolio. Astro 7 static site, deployed by Netlify from `main`
 - `npm run dev`: local server at http://localhost:4321
 - `npm run build`: static build into `dist/`. Must finish with no errors before any commit.
 - `npm run preview`: serve `dist/` locally.
-- `node scripts/og/render-og.cjs`: re-render `public/og/default.png` (needs Playwright, run locally, not on Netlify). `--slug x --title "..." --label "..."` renders `public/og/x.png` for a case. `--icons` re-renders the favicon PNGs.
+- `node scripts/og/render-og.cjs`: re-render `public/og/default.png` (needs Playwright, run locally, not on Netlify). `--slug x --title "..." --label "..."` renders `public/og/x.png` for a case. `--icons` renders `public/favicon.ico` (16, 32, 48) and `public/apple-touch-icon.png` from the logo files. OG images carry the logo mark next to the name, so re-render all six after a logo change.
+- `python3 scripts/logo/build-logo.py`: rebuilds the `leo_` logo from the site's Bricolage font (needs `pip install fonttools brotli uharfbuzz`). Writes `src/data/logo.ts`, `public/favicon.svg` and `scripts/logo/out/*.svg`. Never edit those paths by hand. Then run `render-og.cjs --icons`.
 
 ## Sources of truth
 The copy, numbers and rules live in the claude.ai Project "My Digital Product". Read the relevant doc before changing copy:
@@ -45,7 +46,8 @@ The design canvas (Steps 1 to 4) is the visual reference. Desktop and mobile art
 |---|---|---|
 | `BaseLayout` (layouts) | `title, description?, current?: 'work'\|'lab'\|'about', ogImage?, ogImageAlt?, ogType?, noindex?, jsonLd?` | Head tags, canonical, OG/Twitter, Umami, skip link, Nav, Footer. Slot `head` for extra tags. |
 | `CaseLayout` (layouts) | `slug, data (case frontmatter), next: {slug, title}` | Used by `src/pages/work/[slug].astro`. Renders header, stage strip, meta, tools, tiles, side nav, At a glance, MDX body, Who did what, next case. |
-| `Nav` | `current?` | Desktop links plus "Say hello"; mobile disclosure menu (Escape closes, focus returns). |
+| `Nav` | `current?` | `leo_` logo plus "Lam Nguyen" (link named "Leo Lam Nguyen"), desktop links plus "Say hello"; mobile disclosure menu (Escape closes, focus returns). |
+| `Logo` | `class?, height=22` | The `leo_` wordmark from `src/data/logo.ts`. Decorative (`aria-hidden`): the parent link carries the name. Letters use `currentColor`; the cursor blinks 3 times on load and on hover or focus, not with reduced motion. |
 | `Footer` | none | `#talk` sun band with Email and LinkedIn (`contact_click`), copyright. |
 | `Button` | `href, variant='primary'\|'secondary'\|'white', size='md'\|'sm', block?, event?, eventData?` | Renders `<a class="btn">`. `event` becomes `data-umami-event`, `eventData` keys become `data-umami-event-*`. External links get `rel="noopener"`. One primary button per screen. |
 | `Icon` | `name: IconName, size=20, strokeWidth=1.5` | Paths in `src/data/icons.ts`. Decorative (`aria-hidden`). |

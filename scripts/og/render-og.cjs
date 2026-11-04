@@ -4,7 +4,7 @@
 //   node scripts/og/render-og.cjs                      -> public/og/default.png
 //   node scripts/og/render-og.cjs --slug zalo-showroom --title "..." --label "Case study, VinFast, 2026"
 //
-// Also renders favicon.ico and apple-touch-icon.png from public/favicon.svg when run with --icons.
+// With --icons, renders favicon.ico (16, 32, 48) and apple-touch-icon.png from the logo files.
 const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
@@ -22,15 +22,27 @@ const fontFace = (family, pkg, file) =>
 (async () => {
   const browser = await chromium.launch();
   if (args.includes('--icons')) {
+    // favicon.svg and the square mark come from scripts/logo/build-logo.py.
     const svg = fs.readFileSync(path.join(root, 'public', 'favicon.svg'), 'utf8');
-    const page = await browser.newPage({ viewport: { width: 180, height: 180 } });
-    await page.setContent(`<html><body style="margin:0;background:#FFF8EC">${svg.replace('<svg ', '<svg width="180" height="180" ')}</body></html>`);
-    await page.screenshot({ path: path.join(root, 'public', 'apple-touch-icon.png') });
-    const p32 = await browser.newPage({ viewport: { width: 32, height: 32 } });
-    await p32.setContent(`<html><body style="margin:0;background:transparent">${svg.replace('<svg ', '<svg width="32" height="32" ')}</body></html>`);
-    await p32.screenshot({ path: path.join(root, 'scripts', 'og', 'favicon-32.png'), omitBackground: true });
+    const square = fs.readFileSync(path.join(root, 'scripts', 'logo', 'out', 'leo-mark-square.svg'), 'utf8');
+    const shot = async (markup, size, file, transparent) => {
+      const page = await browser.newPage({ viewport: { width: size, height: size } });
+      await page.setContent(`<html><body style="margin:0;background:transparent">${markup.replace('<svg ', `<svg width="${size}" height="${size}" `)}</body></html>`);
+      await page.screenshot({ path: file, omitBackground: transparent });
+      await page.close();
+    };
+    // iOS rounds the corners itself, so the touch icon is the full-bleed square.
+    await shot(square, 180, path.join(root, 'public', 'apple-touch-icon.png'), false);
+    const tmp = [16, 32, 48].map((s) => path.join(__dirname, `favicon-${s}.png`));
+    for (const [i, s] of [16, 32, 48].entries()) await shot(svg, s, tmp[i], true);
     await browser.close();
-    console.log('icons rendered; convert scripts/og/favicon-32.png to public/favicon.ico');
+    try {
+      require('child_process').execFileSync('convert', [...tmp, path.join(root, 'public', 'favicon.ico')]);
+      tmp.forEach((f) => fs.unlinkSync(f));
+      console.log('wrote public/apple-touch-icon.png and public/favicon.ico (16, 32, 48)');
+    } catch (e) {
+      console.log('ImageMagick not found: combine scripts/og/favicon-*.png into public/favicon.ico by hand');
+    }
     return;
   }
   const slug = arg('slug', 'default');
@@ -46,6 +58,7 @@ const fontFace = (family, pkg, file) =>
   html = html
     .replace('/*FONTS*/', fonts)
     .replace('{{PORTRAIT}}', portrait)
+    .replace('{{MARK}}', fs.readFileSync(path.join(root, 'public', 'favicon.svg'), 'utf8').replace('<svg ', '<svg class="mark" width="52" height="52" aria-hidden="true" '))
     .replace('{{MODE}}', title ? 'case' : 'home')
     .replace('{{TITLE}}', esc(title))
     .replace('{{LABEL}}', esc(label));
