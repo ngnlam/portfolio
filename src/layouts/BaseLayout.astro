@@ -48,9 +48,10 @@ const umamiId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
     {noindex && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#FFF8EC" />
     <meta name="author" content={SITE.name} />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.ico" sizes="32x32" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    {/* ?v= forces browsers to drop a cached favicon. Bump it whenever the logo changes. */}
+    <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico?v=2" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <meta property="og:type" content={ogType} />
