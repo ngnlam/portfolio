@@ -6,6 +6,7 @@ import xanhsm from '../assets/images/logos/xanhsm.png';
 import fpts from '../assets/images/logos/fpt-securities.png';
 import hongha from '../assets/images/logos/hong-ha.png';
 import upwork from '../assets/images/logos/upwork.png';
+import chiemnghiem from '../assets/images/cases/chiem-nghiem/logo-card.png';
 
 export const LOGOS = {
   vinfast: { name: 'VinFast', src: vinfast },
@@ -14,6 +15,7 @@ export const LOGOS = {
   fpts: { name: 'FPT Securities', src: fpts },
   hongha: { name: 'Hong Ha', src: hongha },
   upwork: { name: 'Upwork', src: upwork },
+  chiemnghiem: { name: 'Chiêm Nghiệm', src: chiemnghiem },
 } as const;
 
 export type LogoKey = keyof typeof LOGOS;

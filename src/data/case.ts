@@ -27,4 +27,5 @@ export const COMPANY_LOGO = {
   'VinFast': 'vinfast',
   'VinDynamics': 'vindynamics',
   'Xanh SM': 'xanhsm',
+  'Side project': 'chiemnghiem',
 } as const;

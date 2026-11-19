@@ -1,0 +1,137 @@
+---
+title: "Riders in the automated journeys I built for Xanh SM completed 1.7 million trips"
+seoTitle: "Automated rider journeys for Xanh SM | Leo Lam Nguyen"
+description: "At Xanh SM I rebuilt rider messaging around behavior: 30+ automated journeys for riders who had never ridden or had stopped, each judged on trips instead of clicks."
+order: 4
+company: Xanh SM
+year: "2025"
+role: Builder
+team: "Growth and retention manager (strategy, approval), promotions team (offer matrix), data team (segment data)"
+timeline: "Jul to Sep 2025"
+stages: [Define, Decide, Ship, Measure]
+tools: [CleverTap]
+tiles:
+  - { value: "1.7M", label: "Trips completed by riders inside my journeys", note: "CleverTap conversions, to 11 Sep 2025" }
+  - { value: "+28%", label: "First trips by new riders", note: "month over month" }
+  - { value: "-12%", label: "Rider churn", note: "month over month" }
+glance:
+  problem: "Xanh SM had millions of riders who signed up and never rode, or rode and stopped. Every one of them got the same push messages on the same day."
+  did: "I split riders by what they had actually done, built 30+ automated journeys in CleverTap, fixed the send times and judged every journey on trips, not clicks."
+  role: "I designed and built the journeys and wrote their messages. My manager set the strategy and approved them."
+roles:
+  mine: "Behavior segments, journey design and build in CleverTap, message copy and tone rules, the send schedule, weekly reports on trips, journeys for tourist provinces, and support for the Philippines team."
+  team: "My manager set the zero-trip and churn strategy and approved each journey. The promotions team owned the offer matrix; the data team owned the segment data."
+next: zalo-showroom
+card:
+  teaser: "Xanh SM sent the same push to every rider on the same day. I split riders by what they had done, built 30+ automated journeys and judged each on trips. Riders inside them completed 1.7 million trips."
+  result: "1.7M trips; first trips +28%, churn -12%"
+  image: "../../assets/images/work/first-trips-journey.png"
+  imageAlt: "The new-rider journey, recreated: sign-up, a how-to push on day 0, a welcome offer on days 2 to 5, an A/B test on day 7 and a last reminder on days 12 to 14."
+  imageCaption: "Recreated: the new-rider journey."
+  imageKind: wide
+ogImage: /og/xanh-sm-rider-journeys.png
+---
+import { Image } from 'astro:assets';
+import DataTable from '../../components/case/visuals/DataTable.astro';
+import firstTrips from '../../assets/images/work/first-trips-journey.png';
+
+<Section id="problem" title="One message calendar for millions of riders">
+
+Xanh SM, Vietnam's electric ride-hailing app, had 2.1 million riders who had signed up but never taken a trip, and 1.1 million who had ridden and then stopped. Messaging ran on a calendar: the same push to everyone on the same day, judged by click-through rate. The journeys that did exist ran in isolation, so nobody could see the whole system.
+
+</Section>
+
+<Section id="found" title="Riders who never rode are not one group, and clicks hide the result">
+
+- **Never-ridden riders differ by intent.** Some never opened the app after signing up; some opened it and checked prices; some requested a ride that did not happen. Each needs a different nudge, and the first group gives no signal at all.
+- **Lapsed riders differ by habit.** A rider who used to ride often and stopped 21 days ago is a different case from an occasional rider gone for 28 days.
+- **Clicks hid the real result.** A message could win on click-through and change no trips, so trips became the measure.
+
+<Figure caption="The rider groups I built journeys for, defined by what each rider had done.">
+  <DataTable
+    caption="Rider groups"
+    head={['Rider group', 'What the rider had done', 'In a journey']}
+    rows={[
+      ['Zero trips, cold', 'Signed up, never opened the app', 'No: no signal to act on'],
+      ['Zero trips, warm', 'Opened the app, checked prices, picked a pickup point, no trip', 'Yes'],
+      ['Zero trips, hot', 'Requested a ride that was never completed', 'Yes'],
+      ['Lapsed, high demand', 'Rode often, then no trip for 21 or 28 days', 'Yes'],
+      ['Lapsed, low demand', 'Rode occasionally, then no trip for 21 or 28 days', 'Yes'],
+    ]}
+  />
+</Figure>
+
+</Section>
+
+<Section id="decisions" title="Behavior in, trips out">
+
+<Decisions>
+<Decision title="Enter journeys by behavior, not by calendar">
+
+Each rider enters the journey that matches their last action, instead of receiving whatever the calendar sends that day.
+
+</Decision>
+<Decision title="Leave out riders with no signal">
+
+Riders who never opened the app got no journey: there was nothing to respond to, and offers to them would have been spent blind.
+
+</Decision>
+<Decision title="Create a first trip, don't borrow one">
+
+I turned down booking a first trip on a new rider's behalf, because it only moves demand from one person to another instead of creating it.
+
+</Decision>
+<Decision title="Judge every journey on trips">
+
+Weekly A/B tests were read on trips completed, not on opens or clicks, and a journey's sending frequency went up or down based on that.
+
+</Decision>
+<Decision title="Fixed send times, approved offers, no guilt">
+
+Messages go out at 8 am, 11 am or 7 pm. Offers come only from the approved matrix for each of four market groups. Lapsed riders never hear "we miss you"; they hear what the deal is.
+
+</Decision>
+</Decisions>
+
+</Section>
+
+<Section id="shipped" title="30+ journeys, one map, a weekly report">
+
+- **Journeys in CleverTap:** more than 30 across rider groups, provinces and services (bike, car, express and food), including 14 for never-ridden and lapsed riders.
+- **New markets:** journeys for riders arriving in and leaving tourist provinces, and three journeys built with the local team in the Philippines.
+- **A weekly report** on open rate, click-through and trips for every journey, which set the next week's changes.
+- **Tone rules and a prompt template** so AI tools could draft push and Zalo notification messages in the team's voice.
+
+<Figure caption="Recreated for this site: the new-rider journey. Steps, timing and copy are simplified.">
+  <Image src={firstTrips} alt="The new-rider journey, recreated: sign-up, a how-to push on day 0, a welcome offer on days 2 to 5, an A/B test on day 7 and a last reminder on days 12 to 14." widths={[600, 900, 1200]} sizes="(min-width: 1100px) 680px, 100vw" />
+</Figure>
+
+</Section>
+
+<Section id="results" title="1.7 million trips inside the journeys, more first trips and less churn">
+
+<Figure caption="Trips completed by riders while they were in a journey, to 11 September 2025, as counted by CleverTap.">
+  <DataTable
+    caption="Trips completed inside the journeys"
+    head={['Journey group', 'Trips completed']}
+    rows={[
+      ['Never-ridden riders (warm and hot)', '375,562'],
+      ['Lapsed 21 days', '345,860'],
+      ['Lapsed 28 days', '1,023,747'],
+      ['Total', '1,745,169'],
+    ]}
+  />
+</Figure>
+
+- First trips by new riders rose 28% and churn fell 12%, month over month.
+- Every key rider group now has an automated journey with clear entry and exit rules, mapped by province and service.
+- **How to read the 1.7 million:** these are trips CleverTap attributes to riders while they were in a journey, not all caused by it. That is why each journey was also judged in weekly A/B tests on trips.
+
+</Section>
+
+<Section id="learned" title="Splitting riders by behavior made the whole system visible">
+
+- Splitting riders by their last action turned scattered journeys into one system, mapped by province and service.
+- Writing the tone rules down, with a prompt template, let AI tools draft in the team's voice without me rewriting every message.
+
+</Section>

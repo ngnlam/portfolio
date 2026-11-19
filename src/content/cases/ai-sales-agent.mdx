@@ -1,0 +1,181 @@
+---
+title: "I put an AI sales agent in front of 4,200 VinFast buyers in two weeks, then fixed it from 17,419 real messages"
+seoTitle: "An AI sales agent on VinFast's Messenger page | Leo Lam Nguyen"
+description: "I scoped, grounded and launched an AI sales agent on VinFast's Messenger page in six days, then ran an error analysis on its first 2,000 conversations and fixed what it got wrong."
+order: 1
+company: VinFast
+year: "2026"
+role: Product owner
+team: "Me on Meta's Business Agent; Claude for analysis and drafts; a colleague for testing and price files; my manager for reviews"
+timeline: "Oct to Nov 2026"
+status: "Live since 3 Nov 2026"
+stages: [Discover, Define, Decide, Ship, Measure]
+tools: [Messenger, Claude, Zalo]
+tiles:
+  - { value: "98%", label: "Messages answered in week one", note: "65 seconds on average; 57% of chats came after office hours" }
+  - { value: "7x", label: "Leads per conversation", note: "from 0.13% to 0.94%, same ad campaign, before and after launch" }
+  - { value: "84%+", label: "Installment answers complete", note: "each day from 5 Nov, up from 0% on launch day" }
+glance:
+  problem: "Nobody was assigned to answer VinFast's O2O sales page on Messenger, and most buyers wrote after office hours. The group's own chatbot was months away."
+  did: "I scoped and grounded an AI sales agent, launched it in six days, then ran an error analysis on its first 2,000 conversations and fixed what broke."
+  role: "Product owner: scope, knowledge, guardrails, evals and every launch call."
+roles:
+  mine: "Platform choice, scope and guardrails, the knowledge sources, setup and launch, the week-one error analysis, the fix list, the regression test, and the Zalo bot decision."
+  team: "Meta provides the model. Claude analyzed exports and drafted instructions under my brief. A colleague tested and supplied price files; my manager reviewed."
+next: car-product-pages
+card:
+  teaser: "Nobody answered VinFast's sales page after hours. I launched an AI sales agent in six days, then ran an error analysis on its first 2,000 real conversations and fixed what it got wrong."
+  result: "98% of messages answered, 7x leads per chat"
+  image: "../../assets/images/cases/ai-agent/real-installment-answer.png"
+  imageAlt: "A live Messenger conversation in Vietnamese: a buyer asks whether they can pay in installments, and the AI agent answers with both ways to pay, labeled as AI-generated."
+  imageCaption: "A live conversation after the fix."
+  imageKind: wide
+ogImage: /og/ai-sales-agent.png
+---
+import { Image } from 'astro:assets';
+import DataTable from '../../components/case/visuals/DataTable.astro';
+import chat from '../../assets/images/cases/ai-agent/real-installment-answer.png';
+import knowledge from '../../assets/images/cases/ai-agent/real-knowledge-test-chat.png';
+import rules from '../../assets/images/cases/ai-agent/real-guardrails.png';
+import insights from '../../assets/images/cases/ai-agent/real-messaging-insights.png';
+
+<Section id="problem" title="Buyers wrote at night, and nobody answered">
+
+VinFast's O2O sales page runs Messenger ads for electric scooters and cars, but no one was assigned to reply. Most conversations started after office hours, peaking from 7 to 9 pm. The group's own chatbot was months away, so many of the conversations the ads paid for got no answer.
+
+</Section>
+
+<Section id="found" title="Buyers ask about money first, and the agent is only as good as its files">
+
+- **Price questions dominate.** In the first 2,000 conversations, buyers asked about price, the monthly battery rental fee and installments far more than about specs.
+- **I control the knowledge, not the model.** Meta's agent looks up the files I give it, then writes the reply. When an answer is wrong, the fix is almost always in those files or in its instructions.
+
+<Figure caption="What buyers asked, from the first 2,000 conversations in my export (2 to 9 November; the agent went live on 3 November). One conversation can ask several things, so the shares add up to more than 100%.">
+  <DataTable
+    caption="What buyers asked, week one"
+    head={['Question', 'Share of conversations']}
+    rows={[
+      ['Price or a quote', '57%'],
+      ['Monthly battery rental fee', '34%'],
+      ['Installments', '24%'],
+      ['Choosing or comparing models', '21%'],
+      ['Where to see a bike in person', '6%'],
+    ]}
+  />
+</Figure>
+
+</Section>
+
+<Section id="decisions" title="A grounded agent with one job and a way out to a person">
+
+<Decisions>
+<Decision title="Launch Meta's agent now, as a stopgap">
+
+I chose Meta's Business Agent over fixed keyword replies, which cannot handle open questions, and over waiting months for the group chatbot. The trade-off: leads do not flow into the sales system on their own, so they need a manual hand-off.
+
+</Decision>
+<Decision title="Give it one job">
+
+Answer product, price and policy questions, then guide the buyer to a consultation or an online deposit. Complaints, defects and refunds go to the hotline.
+
+</Decision>
+<Decision title="Ground every price and link">
+
+Prices and links come only from the knowledge files, copied word for word. The agent never works out an on-road price by itself.
+
+</Decision>
+<Decision title="When it does not know, hand off">
+
+The agent asks for a phone number once instead of guessing, and a person follows up.
+
+</Decision>
+</Decisions>
+
+<Figure caption="The agent's live instructions in Meta Business Agent, in Vietnamese. Among them: prices and links only from the knowledge files, the hotline only for complaints and refunds, and no guessing when information is missing.">
+  <Image src={rules} alt="Meta Business Agent screen in Vietnamese titled Your custom instructions, with six active instructions, including that prices and links come only from the FAQ and knowledge entries and that the hotline is only for two kinds of cases." widths={[600, 900, 1052]} sizes="(min-width: 1100px) 560px, 100vw" style="max-width: 560px" />
+</Figure>
+
+<Figure caption="The knowledge I manage, synced from Google Drive, and a test question on the monthly battery fee. The answer matches the official fee table.">
+  <Image src={knowledge} alt="Meta Business Agent knowledge page in Vietnamese with Google Drive connected and entries such as the scooter deposit link and current offers; beside it, a test chat where the agent answers that the battery rental fee for Feliz II is 175,000 VND a month for one battery." widths={[600, 900, 1176]} sizes="(min-width: 1100px) 680px, 100vw" />
+</Figure>
+
+<Figure caption="The agent's model card.">
+  <DataTable
+    caption="Model card for the sales agent"
+    head={['Field', 'Setting']}
+    boldLast={false}
+    rows={[
+      ['Intended use', 'Answer product, price and policy questions; guide buyers to a consultation or an online deposit'],
+      ['Out of scope', 'Complaints, defects, refunds, on-road price estimates, showroom recommendations'],
+      ['Grounding', 'Product catalog, price list and policy entries, synced from Google Drive'],
+      ['Fallback', 'Ask for a phone number once; a person follows up'],
+      ['Evaluation', 'The first 2,000 real conversations (17,419 messages), plus a 23-question regression test'],
+      ['Known limits', 'Meta switches the agent off in chats started from ad comments'],
+    ]}
+  />
+</Figure>
+
+</Section>
+
+<Section id="shipped" title="Live on 3 November, six days after the first setup">
+
+In the first week I exported every conversation, sorted them by question with a script, read samples of each kind and turned what broke into a fix list. Two failures stood out because they hit common questions:
+
+<Figure caption="Week-one error analysis on 2,000 conversations. Affected is the share of conversations on that question where the agent went wrong.">
+  <DataTable
+    caption="Week-one error analysis"
+    head={['Buyer question', 'What went wrong', 'Affected', 'Fix']}
+    boldLast={false}
+    rows={[
+      ['Monthly battery rental fee', 'Sent the buyer to the hotline instead of answering', '96%', 'Added the official fee table to the knowledge files'],
+      ['On-road price', 'Could not give an estimate', '67%', 'Ask for a phone number so sales can send a quote'],
+    ]}
+  />
+</Figure>
+
+Three smaller fixes followed in the first days. Buyers asking where to see a bike got the head-office address 49 times; the agent now answers from a list of 141 pickup points by province. Links now come only from the knowledge files, after seven links to a test site went out on launch day. Greetings now appear only in the first message.
+
+<Figure caption="A live conversation after the fix: asked about installments, the agent names both ways to pay. Customer name and photo blurred.">
+  <Image src={chat} alt="A Messenger conversation in Vietnamese: the buyer asks Can I pay in installments, and the AI agent replies yes, with two ways to pay at the online deposit step, through VinFast's finance partners or by credit card, then asks which model the buyer is considering. The reply is labeled AI-generated." widths={[600, 900, 1275]} sizes="(min-width: 1100px) 680px, 100vw" />
+</Figure>
+
+</Section>
+
+<Section id="results" title="98% of messages answered, and seven times more leads per conversation">
+
+<Figure caption="Business Suite, 22 October to 18 November: 5,200 people messaged the page, mostly from ads. The 94% response rate and 1 minute 14 seconds to reply cover all 28 days, including the 12 before launch.">
+  <Image src={insights} alt="Meta Business Suite messaging insights in Vietnamese: a 94% response rate and 1 minute 14 seconds response time, 5.2K total contacts, and a line chart that jumps from under 100 a day before November to between 200 and 560 a day after." widths={[600, 900, 1208]} sizes="(min-width: 1100px) 680px, 100vw" />
+</Figure>
+
+- **Reach:** 4,227 people messaged the page in the agent's first two weeks (3 to 17 November). In week one it answered 98.1% of messages, half of them within 12 seconds.
+- **Leads:** in the same Messenger ad campaign, 0.94% of conversations left contact details in week one, against 0.13% in the three weeks before launch. The agent asks for a phone number when a buyer wants a quote, a test ride or a call back.
+- **Answer quality:** installment answers that named both ways to pay rose from 0% on launch day to between 84% and 93% a day from 5 November. The median reply got shorter, from 534 to 429 characters.
+- **Regression test:** on 18 November an independent agent asked 23 test questions and 11 passed on the first run. The failures traced back to five knowledge entries that Meta had silently reverted. I re-created them, and the re-run passed except one answer about prepayment discounts, now on the fix list.
+
+For the Zalo account, where an AI model would have needed a new data agreement, I chose rules over AI:
+
+<Figure caption="Build or not for the Zalo bot: four options, one picked.">
+  <DataTable
+    caption="Zalo bot options"
+    head={['Option', 'Decision', 'Why']}
+    rows={[
+      ['Rules on the Zalo account, no AI', 'Picked', 'Ships now, with no new data agreement'],
+      ["Extend the group's AI chatbot", 'Not now', "Depends on another team's schedule"],
+      ['Rent an AI chatbot vendor', 'No', 'Needs a data processing agreement'],
+      ['Build our own API with a language model', 'No', 'Legal and agreement cost'],
+    ]}
+  />
+</Figure>
+
+In a 478-message simulation, the rule-based design matched the right intent 94.1% of the time, up from 90.2% in the first draft. Testers check it before launch.
+
+**Not proven yet:** sales. Ad budget rose in the same weeks, so I credit the agent with answers and lead capture, not with deposits.
+
+</Section>
+
+<Section id="learned" title="The eval came from real conversations, not from my test cases">
+
+- The worst failures were ones I would never have written as test cases: a head-office address for buyers asking where to see a bike, and a battery fee pushed to the hotline. Reading real conversations found them.
+- On a platform I don't control, every change needs a re-test. Meta silently reverted edits to five knowledge entries twice.
+
+</Section>

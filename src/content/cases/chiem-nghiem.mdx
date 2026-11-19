@@ -1,0 +1,144 @@
+---
+title: "My own product: an astrology web app with 1,700+ reading rules, checked against 20,000 charts before launch"
+seoTitle: "Chiêm Nghiệm: a product I took from discovery to launch | Leo Lam Nguyen"
+description: "Chiêm Nghiệm is a Vietnamese astrology (tử vi) web app for working people weighing a decision. I ran discovery, cut the scope, set the metric and shipped it in a week, with AI doing the heavy lifting and me checking its work."
+order: 7
+company: Side project
+year: "2026"
+role: Product owner
+team: "Solo, with Claude as research assistant and pair builder"
+timeline: "8 to 14 Nov 2026"
+status: "Live since 14 Nov 2026. First retention read in late November."
+stages: [Discover, Define, Decide, Ship, Measure]
+tools: [Claude, Claude Code, Umami]
+tiles:
+  - { value: "1,700+", label: "Reading rules taken from one reference book", note: "every score explained, nothing generated at runtime" }
+  - { value: "20,000", label: "Birth dates checked against the original chart engine", note: "zero mismatches after the port" }
+  - { value: "441", label: "Real posts and comments analyzed in discovery", note: "100 Facebook group posts and 341 TikTok comments" }
+glance:
+  problem: "Working people weighing a big move often read tử vi, Vietnamese astrology. Most sites quote alarming one-liners and never show why."
+  did: "I analyzed 441 real posts and comments, ran interviews and a concierge pilot, tore down five competitors, cut the product to one job and shipped it."
+  role: "Everything product-side. Claude researched and coded under my brief; I checked its work."
+roles:
+  mine: "Segment, interviews and pilot, positioning, scope and cut list, success metric and guardrail, brand direction, acceptance checks, launch."
+  team: "Claude ran desk research and competitor walkthroughs, extracted the reading rules and wrote most of the code. A separate agent audited samples."
+next: ai-sales-agent
+card:
+  teaser: "A product of my own: a tử vi web app for working people stuck on a decision. Research showed the market leader already built my first idea, so I repositioned it, cut the scope and launched it with 1,700+ reading rules."
+  result: "1,700+ rules, 20,000 charts checked"
+  image: "../../assets/images/cases/chiem-nghiem/home.png"
+  imageAlt: "Chiêm Nghiệm's home screen on a phone: the logo card, the headline Hiểu lá số của mình trước khi quyết những chuyện lớn, and buttons to make a chart or see a sample."
+  imageCaption: "Live at chiem-nghiem.netlify.app."
+  imageKind: phone
+ogImage: /og/chiem-nghiem.png
+---
+import PhoneRow from '../../components/case/visuals/PhoneRow.astro';
+import DataTable from '../../components/case/visuals/DataTable.astro';
+import cnHome from '../../assets/images/cases/chiem-nghiem/home.png';
+import cnChart from '../../assets/images/cases/chiem-nghiem/sample-1.png';
+import cnReading from '../../assets/images/cases/chiem-nghiem/reading.png';
+import cnAsk from '../../assets/images/cases/chiem-nghiem/ask.png';
+
+<Section id="problem" title="People read their chart when they're stuck, and most sites make it worse">
+
+Tử vi is what many people in Vietnam open when work feels uncertain. Popular sites quote dramatic one-liners, never show why, and sell certainty. I wanted to build one product end to end, solo, for that moment.
+
+</Section>
+
+<Section id="found" title="The leading competitor had already built my first idea">
+
+- **Readings change feelings, not decisions.** Everyone I interviewed described months of indecision; talking it through or taking one small step helped most.
+- **People don't type their real question.** In a concierge pilot, where I gave a reading by hand, the question asked was not the one that mattered, and the reading changed nothing the person did.
+- **Nobody asked for AI.** None of 100 Facebook group posts or 341 TikTok comments mentioned it.
+- **The obvious MVP existed.** My teardown of five competitors showed the leader already did roughly my first idea.
+
+<Figure caption="What research changed before I built anything.">
+  <DataTable
+    caption="The product before and after research"
+    head={['', 'Before research', 'After research']}
+    rows={[
+      ['Main bet', 'Reassure people at the moment of decision', 'Stay with a decision that is stuck'],
+      ['What sets it apart', 'A correct chart, read by AI', 'A reason behind every score, no AI at runtime'],
+      ['Success metric', 'Visits three times a week', 'Comes back unprompted on two days within 14'],
+    ]}
+  />
+</Figure>
+
+</Section>
+
+<Section id="decisions" title="One job, every score explained, nothing generated at runtime">
+
+<Decisions>
+<Decision title="Build now">
+
+Not a five-person prototype test. Whether people come back on their own only shows on a live product, and AI made building cheap.
+
+</Decision>
+<Decision title="Show the reason behind every score">
+
+A 1 to 5 scale with one tap to "why". Not scores like 73/100, which look precise and aren't.
+
+</Decision>
+<Decision title="No AI at runtime">
+
+Readings come from more than 1,700 rules taken from one reference book: no cost per visit, birth data stays on the phone, nothing invented. The trade-off is less fluent text.
+
+</Decision>
+<Decision title="A website, not an app">
+
+Apple is tightening its rules on fortune-telling apps; a website shipped the same week.
+
+</Decision>
+<Decision title="Overrule the AI where it matters">
+
+Twelve palaces, not the seven Claude proposed, because thoroughness earns trust here. I cut accounts, payments, AI chat and numerology (no demand signal).
+
+</Decision>
+</Decisions>
+
+</Section>
+
+<Section id="shipped" title="Live on 14 November, checked before anyone saw it">
+
+<PhoneRow
+  caption="Home, a chart scored 1 to 5, a reading with its reason, and six common work questions. Built-in sample of a fictional person."
+  screens={[
+    { src: cnHome, alt: 'Home screen: the Chiêm Nghiệm logo card, a headline about understanding your chart before big decisions, and buttons to make a chart or see a sample.' },
+    { src: cnChart, alt: 'The sample chart: twelve palaces in a grid, each colored and numbered by its score from 1 to 5, with an overview tile in the middle.' },
+    { src: cnReading, alt: 'The career palace reading: a score of 2 out of 5, a Why this score button, the stars involved, and a short reading with a link to the detailed version.' },
+    { src: cnAsk, alt: 'The Ask tab: six common questions, such as whether to change jobs this year or next, and whether to go independent.' },
+  ]}
+/>
+
+I had 13 Claude agents each read part of the reference book and extract its rules in parallel, more than 1,700 rules in total. Before launch, every layer had to pass a check:
+
+<Figure caption="My launch evals, each as a pass rate. The one at 65% is why the checks exist: without it, those sentences would have shipped.">
+  <DataTable
+    caption="Launch evals for Chiêm Nghiệm"
+    head={['Check before launch', 'Sample', 'Pass rate', 'Action']}
+    rows={[
+      ['Chart engine matches the original after the port', '20,000 random birth dates', '100%', 'Shipped'],
+      ['Reading sentence faithful to the book', '20 random sentences, checked by an independent agent', '100%', 'Shipped'],
+      ['Reading sentence attached to the right chart', 'The same 20 sentences', '65%', 'Fixed the three causes; a code check now runs on every sentence'],
+      ['Live site acceptance checks', '13 checks', '100%', 'Launched 14 November'],
+      ['Birth date stays on the phone', 'Every request the live site sends', '100%', 'Nothing personal leaves the device'],
+    ]}
+  />
+</Figure>
+
+</Section>
+
+<Section id="results" title="Live, and measuring the one behavior that matters">
+
+- **Metric:** the share of early users who come back on their own on two different days within 14. 40% or more means continue, under 40% means fix, and none means rethink.
+- **Guardrail:** if two people say a reading made them more anxious, I stop and rewrite the tone.
+- **Not proven yet:** anything about users. The first read is due in late November, and this page will show it, whatever it says.
+
+</Section>
+
+<Section id="learned" title="AI made building cheap, so checking became the real work">
+
+- The competitor teardown was in my plan and got skipped until I caught it. It changed the positioning, so it is now a fixed step before design.
+- With AI, the bottleneck moved from writing code to verifying it. Without an independent check, 35% of the sampled sentences would have shipped attached to the wrong chart.
+
+</Section>

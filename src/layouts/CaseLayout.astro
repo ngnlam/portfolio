@@ -25,7 +25,7 @@ const meta = [
   { k: 'Role', v: data.role },
   { k: 'Team', v: data.team },
   { k: 'Timeline', v: data.timeline },
-  { k: 'Company', v: data.company },
+  data.company === 'Side project' ? { k: 'Context', v: 'My own product' } : { k: 'Company', v: data.company },
   ...(data.status ? [{ k: 'Status', v: data.status }] : []),
 ];
 const ogImage = data.ogImage ?? SITE.defaultOg;

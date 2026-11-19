@@ -1,0 +1,174 @@
+---
+title: "52 AI-researched prospects in four days, and every website enquiry in front of the right person within a minute"
+seoTitle: "An AI research agent and a lead-ready website for a B2B sales team | Leo Lam Nguyen"
+description: "At VinDynamics I built an AI agent that researches prospects and drafts outreach for BD, and turned the website into a lead source that routes every enquiry to the right person in Microsoft Teams."
+order: 3
+company: VinDynamics
+year: "2026"
+role: Product owner
+team: "Solo build of the agent; a web vendor (site build), an outside designer, a teammate (ad tags); BD as users and lead owners"
+timeline: "Apr to Aug 2026"
+stages: [Discover, Define, Decide, Ship, Measure]
+tools: [Claude, n8n, GA4, Power Automate]
+tiles:
+  - { value: "52", label: "Prospects researched by the AI agent in four days", note: "12 to 15 May 2026, 5 sectors, 9 countries" }
+  - { value: "71%", label: "Finished the website form once started", note: "after the June 2026 redesign, up from 50% before it" }
+  - { value: "<1 min", label: "From a website form to the right person", note: "since June 2026: a card in Microsoft Teams, tagged in one tap" }
+glance:
+  problem: "VinDynamics sells robot training data to AI labs. BD researched every prospect by hand, and website enquiries sat in an inbox, mixed with job applications."
+  did: "I built an AI agent that watches buying signals, scores companies and drafts outreach for a person to send, and turned the website into a lead source with tracking and instant routing."
+  role: "Product owner of the B2B lead pipeline. I built the agent myself; a vendor built the website."
+roles:
+  mine: "The agent's signal design, scoring prompt, contact strategy and n8n workflows, the document fact-checker; the website roadmap, sitemap, lead capture plan, tracking spec, homepage tags, Teams routing, weekly report and SEO."
+  team: "BD used the morning digest, sent every message and owns the leads. The web vendor built the site, forms and email; an outside designer designed the pages; a teammate owned ad tags."
+next: xanh-sm-rider-journeys
+card:
+  teaser: "At VinDynamics I built an AI agent that researched 52 prospects in four days for BD, with a person approving every message, and a website where every enquiry reaches the right person in under a minute."
+  result: "52 prospects in 4 days; form completion 50% to 71%"
+  image: "../../assets/images/cases/web/teams-card.png"
+  imageAlt: "A new-lead card in Microsoft Teams, with the lead's details blurred and buttons to tag the type of lead."
+  imageCaption: "Every enquiry lands in Teams."
+  imageKind: wide
+ogImage: /og/bd-research-agent.png
+---
+import { Image } from 'astro:assets';
+import DataTable from '../../components/case/visuals/DataTable.astro';
+import Pipeline from '../../components/work/Pipeline.astro';
+import Sitemap from '../../components/case/visuals/Sitemap.astro';
+import planHome from '../../assets/images/cases/web/plan-home.png';
+import planDataset from '../../assets/images/cases/web/plan-dataset.png';
+import planChat from '../../assets/images/cases/web/plan-chat.png';
+import planExit from '../../assets/images/cases/web/plan-exit.png';
+import contactForm from '../../assets/images/cases/web/contact-form.png';
+import sampleEmail from '../../assets/images/cases/web/sample-email.png';
+import teamsCard from '../../assets/images/cases/web/teams-card.png';
+import flowCard from '../../assets/images/cases/web/flow-card.png';
+import flowSwitch from '../../assets/images/cases/web/flow-switch.png';
+
+<Section id="problem" title="Research by hand, and enquiries buried in an inbox">
+
+VinDynamics sells robot training data to AI labs. BD found every prospect by hand, from the reason to reach out to the message itself. The website, where a lab first asks for a sample, had no event tracking, and enquiries reached BD late, mixed with job applications.
+
+</Section>
+
+<Section id="found" title="Timing beats a company list, and buyers read before they talk">
+
+- **Signals say when to reach out.** A product launch, a regulatory approval, ML hiring or a funding round tells you a lab needs data now. I defined eight signal types.
+- **Leads came with names, not emails,** and Apollo's paid plan was too expensive for a pilot, so contact lookup had to be rationed.
+- **Buyers research before they talk.** The right offer, a free data sample, belongs where they read, and the only form sat at the bottom of every page.
+- **AI labs ask assistants, not Google.** 68% of 266 target keywords had no search volume, so I made citations by AI assistants the search goal.
+
+</Section>
+
+<Section id="decisions" title="Score before spending, keep a person on the send button, and route every enquiry">
+
+<Decisions>
+<Decision title="Signals, not a static list">
+
+The agent reads funding news, launches, approvals and research papers, plus a watchlist of 28 target companies, so every lead arrives with a reason to talk now.
+
+</Decision>
+<Decision title="Score before paying for a contact lookup">
+
+Claude scores each company from 1 to 10, and only companies scoring 8 or more go on to the paid contact lookup. The lookup runs as a separate step, so a used-up quota never stops the research.
+
+</Decision>
+<Decision title="The agent drafts, a person sends">
+
+I ruled out automated sending and LinkedIn automation to protect the team's accounts. The agent drafts each message; BD reviews and sends it.
+
+</Decision>
+<Decision title="Offer a free sample in five places, ranked by intent">
+
+Two menu buttons and a form on every dataset page come first, then an exit popup, then a chat bubble. The lower the intent, the fewer the fields.
+
+</Decision>
+<Decision title="Send every enquiry to a person in Teams">
+
+Each form submission posts a card to Microsoft Teams, BD tags it in one tap, and a second flow routes it to sales, recruitment, procurement or brand.
+
+</Decision>
+</Decisions>
+
+<Figure caption="How the research agent works, recreated as a diagram: from a buying signal to a morning card that BD reviews.">
+  <Pipeline />
+</Figure>
+
+<Figure caption="Where website visitors can leave details, ranked by intent.">
+  <DataTable
+    caption="Lead capture points on the website"
+    head={['Place', 'Priority', 'Fields asked', 'When it shows']}
+    rows={[
+      ['Menu button: Get sample data', 'P1', '4', 'Every page'],
+      ['Menu button: Talk to our team', 'P1', '5', 'Every page'],
+      ['Dataset page form, dataset pre-filled', 'P1', '4', 'Every dataset page'],
+      ['Exit popup', 'P2', '2', 'Desktop, once a session, after 45 seconds'],
+      ['Chat bubble', 'P3', '1', 'Product pages, after 90 seconds'],
+    ]}
+  />
+</Figure>
+
+<Figure frame="dark" wide caption="My lead capture plan for the designer and vendor: menu buttons, a pre-filled dataset form, a chat bubble and an exit popup.">
+  <Image src={planHome} alt="Mockup: the homepage with two buttons in the menu, Get sample data and Talk to our team, and a sample request form beside the hero." widths={[480, 880, 1200, 1600, 1815]} sizes="(min-width: 1100px) 860px, 100vw" />
+  <Image src={planDataset} alt="Mockup: a dataset page with a request form on the right and the dataset type already filled in." widths={[480, 880, 1200, 1600]} sizes="(min-width: 1100px) 860px, 100vw" />
+  <FigureRow min="160px">
+    <Image src={planChat} alt="Mockup: the chat bubble asking which kind of data the visitor needs." widths={[240, 479]} sizes="(min-width: 1100px) 240px, 50vw" />
+    <Image src={planExit} alt="Mockup: the exit popup offering a free sample dataset, second step asking for a work email." widths={[480, 1004]} sizes="(min-width: 1100px) 600px, 100vw" />
+  </FigureRow>
+</Figure>
+
+</Section>
+
+<Section id="shipped" title="A morning digest for BD, a new website, and a Teams card for every enquiry">
+
+- **Research agent (May):** a 9 am digest in Teams of up to 20 researched companies, each with the buying signal, the people to contact and a draft message, plus Qualified and Not a fit buttons.
+- **Document fact-checker:** BD uploads a PDF such as a press release or a proposal, and gets a verdict, a score, the claims checked and the concerns, in a sheet and a Teams card.
+- **Website (live 27 June):** built on my sitemap, tracking spec and lead capture plan, with 13 tracked events across discovery, evaluation and lead capture. I set up the homepage tags myself.
+
+<Sitemap />
+
+<Figure caption="Live: every enquiry posts to Teams in under a minute, BD tags it in one tap, and two Power Automate flows route it.">
+  <Image src={teamsCard} alt="A new-lead card in Microsoft Teams, with the lead's details blurred and buttons to tag the type of lead." widths={[480, 800, 1142]} sizes="(min-width: 1100px) 680px, 100vw" />
+  <FigureRow min="220px">
+    <Image src={flowCard} alt="Power Automate flow one: read new rows, post a card to Teams and wait for a response, then update the row." widths={[480, 900]} sizes="(min-width: 1100px) 260px, 100vw" />
+    <Image src={flowSwitch} alt="Power Automate flow two: read tagged rows, then a switch that routes each lead to Sales B2B, Recruitment, Procurement or Brand." widths={[480, 800, 1600]} sizes="(min-width: 1100px) 420px, 100vw" />
+  </FigureRow>
+</Figure>
+
+<Figure caption="Live: the contact form, test entries blurred, and the email that sends the requested sample within minutes.">
+  <FigureRow min="240px">
+    <Image src={contactForm} alt="The Contact us form on the live site, with the test entries blurred." widths={[480, 978]} sizes="(min-width: 1100px) 300px, 100vw" />
+    <Image src={sampleEmail} alt="The email that sends the sample: the dataset requested, a download button and a button to contact sales." widths={[480, 1100]} sizes="(min-width: 1100px) 380px, 100vw" />
+  </FigureRow>
+</Figure>
+
+</Section>
+
+<Section id="results" title="52 prospects in four days, all contacted, and seven in ten form starters now finish">
+
+- **Research agent:** from 12 to 15 May it delivered 52 researched companies across 5 sectors and 9 countries, and BD contacted all 52. In the June review, BD valued the research context more than the drafts, so the next version leads with context.
+- **Website:** in mid-June the contact form brought the first B2B meeting request through the site, and it moved to an NDA the following week.
+
+<Figure caption="Before and after, each measured the same way on both sides.">
+  <DataTable
+    caption="Before and after"
+    head={['Measure', 'Before', 'After']}
+    rows={[
+      ['Website form finished once started (website dashboard)', '50%', '71%'],
+      ['Mobile page speed score (speed audit)', '27 of 100', '49 of 100'],
+      ['Time to fact-check one document (workflow run stats)', '10 to 15 minutes', '79 seconds'],
+    ]}
+  />
+</Figure>
+
+**Not proven yet:** pipeline value. Replies to the agent's outreach were still too few to judge by July, and enquiry volume from the site needs more months of data.
+
+</Section>
+
+<Section id="learned" title="Measure honestly before claiming a win">
+
+- Early drafts of this case said 100% fit and 90% qualified. Those were review criteria, not results, so I took them out.
+- Test traffic and job seekers made up a large share of the site's early leads. I filtered them out before judging the redesign.
+- Every automated step now has a cap on how often it runs, after one step ran every 30 minutes instead of daily and used up the month's quota.
+
+</Section>

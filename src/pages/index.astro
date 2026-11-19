@@ -10,9 +10,9 @@ import EnergyMapPreview from '../components/EnergyMapPreview.astro';
 import { LOGOS } from '../data/logos';
 import { SITE } from '../data/site';
 import vf9Hero from '../assets/images/home/vf9-live-hero.jpg';
-import vf9Form from '../assets/images/home/vf9-live-form.jpg';
-import zaloHome from '../assets/images/home/zalo-home.png';
-import dynoHome from '../assets/images/home/dyno-home.jpg';
+import agentFixes from '../assets/images/cases/ai-agent/real-installment-answer.png';
+import agentKnowledge from '../assets/images/cases/ai-agent/real-knowledge-test-chat.png';
+import teamsCard from '../assets/images/cases/web/teams-card.png';
 
 const person = {
   '@context': 'https://schema.org',
@@ -24,23 +24,23 @@ const person = {
   sameAs: [SITE.linkedin],
   address: { '@type': 'PostalAddress', addressLocality: 'Hanoi', addressCountry: 'VN' },
 };
-const entryPoints = [
-  { label: 'Header button', tag: 'New', isNew: true },
-  { label: 'Section button', tag: 'New', isNew: true },
-  { label: 'Sticky bar', tag: 'New', isNew: true },
-  { label: 'Form at the bottom', tag: 'The original', isNew: false },
+const agentRules = [
+  { label: 'Answers price and policy questions', tag: 'Grounded', isNew: true },
+  { label: 'Asks for a phone number once', tag: 'Handoff', isNew: true },
+  { label: 'Fixed from 2,000 real conversations', tag: 'Eval', isNew: true },
+  { label: 'Complaints and refunds', tag: 'To a person', isNew: false },
 ];
 ---
 <BaseLayout
-  title="Leo Lam Nguyen | Digital Product Builder"
-  description="I turn what users actually do into what a product should do next. Case studies from VinFast and VinDynamics."
+  title="Leo Lam Nguyen | AI Product Builder"
+  description="I turn what users actually do into what a product should do next. AI agents, evals and product case studies from VinFast, VinDynamics and a product of my own."
   jsonLd={person}
 >
   <section class="container hero" aria-labelledby="hero-title">
     <div class="hero__text">
-      <span class="lbl muted">Digital product builder in Hanoi</span>
+      <span class="lbl muted">AI product builder in Hanoi</span>
       <h1 id="hero-title" class="d h-hero">I turn what users <span class="hero__hl">actually do</span> into what a product should do next.</h1>
-      <p class="hero__sub">Then I ship it, measure it, and make it better.</p>
+      <p class="hero__sub">Then I ship it, measure it, and make it better. Lately that means an AI sales agent that answered 98% of messages from VinFast buyers in its first week, with the evals and guardrails that keep it honest.</p>
       <div class="hero__actions">
         <Button href="/work" variant="primary" block>See the work</Button>
         <Button href="#talk" variant="secondary" block>Say hello</Button>
@@ -62,10 +62,10 @@ const entryPoints = [
 
     <div class="bento">
       <a
-        href="/work/car-product-pages"
+        href="/work/ai-sales-agent"
         class="card case-card case-card--lg"
         data-umami-event="case_card_click"
-        data-umami-event-case="car-product-pages"
+        data-umami-event-case="ai-sales-agent"
         data-umami-event-from="home"
       >
         <span class="case-card__brand">
@@ -74,13 +74,13 @@ const entryPoints = [
         </span>
         <div class="vf-media">
           <div class="vf-media__shots">
-            <Image src={vf9Hero} alt="The live VF 9 product page, with the starting price and one deposit button in the hero." widths={[400, 700, 1015]} sizes="(min-width: 900px) 420px, 90vw" class="vf-media__img vf-media__img--hero" />
-            <Image src={vf9Form} alt="Further down the live VF 9 page, a consultation form next to the design section." widths={[400, 700, 1015]} sizes="420px" class="vf-media__img only-desktop" />
+            <Image src={agentFixes} alt="A live Messenger conversation in Vietnamese: a buyer asks about installments and the AI agent answers with both ways to pay." widths={[400, 700, 1000]} sizes="(min-width: 900px) 420px, 90vw" class="vf-media__img vf-media__img--hero" />
+            <Image src={agentKnowledge} alt="The agent's knowledge sources in Meta Business Agent, beside a test chat where it answers the monthly battery fee correctly." widths={[400, 700, 1000]} sizes="420px" class="vf-media__img only-desktop" />
           </div>
           <div class="vf-media__list">
-            <span class="lbl lbl--sm muted only-desktop">Four ways to reach the form</span>
-            <ol class="entry-list" aria-label="Four ways to reach the form">
-              {entryPoints.map((e) => (
+            <span class="lbl lbl--sm muted only-desktop">What the agent does</span>
+            <ol class="entry-list" aria-label="What the agent does">
+              {agentRules.map((e) => (
                 <li class="entry-list__item">
                   <span class:list={['entry-list__label', e.isNew && 'is-new']}>{e.label}</span>
                   <span class="lbl lbl--sm muted">{e.tag}</span>
@@ -89,46 +89,44 @@ const entryPoints = [
             </ol>
           </div>
         </div>
-        <h3 class="d case-card__title case-card__title--lg">Half of car-page leads now start at entry points I designed</h3>
+        <h3 class="d case-card__title case-card__title--lg">An AI sales agent in front of 4,200 VinFast buyers, fixed from 17,419 real messages</h3>
         <span class="case-card__result dash-top">
-          <span class="lbl">54% of car-page leads via the new entry points</span>
+          <span class="lbl">98% of messages answered, 7x leads per chat</span>
           <span class="only-desktop"><Icon name="arrowUpRight" size={22} /></span>
         </span>
       </a>
 
       <div class="bento__side">
         <a
-          href="/work/zalo-showroom"
+          href="/work/car-product-pages"
           class="card case-card"
           data-umami-event="case_card_click"
-          data-umami-event-case="zalo-showroom"
+          data-umami-event-case="car-product-pages"
           data-umami-event-from="home"
         >
           <span class="case-card__brand">
             <Image src={LOGOS.vinfast.src} alt="VinFast" height={32} densities={[1, 2]} class="case-card__logo case-card__logo--sm" />
             <span class="lbl lbl--sm muted">2026</span>
           </span>
-          <div class="zalo-media">
-            <Image src={zaloHome} alt="The home screen of VinFast's Zalo Mini App: a promo banner, then electric cars and scooters with their starting prices." widths={[132, 264]} sizes="132px" class="zalo-media__img" />
-          </div>
-          <h3 class="d case-card__title">VinFast's showroom inside Zalo</h3>
-          <span class="case-card__result dash-top"><span class="lbl">30 models, 95 checks passed</span></span>
+          <Image src={vf9Hero} alt="The live VF 9 product page, with the starting price and one deposit button in the hero." widths={[400, 700, 1015]} sizes="(min-width: 900px) 360px, 90vw" class="dyno-media agent-media" />
+          <h3 class="d case-card__title">Nearly nine in ten leads on VinFast's car pages now start at new entry points from my spec</h3>
+          <span class="case-card__result dash-top"><span class="lbl">87% of car-page leads via the new entry points</span></span>
         </a>
 
         <a
-          href="/work/dyno-requirements"
+          href="/work/bd-research-agent"
           class="card case-card"
           data-umami-event="case_card_click"
-          data-umami-event-case="dyno-requirements"
+          data-umami-event-case="bd-research-agent"
           data-umami-event-from="home"
         >
           <span class="case-card__brand">
-            <Image src={LOGOS.vindynamics.src} alt="VinDynamics" height={40} densities={[1, 2]} class="case-card__logo case-card__logo--vd" />
+            <Image src={LOGOS.vindynamics.src} alt="VinDynamics" height={32} densities={[1, 2]} class="case-card__logo case-card__logo--sm" />
             <span class="lbl lbl--sm muted">2026</span>
           </span>
-          <Image src={dynoHome} alt="Dyno, VinDynamics' humanoid robot, standing in a parking basement." widths={[400, 700, 900]} sizes="(min-width: 900px) 360px, 90vw" class="dyno-media" />
-          <h3 class="d case-card__title case-card__title--sm">From a client's wish list to requirements for Dyno, a security robot</h3>
-          <span class="case-card__result dash-top"><span class="lbl">18 user stories cut to 6</span></span>
+          <Image src={teamsCard} alt="A new-lead card in Microsoft Teams, with the lead's details blurred and buttons to tag the type of lead." widths={[400, 700, 1000]} sizes="(min-width: 900px) 360px, 90vw" class="dyno-media agent-media" />
+          <h3 class="d case-card__title">52 AI-researched prospects in four days, and every enquiry routed in a minute</h3>
+          <span class="case-card__result dash-top"><span class="lbl">Form completion from 50% to 71%</span></span>
         </a>
       </div>
     </div>
@@ -271,6 +269,7 @@ const entryPoints = [
     border: var(--line); border-radius: 10px;
   }
   @media (min-width: 900px) { .case-card :global(.dyno-media) { height: 140px; } }
+  .case-card :global(.agent-media) { object-position: center 38%; }
 
   /* Lab teaser */
   .lab { display: flex; flex-direction: column; gap: 20px; }

@@ -20,7 +20,7 @@ const cases = defineCollection({
       description: z.string(),
       /** Position on the Work page and in the next-case loop (1 = first). */
       order: z.number().int(),
-      company: z.enum(['VinFast', 'VinDynamics', 'Xanh SM']),
+      company: z.enum(['VinFast', 'VinDynamics', 'Xanh SM', 'Side project']),
       year: z.string(),
       role: z.enum(ROLES),
       team: z.string(),

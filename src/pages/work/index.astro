@@ -1,5 +1,5 @@
 ---
-// Work: the four case studies, then twelve smaller projects grouped by kind, then side projects.
+// Work: the case studies, then smaller projects grouped by kind, then side projects.
 // Case rows come from src/content/cases (card fields). Smaller projects come from src/data/work.ts.
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
@@ -21,16 +21,20 @@ for (const c of cases) {
 
 const anchors = [
   { label: 'Case studies', href: '#case-studies' },
+  { label: 'AI', href: '#ai' },
   { label: 'New products', href: '#new-products' },
   { label: 'Live products', href: '#live-products' },
   { label: 'Data', href: '#data' },
   { label: 'Side projects', href: '#side-projects' },
 ];
-const logoHeight = { VinFast: 46, VinDynamics: 48, 'Xanh SM': 32 } as const;
+const WORDS = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen', 'Twenty'];
+const rowCount = WORK_GROUPS.reduce((n, g) => n + g.rows.length, 0);
+const moreCount = WORDS[rowCount] ?? String(rowCount);
+const logoHeight = { VinFast: 46, VinDynamics: 48, 'Xanh SM': 32, 'Side project': 44 } as const;
 ---
 <BaseLayout
   title="Work | Leo Lam Nguyen"
-  description="Product case studies from VinFast, VinDynamics and Xanh SM, with the decisions and the numbers."
+  description="Product case studies from VinFast, VinDynamics, Xanh SM and my own products, with the decisions and the numbers."
   current="work"
 >
   <section class="container work-top">
@@ -45,7 +49,7 @@ const logoHeight = { VinFast: 46, VinDynamics: 48, 'Xanh SM': 32 } as const;
   <div id="case-studies" class="cases">
     <header class="container cases__head">
       <span class="lbl clay">Case studies</span>
-      <h2 class="d h-section">The four I'd walk you through first</h2>
+      <h2 class="d h-section">The {WORDS[cases.length]?.toLowerCase() ?? cases.length} I'd walk you through first</h2>
     </header>
 
     {cases.map((c, i) => {
@@ -99,7 +103,7 @@ const logoHeight = { VinFast: 46, VinDynamics: 48, 'Xanh SM': 32 } as const;
   <section class="container more" aria-labelledby="more-title">
     <div class="more__head">
       <span class="lbl clay">More projects</span>
-      <h2 id="more-title" class="d h-section">Twelve more, grouped by kind</h2>
+      <h2 id="more-title" class="d h-section">{moreCount} more, grouped by kind</h2>
     </div>
 
     {WORK_GROUPS.map((g) => (

@@ -20,7 +20,8 @@ const fontFace = (family, pkg, file) =>
   `@font-face{font-family:'${family}';src:url('file://${path.join(fontDir(pkg), file)}') format('woff2');font-weight:100 900;}`;
 
 (async () => {
-  const browser = await chromium.launch();
+  // Falls back to the installed Chrome when Playwright's own Chromium is not downloaded.
+  const browser = await chromium.launch().catch(() => chromium.launch({ channel: 'chrome' }));
   if (args.includes('--icons')) {
     // favicon.svg and the square mark come from scripts/logo/build-logo.py.
     const svg = fs.readFileSync(path.join(root, 'public', 'favicon.svg'), 'utf8');

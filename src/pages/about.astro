@@ -13,19 +13,20 @@ const quotes = quotesData as { text: string; who: string }[];
 const studies = [
   { when: '2026 to 2028', what: 'MSc in Data Science', where: 'Liverpool John Moores University' },
   { when: '2026 to 2028', what: 'Executive Diploma in Data Science and AI', where: 'IIIT Bangalore' },
+  { when: 'In progress', what: 'Digital Product Management', where: 'Darden School of Business, University of Virginia' },
   { when: 'In progress', what: 'Certified Analytics Professional', where: 'INFORMS' },
 ];
 ---
 <BaseLayout
   title="About | Leo Lam Nguyen"
-  description="Digital product builder in Hanoi. Product, growth and data work at Xanh SM, VinDynamics and VinFast."
+  description="AI product builder in Hanoi. An AI sales agent and e-commerce at VinFast, AI requirements and tools at VinDynamics, and AI products of my own."
   current="about"
 >
   <section class="container intro" aria-labelledby="about-title">
     <div class="intro__text">
       <h1 id="about-title" class="d h-display">About</h1>
-      <p class="intro__lead">Hi, I'm Leo. I build digital products in Hanoi, and right now I'm on the growth team at VinFast.</p>
-      <p class="intro__body">Most of my work starts the same way: look at what people actually do, decide what to change, ship it with the team, and check whether it worked. I build with SQL, automation tools and AI when that's the fastest way to find out.</p>
+      <p class="intro__lead">Hi, I'm Leo. I build AI products in Hanoi. At VinFast I'm responsible for e-commerce across five online sales channels, where I put an AI sales agent in front of customers; on my own time I ship AI products end to end.</p>
+      <p class="intro__body">My work starts the same way every time: look at what people actually do, decide what to change, ship it, and check whether it worked. I write the requirements, sketch the flows, set up the tracking, and build with SQL, automation and AI when that's the fastest way to find out.</p>
     </div>
     <div class="intro__portrait">
       <Portrait maxWidth="400px" />
@@ -35,9 +36,10 @@ const studies = [
   <section class="container story" aria-labelledby="story-title">
     <div class="story__text">
       <h2 id="story-title" class="d h-section">How I got here</h2>
-      <p>My first jobs were in marketing: copywriting and planning for clients on Upwork, digital campaigns for VinFast's electric scooters, and a new pen line at Hong Ha that started with four months of field research across 15 stores.</p>
-      <p>At Xanh SM I started in growth: while I ran organic driver recruitment, the online share of new drivers went from 24% to 53%, and a National Day campaign I ran reached more than 7.7 million riders. Then I moved to automating rider journeys. That's where marketing turned into product work for me: deciding what the app should say, to whom and when, then testing it every week.</p>
-      <p>At VinDynamics I wrote the requirements for a security robot, ran the company website as a lead product, and built a lead engine and a marketing data warehouse on my own. Now I'm back at VinFast, working on car pages, a showroom inside Zalo and lead capture.</p>
+      <p>I came to product through growth. At Xanh SM I started in driver recruitment, where the online share of new drivers went from 24% to 53% and the cost per new driver fell by about a third. Then I took over the app's rider messaging: deciding what it should say, to whom and when, across more than 30 automated journeys, and testing it every week. That's where marketing turned into product work for me.</p>
+      <p>At VinDynamics I moved into product. I wrote the requirements for Dyno, a security robot, ran the company website as a lead product, and built AI tools and a marketing data warehouse on my own.</p>
+      <p>At VinFast I'm responsible for e-commerce across five online sales channels. I find where buyers drop off, specify the fixes, and own launches such as VinFast's showroom inside Zalo. On my own time I took <a href="/work/chiem-nghiem" class="ul">Chiêm Nghiệm</a>, a web app, from four interviews to launch in seven days.</p>
+      <p>Before all that, marketing and research taught me to start from the customer: client work on Upwork, campaigns for VinFast's electric scooters, and a new pen line at Hong Ha that began with four months of field research across 15 stores.</p>
       <div class="story__logos">
         <LogoBand variant="row" />
       </div>

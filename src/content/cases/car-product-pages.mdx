@@ -1,31 +1,31 @@
 ---
-title: "Half of car-page leads now start at entry points I designed"
+title: "Nearly nine in ten leads on VinFast's car pages now start at new entry points from my spec"
 seoTitle: "New entry points on VinFast's car pages | Leo Lam Nguyen"
-description: "Three new ways to reach the form on VinFast's car pages. Half of all leads now start there."
+description: "I diagnosed why VinFast's redesigned car pages lost leads and specified three new ways to reach the form. Over 26 days, 87% of car-page leads started there."
 order: 2
 company: VinFast
 year: "2026"
 role: Requirements lead
 team: "Web team (build), tag admin, my manager (scope)"
-timeline: "Sep to Oct 2026"
+timeline: "Sep to Nov 2026"
+note: "Updated 18 November 2026 with 26 days of data."
 stages: [Discover, Define, Decide, Measure]
 tools: [GA4, Google Tag Manager, Excel]
-note: "Updated November 2026. More data in December."
 tiles:
-  - { value: "54%", label: "Car-page leads via new entry points", note: "first nine days after launch" }
-  - { value: "+41%", label: "Leads per 1,000 visits", note: "first nine days after launch" }
-  - { value: "4", label: "Ways to reach the form", note: "was one, at the very bottom" }
+  - { value: "87%", label: "Car-page leads via new entry points", note: "23 Oct to 17 Nov, up from 54% in the first nine days" }
+  - { value: "4x", label: "Reach payment from the new hero button", note: "5.1% of people who tapped it, against 1.3% for the mid-page button, two weeks after launch" }
+  - { value: "75%", label: "Finished the form once started, from the sticky bar", note: "30 Oct to 11 Nov, against 47% for the form placed on the page" }
 glance:
   problem: "After a redesign, VinFast's car pages collected far fewer leads per visit, and the only form sat at the bottom of a long page."
-  did: "I mapped where the page lost people and designed three new ways to reach the form, each with its own tag."
-  role: "Diagnosis, spec and tracking. The web team built and shipped it."
+  did: "I mapped where the page lost people, specified three new ways to reach the form, tagged each one, and measured where leads now start."
+  role: "I owned the diagnosis, spec, tracking and analysis. The web team built it."
 roles:
-  mine: "The button map, the entry point spec, the tracking spec (a position tag and an ID on every call to action), content checks before launch, and the analysis."
-  team: "The web team built and released it, the tag admin published the tags, my manager set the scope, and the website planning team approved the launch."
-next: b2b-website-leads
+  mine: "The button audit, the entry point and tracking specs, content checks before launch, and the analysis."
+  team: "The web team built and released it, the tag admin published the tags, and my manager set the scope."
+next: bd-research-agent
 card:
-  teaser: "After a redesign, VinFast's car pages collected far fewer leads per visit, and the only form sat at the very bottom. I designed three new ways to reach it, each with its own tag. Within nine days, half of all leads came through them, and leads per 1,000 visits rose 41%."
-  result: "54% of car-page leads via the new entry points"
+  teaser: "A redesign cut leads on VinFast's car pages. I specified three new ways to reach the form, each tagged. Over 26 days, 87% of car-page leads started there; the unchanged scooter pages stayed flat."
+  result: "87% of car-page leads via the new entry points"
   image: "../../assets/images/cases/car/live-hero.jpg"
   imageAlt: "The live VF 9 product page hero, with the starting price and one deposit button."
   imageCaption: "Live on the VF 9 page."
@@ -35,27 +35,34 @@ ogImage: /og/car-product-pages.png
 import { Image } from 'astro:assets';
 import EntryMap from '../../components/case/visuals/EntryMap.astro';
 import ShareBars from '../../components/case/visuals/ShareBars.astro';
+import DataTable from '../../components/case/visuals/DataTable.astro';
 import heroBefore from '../../assets/images/cases/car/hero-before.jpg';
 import sectionBefore from '../../assets/images/cases/car/section-before.png';
+import auditMap from '../../assets/images/cases/car/entry-audit-map.jpg';
 import propHero from '../../assets/images/cases/car/proposal-hero.png';
 import propForm from '../../assets/images/cases/car/proposal-form.png';
 import propSticky from '../../assets/images/cases/car/proposal-sticky.png';
 import liveHero from '../../assets/images/cases/car/live-hero.jpg';
 import liveForm from '../../assets/images/cases/car/live-form.jpg';
+import ga4Funnel from '../../assets/images/cases/car/ga4-funnel-by-position.png';
 
 <Section id="problem" title="A new design, and the lead pop-up was gone">
 
-In late September VinFast moved its car product pages to a new domain with a new design, and the lead pop-up went away with it. Visitors kept coming, but leads per visit dropped sharply. For a car brand, those leads are the start of the sales pipeline.
+In late September the car pages moved to a new domain and design, and the lead pop-up went with them. Visits held, but leads per visit fell sharply.
+
+<Figure caption="Before: two buttons competing in the hero, and a section button that only scrolled to the bottom.">
+  <Image src={heroBefore} alt="The hero before: two buttons side by side, deposit and test drive." widths={[480, 800, 1200]} sizes="(min-width: 1100px) 680px, 100vw" />
+  <Image src={sectionBefore} alt="The design section before: a consultation button that only scrolled to the bottom of the page." widths={[480, 800, 1200]} sizes="(min-width: 1100px) 680px, 100vw" />
+</Figure>
 
 </Section>
 
 <Section id="found" title="Ten buttons a page, and none of them opened the form">
 
-People still came to research a car, scrolled, and left. I mapped every button on every car page: ten per page. Seven sent people to the online shop to place a deposit, and two only scrolled them to the bottom. The only way to leave contact details was the form at the very end, so anyone who made up their mind halfway down had to scroll all the way or leave.
+I mapped every button on 14 car pages: ten per page. Seven sent people away to the shop, two only scrolled down, and the tenth was the submit button of the only form, at the very end. Anyone who decided halfway had to scroll or leave.
 
-<Figure caption="Before: two buttons competing in the hero, and a section button that scrolled to the bottom.">
-  <Image src={heroBefore} alt="The hero before: two buttons side by side, deposit and test drive." widths={[480, 800, 1200]} sizes="(min-width: 1100px) 680px, 100vw" />
-  <Image src={sectionBefore} alt="The design section before: a consultation button that only scrolled to the bottom of the page." widths={[480, 800, 1200]} sizes="(min-width: 1100px) 680px, 100vw" />
+<Figure frame="sand" caption="My audit, kept in Vietnamese as written: today's entry points on the left, the ones I proposed on the right.">
+  <Image src={auditMap} alt="A two-column audit of a car product page in Vietnamese. Left, current: a hero with deposit and test drive buttons, a consultation button that only scrolls, and a six-field form at the very bottom. Right, proposed: a consultation button in the hero, a cost estimate after the price, a test drive booking, a spec download, a full form at the end and a sticky bar on mobile." widths={[600, 900, 1170]} sizes="(min-width: 1100px) 680px, 100vw" />
 </Figure>
 
 </Section>
@@ -63,39 +70,34 @@ People still came to research a car, scrolled, and left. I mapped every button o
 <Section id="decisions" title="Entry points now, the section rework later">
 
 <Decisions>
-<Decision title="Entry points first">
+<Decision title="Ship the entry points first">
 
-Reworking every section would take months. New ways to reach the form could ship in weeks, so I went with entry points first, cars before scooters. The section rework became <a href="/work#cost-tool" class="ul">its own proposal</a>.
+New entry points could ship in weeks; reworking every section would take months. I shipped the entry points first and turned the section rework into <a href="/work#cost-tool" class="ul">its own proposal</a>.
 
 </Decision>
 <Decision title="One button in the hero">
 
-Deposit and test drive competed for people who had just arrived. I put the starting price up top with one deposit button. People who are ready press it, everyone else keeps reading, and test drive still lives in the header.
+The old hero had deposit and test drive side by side; I kept one deposit button. Two weeks after launch the hero drew 37% of button taps, and 5.1% of the people who tapped it reached payment, against 1.3% for the mid-page button.
 
 </Decision>
-<Decision title="Open the form in place">
+<Decision title="Open the form where interest peaks">
 
-A consultation button already sat right after the photos of the car, where interest peaks, but it scrolled people to the bottom. I specified it to open the form where they are.
-
-</Decision>
-<Decision title="A header button, from the designer">
-
-I proposed a sticky bar that appears after the hero. The UI designer pointed out that too many fixed elements would crowd the page and suggested the header's test-drive button open the consultation form too. That became the third entry point.
+The button after the photos used to scroll to the bottom. Now it opens the form in place.
 
 </Decision>
-<Decision title="Three required fields">
+<Decision title="Use the designer's header button">
 
-Research favors fewer fields, but the CRM can't create a lead without a name, phone number and email. I kept all three and wrote the trade-off down.
+My sticky bar risked crowding the page, so the UI designer's header button, which opens the form, became the third entry point.
 
 </Decision>
-<Decision title="A tag on every entry point">
+<Decision title="Tag every entry point">
 
-The default was one generic lead event. I gave every entry point its own position tag, which is how I can show exactly where leads now start.
+Every button carries a position tag instead of sharing one generic lead event. That tag is how I can show where each lead started.
 
 </Decision>
 </Decisions>
 
-<Figure frame="sand" caption="From my proposal to the web team.">
+<Figure frame="sand" caption="From my spec to the web team: one hero button, a form that opens in place, a sticky bar.">
   <Image src={propHero} alt="Proposal: one deposit button under the car's key numbers." widths={[480, 775]} sizes="(min-width: 1100px) 650px, 100vw" />
   <Image src={propForm} alt="Proposal: the consultation form opening over the page instead of scrolling to the bottom." widths={[480, 800, 1200]} sizes="(min-width: 1100px) 650px, 100vw" />
   <Image src={propSticky} alt="Proposal: a sticky bar with the starting price and a consultation button." widths={[480, 800, 1103]} sizes="(min-width: 1100px) 650px, 100vw" />
@@ -105,39 +107,57 @@ The default was one generic lead event. I gave every entry point its own positio
 
 <Section id="shipped" title="Four ways to reach the form, each tagged">
 
-Live on 23 October across VinFast's car product pages.
+Live on 23 October across VinFast's car pages.
 
 <EntryMap />
 
-<Figure caption="Live on the VF 9 page.">
+<Figure caption="Live on the VF 9 page: one deposit button up top, and the form right after the photos.">
   <Image src={liveHero} alt="The live VF 9 page: starting price and one deposit button in the hero." widths={[480, 800, 1015]} sizes="(min-width: 1100px) 680px, 100vw" />
   <Image src={liveForm} alt="The live VF 9 page: a consultation form next to the design section." widths={[480, 800, 1015]} sizes="(min-width: 1100px) 680px, 100vw" />
 </Figure>
 
 </Section>
 
-<Section id="results" title="Half of car-page leads now start at the new entry points">
+<Section id="results" title="Nearly nine in ten car-page leads now start at the new entry points">
 
-In the first nine days, 54% of car-page leads came through the new entry points, and leads per 1,000 visits rose 41%.
+Over the first 26 days, 87% of car-page leads started at one of the new entry points in my spec, up from 54% in the first nine days. Scooter pages, which did not change, stayed flat over the same weeks, at about 0.6 leads per 1,000 views before and after.
 
 <ShareBars
-  label="Share of car-page leads by entry point. Before launch, all leads came from the bottom form. In the first nine days after launch, 54% came from the new entry points."
-  caption="Car-page leads by entry point, 23 to 31 October."
+  label="Share of car-page leads that started at a new entry point. Before launch, all leads came from the bottom form. In the first nine days, 54% came from the new entry points. Over the first 26 days, 87% did."
+  caption="Share of car-page leads by where they started, from the position tag on every lead in GA4."
   nameWidth="64px"
   rows={[
     { name: 'Before', segments: [{ text: 'Bottom form 100%', pct: 100 }] },
-    { name: 'After', segments: [{ text: 'New entry points 54%', pct: 54, hl: true }, { text: 'Bottom form', pct: 46 }] },
+    { name: '9 days', segments: [{ text: 'New 54%', pct: 54, hl: true }, { text: 'Bottom 46%', pct: 46 }] },
+    { name: '26 days', segments: [{ text: 'New 87%', pct: 87, hl: true }, { text: '13%', pct: 13 }] },
   ]}
 />
 
-Next, I re-measure at six weeks in early December and join leads to deposits in the CRM mid-December.
+<Figure caption="Where car-page leads started, 23 October to 17 November. Shares to one decimal, so they add up to 100%.">
+  <DataTable
+    caption="Where car-page leads started"
+    head={['Entry point', 'Share of car-page leads']}
+    rows={[
+      ['Mid-page form, right after the photos (new)', '55.2%'],
+      ['Sticky bar on mobile (new)', '25.7%'],
+      ['Header button (new)', '6.5%'],
+      ['Bottom form (the original)', '12.6%'],
+    ]}
+  />
+</Figure>
+
+<Figure caption="My GA4 exploration of the path from a car-page button to a deposit, split by the position tag on every button, 22 October to 18 November. User counts blurred; rates kept.">
+  <Image src={ga4Funnel} alt="A GA4 funnel exploration titled with the PDP CTA to deposit funnel: four steps from first visit to purchase, and a table broken down by CTA position, such as hero, mid, specs, footer, sticky, exterior and header, with completion and abandonment rates. User counts are blurred." widths={[700, 1100, 1568]} sizes="(min-width: 1100px) 880px, 100vw" />
+</Figure>
+
+- **How I checked:** rerunning the first nine days reproduces the 54%, and lead totals per page match across two separate pulls. VF Wild, still on the old template, is left out.
+- **Not proven yet:** whether these leads become deposits more often. That needs leads joined to deposits in the sales system, which is the next read.
 
 </Section>
 
-<Section id="learned" title="Small changes in the right place come first">
+<Section id="learned" title="A tag on every button paid for itself">
 
-- A tag on every entry point costs almost nothing and pays off on day one. It's why I can show where half the leads now start.
-- Four ways to reach the form shipped in weeks; the section rework would have taken months.
-- Next: the mid-page cost tool and form I've already prototyped, so more of the people who read the page leave their details.
+- Tagging every position cost almost nothing and turned a 26-day re-measure into a few minutes of work.
+- Forms that open on request finish more often than a form placed on the page. Making every entry point open the form is my next test.
 
 </Section>

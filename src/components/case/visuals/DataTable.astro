@@ -7,11 +7,18 @@ interface Props {
   boldLast?: boolean;
 }
 const { head, rows, caption, boldLast = true } = Astro.props;
+// Four or more columns scroll sideways on narrow screens instead of being cut off.
+const wide = head.length >= 4;
 ---
-<div class="dtable">
+<div
+  class:list={['dtable', wide && 'dtable--wide']}
+  tabindex={wide ? 0 : undefined}
+  role={wide ? 'region' : undefined}
+  aria-label={wide ? (caption ?? head.join(', ')) : undefined}
+>
   <table>
     {caption && <caption class="sr-only">{caption}</caption>}
-    <thead><tr>{head.map((h) => <th scope="col" class="lbl lbl--sm">{h}</th>)}</tr></thead>
+    <thead><tr>{head.map((h, i) => <th scope="col" class="lbl lbl--sm">{h || <span class="sr-only">{i === 0 ? 'Item' : 'Value'}</span>}</th>)}</tr></thead>
     <tbody>
       {rows.map((r) => (
         <tr>{r.map((c, j) => <td class:list={[boldLast && j === r.length - 1 && 'dtable__strong']}>{c}</td>)}</tr>
@@ -22,6 +29,9 @@ const { head, rows, caption, boldLast = true } = Astro.props;
 
 <style>
   .dtable { border: var(--line); border-radius: var(--radius-md); background: var(--color-white); overflow: hidden; }
+  .dtable--wide { overflow-x: auto; }
+  .dtable--wide table { min-width: 620px; }
+  .dtable--wide:focus-visible { outline: 2px solid var(--color-graphite); outline-offset: 2px; }
   table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.45; }
   @media (min-width: 640px) { table { font-size: 15px; } }
   thead tr { background: var(--color-sand); }

@@ -1,12 +1,15 @@
 // Work page data (docs: work-review.md, content.md §3, labels-and-headings.md).
-// The four case studies come from src/content/cases; this file holds the twelve smaller
+// The case studies come from src/content/cases; this file holds the smaller
 // projects and the side projects. Edit copy here; roles and tools are checked at build time.
 import type { ImageMetadata } from 'astro';
 import type { Role } from './tools';
 import bankPages from '../assets/images/work/bank-pages.jpg';
-import firstTrips from '../assets/images/work/first-trips-journey.png';
+import brainGraph from '../assets/images/work/second-brain-graph.jpg';
 import dataform from '../assets/images/work/dataform-graph.jpg';
 import o2o from '../assets/images/work/o2o-dashboard.png';
+import pdpSections from '../assets/images/work/pdp-section-proposal.jpg';
+import vf6Cost from '../assets/images/work/vf6-cost-prototype.jpg';
+import ga4Audit from '../assets/images/work/ga4-audit-summary.jpg';
 
 export interface WorkImage { img: ImageMetadata; alt: string; caption: string; maxWidth: string }
 export interface WorkRow {
@@ -14,7 +17,7 @@ export interface WorkRow {
   id: string;
   title: string;
   role: Role;
-  company: 'VinFast' | 'VinDynamics' | 'Xanh SM';
+  company: 'VinFast' | 'VinDynamics' | 'Xanh SM' | 'Side project';
   year: string;
   problem: string;
   decided: string;
@@ -28,6 +31,54 @@ export interface WorkRow {
 export interface WorkGroup { id: string; name: string; rows: WorkRow[] }
 
 export const WORK_GROUPS: WorkGroup[] = [
+  {
+    "id": "ai",
+    "name": "AI products and systems",
+    "rows": [
+      {
+        "id": "deposit-audit",
+        "title": "Finding where online deposits start, with AI agents running the audit",
+        "role": "Analyst",
+        "company": "VinFast",
+        "year": "2026",
+        "problem": "The team wanted to know which buttons lead to online deposits, but the trail breaks between the main site and the shop.",
+        "decided": "I split the question into two paths, online deposits measured in GA4 and leads that deposit through sales, and set the brief: audit what exists before proposing anything. AI agents parsed the live tag container, read the deposit flow's code and pulled GA4; a second agent re-pulled the key numbers independently.",
+        "outcome": "49% of sessions with a car deposit start on the homepage and only 10% on a product page, yet the homepage and both listing pages send no button events at all. I sent eight fixes to the team.",
+        "tools": [
+          "GA4",
+          "Google Tag Manager",
+          "Claude"
+        ],
+        "images": [],
+        "visual": null,
+        "links": []
+      },
+      {
+        "id": "second-brain",
+        "title": "A personal AI knowledge system built from 2,000 chats",
+        "role": "Builder",
+        "company": "Side project",
+        "year": "2026",
+        "problem": "Three years of work and study lived in about 2,000 AI chats, so every new conversation started from zero.",
+        "decided": "I built it with Claude Code. AI agents file everything under rules I wrote: every claim cites its source, conflicts keep both sides, sensitive data stays out. A linking agent enforces an 11-point contract, and a nightly job files new chats. I kept it local and turned down sync extensions that could read work data.",
+        "outcome": "It converted and classified 2,000 chats, with phone numbers and emails masked, into 14 topic maps. Each note links to 16 others on average, with zero contract violations. It's the memory I used to rewrite this site.",
+        "tools": [
+          "Claude Code",
+          "Obsidian"
+        ],
+        "images": [
+          {
+            "img": brainGraph,
+            "alt": "The graph view of my Obsidian vault: hundreds of colored dots, one per note, joined by a dense web of links. Note names are blurred.",
+            "caption": "My vault in Obsidian's graph view: 214 notes and 2,537 links, colored by type. Names blurred.",
+            "maxWidth": "720px"
+          }
+        ],
+        "visual": null,
+        "links": []
+      }
+    ]
+  },
   {
     "id": "new-products",
     "name": "New products and tools",
@@ -67,49 +118,14 @@ export const WORK_GROUPS: WorkGroup[] = [
         ]
       },
       {
-        "id": "lead-engine",
-        "title": "An outbound lead engine for a small BD team",
-        "role": "Builder",
-        "company": "VinDynamics",
-        "year": "2026",
-        "problem": "The BD team researched every prospect by hand, from finding a reason to reach out to writing the message.",
-        "decided": "I built it around buying signals, such as a product launch or a regulatory approval, instead of a static list of companies. Claude scores each company, Hunter finds the contacts, and every lead arrives with a drafted email and LinkedIn message. A person sends every one. I picked Hunter over Apollo because Apollo had little on small companies, and left LinkedIn automation out to protect the team's accounts.",
-        "outcome": "Over four days in May 2026 it delivered 52 researched companies across 5 sectors and 9 countries, each with a score, the signal behind it, two contacts and two drafts. BD reached out to all 52.",
-        "tools": [
-          "n8n",
-          "Claude",
-          "Hunter",
-          "Microsoft Teams"
-        ],
-        "images": [],
-        "visual": "lead-engine",
-        "links": []
-      },
-      {
-        "id": "ai-agent",
-        "title": "An AI agent for a sales page's messages",
-        "role": "Builder",
-        "company": "VinFast",
-        "year": "2026",
-        "problem": "Nobody was assigned to answer messages on the brand's sales page, so customers waited.",
-        "decided": "I set up an AI agent on the page's messenger, loaded it with product information and scoped it to two jobs: answer questions, then send people to book a consultation or place a deposit online.",
-        "outcome": "It handles the common questions on its own and hands people to the right next step. It passed end-to-end testing and goes live after sign-off.",
-        "tools": [
-          "Messenger"
-        ],
-        "images": [],
-        "visual": null,
-        "links": []
-      },
-      {
         "id": "daily-lead-report",
         "title": "A daily lead report that checks itself",
         "role": "Builder",
         "company": "VinFast",
         "year": "2026",
         "problem": "My manager rebuilt the lead and deposit report by hand every day.",
-        "decided": "I worked out the metric rules from my manager's own files, then automated the cleanup, matching and counts in Power Query, with four built-in checks.",
-        "outcome": "Lead counts match the manual report within 1%. Building it also showed that one channel's conversion rate always read 100%, because of the way its records were created.",
+        "decided": "I worked out the metric rules from my manager's own files and automated the cleanup, matching and counts. When the first version got too slow in November, I rebuilt it as an automated pipeline with a two-page dashboard, and wrote the logic down in 20 sections with the code, so a person or an AI agent can rebuild it.",
+        "outcome": "Lead counts match the manual report within 1%, and every run checks itself: valid orders must equal the sum of their four sources, and overlapping days must match the previous report. Building it also showed that one channel's conversion rate always read 100% because of how its records were created, and that a story about retail orders doubling was mostly 13 bulk orders.",
         "tools": [
           "Excel"
         ],
@@ -124,16 +140,47 @@ export const WORK_GROUPS: WorkGroup[] = [
     "name": "Fixes to live products",
     "rows": [
       {
+        "id": "listing-pages",
+        "title": "Fixing conversion on two new buying pages before buying more traffic",
+        "role": "Requirements lead",
+        "company": "VinFast",
+        "year": "2026",
+        "problem": "Two new online buying pages went live at the end of October, and the next step on the plan was to send more ads to them.",
+        "decided": "I audited both pages with GA4 and Clarity recordings and argued for fixing conversion before raising spend. On mobile, 42% of views lasted under three seconds; in 34 recordings nobody tapped Get a consultation, and the most tapped element was the cookie banner's Reject all. I mocked up the page again and wrote a 17-row current-versus-proposed spec, ranked into fix now, round one and round two.",
+        "outcome": "The ranked fix list is part of my proposal to the division director, with about 2.8 leads per 1,000 sessions as the baseline to beat.",
+        "tools": [
+          "GA4",
+          "Clarity",
+          "Excel"
+        ],
+        "images": [],
+        "visual": null,
+        "links": []
+      },
+      {
         "id": "cost-tool",
         "title": "A cost tool and a mid-page form for car product pages",
-        "role": "Analyst",
+        "role": "Requirements lead",
         "company": "VinFast",
         "year": "2026",
         "problem": "Shoppers had to leave the page to work out on-road cost or monthly payments.",
-        "decided": "I mapped every section and button across the car and scooter pages. Then I prototyped a three-tab cost tool (on-road cost, installments and fuel savings) and a form halfway down the page, for desktop and mobile.",
-        "outcome": "A proposal, revised after the systems team's review and now with the team that plans the website. The open question is how to build it: an embedded frame is quick to add, but it loads slowly and scrolls badly on phones.",
+        "decided": "I mapped every section and button across the car and scooter pages, then prototyped a three-tab cost tool (on-road cost, installments and fuel savings) and a form halfway down the page, for desktop and mobile. When review showed the shop's data was stale, still listing 63 provinces and interest rates last updated in November 2023, I proposed letting buyers enter their own rate.",
+        "outcome": "Approved by the division director on 2 November. The mid-page form and the fuel-savings comparison are live, and the form now brings in more than half of car-page leads. On-road cost and installments wait on an API from the shop team.",
         "tools": [],
-        "images": [],
+        "images": [
+          {
+            "img": pdpSections,
+            "alt": "My proposal board in Vietnamese: the car page's nine sections today on the left, the reordered ten changes on the right, plus the ordering principle, a check against four EV brands, and a staggered rollout to measure it.",
+            "caption": "My section proposal, in Vietnamese: reorder the page in the order buyers ask, with no new copy.",
+            "maxWidth": "820px"
+          },
+          {
+            "img": vf6Cost,
+            "alt": "My VF 6 prototype in Vietnamese: pick a version and city to see the full on-road cost and the monthly saving against a petrol car, then a consultation form that keeps those choices.",
+            "caption": "My VF 6 prototype: on-road cost and fuel savings first, then a form that keeps the buyer's choices.",
+            "maxWidth": "620px"
+          }
+        ],
         "visual": null,
         "links": []
       },
@@ -145,7 +192,7 @@ export const WORK_GROUPS: WorkGroup[] = [
         "year": "2026",
         "problem": "A group loyalty app sent plenty of car leads, but few of them became deposits.",
         "decided": "I prototyped a clickable buying flow for cars and scooters, with a shorter form and views for each membership tier.",
-        "outcome": "The prototype made the real issue easy to see: most people dropped off to compare prices with dealers, and a new screen won't fix that. I flagged it alongside the prototype, so the app's team can put effort where it pays.",
+        "outcome": "The prototype made the real issue easy to see: most people dropped off to compare prices with dealers, and a new screen won't fix that. I flagged it with the prototype, so the app's team puts effort where it pays.",
         "tools": [],
         "images": [],
         "visual": null,
@@ -164,29 +211,6 @@ export const WORK_GROUPS: WorkGroup[] = [
           "CleverTap"
         ],
         "images": [],
-        "visual": null,
-        "links": []
-      },
-      {
-        "id": "first-14-days",
-        "title": "The first 14 days: getting new riders to take a first trip",
-        "role": "Builder",
-        "company": "Xanh SM",
-        "year": "2025",
-        "problem": "Every rider got the same push messages on the same day, whether they had signed up yesterday or stopped riding months ago.",
-        "decided": "Riders who take a trip within 14 days of signing up stay the longest, so I gave every new rider one goal: a first trip inside 14 days. I moved messaging from a calendar to behavior, built 30+ automated journeys for four rider groups, and judged every weekly A/B test on trips, not clicks.",
-        "outcome": "First trips rose 28% and churn fell 12%, month over month.",
-        "tools": [
-          "CleverTap"
-        ],
-        "images": [
-          {
-            "img": firstTrips,
-            "alt": "The new-rider flow, recreated: sign-up, a how-to push on day 0, a welcome offer on days 2 to 5, an A/B test on day 7 and a last reminder on days 12 to 14.",
-            "caption": "Recreated for this site. Steps, timing and copy are simplified.",
-            "maxWidth": "820px"
-          }
-        ],
         "visual": null,
         "links": []
       },
@@ -221,13 +245,20 @@ export const WORK_GROUPS: WorkGroup[] = [
         "year": "2026",
         "problem": "The site had more tags than anyone owned, and ad platforms saw only part of the leads and none of the car deposits.",
         "decided": "I audited the tag setup, wrote one event plan shared by every product page, and configured the lead and deposit tags. The web team shipped the code changes.",
-        "outcome": "Lead tags went from covering 29% of car product pages to all of them, and car deposits now report back to the ad account. Leads recorded per ad click more than doubled that quarter, alongside new campaigns that launched at the same time.",
+        "outcome": "Lead tags went from covering 29% of car product pages to all of them, and car deposits now report back to the ad account. Leads recorded per ad click more than doubled that quarter, alongside new campaigns that launched at the same time. Since 30 October every button also reports its position and car model, which is what made the 26-day read of the car pages possible.",
         "tools": [
           "GA4",
           "Google Tag Manager",
           "Google Ads"
         ],
-        "images": [],
+        "images": [
+          {
+            "img": ga4Audit,
+            "alt": "Summary cards from my GA4 audit, in Vietnamese: 9 items working, 8 broken and hurting reporting and attribution, 6 missing and not yet built.",
+            "caption": "My GA4 audit in September, which set the fix list: 9 items working, 8 broken, 6 missing.",
+            "maxWidth": "820px"
+          }
+        ],
         "visual": null,
         "links": []
       },
@@ -263,8 +294,8 @@ export const WORK_GROUPS: WorkGroup[] = [
         "company": "VinFast",
         "year": "2026",
         "problem": "Ad spend, leads and web deposits sat in three separate platforms.",
-        "decided": "I built a dashboard with Claude that pulls Meta Ads, Google Ads and GA4 through Windsor.ai. It tracks the quarter's plan, cost per lead and cost per web deposit by car model, and turns Google Ads data into a weekly to-do list: which campaigns to raise or hold, and which search terms to block.",
-        "outcome": "One page covers plan progress, spend, leads and deposits by car model, with a short guide on how far to trust each number.",
+        "decided": "I built a dashboard with Claude that brings Meta Ads, Google Ads and GA4 into one place. It tracks the quarter's plan, cost per lead and cost per web deposit by car model, and turns Google Ads data into a weekly to-do list: which campaigns to raise or hold, and which search terms to block. When a source drops out or a day's GA4 count falls below 30% of normal, it keeps the last good number instead of showing a false drop.",
+        "outcome": "One page covers plan progress, spend, leads and deposits by car model, with a short guide on how far to trust each number. It's on its fifth version and refreshes every morning.",
         "tools": [
           "Meta Ads",
           "Google Ads",
@@ -288,6 +319,12 @@ export const WORK_GROUPS: WorkGroup[] = [
 
 export const SIDE_PROJECTS: { title: string; role: Role; line: string; href: string | null }[] = [
   {
+    "title": "Chiêm Nghiệm",
+    "role": "Product owner",
+    "line": "A tử vi web app for working people stuck on a decision, live since 14 November.",
+    "href": "/work/chiem-nghiem"
+  },
+  {
     "title": "Energy audit",
     "role": "Builder",
     "line": "A small tool to see which parts of your week give you energy.",
@@ -296,7 +333,7 @@ export const SIDE_PROJECTS: { title: string; role: Role; line: string; href: str
   {
     "title": "This website",
     "role": "Builder",
-    "line": "Designed and built with Claude.",
+    "line": "My brief, wireframes and copy rules, with Claude Code as the builder.",
     "href": null
   }
 ];

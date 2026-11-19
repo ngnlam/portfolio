@@ -40,6 +40,11 @@ export const TOOLS: Record<string, Tool> = {
   'Zalo': { logo: logo('zalo') },
   'Messenger': { logo: logo('messenger') },
   'Windsor.ai': { icon: 'plug' },
+  'Clarity': { icon: 'observe' },
+  'Umami': { icon: 'measure' },
+  'Cloudflare': { icon: 'cloud' },
+  'Claude Code': { logo: logo('claude') },
+  'Obsidian': { icon: 'pen' },
 };
 
 export type ToolName = keyof typeof TOOLS;
