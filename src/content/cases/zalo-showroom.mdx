@@ -1,77 +1,74 @@
 ---
-title: "VinFast's 30-model showroom inside Zalo, built so Zalo leads stop hiding under Facebook"
-seoTitle: "VinFast's showroom inside Zalo | Leo Lam Nguyen"
-description: "As business owner, I took a Zalo Mini App with 30 VinFast models from approved idea to signed-off release, and made sure every lead reaches the sales system counted as Zalo."
-order: 7
+title: "A 29-model showroom inside Zalo, two live partner bank pages and a loyalty app prototype for VinFast"
+seoTitle: "New sales channels for VinFast: Zalo, partner banks and a loyalty app | Leo Lam Nguyen"
+description: "I took VinFast into three new sales channels: a Zalo mini app with 29 models, offer pages for the staff of two partner banks, and a buying flow prototype for the group's loyalty app, each with its own lead source."
+order: 9
 company: VinFast
 year: "2026"
 role: Product owner
-team: "Growth manager (idea, sign-off), vendor (design, build), sales system teams, legal and data protection"
+team: "Growth manager (idea, approval), vendor (Zalo app design and build), build team (bank pages), sales system teams, legal and data protection"
 timeline: "Sep to Nov 2026"
-status: "Signed off. Launch plan approved 18 Nov 2026."
+status: "Zalo app passed acceptance testing on 2 Nov 2026; bank pages live since late October"
 stages: [Discover, Define, Decide, Ship]
 tools: [Zalo, Figma, Excel]
 tiles:
   - { value: "1,000+", label: "Zalo leads I found logged as Facebook", note: "in the sales system since March 2025, so Zalo got its own lead source in week one" }
-  - { value: "30", label: "Car and scooter models in the app", note: "each mapped to the sales system through 81 product codes" }
-  - { value: "95", label: "Acceptance checks passed before sign-off", note: "images, prices, the form and every lead reaching the sales system" }
+  - { value: "29", label: "Car and scooter models in the Zalo app", note: "each mapped to the sales system through 81 product codes" }
+  - { value: "3", label: "New channels, each with its own lead source", note: "Zalo, two partner banks and the loyalty app" }
 glance:
-  problem: "To browse or buy a VinFast, people had to leave Zalo for the website, and Zalo leads were being counted as Facebook."
-  did: "I took a showroom inside Zalo from approved idea to signed-off release: phasing, lead source, legal, audits and acceptance testing."
-  role: "Product owner, named the business owner of the project. A vendor team designed and built the app."
+  problem: "Many VinFast buyers live outside the website: in Zalo, at partner banks, in the group's loyalty app. Their leads got lost, mixed in or miscounted, and Zalo leads were logged as Facebook."
+  did: "I took a Zalo showroom from approved idea to acceptance testing, owned offer pages for two partner banks from idea to launch, and prototyped a buying flow for the loyalty app, each with its own lead source."
+  role: "Product owner across the three channels, named the business owner of the Zalo app. A vendor built the app; the build team built the bank pages."
 roles:
-  mine: "Scope and phasing, the lead source and tracking spec, legal and data protection, content audits, the 81-code product mapping, acceptance testing."
-  team: "Growth manager: idea and sign-off. Vendor: design and build. Sales system teams: lead intake. Legal and the data protection officer: review."
-next: chiem-nghiem
+  mine: "Scope and phasing, lead sources and tracking specs, legal and data protection, content audits, the 81-code product mapping, acceptance testing, the bank page design and tests, and the loyalty app prototype."
+  team: "Growth manager: idea and approval. Vendor: Zalo app design and build. Build team: bank pages. Sales system teams: lead intake. Legal and the data protection officer: review."
+next: b2b-website-leads
 card:
-  teaser: "As business owner, I took a showroom inside Zalo from approved idea to signed-off release, cut phase 1 to four screens, and found 1,000+ Zalo leads that were being counted as Facebook."
-  result: "Signed off, launch plan approved"
+  teaser: "I took VinFast into three new sales channels: a 29-model showroom inside Zalo, offer pages for two partner banks and a loyalty app buying flow. Along the way I found 1,000+ Zalo leads that were being counted as Facebook."
+  result: "Bank pages live; Zalo app through acceptance testing"
   image: "../../assets/images/cases/zalo/home.png"
   imageAlt: "The mini app's home screen inside Zalo: a promo banner, electric cars and electric scooters with starting prices, and a Get a consultation button."
-  imageCaption: "The mini app's home screen."
+  imageCaption: "The Zalo app's home screen."
   imageKind: phone
 ogImage: /og/zalo-showroom.png
 ---
 import { Image } from 'astro:assets';
 import PhoneRow from '../../components/case/visuals/PhoneRow.astro';
-import UatTables from '../../components/case/visuals/UatTables.astro';
+import DataTable from '../../components/case/visuals/DataTable.astro';
 import zHome from '../../assets/images/cases/zalo/home.png';
 import zList from '../../assets/images/cases/zalo/listing.png';
 import zFeliz from '../../assets/images/cases/zalo/feliz.png';
 import zForm from '../../assets/images/cases/zalo/form.jpg';
 import zThanks from '../../assets/images/cases/zalo/thanks.jpg';
 import zError from '../../assets/images/cases/zalo/form-error.png';
+import bankPages from '../../assets/images/work/bank-pages.jpg';
 
-<Section id="problem" title="Customers live in Zalo. The showroom lived on the website.">
+<Section id="problem" title="Buyers outside the website, and their leads lost or miscounted">
 
-Zalo is where many Vietnamese buyers chat, but to browse or buy a VinFast they had to leave it for the website. VinFast approved a sales channel inside Zalo in August, and I became its business owner in September. My bar: every lead lands in the same sales system as every other channel, counted as Zalo.
+Many VinFast buyers never start on the website. They chat in Zalo, work at partner banks with staff offers, or shop through the group's loyalty app. Zalo leads were being logged as Facebook, bank staff leads would have mixed in with every other web lead, and the loyalty app sent plenty of car leads that rarely turned into deposits.
 
 </Section>
 
-<Section id="found" title="Zalo leads were hiding under Facebook">
+<Section id="found" title="Each channel needed its own source, and Zalo needed its own rules">
 
 - **Zalo had no lead source of its own.** More than 1,000 leads since March 2025 came from Zalo but were logged as Facebook.
 - **Deposits change the legal rules.** Legal advised that taking online deposits brings in the full e-commerce ordering rules.
-- **The build drifted from the website.** My content audit found outdated prices, missing colors and a model no longer on sale.
+- **The Zalo build drifted from the website.** My content audit found outdated prices, missing colors and a model no longer on sale.
+- **The loyalty app was invisible in reports.** It sends 800 to 1,000 car leads a month, yet 98% of its 21,363 sessions in 30 days showed up in GA4 as direct traffic.
 
 </Section>
 
-<Section id="decisions" title="Lead capture first, deposits later">
+<Section id="decisions" title="Lead capture first, a source for every channel">
 
 <Decisions>
-<Decision title="Split the launch into two phases">
+<Decision title="Split the Zalo launch into two phases">
 
 Phase 1 is a home screen, a listing, a page for each model and a form. I moved deposits to phase 2 because a new sales system was due in October, and a deposit flow built before it would have been built twice.
 
 </Decision>
-<Decision title="Keep the form inside the app">
+<Decision title="Give every channel a lead source of its own">
 
-Linking out to the website form would have opened a web page inside the Zalo app, which is slower and loses the Zalo context. The form lives in the app.
-
-</Decision>
-<Decision title="Give Zalo a lead source of its own">
-
-Every lead carries the source "Zalo Mini App" plus campaign fields, so reports can separate Zalo from Facebook without guessing.
+Zalo leads carry the source "Zalo Mini App" plus campaign fields, and each partner bank has its own campaign rules and CRM topic, so sales and reports can tell the channels apart.
 
 </Decision>
 <Decision title="Collect only the Zalo user ID">
@@ -79,14 +76,24 @@ Every lead carries the source "Zalo Mini App" plus campaign fields, so reports c
 The form sends data straight to VinFast's servers and asks Zalo for nothing beyond the user ID, so no data processing agreement with Zalo was needed.
 
 </Decision>
+<Decision title="Rework the bank pages to a premium standard">
+
+My first bank page design came back as not premium enough, so I studied offer pages from premium car brands and reworked it before launch.
+
+</Decision>
+<Decision title="Prototype the loyalty flow before building it">
+
+A clickable prototype for cars and scooters, with a shorter form and views for each membership tier, made the real issue visible before anyone wrote code: the app team's read is that most people leave to compare prices with dealers.
+
+</Decision>
 </Decisions>
 
 </Section>
 
-<Section id="shipped" title="One app, 30 models, one form">
+<Section id="shipped" title="A Zalo showroom, two bank pages and a loyalty prototype">
 
 <PhoneRow
-  caption="Home, the car listing, a scooter page, the form and the thank-you screen, from acceptance testing. Phone number blurred."
+  caption="The Zalo app: home, the car listing, a scooter page, the form and the thank-you screen, from acceptance testing. Phone number blurred."
   screens={[
     { src: zHome, alt: 'The mini app home screen: a banner, electric cars and electric scooters with starting prices, and a Get a consultation button.' },
     { src: zList, alt: 'The car listing in the design file: personal electric cars and service vehicles, each with a starting price.' },
@@ -96,17 +103,34 @@ The form sends data straight to VinFast's servers and asks Zalo for nothing beyo
   ]}
 />
 
-Behind the screens: the tracking spec, an 81-code product mapping so the sales system recognizes every model, fix lists for the vendor, and the acceptance checklist.
+- **Zalo app:** 29 car and scooter models, mapped to the sales system through 81 product codes, with the tracking spec, fix lists for the vendor and the acceptance checklist.
+- **Partner bank pages:** two staff offer pages for desktop and mobile; I designed and tested them, and the build team built and deployed them.
+- **Loyalty app:** a clickable buying flow prototype, shared with the app's team.
+
+<Figure caption="Both partner bank pages side by side, live since late October. Offer rates are blurred.">
+  <Image src={bankPages} alt="The VinFast staff offer pages for two partner banks side by side, with offer rates blurred." widths={[600, 900, 1400]} sizes="(min-width: 1100px) 680px, 100vw" />
+</Figure>
 
 </Section>
 
-<Section id="results" title="Signed off, with a launch plan approved">
+<Section id="results" title="Three channels, each one countable from day one">
 
-<UatTables />
+<Figure caption="Where each channel stands.">
+  <DataTable
+    caption="New sales channels"
+    head={['Channel', 'What I delivered', 'Status']}
+    boldLast={false}
+    rows={[
+      ['Zalo mini app', 'Four screens, 29 models, one form, its own lead source', 'Passed acceptance testing on 2 Nov; launch plan approved 18 Nov'],
+      ['Partner bank pages', 'Two offer pages with per-bank campaign rules', 'Live since late October'],
+      ['Loyalty app flow', 'A clickable buying flow prototype', 'Shared with the app team'],
+    ]}
+  />
+</Figure>
 
-- All 95 checks passed in late October. Testing caught the form accepting only two models, because it reused a model list from an older app; mapping all 81 product codes fixed it before sign-off.
-- Go-live moved to November for the build team's cloud setup. My launch plan was approved on 18 November: the Zalo Official Account menu, its chatbot, a broadcast to followers and inbox ads all point buyers to the app.
-- **Next:** lead volume from launch day, counted through Zalo's own lead source.
+- Testing caught the Zalo form accepting only two models, because it reused a model list from an older app; mapping all 81 product codes fixed it before acceptance.
+- My Zalo launch plan, the official account menu, its chatbot, a broadcast to followers and inbox ads all pointing buyers to the app, was approved on 18 November.
+- **Next:** lead volume per channel from launch day, counted through each channel's own source.
 
 <Figure caption="A form rule at work: a wrongly formatted phone number is blocked before it reaches sales." class="zalo-error">
   <Image src={zError} alt="The form blocking a phone number in the wrong format, with an example of the right format." widths={[387]} sizes="360px" style="max-width: 360px" />
@@ -116,7 +140,7 @@ Behind the screens: the tracking spec, an 81-code product mapping so the sales s
 
 <Section id="learned" title="The risky part was the data we reused">
 
-- The form broke on a model list copied from an older app, not on new code. I now check reused data before new features.
-- Agreeing the lead source in week one meant measurement was ready before the screens were.
+- The Zalo form broke on a model list copied from an older app, not on new code. I now check reused data before new features.
+- Agreeing each channel's lead source in week one meant measurement was ready before the screens were.
 
 </Section>

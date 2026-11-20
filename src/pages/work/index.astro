@@ -20,12 +20,13 @@ for (const c of cases) {
 }
 
 const anchors = [
-  { label: 'Case studies', href: '#case-studies' },
-  { label: 'AI', href: '#ai' },
-  { label: 'New products', href: '#new-products' },
-  { label: 'Live products', href: '#live-products' },
-  { label: 'Data', href: '#data' },
+  { label: 'AI products', href: '#ai' },
+  { label: 'Growth and product', href: '#growth' },
   { label: 'Side projects', href: '#side-projects' },
+];
+const sections = [
+  { id: 'ai', kicker: 'AI products', title: 'AI products I built, shipped and specified', items: cases.filter((c) => c.data.group === 'ai') },
+  { id: 'growth', kicker: 'Growth and product', title: 'Growth and product work', items: cases.filter((c) => c.data.group !== 'ai') },
 ];
 const WORDS = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen', 'Twenty'];
 const rowCount = WORK_GROUPS.reduce((n, g) => n + g.rows.length, 0);
@@ -46,26 +47,27 @@ const logoHeight = { VinFast: 46, VinDynamics: 48, 'Xanh SM': 32, 'Side project'
     </nav>
   </section>
 
-  <div id="case-studies" class="cases">
+  {sections.map((sec, si) => (
+  <div id={sec.id} class="cases">
     <header class="container cases__head">
-      <span class="lbl clay">Case studies</span>
-      <h2 class="d h-section">The {WORDS[cases.length]?.toLowerCase() ?? cases.length} I'd walk you through first</h2>
+      <span class="lbl clay">{sec.kicker}</span>
+      <h2 class="d h-section">{sec.title}</h2>
     </header>
 
-    {cases.map((c, i) => {
+    {sec.items.map((c, i) => {
       const card = c.data.card!;
       const logo = c.data.noLogo ? null : LOGOS[COMPANY_LOGO[c.data.company]];
       const kind = card.imageKind ?? 'wide';
       return (
-        <section class:list={['case-row-wrap', i === 0 && 'case-row-wrap--band']} aria-labelledby={`case-${c.id}`}>
-          <div class:list={['container', 'case-row', i === 0 && 'case-row--first', i % 2 === 1 && 'case-row--rev']}>
+        <section class:list={['case-row-wrap', si === 0 && i === 0 && 'case-row-wrap--band']} aria-labelledby={`case-${c.id}`}>
+          <div class:list={['container', 'case-row', si === 0 && i === 0 && 'case-row--first', i % 2 === 1 && 'case-row--rev']}>
             <figure class:list={['case-row__fig', `case-row__fig--${kind}`]}>
               <Image
                 src={card.image!}
                 alt={card.imageAlt ?? ''}
                 widths={kind === 'phone' ? [230, 460] : [480, 800, 1200]}
                 sizes={kind === 'phone' ? '230px' : kind === 'photo' ? '(min-width: 900px) 420px, 90vw' : '(min-width: 900px) 640px, 90vw'}
-                loading={i === 0 ? 'eager' : 'lazy'}
+                loading={si === 0 && i === 0 ? 'eager' : 'lazy'}
                 class="case-row__img"
               />
               {card.imageCaption && <figcaption class="case-row__cap muted">{card.imageCaption}</figcaption>}
@@ -85,9 +87,9 @@ const logoHeight = { VinFast: 46, VinDynamics: 48, 'Xanh SM': 32, 'Side project'
               <div>
                 <Button
                   href={`/work/${c.id}`}
-                  variant={i === 0 ? 'primary' : 'secondary'}
+                  variant={si === 0 && i === 0 ? 'primary' : 'secondary'}
                   block
-                  class={i === 0 ? undefined : 'case-row__btn--alt'}
+                  class={si === 0 && i === 0 ? undefined : 'case-row__btn--alt'}
                   event="case_card_click"
                   eventData={{ case: c.id, from: 'work' }}
                   aria-describedby={`case-${c.id}`}
@@ -99,11 +101,12 @@ const logoHeight = { VinFast: 46, VinDynamics: 48, 'Xanh SM': 32, 'Side project'
       );
     })}
   </div>
+  ))}
 
   <section class="container more" aria-labelledby="more-title">
     <div class="more__head">
-      <span class="lbl clay">More projects</span>
-      <h2 id="more-title" class="d h-section">{moreCount} more, grouped by kind</h2>
+      <span class="lbl clay">{rowCount > 0 ? 'More projects' : 'Side projects'}</span>
+      <h2 id="more-title" class="d h-section">{rowCount > 0 ? `${moreCount} more, grouped by kind` : 'Small tools I built for myself'}</h2>
     </div>
 
     {WORK_GROUPS.map((g) => (

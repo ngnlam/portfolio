@@ -1,0 +1,124 @@
+---
+title: "Every VinFast product page tagged, and a dashboard that matches the web total to 1 lead in 3,638"
+seoTitle: "Lead and deposit measurement for VinFast's O2O team | Leo Lam Nguyen"
+description: "I audited VinFast's tracking, tagged every car and scooter product page, ran a deposit audit with AI agents, and built a self-checking daily lead report and a dashboard the team reads every morning."
+order: 8
+company: VinFast
+year: "2026"
+role: Builder
+team: "Web team (code changes), tag admin (publishing), my manager (report owner); Claude agents for the audit work under my brief"
+timeline: "Sep to Nov 2026"
+stages: [Discover, Define, Decide, Ship, Measure]
+tools: [GA4, Google Tag Manager, Claude, Windsor.ai]
+tiles:
+  - { value: "100%", label: "Product pages with lead tags", note: "up from 4 of 14 car pages and 9 of 21 scooter pages" }
+  - { value: "99.97%", label: "Dashboard lead totals matching the web total", note: "1 lead off in 3,638" }
+  - { value: "49%", label: "Car deposit sessions that start on the homepage", note: "found by an AI-agent audit; only 10% start on a product page" }
+glance:
+  problem: "VinFast's O2O site had more tags than anyone owned, ad platforms saw only part of the leads and none of the car deposits, and my manager rebuilt the daily lead report by hand."
+  did: "I audited GA4 and the tag container, wrote one event plan for every product page, ran a deposit audit with AI agents, and built a self-checking daily report and a dashboard."
+  role: "I owned the audits, the event plan, the report and the dashboard. The web team shipped the code changes."
+roles:
+  mine: "The GA4 and tag audits, the event plan, the lead and deposit tag configuration, the deposit audit brief and checks, the daily report logic and pipeline, and the dashboard."
+  team: "The web team shipped the code changes, the tag admin published the tags, and my manager owns the report. Claude agents did the audit legwork under my brief."
+next: zalo-showroom
+card:
+  teaser: "I rebuilt how VinFast's O2O team measures leads and deposits: every product page tagged, a deposit audit run with AI agents, a daily report that checks itself and a dashboard that matches the web total to 1 lead in 3,638."
+  result: "Every product page tagged; 99.97% dashboard match"
+  image: "../../assets/images/work/o2o-dashboard.png"
+  imageAlt: "The O2O marketing dashboard with plan progress, spend, leads and deposits by car model; figures blurred."
+  imageCaption: "The O2O dashboard, figures blurred."
+  imageKind: wide
+ogImage: /og/o2o-measurement.png
+---
+import { Image } from 'astro:assets';
+import DataTable from '../../components/case/visuals/DataTable.astro';
+import ga4Audit from '../../assets/images/work/ga4-audit-summary.jpg';
+import dashboard from '../../assets/images/work/o2o-dashboard.png';
+
+<Section id="problem" title="The team could not tell which page or button led to a car deposit">
+
+VinFast's O2O team sells cars and scooters online. In September the site had more tags than anyone owned, ad platforms saw only part of the leads and none of the car deposits, and my manager rebuilt the daily lead and deposit report by hand. Decisions rested on numbers nobody could trace back.
+
+</Section>
+
+<Section id="found" title="Tags nobody owned, and a deposit trail that broke at the shop">
+
+- **The tag container had grown wild.** 212 tags, 81 of them paused, and lead tags on only 4 of 14 car product pages.
+- **GA4 had nine things working, eight broken and six missing,** from deposit events to the link between the main site and the shop.
+- **Deposits lost their source at checkout.** The payment step sends buyers through a payment gateway, and some deposits arrived in GA4 credited to the gateway instead of the ad that brought them.
+- **Buyers deposit from the homepage, not from product pages.** 49% of sessions with a car deposit started on the homepage and only 10% on a product page, yet the homepage sent no button events at all.
+
+<Figure caption="My GA4 audit summary, in Vietnamese: 9 items working, 8 broken and hurting reporting, 6 missing. Account details blurred.">
+  <Image src={ga4Audit} alt="Summary cards from my GA4 audit, in Vietnamese: 9 items working, 8 broken and hurting reporting and attribution, 6 missing and not yet built." widths={[600, 900, 1200]} sizes="(min-width: 1100px) 680px, 100vw" />
+</Figure>
+
+</Section>
+
+<Section id="decisions" title="One event plan, checks built into every number">
+
+<Decisions>
+<Decision title="One event plan for every product page">
+
+Not a fix per page. One plan sets the lead and deposit events for every car and scooter page, and since 30 October every button also reports its position and car model.
+
+</Decision>
+<Decision title="Audit what exists before proposing anything">
+
+For the deposit question I had AI agents read the live tag container and the shop's checkout code and pull GA4. A second agent re-pulled the key numbers a different way; the totals matched, and the check exposed a connector bug that returns wrong numbers with "contains" filters.
+
+</Decision>
+<Decision title="A report that checks itself">
+
+Every run checks that valid orders equal the sum of their four sources and that overlapping days match the previous report, so a wrong number stops the report instead of reaching my manager.
+
+</Decision>
+<Decision title="Keep the last good number">
+
+When a source drops out or a day's GA4 count falls below 30% of normal, the dashboard keeps the last good number instead of showing a false drop.
+
+</Decision>
+</Decisions>
+
+</Section>
+
+<Section id="shipped" title="Tags on every page, an audit, a daily report and a dashboard">
+
+- **Tracking:** lead tags on all 14 car and all 21 scooter product pages, car deposits reporting back to the ad account, and position tags on every button.
+- **Deposit audit:** eight proposals from the AI-agent audit, and a two-item order to the team for the site.
+- **Daily lead report:** an eight-sheet workbook run by one command in about 20 seconds, with its logic written down in 20 sections so a person or an AI agent can rebuild it.
+- **Dashboard:** Meta Ads, Google Ads and GA4 in one place by car model, refreshed every morning, with a guide on how far to trust each number. It is on its fifth version.
+
+<Figure caption="The O2O dashboard I built, figures blurred.">
+  <Image src={dashboard} alt="The O2O marketing dashboard with plan progress, spend, leads and deposits by car model; figures blurred." widths={[600, 900, 1400]} sizes="(min-width: 1100px) 680px, 100vw" />
+</Figure>
+
+</Section>
+
+<Section id="results" title="Every product page tagged, and numbers the team can trust">
+
+<Figure caption="Before and after, each measured the same way on both sides.">
+  <DataTable
+    caption="Measurement before and after"
+    head={['Measure', 'Before', 'After']}
+    rows={[
+      ['Car product pages with lead tags', '4 of 14', '14 of 14'],
+      ['Scooter product pages with lead tags', '9 of 21', '21 of 21'],
+      ['Car deposits reported to the ad account', 'None', 'Reported'],
+      ['Buttons that report their position', 'None', 'All, from 30 Oct'],
+    ]}
+  />
+</Figure>
+
+- **Accuracy:** lead totals by page in the dashboard match the web total to 1 lead in 3,638, and Meta numbers sit within 0.5% of the connector's pull.
+- **What the data changed:** the position tags made the 26-day read of the car pages possible, and the report showed that what looked like retail orders doubling was a handful of bulk orders.
+- **Next:** join leads to deposits in the sales system, so every channel is judged on deposits, not leads.
+
+</Section>
+
+<Section id="learned" title="The daily report stops itself if its totals do not add up">
+
+- Writing the report logic down in 20 sections means anyone, or an AI agent, can rebuild it without me.
+- Splitting the audit between agents, with one agent re-pulling the numbers blind, caught a connector bug a single pass would have missed.
+
+</Section>

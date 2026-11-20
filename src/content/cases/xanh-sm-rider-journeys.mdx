@@ -1,51 +1,53 @@
 ---
-title: "Riders in the automated journeys I built for Xanh SM completed 1.7 million trips"
-seoTitle: "Automated rider journeys for Xanh SM | Leo Lam Nguyen"
-description: "At Xanh SM I rebuilt rider messaging around behavior: 30+ automated journeys for riders who had never ridden or had stopped, each judged on trips instead of clicks."
-order: 5
+title: "New drivers 35% cheaper, and 1.7 million trips inside the rider journeys I built at Xanh SM"
+seoTitle: "Rider journeys and driver growth at Xanh SM | Leo Lam Nguyen"
+description: "At Xanh SM I grew both sides of the marketplace: automated rider journeys judged on trips, a diagnosis of the food cart, and online driver recruitment that cut the cost per new driver by 35%."
+order: 7
 company: Xanh SM
 year: "2025"
 role: Builder
-team: "Growth and retention manager (strategy, approval), promotions team (offer matrix), data team (segment data)"
-timeline: "Jul to Sep 2025"
+team: "Growth and retention manager (strategy, approval), promotions team (offer matrix), data team (segment data), driver supply team (recruitment)"
+timeline: "Jul 2024 to Apr 2026"
 stages: [Define, Decide, Ship, Measure]
 tools: [CleverTap]
 tiles:
-  - { value: "1.7M", label: "Trips completed by riders inside my journeys", note: "CleverTap conversions, to 11 Sep 2025" }
-  - { value: "+28%", label: "First trips by new riders", note: "month over month" }
-  - { value: "-12%", label: "Rider churn", note: "month over month" }
+  - { value: "-35%", label: "Cost per new driver", note: "Bike drivers, June 2025, as online channels took over" }
+  - { value: "53%", label: "Share of new drivers from online channels", note: "up from 24% in one month, Bike drivers, June 2025" }
+  - { value: "1.7M", label: "Trips by riders while inside my journeys", note: "as counted by CleverTap, to 11 Sep 2025" }
 glance:
-  problem: "Xanh SM had millions of riders who signed up and never rode, or rode and stopped. Every one of them got the same push messages on the same day."
-  did: "I split riders by what they had actually done, built 30+ automated journeys in CleverTap, fixed the send times and judged every journey on trips, not clicks."
-  role: "I designed and built the journeys and wrote their messages. My manager set the strategy and approved them."
+  problem: "Xanh SM, Vietnam's electric ride-hailing app, needed both sides of the marketplace to grow: drivers to meet demand, and riders who keep riding instead of signing up and disappearing."
+  did: "I moved driver recruitment online, then rebuilt rider messaging around behavior: 30+ automated journeys in CleverTap, each judged on trips, plus a diagnosis of where food orders stalled."
+  role: "I built the journeys and wrote their messages, ran the driver content, and analyzed the funnels. Named an Advanced Employee of the Year 2025."
 roles:
-  mine: "Behavior segments, journey design and build in CleverTap, message copy and tone rules, the send schedule, weekly reports on trips, journeys for tourist provinces, and support for the Philippines team."
-  team: "My manager set the zero-trip and churn strategy and approved each journey. The promotions team owned the offer matrix; the data team owned the segment data."
-next: b2b-website-leads
+  mine: "Driver recruitment content and channel mix, behavior segments, journey design and build in CleverTap, message copy and tone rules, the send schedule, weekly reports on trips, the food funnel analysis, and support for the Philippines team."
+  team: "My manager set the zero-trip and churn strategy and approved each journey. The promotions team owned the offer matrix; the data team owned the segment data; the driver supply team ran recruitment with me."
+next: o2o-measurement
 card:
-  teaser: "Xanh SM sent the same push to every rider on the same day. I split riders by what they had done, built 30+ automated journeys and judged each on trips. Riders inside them completed 1.7 million trips."
-  result: "1.7M trips; first trips +28%, churn -12%"
-  image: "../../assets/images/work/first-trips-journey.png"
-  imageAlt: "The new-rider journey, recreated: sign-up, a how-to push on day 0, a welcome offer on days 2 to 5, an A/B test on day 7 and a last reminder on days 12 to 14."
-  imageCaption: "Recreated: the new-rider journey."
-  imageKind: wide
+  teaser: "At Xanh SM I grew both sides of the marketplace: rider journeys that brought 1.7 million trips, and online driver recruitment that cut the cost per new driver by 35%."
+  result: "Drivers 35% cheaper; 1.7M trips in journeys"
+  image: "../../assets/images/about/team-xanhsm.jpg"
+  imageAlt: "Leo at a Xanh SM team session, sitting with colleagues in team shirts."
+  imageCaption: "With the Xanh SM team."
+  imageKind: photo
 ogImage: /og/xanh-sm-rider-journeys.png
 ---
 import { Image } from 'astro:assets';
 import DataTable from '../../components/case/visuals/DataTable.astro';
 import firstTrips from '../../assets/images/work/first-trips-journey.png';
+import team from '../../assets/images/about/team-xanhsm.jpg';
 
-<Section id="problem" title="One message calendar for millions of riders">
+<Section id="problem" title="A marketplace that needed drivers and riders at the same time">
 
-Xanh SM, Vietnam's electric ride-hailing app, had 2.1 million riders who had signed up but never taken a trip, and 1.1 million who had ridden and then stopped. Messaging ran on a calendar: the same push to everyone on the same day, judged by click-through rate. The journeys that did exist ran in isolation, so nobody could see the whole system.
+Xanh SM is Vietnam's electric ride-hailing app. To grow, it needed more drivers to meet demand and more riders who keep riding. Driver hiring leaned on offline channels, and rider messaging ran on a calendar: the same push to everyone on the same day, judged by click-through rate.
 
 </Section>
 
-<Section id="found" title="Riders who never rode are not one group, and clicks hide the result">
+<Section id="found" title="Drivers were online already, and riders differ by what they last did">
 
-- **Never-ridden riders differ by intent.** Some never opened the app after signing up; some opened it and checked prices; some requested a ride that did not happen. Each needs a different nudge, and the first group gives no signal at all.
-- **Lapsed riders differ by habit.** A rider who used to ride often and stopped 21 days ago is a different case from an occasional rider gone for 28 days.
-- **Clicks hid the real result.** A message could win on click-through and change no trips, so trips became the measure.
+- **Drivers scroll the same feeds riders do.** Online channels brought only about a quarter of new Bike drivers, so the cheapest channel was the least used.
+- **Never-ridden riders differ by intent.** Some never opened the app after signing up; some checked prices; some requested a ride that did not happen. Each needs a different nudge.
+- **Lapsed riders differ by habit.** A frequent rider gone 21 days is a different case from an occasional rider gone 28.
+- **Food orders stalled for lack of a reason to continue, not for bugs.** Across 211,272 add-to-cart events, the drop-off pointed to missing prompts such as free delivery and to unfamiliar restaurants.
 
 <Figure caption="The rider groups I built journeys for, defined by what each rider had done.">
   <DataTable
@@ -66,14 +68,14 @@ Xanh SM, Vietnam's electric ride-hailing app, had 2.1 million riders who had sig
 <Section id="decisions" title="Journeys built on behavior, judged on trips">
 
 <Decisions>
-<Decision title="Enter journeys by behavior, not by calendar">
+<Decision title="Recruit drivers where they already are">
 
-Each rider enters the journey that matches their last action, instead of receiving whatever the calendar sends that day.
+I shifted Bike driver recruitment to online content: 145 pieces in one month, seeded through 7,250 links in the community groups drivers read.
 
 </Decision>
-<Decision title="Leave out riders with no signal">
+<Decision title="Enter journeys by behavior, not by calendar">
 
-Riders who never opened the app got no journey: there was nothing to respond to, and offers to them would have been spent blind.
+Each rider enters the journey that matches their last action. Riders who never opened the app get no journey, because there is nothing to respond to.
 
 </Decision>
 <Decision title="Create a first trip, don't borrow one">
@@ -95,12 +97,12 @@ Messages go out at 8 am, 11 am or 7 pm. Offers come only from the approved matri
 
 </Section>
 
-<Section id="shipped" title="30+ journeys, one map, a weekly report">
+<Section id="shipped" title="30+ journeys, a driver content engine and a food cart plan">
 
-- **Journeys in CleverTap:** more than 30 across rider groups, provinces and services (bike, car, express and food), including 14 for never-ridden and lapsed riders.
-- **New markets:** journeys for riders arriving in and leaving tourist provinces, and three journeys built with the local team in the Philippines.
-- **A weekly report** on open rate, click-through and trips for every journey, which set the next week's changes.
-- **Tone rules and a prompt template** so AI tools could draft push and Zalo notification messages in the team's voice.
+- **Journeys in CleverTap:** more than 30 across rider groups, provinces and services (bike, car, express and food), including 14 for never-ridden and lapsed riders, plus three added for the team in the Philippines.
+- **Food cart:** a four-fix plan for the cart, led by a free-delivery prompt right after add to cart and timed cart reminders.
+- **Driver content:** 145 pieces and 7,250 seeded links for Bike drivers in a single month.
+- **Tone rules and a prompt template** so AI tools draft push and Zalo notification messages in the team's voice.
 
 <Figure caption="Recreated for this site: the new-rider journey. Steps, timing and copy are simplified.">
   <Image src={firstTrips} alt="The new-rider journey, recreated: sign-up, a how-to push on day 0, a welcome offer on days 2 to 5, an A/B test on day 7 and a last reminder on days 12 to 14." widths={[600, 900, 1200]} sizes="(min-width: 1100px) 680px, 100vw" />
@@ -108,7 +110,7 @@ Messages go out at 8 am, 11 am or 7 pm. Offers come only from the approved matri
 
 </Section>
 
-<Section id="results" title="1.7 million trips inside the journeys, more first trips and less churn">
+<Section id="results" title="1.7 million trips inside the journeys, and drivers 35% cheaper to hire">
 
 <Figure caption="Trips completed by riders while they were in a journey, to 11 September 2025, as counted by CleverTap.">
   <DataTable
@@ -123,13 +125,30 @@ Messages go out at 8 am, 11 am or 7 pm. Offers come only from the approved matri
   />
 </Figure>
 
-- First trips by new riders rose 28% and churn fell 12%, month over month.
-- Every key rider group now has an automated journey with clear entry and exit rules, mapped by province and service.
-- **How to read the 1.7 million:** these are trips CleverTap attributes to riders while they were in a journey, not all caused by it, and a rider who passed through two journeys can be counted in both. That is why each journey was also judged in weekly A/B tests on trips.
+<Figure caption="Bike driver recruitment in June 2025, against the month before.">
+  <DataTable
+    caption="Driver recruitment, June 2025"
+    head={['Measure', 'Change']}
+    boldLast={false}
+    rows={[
+      ['Share of new drivers from online channels', 'From 24% to 53%'],
+      ['Cost per new driver', '35% lower'],
+      ['New drivers from marketing', '66% more'],
+    ]}
+  />
+</Figure>
+
+- Trips in the never-ridden journeys grew 28% month over month.
+- I was named an Advanced Employee of the Year 2025 at Xanh SM.
+- **Next:** read each journey's lift against a holdout group, since CleverTap counts every trip a rider takes while in a journey.
+
+<Figure caption="With the Xanh SM team.">
+  <Image src={team} alt="Leo at a Xanh SM team session, sitting with colleagues in team shirts." widths={[480, 800, 1200]} sizes="(min-width: 1100px) 560px, 100vw" style="max-width: 560px" />
+</Figure>
 
 </Section>
 
-<Section id="learned" title="Splitting riders by behavior made the whole system visible">
+<Section id="learned" title="Grouping riders by their last action showed which journey each one needed">
 
 - Splitting riders by their last action turned scattered journeys into one system, mapped by province and service.
 - Writing the tone rules down, with a prompt template, let AI tools draft in the team's voice without me rewriting every message.

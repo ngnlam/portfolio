@@ -1,27 +1,27 @@
 ---
-title: "VinDynamics' website, rebuilt to turn AI-lab visitors into enquiries BD can act on"
+title: "VinDynamics' growth stack: a data warehouse I built solo, and a website that turns AI-lab visitors into enquiries"
 seoTitle: "A B2B website that turns visitors into enquiries | Leo Lam Nguyen"
-description: "I set the sitemap, lead capture, tracking and routing for VinDynamics' website. Form completion rose from 50% to 71% once people started, and every enquiry now reaches BD as a Teams card."
-order: 6
+description: "I set the sitemap, lead capture, tracking and routing for VinDynamics' website and built its marketing data warehouse in BigQuery. Form completion rose from 50% to 71%, and my manager rated the warehouse, tracking and lead automation 5 out of 5."
+order: 10
 company: VinDynamics
 year: "2026"
 role: Product owner
 team: "Web vendor (build), outside designer (with me), a teammate (ad tags), BD (lead owners)"
 timeline: "Apr to Aug 2026"
 stages: [Discover, Define, Decide, Ship, Measure]
-tools: [GA4, Google Tag Manager, Looker Studio, Power Automate]
+tools: [GA4, BigQuery, Dataform, Power Automate]
 tiles:
   - { value: "71%", label: "Finished the form once started", note: "after the June 2026 redesign, up from 50%, as reported in my June review" }
-  - { value: "49", label: "Mobile page speed score", note: "up from 27, after the fixes my speed audit traced" }
-  - { value: "13", label: "Intent events in my tracking spec", note: "for a site that tracked none, across discovery, evaluation and lead capture" }
+  - { value: "5/5", label: "My manager's rating for the warehouse, tracking and lead automation", note: "mid-year review 2026" }
+  - { value: "37", label: "Tables and views in the warehouse I built solo", note: "four layers in BigQuery, refreshed every morning at 7" }
 glance:
   problem: "VinDynamics' website had no event tracking, and enquiries sat in an inbox where BD couldn't tell a buyer from a job seeker."
-  did: "I set the sitemap and navigation, ranked where visitors leave details, specified the tracking, and routed every enquiry to the right team in Microsoft Teams."
-  role: "Product owner for the site's growth side. A vendor built it."
+  did: "I set the sitemap and navigation, ranked where visitors leave details, specified the tracking, routed every enquiry to the right team in Teams, and built the data warehouse every report reads from."
+  role: "Product owner for the site's growth side, and sole builder of the warehouse. A vendor built the site."
 roles:
-  mine: "Roadmap, sitemap and navigation, design direction, the lead capture plan, vendor brief, tracking specs, homepage tags, the Teams routing flows, testing, the weekly report and SEO."
+  mine: "Roadmap, sitemap and navigation, design direction, the lead capture plan, vendor brief, tracking specs, homepage tags, the Teams routing flows, testing, the BigQuery warehouse and its dashboards, the weekly report and SEO."
   team: "The vendor built the site, forms and email; an outside designer designed the pages; a teammate owned ad tags; BD owns the leads."
-next: zalo-showroom
+next: ai-sales-agent
 card:
   teaser: "VinDynamics' site had no tracking and sent every enquiry to an inbox. I ranked where visitors leave details, specified the tracking and routed every enquiry to the right team in Teams."
   result: "Form completion up from 50% to 71%"
@@ -44,10 +44,11 @@ import sampleEmail from '../../assets/images/cases/web/sample-email.png';
 import teamsCard from '../../assets/images/cases/web/teams-card.png';
 import flowCard from '../../assets/images/cases/web/flow-card.png';
 import flowSwitch from '../../assets/images/cases/web/flow-switch.png';
+import dataform from '../../assets/images/work/dataform-graph.jpg';
 
-<Section id="problem" title="No tracking, and enquiries buried in an inbox">
+<Section id="problem" title="No tracking, enquiries buried in an inbox, and data in four places">
 
-For a company selling robot training data, the website is where an AI lab first asks for a sample. In April it had no event tracking, and enquiries reached BD late, mixed with job applications.
+For a company selling robot training data, the website is where an AI lab first asks for a sample. In April it had no event tracking, enquiries reached BD late, mixed with job applications, and ad and web data sat in separate tools with no shared definitions.
 
 </Section>
 
@@ -76,6 +77,11 @@ Two menu buttons and a form on every dataset page come first, then an exit popup
 <Decision title="Track intent, nothing else">
 
 I specified 13 events across discovery, evaluation and lead capture, and cut video plays, scrolls and page resizes.
+
+</Decision>
+<Decision title="One warehouse, every metric defined once">
+
+As the only data person on the team, I built a four-layer warehouse in BigQuery that joins GA4, Google Ads, LinkedIn Ads and the lead tracker, so each metric is defined once and every report reads from the same place.
 
 </Decision>
 <Decision title="Send every enquiry to a person in Teams">
@@ -110,7 +116,7 @@ Each submission posts a card to Microsoft Teams, BD tags it in one tap, and a se
 
 </Section>
 
-<Section id="shipped" title="From sitemap to the Teams card">
+<Section id="shipped" title="A new site, a Teams card for every enquiry, and a warehouse behind the reports">
 
 The new homepage went live at the end of June, built on my sitemap, tracking spec and lead capture plan. I set up the homepage tags myself and owned the weekly report and SEO.
 
@@ -131,9 +137,15 @@ The new homepage went live at the end of June, built on my sitemap, tracking spe
   </FigureRow>
 </Figure>
 
+- **Data warehouse:** 37 tables and views in four layers, refreshed every morning at 7, feeding dashboards for LinkedIn, SEO and the website across 12 channels.
+
+<Figure caption="The warehouse's Dataform graph in BigQuery: staging tables flowing into core tables and report views.">
+  <Image src={dataform} alt="The warehouse's Dataform dependency graph in BigQuery: staging tables on the left flowing into core tables and report views on the right." widths={[600, 900, 1400]} sizes="(min-width: 1100px) 680px, 100vw" />
+</Figure>
+
 </Section>
 
-<Section id="results" title="Seven in ten people who start the form now finish it">
+<Section id="results" title="Seven in ten form starters now finish, and one warehouse behind every report">
 
 <ShareBars
   label="Among people who started the contact form, 50% finished it before the redesign and 71% after."
@@ -146,6 +158,8 @@ The new homepage went live at the end of June, built on my sitemap, tracking spe
 />
 
 - In mid-June the site brought its first on-target enquiry, a hardware purchase request, and a meeting was set for the following week.
+- My manager rated the warehouse, the website tracking and the lead automation 5 out of 5 in my mid-year review.
+- Rebuilding the channel rules in the warehouse moved 589 paid LinkedIn sessions out of the wrong channel.
 - A speed audit I ran traced slow mobile pages to reCAPTCHA loading three times; after the vendor's fixes, the mobile score went from 27 to 49.
 - **Next:** grow enquiry volume. The 71% counts people who start typing, so making the first fields easier to start is the next fix.
 

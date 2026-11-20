@@ -2,26 +2,26 @@
 title: "Requirements for an AI security robot: what Dyno detects, and what stays with the guard"
 seoTitle: "Requirements for Dyno, an AI security robot | Leo Lam Nguyen"
 description: "From a site visit in parking basements to detection and alert requirements for Dyno: 18 user stories cut to 6, 21 acceptance criteria, and every judgment call left with a person."
-order: 9
+order: 5
 company: VinDynamics
 year: "2026"
 role: Requirements lead
 team: "Two teammates (site research, team BRD), a senior PM (review), engineering (build), VCS security staff (users)"
 timeline: "Aug 2026"
-status: "Requirements handed to engineering"
+status: "Requirements handed over, Aug 2026"
 stages: [Discover, Define, Decide]
 tiles:
-  - { value: "1,000+", label: "Parking spaces a guard covers in one round", note: "about 90 minutes on a scooter, the job Dyno has to fit into" }
+  - { value: "1,420", label: "Parking spaces a guard covers in one round", note: "about 90 minutes on a scooter, the job Dyno has to fit into" }
   - { value: "7", label: "Violation types the model must detect", note: "each with a defined alert and a person who acts on it" }
   - { value: "21", label: "Acceptance criteria", note: "that engineering can test the build against" }
 glance:
   problem: "VCS wanted Dyno, VinDynamics' humanoid robot, to patrol its parking basements. The brief was a wish list, with nothing on how guards actually work."
   did: "I went on site, interviewed the guards, and specified what the robot must detect, what goes in each alert, and which calls stay with a person."
-  role: "I drove two of five priority use cases and wrote the BRD template the team used."
+  role: "I drove two of five priority use cases, including the parking spec."
 roles:
-  mine: "The parking and trash use cases, the parking requirement spec, the BRD framework and template, the flow diagrams."
+  mine: "The parking and trash use cases, the parking requirement spec and the flow diagrams."
   team: "Two teammates ran the site visit with me and co-own the combined BRD; a senior PM reviewed it; engineering builds; VCS guards were interviewed."
-next: ai-sales-agent
+next: car-product-pages
 card:
   teaser: "A client wanted Dyno, a humanoid robot with a perception model, to patrol its parking basements. I went on site, defined what it must detect and which calls stay with a guard, and handed engineering testable requirements."
   result: "18 user stories cut to 6, with 21 acceptance criteria"
@@ -30,6 +30,7 @@ card:
   imageCaption: "Dyno in a parking basement."
   imageKind: photo
 ogImage: /og/dyno-requirements.png
+group: ai
 ---
 import { Image } from 'astro:assets';
 import RequirementCard from '../../components/case/visuals/RequirementCard.astro';
@@ -54,10 +55,10 @@ Dyno sees through cameras and a perception model. Engineering needed to know whi
 
 <Section id="found" title="The real job happens on a scooter, at walking pace">
 
-- **The round:** a guard rides about 90 minutes on a scooter, covering more than a thousand spaces, then rewinds camera footage at the desk. Dyno's value is alerting during the round.
+- **The round:** a guard rides about 90 minutes on a scooter, covering 1,420 parking spaces, then rewinds camera footage at the desk. Dyno's value is alerting during the round.
 - **The hard limit:** the battery lasts about two hours. That one fact decides the operating model.
 - **Three questions decide an object's fate:** does it belong to someone, can one person carry it, is it hazardous.
-- **The job ends at the fix:** guards hand off with a deadline and check back about 15 minutes later, a step a robot that only sends alerts would miss.
+- **The job ends at the fix:** guards hand off with a deadline and check back on the next round, a step a robot that only sends alerts would miss.
 - **A cheaper signal:** the charger's LED color shows a charging violation with no integration.
 
 <Figure wide caption="My flow diagrams for the trash use case, kept in Vietnamese as written: the three questions, then the lost property path.">
@@ -72,7 +73,7 @@ Dyno sees through cameras and a perception model. Engineering needed to know whi
 <Decisions>
 <Decision title="Describe today's job before the robot's">
 
-Every BRD opens with how the work is done now. I turned this into the template for every use case.
+Every BRD I wrote opens with how the work is done today, before any robot feature.
 
 </Decision>
 <Decision title="Keep only stories that change the build">
@@ -82,7 +83,7 @@ I cut 18 user stories to 13, then to 6, removing any story that would not change
 </Decision>
 <Decision title="Detect and alert, then let a person decide">
 
-The robot reports and the guard decides. I ruled out four requests from the brief that would have let Dyno act on its own.
+The robot reports and the guard decides, so a false alert never turns into an action on its own.
 
 </Decision>
 <Decision title="Label targets as assumptions">
@@ -92,16 +93,15 @@ Detection rates and a 10-second alert time are marked as assumptions to confirm 
 </Decision>
 </Decisions>
 
-<Figure caption="Where the model stops and a person takes over. Every request I ruled out has its reason in the spec.">
+<Figure caption="The hard limits I wrote into the spec as constraints, not footnotes.">
   <DataTable
-    caption="Human in the loop for Dyno"
-    head={['Request from the brief', 'Decision', 'Why']}
+    caption="Hard constraints in the Dyno spec"
+    head={['Constraint', 'Value', 'What it means for the spec']}
     rows={[
-      ['Spot violations and unknown objects on the round', 'Dyno detects and alerts', 'This is where a robot saves the guard rewinding footage'],
-      ['Call reception about a violation', 'Ruled out', 'A guard must be able to overrule a false alert first'],
-      ['Decide what to do about a violation', 'Ruled out', "It's the guard's call"],
-      ['Remind drivers still in their cars', 'Ruled out', 'No reliable way to detect it'],
-      ['Trace owners through CCTV', 'Ruled out', 'The camera system already does it'],
+      ['Battery', 'About 2 hours', 'A full patrol and the trip back to charge must fit in one charge'],
+      ['Patrol round', 'About 90 minutes, 1,420 spaces', 'Alerts have to arrive during the round, not after it'],
+      ['Top speed', '2.0 metres per second', 'Dyno patrols one zone well rather than the whole basement'],
+      ['Fixed cameras on site', 'Already cover the basement', 'Dyno earns its place only where it beats a camera or a guard'],
     ]}
   />
 </Figure>
@@ -118,10 +118,9 @@ I delivered two BRDs, for parking violations and for trash or flammable items, a
     head={['Spec item', 'Count']}
     rows={[
       ['Violation types the perception model must detect', '7'],
-      ['Fields in every alert sent to the guard', '10'],
       ['User stories in the final spec, cut from 18', '6'],
       ['Acceptance criteria engineering tests against', '21'],
-      ['Open questions flagged for the client to answer', '8'],
+      ['Open questions flagged for the client to answer', '4'],
     ]}
   />
 </Figure>
@@ -133,12 +132,12 @@ I delivered two BRDs, for parking violations and for trash or flammable items, a
 <Section id="results" title="Handed to engineering, partly built">
 
 - I handed the requirements over at the end of August, when I moved to VinFast.
-- Engineering built parts of parking violation detection from them, and the team's combined BRD carries my flow diagrams.
+- The team's combined BRD carries my flow diagrams, and the project continued in R&D with the client.
 - **Next:** confirm detection accuracy on site against the targets in the spec.
 
 </Section>
 
-<Section id="learned" title="One site visit changed the spec more than any meeting">
+<Section id="learned" title="The site visit gave me the scooter round and the charger lights, which no meeting had">
 
 - The scooter round, the evidence rule and the charger lights came from one visit and changed the requirement more than any meeting.
 - A requirement is finished when an engineer can test it, so every story ends in acceptance criteria.

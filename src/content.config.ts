@@ -54,6 +54,8 @@ const cases = defineCollection({
       published: z.coerce.date().optional(),
       // A case with no company logo, for example a personal system.
       noLogo: z.boolean().optional(),
+      // Which section of the Work page the case sits in.
+      group: z.enum(['ai', 'growth']).default('growth'),
     }),
 });
 

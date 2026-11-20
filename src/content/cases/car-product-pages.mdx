@@ -1,31 +1,30 @@
 ---
-title: "Nearly nine in ten leads on VinFast's car pages now start at new entry points from my spec"
-seoTitle: "New entry points on VinFast's car pages | Leo Lam Nguyen"
-description: "I diagnosed why VinFast's redesigned car pages lost leads and specified three new ways to reach the form. Over 26 days, 87% of car-page leads started there."
-order: 4
+title: "Nearly nine in ten car-page leads at VinFast now start at entry points from my spec"
+seoTitle: "VinFast's online car funnel: product pages, listings and a cost tool | Leo Lam Nguyen"
+description: "I diagnosed why VinFast's redesigned car pages lost leads and rebuilt the online car funnel: new entry points on product pages, a cost tool, fixes for two buying pages and a clean domain move. 87% of car-page leads now start at the new entry points."
+order: 6
 company: VinFast
 year: "2026"
-role: Requirements lead
-team: "Web team (build), tag admin, my manager (scope)"
+role: Product owner
+team: "Web team (build), UI designer, tag admin, my manager (scope); the division director approved the proposals"
 timeline: "Sep to Nov 2026"
-note: "Updated 18 November 2026 with 26 days of data."
-stages: [Discover, Define, Decide, Measure]
-tools: [GA4, Google Tag Manager, Excel]
+stages: [Discover, Define, Decide, Ship, Measure]
+tools: [GA4, Google Tag Manager, Clarity, Search Console]
 tiles:
-  - { value: "87%", label: "Car-page leads via new entry points", note: "23 Oct to 17 Nov, up from 54% in the first nine days" }
-  - { value: "4x", label: "Reach payment from the new hero button", note: "5.1% of people who tapped it, against 1.3% for the mid-page button, two weeks after launch" }
+  - { value: "87%", label: "Car-page leads via the new entry points", note: "23 Oct to 17 Nov, up from 54% in the first nine days" }
+  - { value: "4x", label: "Reach payment from the hero button, against the mid-page button", note: "5.1% of people who tapped it, against 1.3%, 30 Oct to 5 Nov" }
   - { value: "75%", label: "Finished the form once started, from the sticky bar", note: "30 Oct to 11 Nov, against 47% for the form placed on the page" }
 glance:
-  problem: "After a redesign, VinFast's car pages collected far fewer leads per visit, and the only form sat at the bottom of a long page."
-  did: "I mapped where the page lost people, specified three new ways to reach the form, tagged each one, and measured where leads now start."
-  role: "I owned the diagnosis, spec, tracking and analysis. The web team built it."
+  problem: "After a move to a new domain and design, VinFast's car pages collected far fewer leads per visit, the only form sat at the bottom of a long page, and shoppers had to leave to work out what a car would really cost."
+  did: "I mapped where the pages lost people, specified new ways to reach the form and tagged each one, prototyped a cost tool, ranked fixes for two new buying pages, and checked the domain move end to end."
+  role: "Product owner for the car funnel: diagnosis, specs, tracking and analysis. The web team built it."
 roles:
-  mine: "The button audit, the entry point and tracking specs, content checks before launch, and the analysis."
-  team: "The web team built and released it, the tag admin published the tags, and my manager set the scope."
+  mine: "The button audit, the entry point and tracking specs, the cost tool prototype, the buying page audit and fix list, the domain move check and SEO fix list, content checks before launch, and the analysis."
+  team: "The web team built and released the changes, the UI designer added the header button, the tag admin published the tags, my manager set the scope and the division director approved the proposals."
 next: xanh-sm-rider-journeys
 card:
-  teaser: "A redesign cut leads on VinFast's car pages. I specified three new ways to reach the form, each tagged. Over 26 days, 87% of car-page leads started there; the unchanged scooter pages stayed flat."
-  result: "87% of car-page leads via the new entry points"
+  teaser: "A redesign cut leads on VinFast's car pages. I rebuilt the online car funnel: new entry points, a cost tool, fixes for two buying pages and a clean domain move. 87% of car-page leads now start at the new entry points."
+  result: "87% of car-page leads via new entry points; 2 proposals approved"
   image: "../../assets/images/cases/car/live-hero.jpg"
   imageAlt: "The live VF 9 product page hero, with the starting price and one deposit button."
   imageCaption: "Live on the VF 9 page."
@@ -45,10 +44,12 @@ import propSticky from '../../assets/images/cases/car/proposal-sticky.png';
 import liveHero from '../../assets/images/cases/car/live-hero.jpg';
 import liveForm from '../../assets/images/cases/car/live-form.jpg';
 import ga4Funnel from '../../assets/images/cases/car/ga4-funnel-by-position.png';
+import pdpSections from '../../assets/images/work/pdp-section-proposal.jpg';
+import vf6Cost from '../../assets/images/work/vf6-cost-prototype.jpg';
 
 <Section id="problem" title="A new design, and the lead pop-up was gone">
 
-In late September the car pages moved to a new domain and design, and the lead pop-up went with them. Visits held, but leads per visit fell sharply.
+In late September VinFast's car pages moved to a new domain and design, and the lead pop-up went with them. Leads per visit fell sharply. The only form sat at the very end of a long page, and a shopper who wanted the on-road cost or a monthly payment had to leave to find it.
 
 <Figure caption="Before: two buttons competing in the hero, and a section button that only scrolled to the bottom.">
   <Image src={heroBefore} alt="The hero before: two buttons side by side, deposit and test drive." widths={[480, 800, 1200]} sizes="(min-width: 1100px) 680px, 100vw" />
@@ -57,9 +58,12 @@ In late September the car pages moved to a new domain and design, and the lead p
 
 </Section>
 
-<Section id="found" title="Ten buttons a page, and none of them opened the form">
+<Section id="found" title="No button opened the form, and the shop's own data was stale">
 
-I mapped every button on 14 car pages: ten per page. Seven sent people away to the shop, two only scrolled down, and the tenth was the submit button of the only form, at the very end. Anyone who decided halfway had to scroll or leave.
+- **Every button led away.** I mapped every button on the nine car pages live at the time: most sent people to the shop or only scrolled down, and the only form sat at the very end.
+- **The cost data was out of date.** The shop still listed 63 provinces and interest rates last updated in November 2023.
+- **The new buying pages lost people in seconds.** On mobile, 42% of views lasted under three seconds, and in 34 session recordings nobody tapped Get a consultation.
+- **The domain move hid a search problem.** Every moved page passed, but canonical tags on most car pages pointed to broken URLs.
 
 <Figure frame="sand" caption="My audit, kept in Vietnamese as written: today's entry points on the left, the ones I proposed on the right.">
   <Image src={auditMap} alt="A two-column audit of a car product page in Vietnamese. Left, current: a hero with deposit and test drive buttons, a consultation button that only scrolls, and a six-field form at the very bottom. Right, proposed: a consultation button in the hero, a cost estimate after the price, a test drive booking, a spec download, a full form at the end and a sticky bar on mobile." widths={[600, 900, 1170]} sizes="(min-width: 1100px) 680px, 100vw" />
@@ -67,12 +71,12 @@ I mapped every button on 14 car pages: ten per page. Seven sent people away to t
 
 </Section>
 
-<Section id="decisions" title="Entry points now, the section rework later">
+<Section id="decisions" title="Entry points first, then cost, then traffic">
 
 <Decisions>
 <Decision title="Ship the entry points first">
 
-New entry points could ship in weeks; reworking every section would take months. I shipped the entry points first and turned the section rework into <a href="/work#cost-tool" class="ul">its own proposal</a>.
+New entry points could ship in weeks; reworking every section would take months. I shipped the entry points first and made the section rework and the cost tool their own proposal.
 
 </Decision>
 <Decision title="One button in the hero">
@@ -82,17 +86,22 @@ The old hero had deposit and test drive side by side; I kept one deposit button.
 </Decision>
 <Decision title="Open the form where interest peaks">
 
-The button after the photos used to scroll to the bottom. Now it opens the form in place.
-
-</Decision>
-<Decision title="Use the designer's header button">
-
-I kept my sticky bar small so it would not crowd the page, and added the UI designer's header button, which opens the form, as the third new entry point.
+The button after the photos used to scroll to the bottom. Now it opens the form in place, and I kept my sticky bar small and added the UI designer's header button that opens the form.
 
 </Decision>
 <Decision title="Tag every entry point">
 
 Every button carries a position tag instead of sharing one generic lead event. That tag is how I can show where each lead started.
+
+</Decision>
+<Decision title="Let buyers enter their own rate">
+
+With the shop's rates two years old, the cost tool asks buyers for their own interest rate instead of showing a wrong one.
+
+</Decision>
+<Decision title="Fix conversion before buying more traffic">
+
+The plan was to send more ads to the two new buying pages. I argued to fix the pages first and ranked 17 changes into fix now, round one and round two.
 
 </Decision>
 </Decisions>
@@ -103,11 +112,21 @@ Every button carries a position tag instead of sharing one generic lead event. T
   <Image src={propSticky} alt="Proposal: a sticky bar with the starting price and a consultation button." widths={[480, 800, 1103]} sizes="(min-width: 1100px) 650px, 100vw" />
 </Figure>
 
+<Figure caption="My section proposal and the VF 6 cost tool prototype: on-road cost, installments and fuel savings in three tabs.">
+  <FigureRow min="240px">
+    <Image src={pdpSections} alt="A proposal for the car product page sections, mapping each section and its button." widths={[480, 800, 1200]} sizes="(min-width: 1100px) 420px, 100vw" />
+    <Image src={vf6Cost} alt="A prototype of the VF 6 cost tool with tabs for on-road cost, installments and fuel savings." widths={[480, 800, 1200]} sizes="(min-width: 1100px) 420px, 100vw" />
+  </FigureRow>
+</Figure>
+
 </Section>
 
-<Section id="shipped" title="Four ways to reach the form, each tagged">
+<Section id="shipped" title="New entry points on every car page, a cost tool and a clean domain move">
 
-Live on 23 October across VinFast's car pages.
+- **Entry points:** the mid-page form went live on 23 October; the sticky bar, the header button and the position tags followed on 30 October.
+- **Cost tool:** approved by the division director on 2 November. The mid-page form is live and the fuel-savings comparison has been in user testing since 13 November; on-road cost and installments wait on an API from the shop team.
+- **Buying pages:** a 17-row current-versus-proposed spec, approved by the division director on 18 November, with about 2.8 leads per 1,000 sessions as the baseline to beat.
+- **Domain move:** 30 product pages, 9 car and 21 scooter, checked at the server, search and analytics level, plus a technical SEO fix list for the canonical errors.
 
 <EntryMap />
 
@@ -139,7 +158,7 @@ Over the first 26 days, 87% of car-page leads started at one of the new entry po
     head={['Entry point', 'Share of car-page leads']}
     rows={[
       ['Mid-page form, right after the photos (new)', '55.2%'],
-      ['Sticky bar on mobile (new)', '25.7%'],
+      ['Sticky bar (new)', '25.7%'],
       ['Header button (new)', '6.5%'],
       ['Bottom form (the original)', '12.6%'],
     ]}
@@ -147,7 +166,7 @@ Over the first 26 days, 87% of car-page leads started at one of the new entry po
 </Figure>
 
 <Figure caption="My GA4 exploration of the path from a car-page button to a deposit, split by the position tag on every button, 22 October to 18 November. User counts blurred; rates kept.">
-  <Image src={ga4Funnel} alt="A GA4 funnel exploration titled with the PDP CTA to deposit funnel: four steps from first visit to purchase, and a table broken down by CTA position, such as hero, mid, specs, footer, sticky, exterior and header, with completion and abandonment rates. User counts are blurred." widths={[700, 1100, 1568]} sizes="(min-width: 1100px) 880px, 100vw" />
+  <Image src={ga4Funnel} alt="A GA4 funnel exploration of the PDP CTA to deposit funnel: four steps from first visit to purchase, and a table broken down by CTA position, such as hero, mid, specs, footer, sticky, exterior and header, with completion and abandonment rates. User counts are blurred." widths={[700, 1100, 1568]} sizes="(min-width: 1100px) 880px, 100vw" />
 </Figure>
 
 - **How I checked:** rerunning the first nine days reproduces the 54%, and lead totals per page match across two separate pulls. VF Wild, still on the old template, is left out.
@@ -158,6 +177,6 @@ Over the first 26 days, 87% of car-page leads started at one of the new entry po
 <Section id="learned" title="A tag on every button paid for itself">
 
 - Tagging every position cost almost nothing and turned a 26-day re-measure into a few minutes of work.
-- Forms that open on request finish more often than a form placed on the page. Making every entry point open the form is my next test.
+- Forms that open on request finish more often than a form placed on the page: 75% from the sticky bar against 47% mid-page, 30 October to 11 November. Making every entry point open the form is my next test.
 
 </Section>

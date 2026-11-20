@@ -2,7 +2,7 @@
 title: "My own product: an astrology web app with 1,700+ reading rules, checked against 20,000 charts before launch"
 seoTitle: "Chiêm Nghiệm: a product I took from discovery to launch | Leo Lam Nguyen"
 description: "Chiêm Nghiệm is a Vietnamese astrology (tử vi) web app for working people weighing a decision. I ran discovery, cut the scope, set the metric and shipped it in a week, with AI doing the heavy lifting and me checking its work."
-order: 8
+order: 3
 company: Side project
 year: "2026"
 role: Product owner
@@ -22,7 +22,7 @@ glance:
 roles:
   mine: "Segment, interviews and pilot, positioning, scope and cut list, success metric and guardrail, brand direction, acceptance checks, launch."
   team: "Claude ran desk research and competitor walkthroughs, extracted the reading rules and wrote most of the code. A separate agent audited samples."
-next: dyno-requirements
+next: ai-work-system
 card:
   teaser: "A product of my own: a tử vi web app for working people stuck on a decision. Research showed the market leader already built my first idea, so I repositioned it, cut the scope and launched it with 1,700+ reading rules."
   result: "1,700+ rules, 20,000 charts checked"
@@ -31,6 +31,7 @@ card:
   imageCaption: "Live at chiem-nghiem.netlify.app."
   imageKind: phone
 ogImage: /og/chiem-nghiem.png
+group: ai
 ---
 import PhoneRow from '../../components/case/visuals/PhoneRow.astro';
 import DataTable from '../../components/case/visuals/DataTable.astro';
@@ -49,7 +50,7 @@ Tử vi is what many people in Vietnam open when work feels uncertain. Popular s
 
 - **Readings change feelings, not decisions.** Everyone I interviewed described months of indecision; talking it through or taking one small step helped most.
 - **People don't type their real question.** In a concierge pilot, where I gave a reading by hand, the question asked was not the one that mattered, and the reading changed nothing the person did.
-- **Nobody asked for AI.** None of 100 Facebook group posts or 341 TikTok comments mentioned it.
+- **Working people didn't ask for AI.** In the working-people sample, none of 100 Facebook group posts or 341 TikTok comments mentioned it.
 - **The obvious MVP existed.** My teardown of five competitors showed the leader already did roughly my first idea.
 
 <Figure caption="What research changed before I built anything.">
@@ -136,7 +137,7 @@ I had 13 Claude agents each read part of the reference book and extract its rule
 
 </Section>
 
-<Section id="learned" title="AI made building cheap, so checking became the real work">
+<Section id="learned" title="Claude wrote most of the code, so I spent my time testing it">
 
 - The competitor teardown was in my plan and got skipped until I caught it. It changed the positioning, so it is now a fixed step before design.
 - With AI, the bottleneck moved from writing code to verifying it. Without an independent check, 35% of the sampled sentences would have shipped attached to the wrong chart.
