@@ -20,7 +20,7 @@ interface Props {
   next: { slug: string; title: string };
 }
 const { slug, data, next } = Astro.props;
-const logo = LOGOS[COMPANY_LOGO[data.company]];
+const logo = data.noLogo ? null : LOGOS[COMPANY_LOGO[data.company]];
 const meta = [
   { k: 'Role', v: data.role },
   { k: 'Team', v: data.team },
@@ -53,7 +53,7 @@ const jsonLd = {
   <section class="container case-head" data-case={slug}>
     <a href="/work" class="ul case-head__back">Back to all work</a>
     <span class="case-head__brand">
-      <Image src={logo.src} alt={logo.name} height={52} densities={[1, 2]} class="case-head__logo" />
+      {logo && <Image src={logo.src} alt={logo.name} height={52} densities={[1, 2]} class="case-head__logo" />}
       <span class="lbl lbl--sm muted">{data.year}</span>
     </span>
     <h1 class="d case-head__title">{data.title}</h1>

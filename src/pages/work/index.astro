@@ -54,7 +54,7 @@ const logoHeight = { VinFast: 46, VinDynamics: 48, 'Xanh SM': 32, 'Side project'
 
     {cases.map((c, i) => {
       const card = c.data.card!;
-      const logo = LOGOS[COMPANY_LOGO[c.data.company]];
+      const logo = c.data.noLogo ? null : LOGOS[COMPANY_LOGO[c.data.company]];
       const kind = card.imageKind ?? 'wide';
       return (
         <section class:list={['case-row-wrap', i === 0 && 'case-row-wrap--band']} aria-labelledby={`case-${c.id}`}>
@@ -72,7 +72,7 @@ const logoHeight = { VinFast: 46, VinDynamics: 48, 'Xanh SM': 32, 'Side project'
             </figure>
             <div class="case-row__text">
               <span class="case-row__brand">
-                <Image src={logo.src} alt={logo.name} height={logoHeight[c.data.company]} densities={[1, 2]} class="case-row__logo" />
+                {logo && <Image src={logo.src} alt={logo.name} height={logoHeight[c.data.company]} densities={[1, 2]} class="case-row__logo" />}
                 <span class="lbl lbl--sm muted">{c.data.year}</span>
               </span>
               <h3 id={`case-${c.id}`} class="d case-row__title">{c.data.title}</h3>

@@ -2,7 +2,7 @@
 title: "Requirements for an AI security robot: what Dyno detects, and what stays with the guard"
 seoTitle: "Requirements for Dyno, an AI security robot | Leo Lam Nguyen"
 description: "From a site visit in parking basements to detection and alert requirements for Dyno: 18 user stories cut to 6, 21 acceptance criteria, and every judgment call left with a person."
-order: 6
+order: 9
 company: VinDynamics
 year: "2026"
 role: Requirements lead
@@ -21,7 +21,7 @@ glance:
 roles:
   mine: "The parking and trash use cases, the parking requirement spec, the BRD framework and template, the flow diagrams."
   team: "Two teammates ran the site visit with me and co-own the combined BRD; a senior PM reviewed it; engineering builds; VCS guards were interviewed."
-next: chiem-nghiem
+next: ai-sales-agent
 card:
   teaser: "A client wanted Dyno, a humanoid robot with a perception model, to patrol its parking basements. I went on site, defined what it must detect and which calls stay with a guard, and handed engineering testable requirements."
   result: "18 user stories cut to 6, with 21 acceptance criteria"
@@ -57,7 +57,7 @@ Dyno sees through cameras and a perception model. Engineering needed to know whi
 - **The round:** a guard rides about 90 minutes on a scooter, covering more than a thousand spaces, then rewinds camera footage at the desk. Dyno's value is alerting during the round.
 - **The hard limit:** the battery lasts about two hours. That one fact decides the operating model.
 - **Three questions decide an object's fate:** does it belong to someone, can one person carry it, is it hazardous.
-- **The job ends at the fix:** guards hand off with a deadline and check back about 15 minutes later. A robot that only alerts skips that.
+- **The job ends at the fix:** guards hand off with a deadline and check back about 15 minutes later, a step a robot that only sends alerts would miss.
 - **A cheaper signal:** the charger's LED color shows a charging violation with no integration.
 
 <Figure wide caption="My flow diagrams for the trash use case, kept in Vietnamese as written: the three questions, then the lost property path.">
@@ -138,7 +138,7 @@ I delivered two BRDs, for parking violations and for trash or flammable items, a
 
 </Section>
 
-<Section id="learned" title="Time on site paid for itself">
+<Section id="learned" title="One site visit changed the spec more than any meeting">
 
 - The scooter round, the evidence rule and the charger lights came from one visit and changed the requirement more than any meeting.
 - A requirement is finished when an engineer can test it, so every story ends in acceptance criteria.

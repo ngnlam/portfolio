@@ -1,174 +1,157 @@
 ---
-title: "52 AI-researched prospects in four days, and every website enquiry in front of the right person within a minute"
-seoTitle: "An AI research agent and a lead-ready website for a B2B sales team | Leo Lam Nguyen"
-description: "At VinDynamics I built an AI agent that researches prospects and drafts outreach for BD, and turned the website into a lead source that routes every enquiry to the right person in Microsoft Teams."
-order: 3
+title: "An AI research agent that found 52 prospects in two weeks, and three more AI tools I built for VinDynamics' B2B team"
+seoTitle: "AI agents and tools for a B2B sales team | Leo Lam Nguyen"
+description: "At VinDynamics I built an AI research agent that finds and drafts outreach to AI labs, a document fact-checker, a press release writer and a LinkedIn monitor, each with a person making the final call."
+order: 2
 company: VinDynamics
 year: "2026"
-role: Product owner
-team: "Solo build of the agent; a web vendor (site build), an outside designer, a teammate (ad tags); BD as users and lead owners"
+role: Builder
+team: "Solo build. BD and the Brand team as users; my manager for reviews"
 timeline: "Apr to Aug 2026"
 stages: [Discover, Define, Decide, Ship, Measure]
-tools: [Claude, n8n, GA4, Power Automate]
+tools: [Claude, n8n, Power Automate, Microsoft Teams]
 tiles:
-  - { value: "52", label: "Prospects researched by the AI agent in four days", note: "12 to 15 May 2026, 5 sectors, 9 countries" }
-  - { value: "71%", label: "Finished the website form once started", note: "after the June 2026 redesign, up from 50% before it" }
-  - { value: "<1 min", label: "From a website form to the right person", note: "since June 2026: a card in Microsoft Teams, tagged in one tap" }
+  - { value: "52", label: "Prospects researched by the agent in its first two weeks", note: "12 to 25 May 2026, from a watchlist of 28 labs and 20+ live news sources" }
+  - { value: "20", label: "Researched prospects on BD's desk every morning", note: "as Teams cards at 9 am, each with the reason to reach out and a draft" }
+  - { value: "79 s", label: "To fact-check an 8-page document", note: "one Claude call with web search, on my own test file" }
 glance:
-  problem: "VinDynamics sells robot training data to AI labs. BD researched every prospect by hand, and website enquiries sat in an inbox, mixed with job applications."
-  did: "I built an AI agent that watches buying signals, scores companies and drafts outreach for a person to send, and turned the website into a lead source with tracking and instant routing."
-  role: "Product owner of the B2B lead pipeline. I built the agent myself; a vendor built the website."
+  problem: "VinDynamics sells robot training data to AI labs. BD found every prospect by hand, leaders kept sending documents back for factual fixes, and the Brand team wrote every press release from scratch."
+  did: "I built four AI tools on n8n, Power Automate, Claude and Teams: a research agent, a document fact-checker, a press release writer and a LinkedIn monitor. Each one drafts or flags; a person decides."
+  role: "Builder and owner of all four tools, from design to the hand-over."
 roles:
-  mine: "The agent's signal design, scoring prompt, contact strategy and n8n workflows, the document fact-checker; the website roadmap, sitemap, lead capture plan, tracking spec, homepage tags, Teams routing, weekly report and SEO."
-  team: "BD used the morning digest, sent every message and owns the leads. The web vendor built the site, forms and email; an outside designer designed the pages; a teammate owned ad tags."
-next: xanh-sm-rider-journeys
+  mine: "The designs, prompts, n8n workflows, Power Automate flows and Teams cards of all four tools, the hosting choice for the press release writer, the test runs and the user guides."
+  team: "BD used the research cards and sent every message. The Brand team was the user of the press release writer. My manager reviewed the pilot."
+next: ai-work-system
 card:
-  teaser: "At VinDynamics I built an AI agent that researched 52 prospects in four days for BD, with a person approving every message, and a website where every enquiry reaches the right person in under a minute."
-  result: "52 prospects in 4 days; form completion 50% to 71%"
-  image: "../../assets/images/cases/web/teams-card.png"
-  imageAlt: "A new-lead card in Microsoft Teams, with the lead's details blurred and buttons to tag the type of lead."
-  imageCaption: "Every enquiry lands in Teams."
+  teaser: "At VinDynamics I built four AI tools for the B2B team: a research agent that found 52 prospects in its first two weeks, a document fact-checker, a press release writer and a LinkedIn monitor. A person makes every final call."
+  result: "52 prospects in 2 weeks, 20 on BD's desk each morning"
+  image: "../../assets/images/cases/vd-ai/fact-check-card.png"
+  imageAlt: "A recreated Microsoft Teams card titled Fact-Check Report v2, showing the verdict USE_WITH_FIXES, a score of 62 with high confidence, the top three concerns and the processing time of 79 seconds."
+  imageCaption: "Recreated: the fact-checker's Teams card."
   imageKind: wide
 ogImage: /og/bd-research-agent.png
 ---
 import { Image } from 'astro:assets';
 import DataTable from '../../components/case/visuals/DataTable.astro';
 import Pipeline from '../../components/work/Pipeline.astro';
-import Sitemap from '../../components/case/visuals/Sitemap.astro';
-import planHome from '../../assets/images/cases/web/plan-home.png';
-import planDataset from '../../assets/images/cases/web/plan-dataset.png';
-import planChat from '../../assets/images/cases/web/plan-chat.png';
-import planExit from '../../assets/images/cases/web/plan-exit.png';
-import contactForm from '../../assets/images/cases/web/contact-form.png';
-import sampleEmail from '../../assets/images/cases/web/sample-email.png';
-import teamsCard from '../../assets/images/cases/web/teams-card.png';
-import flowCard from '../../assets/images/cases/web/flow-card.png';
-import flowSwitch from '../../assets/images/cases/web/flow-switch.png';
+import n8nFlow from '../../assets/images/cases/vd-ai/fact-checker-n8n.png';
+import factCard from '../../assets/images/cases/vd-ai/fact-check-card.png';
+import prForm from '../../assets/images/cases/vd-ai/pr-writer-form.png';
 
-<Section id="problem" title="Research by hand, and enquiries buried in an inbox">
+<Section id="problem" title="Four jobs a small team did by hand">
 
-VinDynamics sells robot training data to AI labs. BD found every prospect by hand, from the reason to reach out to the message itself. The website, where a lab first asks for a sample, had no event tracking, and enquiries reached BD late, mixed with job applications.
+VinDynamics sells robot training data to AI labs in the US, Japan, Korea and the UAE. Four jobs took the team's time: BD researched every prospect by hand, leaders sent documents such as press releases and proposals back for factual fixes, the Brand team wrote each press release from scratch, and nobody watched what target companies posted on LinkedIn.
 
 </Section>
 
-<Section id="found" title="Timing beats a company list, and buyers read before they talk">
+<Section id="found" title="Timing beats a company list, and the platform limits decide the design">
 
-- **Signals say when to reach out.** A product launch, a regulatory approval, ML hiring or a funding round tells you a lab needs data now. I defined eight signal types.
-- **Leads came with names, not emails,** and Apollo's paid plan was too expensive for a pilot, so contact lookup had to be rationed.
-- **Buyers research before they talk.** The right offer, a free data sample, belongs where they read, and the only form sat at the bottom of every page.
-- **AI labs ask assistants, not Google.** 68% of 266 target keywords had no search volume, so I made citations by AI assistants the search goal.
+- **Signals say when to reach out.** A product launch, a regulatory approval, ML hiring or a funding round tells you a lab needs data now, so the agent starts from news, not from a list.
+- **Contacts were the expensive step.** Apollo's free plan returned no contacts, and its paid plan was not worth it for a pilot, so contact lookup had to be saved for the best prospects.
+- **The company network sets the rules.** Our Microsoft 365 tenant blocked some Power Automate triggers, the group network blocked Google Drive and Google scripts, and n8n's starter plan allows 2,500 runs a month. Every design had to fit inside those limits.
 
 </Section>
 
-<Section id="decisions" title="Score before spending, keep a person on the send button, and route every enquiry">
+<Section id="decisions" title="Cheap filters first, a person on every final step">
 
 <Decisions>
-<Decision title="Signals, not a static list">
+<Decision title="Start from signals, not a static list">
 
-The agent reads funding news, launches, approvals and research papers, plus a watchlist of 28 target companies, so every lead arrives with a reason to talk now.
+The agent reads more than 20 live sources, such as approvals, research papers and startup news, plus a watchlist of 28 target labs, so every prospect arrives with a reason to talk now.
 
 </Decision>
-<Decision title="Score before paying for a contact lookup">
+<Decision title="Use a cheap model to filter, a strong one to write">
 
-Claude scores each company from 1 to 10, and only companies scoring 8 or more go on to the paid contact lookup. The lookup runs as a separate step, so a used-up quota never stops the research.
+Claude Haiku scores each signal from 1 to 10 and drops weak ones. Claude Sonnet researches only the survivors and drafts the messages, and contact lookup is saved for the top-scoring prospects. I turned down Apollo's paid plan.
 
 </Decision>
 <Decision title="The agent drafts, a person sends">
 
-I ruled out automated sending and LinkedIn automation to protect the team's accounts. The agent drafts each message; BD reviews and sends it.
+I ruled out automated LinkedIn sending tools because of the risk of account bans. Each morning at 9 BD gets the top 20 prospects as Teams cards with the reason, the people to contact and a draft; BD reviews and sends.
 
 </Decision>
-<Decision title="Offer a free sample in five places, ranked by intent">
+<Decision title="One model call per document, not sixty">
 
-Two menu buttons and a form on every dataset page come first, then an exit popup, then a chat bubble. The lower the intent, the fewer the fields.
+The first fact-checker checked each claim separately, about 60 calls per document. The second makes one Claude call with web search that returns a verdict, a score and the concerns, and it runs in 79 seconds on an 8-page test file.
 
 </Decision>
-<Decision title="Send every enquiry to a person in Teams">
+<Decision title="Host the press release writer where it can actually run">
 
-Each form submission posts a card to Microsoft Teams, BD tags it in one tap, and a second flow routes it to sales, recruitment, procurement or brand.
+I compared seven ways to give the Brand team a shared tool and shipped a Cloudflare Worker that keeps the API key secret.
 
 </Decision>
 </Decisions>
+
+<Figure caption="Where to host the press release writer: seven options, one shipped.">
+  <DataTable
+    caption="Hosting options for the press release writer"
+    head={['Option', 'Decision', 'Why']}
+    rows={[
+      ['A shared Claude Project', 'No', 'Tied to one personal account; cannot be shared'],
+      ['Claude Team plan', 'No', 'A paid seat for every user'],
+      ['A custom GPT', 'No', 'A second AI stack to maintain'],
+      ['An n8n web form', 'Dropped', 'The monthly runs were needed by the research agent'],
+      ['A SharePoint page', 'No', 'Cannot call an outside API'],
+      ['Vercel', 'No', 'The free plan forbids commercial use'],
+      ['Cloudflare Worker with AI Gateway', 'Shipped', 'Free tier, the API key kept as a secret, calls routed through AI Gateway'],
+    ]}
+  />
+</Figure>
+
+</Section>
+
+<Section id="shipped" title="Four tools, each ending with a person">
 
 <Figure caption="How the research agent works, recreated as a diagram: from a buying signal to a morning card that BD reviews.">
   <Pipeline />
 </Figure>
 
-<Figure caption="Where website visitors can leave details, ranked by intent.">
-  <DataTable
-    caption="Lead capture points on the website"
-    head={['Place', 'Priority', 'Fields asked', 'When it shows']}
-    rows={[
-      ['Menu button: Get sample data', 'P1', '4', 'Every page'],
-      ['Menu button: Talk to our team', 'P1', '5', 'Every page'],
-      ['Dataset page form, dataset pre-filled', 'P1', '4', 'Every dataset page'],
-      ['Exit popup', 'P2', '2', 'Desktop, once a session, after 45 seconds'],
-      ['Chat bubble', 'P3', '1', 'Product pages, after 90 seconds'],
-    ]}
-  />
+- **Research agent (May):** n8n finds signals, Claude filters, researches and drafts, Power Automate posts the morning cards to Teams and records every click in the BD pipeline file. An evening card asks BD to log replies.
+- **Document fact-checker:** BD uploads a PDF through a Microsoft Form; the card that comes back gives a verdict, a score, the top concerns and links to sheets with every claim checked.
+- **Press release writer:** a one-page form for the Brand team that drafts a release in the group's house style, trained on the group's own published releases.
+- **LinkedIn monitor:** watches a list of key people at target companies and posts each new post to a Teams chat with the BD owner tagged. Running from 14 May.
+
+<Figure caption="Recreated from my build: the fact-checker's n8n workflow, one Claude call in the middle, three sheets and a Teams card at the end.">
+  <Image src={n8nFlow} alt="A recreated n8n workflow with eleven nodes: Webhook, PreparePayload, ClaudeAnalyze, ParseResponse, then branches to WriteReport, SplitClaims and WriteClaims, SplitConcerns and WriteConcerns, and BuildTeamsPayload and SendTeamsCard." widths={[700, 1100, 1500]} sizes="(min-width: 1100px) 880px, 100vw" />
 </Figure>
 
-<Figure frame="dark" wide caption="My lead capture plan for the designer and vendor: menu buttons, a pre-filled dataset form, a chat bubble and an exit popup.">
-  <Image src={planHome} alt="Mockup: the homepage with two buttons in the menu, Get sample data and Talk to our team, and a sample request form beside the hero." widths={[480, 880, 1200, 1600, 1815]} sizes="(min-width: 1100px) 860px, 100vw" />
-  <Image src={planDataset} alt="Mockup: a dataset page with a request form on the right and the dataset type already filled in." widths={[480, 880, 1200, 1600]} sizes="(min-width: 1100px) 860px, 100vw" />
-  <FigureRow min="160px">
-    <Image src={planChat} alt="Mockup: the chat bubble asking which kind of data the visitor needs." widths={[240, 479]} sizes="(min-width: 1100px) 240px, 50vw" />
-    <Image src={planExit} alt="Mockup: the exit popup offering a free sample dataset, second step asking for a work email." widths={[480, 1004]} sizes="(min-width: 1100px) 600px, 100vw" />
-  </FigureRow>
-</Figure>
-
-</Section>
-
-<Section id="shipped" title="A morning digest for BD, a new website, and a Teams card for every enquiry">
-
-- **Research agent (May):** a 9 am digest in Teams of up to 20 researched companies, each with the buying signal, the people to contact and a draft message, plus Qualified and Not a fit buttons.
-- **Document fact-checker:** BD uploads a PDF such as a press release or a proposal, and gets a verdict, a score, the claims checked and the concerns, in a sheet and a Teams card.
-- **Website (live 27 June):** built on my sitemap, tracking spec and lead capture plan, with 13 tracked events across discovery, evaluation and lead capture. I set up the homepage tags myself.
-
-<Sitemap />
-
-<Figure caption="Live: every enquiry posts to Teams in under a minute, BD tags it in one tap, and two Power Automate flows route it.">
-  <Image src={teamsCard} alt="A new-lead card in Microsoft Teams, with the lead's details blurred and buttons to tag the type of lead." widths={[480, 800, 1142]} sizes="(min-width: 1100px) 680px, 100vw" />
-  <FigureRow min="220px">
-    <Image src={flowCard} alt="Power Automate flow one: read new rows, post a card to Teams and wait for a response, then update the row." widths={[480, 900]} sizes="(min-width: 1100px) 260px, 100vw" />
-    <Image src={flowSwitch} alt="Power Automate flow two: read tagged rows, then a switch that routes each lead to Sales B2B, Recruitment, Procurement or Brand." widths={[480, 800, 1600]} sizes="(min-width: 1100px) 420px, 100vw" />
-  </FigureRow>
-</Figure>
-
-<Figure caption="Live: the contact form, test entries blurred, and the email that sends the requested sample within minutes.">
+<Figure caption="Recreated from the card design, with the numbers from the test run on an 8-page file. The concern wording is illustrative.">
   <FigureRow min="240px">
-    <Image src={contactForm} alt="The Contact us form on the live site, with the test entries blurred." widths={[480, 978]} sizes="(min-width: 1100px) 300px, 100vw" />
-    <Image src={sampleEmail} alt="The email that sends the sample: the dataset requested, a download button and a button to contact sales." widths={[480, 1100]} sizes="(min-width: 1100px) 380px, 100vw" />
+    <Image src={factCard} alt="A recreated Teams card: Fact-Check Report v2, verdict USE_WITH_FIXES, score 62 with high confidence, a short summary, the top three concerns, 7 claims, 5 concerns, 4 web searches and 79 seconds, with buttons to open the concerns and the full report." widths={[480, 800, 1178]} sizes="(min-width: 1100px) 420px, 100vw" />
   </FigureRow>
+</Figure>
+
+<Figure caption="Recreated from my build: the press release writer's form, with the fields the Brand team fills in.">
+  <Image src={prForm} alt="A recreated web form titled VinDynamics AI PR Writer, internal tool for the Brand team: article type, language, audience, tone and length on the left; event summary, spokesperson, quote, partner and a reference article on the right; a Create article button below." widths={[700, 1100, 1600]} sizes="(min-width: 1100px) 880px, 100vw" />
 </Figure>
 
 </Section>
 
-<Section id="results" title="52 prospects in four days, all contacted, and seven in ten form starters now finish">
+<Section id="results" title="52 prospects in two weeks, and four tools handed over">
 
-- **Research agent:** from 12 to 15 May it delivered 52 researched companies across 5 sectors and 9 countries, and BD contacted all 52. In the June review, BD valued the research context more than the drafts, so the next version leads with context.
-- **Website:** in mid-June the contact form brought the first B2B meeting request through the site, and it moved to an NDA the following week.
-
-<Figure caption="Before and after, each measured the same way on both sides.">
+<Figure caption="Where each tool stood when I left in August 2026.">
   <DataTable
-    caption="Before and after"
-    head={['Measure', 'Before', 'After']}
+    caption="Status of each tool"
+    head={['Tool', 'Status when I left', 'Evidence']}
+    boldLast={false}
     rows={[
-      ['Website form finished once started (website dashboard)', '50%', '71%'],
-      ['Mobile page speed score (speed audit)', '27 of 100', '49 of 100'],
-      ['Time to fact-check one document (workflow run stats)', '10 to 15 minutes', '79 seconds'],
+      ['Research agent', 'Running; kept after the June review', '52 prospects in the pipeline by 25 May'],
+      ['LinkedIn monitor', 'Running from 14 May', 'Build and test notes'],
+      ['Document fact-checker', 'Working end to end; user testing not started', 'My test run: 79 seconds on an 8-page file'],
+      ['Press release writer', 'Deployed for the Brand team', 'Build notes; use not measured'],
     ]}
   />
 </Figure>
 
-**Not proven yet:** pipeline value. Replies to the agent's outreach were still too few to judge by July, and enquiry volume from the site needs more months of data.
+- In the June review the team agreed to keep the research agent running; BD valued the research context and preferred to write the messages themselves. The team's weekly report recorded the first meeting with one of the prospects on 1 June.
+- **Not proven yet:** conversion and time saved. One meeting is too early to judge, and I had no usage data for the other tools before I left.
 
 </Section>
 
-<Section id="learned" title="Measure honestly before claiming a win">
+<Section id="learned" title="Check the platform's limits before designing">
 
+- One step ran every 30 minutes instead of daily and used up the month's n8n runs. Every automated step now gets a run budget before it goes live.
+- Blocked triggers, blocked file hosting and one personal AI account shaped every choice. I now list the platform's limits first, then design.
 - Early drafts of this case said 100% fit and 90% qualified. Those were review criteria, not results, so I took them out.
-- Test traffic and job seekers made up a large share of the site's early leads. I filtered them out before judging the redesign.
-- Every automated step now has a cap on how often it runs, after one step ran every 30 minutes instead of daily and used up the month's quota.
 
 </Section>

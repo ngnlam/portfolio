@@ -1,0 +1,133 @@
+---
+title: "My AI work system: 2,002 chats turned into a second brain that agents keep up to date every night"
+seoTitle: "An AI second brain run by agents | Leo Lam Nguyen"
+description: "I built a personal AI system with Claude Code: 2,002 AI chats converted into a linked knowledge base, a link-checking agent, nightly ingestion jobs and a library of 75 reusable skills."
+order: 3
+company: Side project
+year: "2026"
+role: Builder
+team: "Solo, with Claude Code as the builder under my rules"
+timeline: "May to Nov 2026"
+status: "Running every night since 17 Nov 2026"
+stages: [Define, Decide, Ship, Measure]
+tools: [Claude Code, Claude, Obsidian]
+tiles:
+  - { value: "2,002", label: "AI chats turned into source files", note: "268 from Claude and 1,734 from ChatGPT" }
+  - { value: "2,633", label: "Links between 221 notes", note: "every note has at least three, checked by a script on 20 Nov 2026" }
+  - { value: "75", label: "Reusable skills in my library", note: "methods written once, used across companies" }
+glance:
+  problem: "Three years of work and study lived in about 2,000 AI chats. Every new conversation started from zero, and I explained the same methods again and again."
+  did: "I designed a three-layer knowledge base, had Claude Code build the converters, an agent that enforces how notes link, and nightly jobs that file new chats and documents."
+  role: "Everything: the design, the rules the agents follow, the checks, and every judgment call. Claude Code wrote the scripts under my brief."
+roles:
+  mine: "The three-layer design, the writing and privacy rules, the 11-point link contract, the agent and job design, the skill library and the reviews."
+  team: "Claude Code wrote the converters and scripts and runs the agents under my rules."
+next: car-product-pages
+card:
+  teaser: "I turned 2,002 AI chats into a linked second brain with Claude Code: converters, a link-checking agent, nightly ingestion and 75 reusable skills. It's the memory I used to rewrite this site."
+  result: "2,002 chats, 2,633 links, 75 skills"
+  image: "../../assets/images/work/second-brain-graph.jpg"
+  imageAlt: "The graph view of my Obsidian vault: hundreds of colored dots, one per note, joined by a dense web of links. Note names are blurred."
+  imageCaption: "The vault's graph, names blurred."
+  imageKind: wide
+ogImage: /og/ai-work-system.png
+noLogo: true
+---
+import { Image } from 'astro:assets';
+import DataTable from '../../components/case/visuals/DataTable.astro';
+import graph from '../../assets/images/work/second-brain-graph.jpg';
+import stats from '../../assets/images/cases/ai-system/link-stats.png';
+
+<Section id="problem" title="Two thousand chats, and every new one started from zero">
+
+For three years I worked through problems with AI: growth analyses, requirement documents, course notes, code. The knowledge stayed inside about 2,000 separate chats in Claude and ChatGPT. A decision lived in one chat and its numbers in another, and every new conversation started from zero.
+
+</Section>
+
+<Section id="found" title="Chats are raw material, and an AI that writes notes will drift">
+
+- **A chat is not a memory.** It holds the thinking, but not in a form I or an AI can look up, link or check.
+- **AI-written notes drift without rules.** Left alone, an assistant creates duplicate notes, leaves notes unlinked and states facts without a source.
+- **Methods travel, company facts don't.** The way I diagnose a funnel works at any company; the numbers belong to one project.
+
+</Section>
+
+<Section id="decisions" title="Rules first, then agents that follow them">
+
+<Decisions>
+<Decision title="Three layers: sources, wiki, rules">
+
+Raw sources are never edited. Agents write a wiki on top of them, and a rules file says how. Any note can be traced back to the chat or document it came from.
+
+</Decision>
+<Decision title="Every claim cites its source">
+
+Notes carry their sources; a fact the AI inferred is marked as inferred; when two sources disagree, the note keeps both with a warning. Phone numbers, keys and customer data stay out.
+
+</Decision>
+<Decision title="An agent enforces how notes link">
+
+I wrote an 11-point link contract: every note needs topics, at least three meaningful links and at least one note pointing to it, and every concept says where I applied it. A script measures the graph; a link-keeper agent fixes what fails.
+
+</Decision>
+<Decision title="Parallel agents, separate files">
+
+When ingesting thousands of chats, each agent owns one project's files and writes nothing else, and the link agent runs last, so no two agents ever write the same file.
+
+</Decision>
+<Decision title="Local and private">
+
+The vault lives on my machine under git. I turned down sync extensions that could read work data.
+
+</Decision>
+</Decisions>
+
+<Figure caption="The vault's graph in Obsidian: each dot is a note, colored by type. Note names blurred, since some name colleagues.">
+  <Image src={graph} alt="The graph view of my Obsidian vault: hundreds of colored dots, one per note, joined by a dense web of links." widths={[600, 900, 1190]} sizes="(min-width: 1100px) 680px, 100vw" />
+</Figure>
+
+</Section>
+
+<Section id="shipped" title="Converters, an agent, two nightly jobs and a skill library">
+
+- **Converters** for Claude and ChatGPT exports, Claude Code sessions and claude.ai projects, plus scripts that build the index, lint the vault and measure the link graph: 13 scripts in all.
+- **A link-keeper agent and five vault skills** for ingesting sources, saving a work session, syncing chats, linting and weaving links.
+- **Two scheduled jobs:** every night at 9:35 pm the system saves the day's chats and reads anything I drop in the inbox; every Sunday evening it syncs skills, re-links and cleans up. Each run ends with a git commit and a short report.
+- **A skill library of 75 methods**, from growth diagnosis to requirement writing, each written once and reused.
+
+<Figure caption="What the system holds, counted on 20 November 2026.">
+  <DataTable
+    caption="What the system holds"
+    head={['Layer', 'Count']}
+    rows={[
+      ['AI chats converted to source files', '2,002'],
+      ['Raw source files in all', '2,270'],
+      ['Notes in the knowledge graph', '221'],
+      ['Links between notes', '2,633'],
+      ['Topic maps', '14'],
+      ['Skills in the library', '75'],
+      ['Scripts', '13'],
+    ]}
+  />
+</Figure>
+
+<Figure caption="Real output of my link check script on 20 November 2026: every note has topics and at least three links.">
+  <Image src={stats} alt="A terminal running the link graph stats script: 221 notes, 2,633 organic links, an average degree of 16.2, no notes with fewer than three links, 100% of notes with topics and 66% of links crossing topics." widths={[600, 900, 1520]} sizes="(min-width: 1100px) 560px, 100vw" style="max-width: 560px" />
+</Figure>
+
+</Section>
+
+<Section id="results" title="A memory I can query, and the one I used to rebuild this site">
+
+- **Coverage:** every note has topics and none has fewer than three links; two in three links cross from one topic to another, which is where ideas connect.
+- **In use:** every number on this site was checked against a vault note and its source. When I rewrote the car case, the vault showed that one growth figure came mostly from a traffic mix shift, so I removed it.
+- **Not proven yet:** time saved. I have not measured how much faster I find or reuse past work.
+
+</Section>
+
+<Section id="learned" title="Unlinked notes drift, so linking is enforced">
+
+- Adding notes without linking them made the vault drift, so every change now goes through the link agent.
+- Splitting ingestion by project, one agent per set of files, let many agents run at once without overwriting each other.
+
+</Section>

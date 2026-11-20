@@ -4,7 +4,7 @@
 import type { ImageMetadata } from 'astro';
 import type { Role } from './tools';
 import bankPages from '../assets/images/work/bank-pages.jpg';
-import brainGraph from '../assets/images/work/second-brain-graph.jpg';
+import emailScooter from '../assets/images/work/email-scooter-lead.jpg';
 import dataform from '../assets/images/work/dataform-graph.jpg';
 import o2o from '../assets/images/work/o2o-dashboard.png';
 import pdpSections from '../assets/images/work/pdp-section-proposal.jpg';
@@ -42,38 +42,14 @@ export const WORK_GROUPS: WorkGroup[] = [
         "company": "VinFast",
         "year": "2026",
         "problem": "The team wanted to know which buttons lead to online deposits, but the trail breaks between the main site and the shop.",
-        "decided": "I split the question into two paths, online deposits measured in GA4 and leads that deposit through sales, and set the brief: audit what exists before proposing anything. AI agents parsed the live tag container, read the deposit flow's code and pulled GA4; a second agent re-pulled the key numbers independently.",
-        "outcome": "49% of sessions with a car deposit start on the homepage and only 10% on a product page, yet the homepage and both listing pages send no button events at all. I sent eight fixes to the team.",
+        "decided": "I split the question into two paths, online deposits measured in GA4 and leads that deposit through sales, and set the brief: audit what exists before proposing anything. AI agents parsed the live tag container, read the deposit flow's code and pulled GA4; a second agent re-pulled the key numbers independently. The re-pull used a different cut of the data, and its totals matched; it also exposed a connector bug that returns wrong numbers with \"contains\" filters.",
+        "outcome": "49% of sessions with a car deposit start on the homepage and only 10% on a product page, yet the homepage and both listing pages send no button events at all. I wrote eight proposals, and the team got a two-item order for the site.",
         "tools": [
           "GA4",
           "Google Tag Manager",
           "Claude"
         ],
         "images": [],
-        "visual": null,
-        "links": []
-      },
-      {
-        "id": "second-brain",
-        "title": "A personal AI knowledge system built from 2,000 chats",
-        "role": "Builder",
-        "company": "Side project",
-        "year": "2026",
-        "problem": "Three years of work and study lived in about 2,000 AI chats, so every new conversation started from zero.",
-        "decided": "I built it with Claude Code. AI agents file everything under rules I wrote: every claim cites its source, conflicts keep both sides, sensitive data stays out. A linking agent enforces an 11-point contract, and a nightly job files new chats. I kept it local and turned down sync extensions that could read work data.",
-        "outcome": "It converted and classified 2,000 chats, with phone numbers and emails masked, into 14 topic maps. Each note links to 16 others on average, with zero contract violations. It's the memory I used to rewrite this site.",
-        "tools": [
-          "Claude Code",
-          "Obsidian"
-        ],
-        "images": [
-          {
-            "img": brainGraph,
-            "alt": "The graph view of my Obsidian vault: hundreds of colored dots, one per note, joined by a dense web of links. Note names are blurred.",
-            "caption": "My vault in Obsidian's graph view: 214 notes and 2,537 links, colored by type. Names blurred.",
-            "maxWidth": "720px"
-          }
-        ],
         "visual": null,
         "links": []
       }
@@ -83,6 +59,30 @@ export const WORK_GROUPS: WorkGroup[] = [
     "id": "new-products",
     "name": "New products and tools",
     "rows": [
+      {
+        "id": "email-series",
+        "title": "A four-email series for scooter leads, on the platform that scored 74 of 100",
+        "role": "Product owner",
+        "company": "VinFast",
+        "year": "2026",
+        "problem": "Scooter leads who left their details but didn't deposit got no follow-up email, and the team had two email platforms to choose between.",
+        "decided": "I scored both platforms on 18 criteria in six weighted groups, from data and automation to measurement; Marketing Cloud scored 74 of 100 against 40. I planned four emails over nine days, each answering one buying question: the offer, a day with the scooter, the running costs and a test ride. I dropped a \"three days left\" countdown because it would be wrong for leads who join late.",
+        "outcome": "On 10 November the team fixed Marketing Cloud as the platform until the end of 2026. The first email is approved as the template and the rest are being revised, so the series is not live yet and has no open or deposit results.",
+        "tools": [
+          "Salesforce",
+          "Claude"
+        ],
+        "images": [
+          {
+            "img": emailScooter,
+            "alt": "An email design for Evo Grand Limited: the offer price after a 3 million dong discount, a deposit button, key specs such as 262 km per charge with an extra battery, the offer deadline and four common questions.",
+            "caption": "The first email, approved as the template, rendered from my design file. Product photos are missing from the export.",
+            "maxWidth": "420px"
+          }
+        ],
+        "visual": null,
+        "links": []
+      },
       {
         "id": "bank-offer-pages",
         "title": "Staff offer pages for two partner banks, from idea to launch",

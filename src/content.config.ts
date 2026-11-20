@@ -52,6 +52,8 @@ const cases = defineCollection({
       /** Path under /public, e.g. /og/zalo-showroom.png. Falls back to the default OG image. */
       ogImage: z.string().optional(),
       published: z.coerce.date().optional(),
+      // A case with no company logo, for example a personal system.
+      noLogo: z.boolean().optional(),
     }),
 });
 

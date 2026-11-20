@@ -22,7 +22,7 @@ glance:
 roles:
   mine: "Platform choice, scope and guardrails, the knowledge sources, setup and launch, the week-one error analysis, the fix list, the regression test, and the Zalo bot decision."
   team: "Meta provides the model. Claude analyzed exports and drafted instructions under my brief. A colleague tested and supplied price files; my manager reviewed."
-next: car-product-pages
+next: bd-research-agent
 card:
   teaser: "Nobody answered VinFast's sales page after hours. I launched an AI sales agent in six days, then ran an error analysis on its first 2,000 real conversations and fixed what it got wrong."
   result: "98% of messages answered, 7x leads per chat"
@@ -50,9 +50,9 @@ VinFast's O2O sales page runs Messenger ads for electric scooters and cars, but 
 - **Price questions dominate.** In the first 2,000 conversations, buyers asked about price, the monthly battery rental fee and installments far more than about specs.
 - **I control the knowledge, not the model.** Meta's agent looks up the files I give it, then writes the reply. When an answer is wrong, the fix is almost always in those files or in its instructions.
 
-<Figure caption="What buyers asked, from the first 2,000 conversations in my export (2 to 9 November; the agent went live on 3 November). One conversation can ask several things, so the shares add up to more than 100%.">
+<Figure caption="What buyers asked in the first 2,000 conversations of my export, which covers 2 to 9 November; the agent went live on 3 November. One conversation can ask several things, so the shares add up to more than 100%.">
   <DataTable
-    caption="What buyers asked, week one"
+    caption="What buyers asked, first 2,000 conversations"
     head={['Question', 'Share of conversations']}
     rows={[
       ['Price or a quote', '57%'],
@@ -147,7 +147,7 @@ Three smaller fixes followed in the first days. Buyers asking where to see a bik
   <Image src={insights} alt="Meta Business Suite messaging insights in Vietnamese: a 94% response rate and 1 minute 14 seconds response time, 5.2K total contacts, and a line chart that jumps from under 100 a day before November to between 200 and 560 a day after." widths={[600, 900, 1208]} sizes="(min-width: 1100px) 680px, 100vw" />
 </Figure>
 
-- **Reach:** 4,227 people messaged the page in the agent's first two weeks (3 to 17 November). In week one it answered 98.1% of messages, half of them within 12 seconds.
+- **Reach:** 4,227 people messaged the page in the agent's first two weeks (3 to 17 November). In week one it answered 98.1% of messages by Meta's response rate; in the conversation export, half of its replies went out within 12 seconds.
 - **Leads:** in the same Messenger ad campaign, 0.94% of conversations left contact details in week one, against 0.13% in the three weeks before launch. The agent asks for a phone number when a buyer wants a quote, a test ride or a call back.
 - **Answer quality:** installment answers that named both ways to pay rose from 0% on launch day to between 84% and 93% a day from 5 November. The median reply got shorter, from 534 to 429 characters.
 - **Regression test:** on 18 November an independent agent asked 23 test questions and 11 passed on the first run. The failures traced back to five knowledge entries that Meta had silently reverted. I re-created them, and the re-run passed except one answer about prepayment discounts, now on the fix list.
