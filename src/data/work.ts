@@ -67,7 +67,7 @@ export const WORK_GROUPS: WorkGroup[] = [
         "year": "2026",
         "problem": "Scooter leads who left their details but didn't deposit got no follow-up email, and the team had two email platforms to choose between.",
         "decided": "I scored both platforms on 18 criteria in six weighted groups, from data and automation to measurement; Marketing Cloud scored 74 of 100 against 40. I planned four emails over nine days, each answering one buying question: the offer, a day with the scooter, the running costs and a test ride. I dropped a \"three days left\" countdown because it would be wrong for leads who join late.",
-        "outcome": "On 10 November the team fixed Marketing Cloud as the platform until the end of 2026. The first email is approved as the template and the rest are being revised, so the series is not live yet and has no open or deposit results.",
+        "outcome": "On 10 November the team fixed Marketing Cloud as the platform until the end of 2026. The first email is approved as the template, and the other three are being finished for launch.",
         "tools": [
           "Salesforce",
           "Claude"
