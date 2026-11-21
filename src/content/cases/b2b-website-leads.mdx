@@ -1,7 +1,7 @@
 ---
 title: "VinDynamics' growth stack: a data warehouse I built solo, and a website that turns AI-lab visitors into enquiries"
 seoTitle: "A B2B website that turns visitors into enquiries | Leo Lam Nguyen"
-description: "I set the sitemap, lead capture, tracking and routing for VinDynamics' website and built its marketing data warehouse in BigQuery. Form completion rose from 50% to 71%, and my manager rated the warehouse, tracking and lead automation 5 out of 5."
+description: "I set the sitemap, lead capture, tracking and routing for VinDynamics' website and built its marketing data warehouse in BigQuery. My manager rated the warehouse, tracking and lead automation 5 out of 5."
 order: 10
 company: VinDynamics
 year: "2026"
@@ -11,7 +11,7 @@ timeline: "Apr to Aug 2026"
 stages: [Discover, Define, Decide, Ship, Measure]
 tools: [GA4, BigQuery, Dataform, Power Automate]
 tiles:
-  - { value: "71%", label: "Finished the form once started", note: "after the June 2026 redesign, up from 50%, as reported in my June review" }
+  - { value: "49", label: "Mobile speed score after the fixes from my audit", note: "up from 27; reCAPTCHA had been loading three times" }
   - { value: "5/5", label: "My manager's rating for the warehouse, tracking and lead automation", note: "mid-year review 2026" }
   - { value: "37", label: "Tables and views in the warehouse I built solo", note: "four layers in BigQuery, refreshed every morning at 7" }
 glance:
@@ -24,7 +24,7 @@ roles:
 next: ai-sales-agent
 card:
   teaser: "VinDynamics' site had no tracking and sent every enquiry to an inbox. I ranked where visitors leave details, specified the tracking and routed every enquiry to the right team in Teams."
-  result: "Form completion up from 50% to 71%"
+  result: "Warehouse, tracking and lead automation rated 5/5"
   image: "../../assets/images/cases/web/plan-home.png"
   imageAlt: "A homepage mockup with Get Sample Data and Talk to Our Team buttons in the menu, and a sample request form beside the hero."
   imageCaption: "From my lead capture plan."
@@ -33,7 +33,6 @@ ogImage: /og/b2b-website-leads.png
 ---
 import { Image } from 'astro:assets';
 import Sitemap from '../../components/case/visuals/Sitemap.astro';
-import ShareBars from '../../components/case/visuals/ShareBars.astro';
 import DataTable from '../../components/case/visuals/DataTable.astro';
 import planHome from '../../assets/images/cases/web/plan-home.png';
 import planDataset from '../../assets/images/cases/web/plan-dataset.png';
@@ -145,23 +144,15 @@ The new homepage went live at the end of June, built on my sitemap, tracking spe
 
 </Section>
 
-<Section id="results" title="Seven in ten form starters now finish, and one warehouse behind every report">
+<Section id="results" title="One warehouse behind every report, and the first on-target enquiry">
 
-<ShareBars
-  label="Among people who started the contact form, 50% finished it before the redesign and 71% after."
-  caption="Share of people who finished the form once they'd started, as reported in my June review."
-  nameWidth="120px"
-  rows={[
-    { name: 'Before redesign', segments: [{ text: '50%', pct: 50 }] },
-    { name: 'After redesign', segments: [{ text: '71%', pct: 71, hl: true }] },
-  ]}
-/>
+In the week after the June redesign, 5 of the 7 people who started the contact form finished it, against 50% the week before. The sample is too small to call a result, so I read it as a direction.
 
 - In mid-June the site brought its first on-target enquiry, a hardware purchase request, and a meeting was set for the following week.
 - My manager rated the warehouse, the website tracking and the lead automation 5 out of 5 in my mid-year review.
 - Rebuilding the channel rules in the warehouse moved 589 paid LinkedIn sessions out of the wrong channel.
 - A speed audit I ran traced slow mobile pages to reCAPTCHA loading three times; after the vendor's fixes, the mobile score went from 27 to 49.
-- **Next:** grow enquiry volume. The 71% counts people who start typing, so making the first fields easier to start is the next fix.
+- **Next:** grow enquiry volume, then measure form completion again once enough people start the form.
 
 </Section>
 

@@ -12,7 +12,7 @@ status: "Zalo app passed acceptance testing on 2 Nov 2026; bank pages live since
 stages: [Discover, Define, Decide, Ship]
 tools: [Zalo, Figma, Excel]
 tiles:
-  - { value: "1,000+", label: "Zalo leads I found logged as Facebook", note: "in the sales system since March 2025, so Zalo got its own lead source in week one" }
+  - { value: "Week 1", label: "When I found Zalo leads logged as Facebook", note: "in the sales system since March 2025; Zalo now has its own lead source" }
   - { value: "29", label: "Car and scooter models in the Zalo app", note: "each mapped to the sales system through 81 product codes" }
   - { value: "3", label: "New channels, each with its own lead source", note: "Zalo, two partner banks and the loyalty app" }
 glance:
@@ -20,11 +20,11 @@ glance:
   did: "I took a Zalo showroom from approved idea to acceptance testing, owned offer pages for two partner banks from idea to launch, and prototyped a buying flow for the loyalty app, each with its own lead source."
   role: "Product owner across the three channels, named the business owner of the Zalo app. A vendor built the app; the build team built the bank pages."
 roles:
-  mine: "Scope and phasing, lead sources and tracking specs, legal and data protection, content audits, the 81-code product mapping, acceptance testing, the bank page design and tests, and the loyalty app prototype."
+  mine: "Scope, lead sources and tracking specs, legal and data protection, content audits, the 81-code product mapping, acceptance testing, the bank page design and tests, and the loyalty app prototype."
   team: "Growth manager: idea and approval. Vendor: Zalo app design and build. Build team: bank pages. Sales system teams: lead intake. Legal and the data protection officer: review."
 next: b2b-website-leads
 card:
-  teaser: "I took VinFast into three new sales channels: a 29-model showroom inside Zalo, offer pages for two partner banks and a loyalty app buying flow. Along the way I found 1,000+ Zalo leads that were being counted as Facebook."
+  teaser: "I took VinFast into three new sales channels: a 29-model showroom inside Zalo, offer pages for two partner banks and a loyalty app buying flow. Along the way I found that Zalo leads had been counted as Facebook since March 2025."
   result: "Bank pages live; Zalo app through acceptance testing"
   image: "../../assets/images/cases/zalo/home.png"
   imageAlt: "The mini app's home screen inside Zalo: a promo banner, electric cars and electric scooters with starting prices, and a Get a consultation button."
@@ -51,29 +51,24 @@ Many VinFast buyers never start on the website. They chat in Zalo, work at partn
 
 <Section id="found" title="Each channel needed its own source, and Zalo needed its own rules">
 
-- **Zalo had no lead source of its own.** More than 1,000 leads since March 2025 came from Zalo but were logged as Facebook.
+- **Zalo had no lead source of its own.** Since March 2025, leads from Zalo had been logged as Facebook.
 - **Deposits change the legal rules.** Legal advised that taking online deposits brings in the full e-commerce ordering rules.
 - **The Zalo build drifted from the website.** My content audit found outdated prices, missing colors and a model no longer on sale.
-- **The loyalty app was invisible in reports.** It sends 800 to 1,000 car leads a month, yet 98% of its 21,363 sessions in 30 days showed up in GA4 as direct traffic.
+- **The loyalty app was invisible in reports.** It is a steady source of car leads, yet 98% of its sessions over 30 days showed up in GA4 as direct traffic.
 
 </Section>
 
 <Section id="decisions" title="Lead capture first, a source for every channel">
 
 <Decisions>
-<Decision title="Split the Zalo launch into two phases">
+<Decision title="Give legal three ways to launch">
 
-Phase 1 is a home screen, a listing, a page for each model and a form. I moved deposits to phase 2 because a new sales system was due in October, and a deposit flow built before it would have been built twice.
+Signing a data agreement with Zalo takes about a month. I gave legal and the data protection officer three options: go live under Zalo's public agreement and sign in parallel, drop the in-app form, or move the launch date, and recommended the first. Deposits stayed in phase 2, as the brief set from the start, since online deposits bring in the full e-commerce ordering rules.
 
 </Decision>
 <Decision title="Give every channel a lead source of its own">
 
 Zalo leads carry the source "Zalo Mini App" plus campaign fields, and each partner bank has its own campaign rules and CRM topic, so sales and reports can tell the channels apart.
-
-</Decision>
-<Decision title="Collect only the Zalo user ID">
-
-The form sends data straight to VinFast's servers and asks Zalo for nothing beyond the user ID, so no data processing agreement with Zalo was needed.
 
 </Decision>
 <Decision title="Rework the bank pages to a premium standard">

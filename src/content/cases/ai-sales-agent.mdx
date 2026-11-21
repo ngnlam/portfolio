@@ -1,5 +1,5 @@
 ---
-title: "An AI sales agent for 4,200 prospective VinFast buyers in its first two weeks, fixed from 17,419 real messages"
+title: "An AI sales agent for VinFast, live in six days and fixed from its first 2,000 real conversations"
 seoTitle: "An AI sales agent on VinFast's Messenger page | Leo Lam Nguyen"
 description: "I scoped, grounded and launched an AI sales agent on VinFast's Messenger page in six days, then ran an error analysis on its first 2,000 conversations and fixed what it got wrong."
 order: 1
@@ -13,7 +13,7 @@ stages: [Discover, Define, Decide, Ship, Measure]
 tools: [Messenger, Claude, Zalo, Salesforce]
 tiles:
   - { value: "98%", label: "Messages answered in week one", note: "Meta's response rate for the page, 2 to 8 Nov; 65 seconds on average" }
-  - { value: "4,227", label: "People who messaged the page in its first two weeks", note: "3 to 17 Nov 2026; 57% of chats came after office hours" }
+  - { value: "57%", label: "Chats that came after office hours", note: "first two weeks, 3 to 17 Nov 2026; nobody had been assigned to answer the page before" }
   - { value: "84%+", label: "Installment answers complete", note: "each day from 5 Nov, up from 0% on launch day" }
 glance:
   problem: "Nobody was assigned to answer VinFast's O2O sales page on Messenger, and most buyers wrote after office hours. The group's own chatbot was not due until the end of November."
@@ -111,7 +111,7 @@ The agent asks for a phone number once instead of guessing, and a person follows
       ['Out of scope', 'Complaints, defects, refunds, on-road price estimates, showroom recommendations'],
       ['Grounding', 'Product catalog, price list and policy entries, synced from Google Drive'],
       ['Fallback', 'Ask for a phone number once; a person follows up'],
-      ['Evaluation', 'The first 2,000 real conversations (17,419 messages), plus a 23-question regression test'],
+      ['Evaluation', 'The first 2,000 real conversations, plus a 23-question regression test'],
       ['Known limits', 'Meta switches the agent off in chats started from ad comments'],
     ]}
   />
@@ -137,7 +137,7 @@ In the first week I exported every conversation, sorted them by question with a 
 
 Three smaller fixes followed in the first days. Buyers asking where to see a bike got the head-office address 49 times; the agent now answers from a list of 141 pickup points by province. Links now come only from the knowledge files, after seven links to a test site went out on launch day. Greetings now appear only in the first message.
 
-<Figure caption="A live conversation after the fix: asked about installments, the agent names both ways to pay. Customer name and photo blurred.">
+<Figure caption="A live conversation after the installment fix of 4 November, made after my manager's review and before the week-one error analysis: asked about installments, the agent names both ways to pay. Customer name and photo blurred.">
   <Image src={chat} alt="A Messenger conversation in Vietnamese: the buyer asks Can I pay in installments, and the AI agent replies yes, with two ways to pay at the online deposit step, through VinFast's finance partners or by credit card, then asks which model the buyer is considering. The reply is labeled AI-generated." widths={[600, 900, 1275]} sizes="(min-width: 1100px) 680px, 100vw" />
 </Figure>
 
@@ -145,13 +145,13 @@ Three smaller fixes followed in the first days. Buyers asking where to see a bik
 
 <Section id="results" title="98% of messages answered, every fix measured, and a follow-up plan">
 
-<Figure caption="Business Suite, 22 October to 18 November: 5,200 people messaged the page, mostly from ads. The 94% response rate and 1 minute 14 seconds to reply cover all 28 days, including the 12 before launch.">
-  <Image src={insights} alt="Meta Business Suite messaging insights in Vietnamese: a 94% response rate and 1 minute 14 seconds response time, 5.2K total contacts, and a line chart that jumps from under 100 a day before November to between 200 and 560 a day after." widths={[600, 900, 1208]} sizes="(min-width: 1100px) 680px, 100vw" />
+<Figure caption="Business Suite, 22 October to 18 November: messages jumped after launch, mostly from ads. The 94% response rate and 1 minute 14 seconds to reply cover all 28 days, including the 12 before launch.">
+  <Image src={insights} alt="Meta Business Suite messaging insights in Vietnamese: a 94% response rate, a 1 minute 14 seconds response time, and a line chart of daily contacts that jumps after launch in November." widths={[600, 900, 1208]} sizes="(min-width: 1100px) 680px, 100vw" />
 </Figure>
 
-- **Reach:** 4,227 people messaged the page in the agent's first two weeks (3 to 17 November). In week one it answered 98.1% of messages by Meta's response rate; in the conversation export, half of its replies went out within 12 seconds.
+- **Reach:** 57% of chats in the agent's first two weeks (3 to 17 November) came after office hours, when nobody had been answering. In week one the page answered 98.1% of messages by Meta's response rate; in the conversation export, half of the agent's replies went out within 12 seconds.
 - **Leads:** the agent now asks for a phone number when a buyer wants a quote, a test ride or a call back, so chats that used to go unanswered turn into leads sales can call.
-- **Answer quality:** installment answers that named both ways to pay rose from 0% on launch day to between 84% and 93% a day from 5 November. The median reply got shorter, from 534 to 429 characters.
+- **Answer quality:** installment answers that named both ways to pay rose from 0% on launch day to between 84% and 93% a day from 5 November, the day after that fix. The median reply got shorter, from 534 to 429 characters.
 - **Regression test:** on 18 November an independent agent asked 23 test questions and 11 passed on the first run. The failures traced back to five knowledge entries that Meta had silently reverted. I re-created them, and the re-run passed except one answer about prepayment discounts, now on the fix list.
 
 For the Zalo account, where an AI model would have needed a new data agreement, I chose rules over AI:
