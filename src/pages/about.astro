@@ -1,65 +1,185 @@
 ---
+// About = the CV, written for the web. Facts come from src/data/cv.ts, which also feeds the PDF (/cv).
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/Button.astro';
+import CvJob from '../components/CvJob.astro';
 import Icon from '../components/Icon.astro';
-import LogoBand from '../components/LogoBand.astro';
 import Portrait from '../components/Portrait.astro';
 import Polaroid from '../components/Polaroid.astro';
 import quotesData from '../data/quotes.json';
+import { CV, CV_PDF, chipCase } from '../data/cv';
+import { LOGOS } from '../data/logos';
 import teamPhoto from '../assets/images/about/team-xanhsm.jpg';
 import outsidePhoto from '../assets/images/about/outside-work.jpg';
 
 const quotes = quotesData as { text: string; who: string }[];
-const studies = [
-  { when: '2026 to 2028', what: 'MSc in Data Science', where: 'Liverpool John Moores University' },
-  { when: '2026 to 2028', what: 'Executive Diploma in Data Science and AI', where: 'IIIT Bangalore' },
-  { when: 'In progress', what: 'Digital Product Management', where: 'Darden School of Business, University of Virginia' },
-  { when: 'In progress', what: 'Certified Analytics Professional', where: 'INFORMS' },
-];
+const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 ---
 <BaseLayout
   title="About | Leo Lam Nguyen"
-  description="AI product builder in Hanoi. An AI sales agent and e-commerce at VinFast, AI requirements and tools at VinDynamics, and AI products of my own."
+  description="Growth and product specialist in Hanoi: an AI sales agent at VinFast, requirements for an AI security robot at VinDynamics, rider journeys at Xanh SM."
   current="about"
 >
   <section class="container intro" aria-labelledby="about-title">
     <div class="intro__text">
       <h1 id="about-title" class="d h-display">About</h1>
-      <p class="intro__lead">Hi, I'm Leo. I build AI products in Hanoi. At VinFast I'm responsible for e-commerce across five online sales channels, where I put an AI sales agent in front of customers; on my own time I ship AI products end to end.</p>
-      <p class="intro__body">My work starts the same way every time: look at what people actually do, decide what to change, ship it, and check whether it worked. I write the requirements, sketch the flows, set up the tracking, and build with SQL, automation and AI when that's the fastest way to find out.</p>
+      <p class="intro__lead">{CV.intro.lead}</p>
+      <p class="intro__body">{CV.intro.body}</p>
+      <div class="intro__actions">
+        <Button href={CV_PDF} variant="secondary" event="cv_download" eventData={{ from: 'about' }}>
+          <Icon name="arrowDown" size={18} /> Download the CV (PDF)
+        </Button>
+      </div>
     </div>
     <div class="intro__portrait">
       <Portrait maxWidth="400px" />
     </div>
   </section>
 
-  <section class="container story" aria-labelledby="story-title">
-    <div class="story__text">
-      <h2 id="story-title" class="d h-section">How I got here</h2>
-      <p>I came to product through growth. At Xanh SM I started in driver recruitment, where in one month the online share of new Bike drivers went from 24% to 53% and the cost per new driver fell by 35%. Then I took over the app's rider messaging: deciding what it should say, to whom and when, across more than 30 automated journeys, and testing it every week. That's where marketing turned into product work for me.</p>
-      <p>At VinDynamics I moved into product. I wrote the requirements for Dyno, a security robot, turned the company website into a lead source, and built AI tools and a marketing data warehouse on my own.</p>
-      <p>At VinFast I'm responsible for e-commerce across five online sales channels. I find where buyers drop off, specify the fixes, and own launches such as VinFast's showroom inside Zalo. On my own time I took <a href="/work/chiem-nghiem" class="ul">Chiêm Nghiệm</a>, a web app, from four interviews to launch in seven days.</p>
-      <p>Before all that, marketing and research taught me to start from the customer: client work on Upwork, campaigns for VinFast's electric scooters, and a new pen line at Hong Ha that began with field research across 15 stores.</p>
-      <div class="story__logos">
-        <LogoBand variant="row" />
+  <section class="container exp" aria-labelledby="exp-title">
+    <h2 id="exp-title" class="d h-section">Experience</h2>
+
+    <div class="grp">
+      <div class="grp__head">
+        <span class="grp__name">{CV.group.label}</span>
+        <span class="lbl muted">{CV.group.place} | {CV.group.dates}</span>
+      </div>
+      <ol class="tl tl--rail" role="list">
+        {CV.group.jobs.map((job) => <CvJob job={job} />)}
+      </ol>
+    </div>
+
+    <div class="grp">
+      <div class="grp__head">
+        <span class="grp__name">Before Vingroup</span>
+        <span class="lbl muted">2021 to 2024</span>
+      </div>
+      <ol class="tl" role="list">
+        {CV.jobs.map((job) => <CvJob job={job} />)}
+      </ol>
+      <div class="earlier">
+        <h3 class="lbl lbl--sm clay">Earlier</h3>
+        <ul class="earlier__list" role="list">
+          {CV.earlier.map((e) => (
+            <li class="earlier__item">
+              <span class="earlier__logo"><Image src={LOGOS[e.logo].src} alt="" width={96} /></span>
+              <span class="earlier__text"><strong>{e.company}</strong>, {e.text}</span>
+              <span class="lbl lbl--sm muted earlier__dates">{e.dates}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
-    <div class="story__aside">
+  </section>
+
+  <section class="container prods" aria-labelledby="prods-title">
+    <h2 id="prods-title" class="d h-section">Products of my own</h2>
+    <ul class="prods__grid" role="list">
+      {CV.products.map((p) => (
+        <li>
+          <a
+            href={`/work/${p.case}`}
+            class="card prod"
+            data-umami-event="case_card_click"
+            data-umami-event-case={p.case}
+            data-umami-event-from="about"
+          >
+            <span class="prod__mark">
+              {p.logo ? <Image src={LOGOS[p.logo].src} alt="" width={160} /> : <Icon name="flow" size={26} />}
+            </span>
+            <span class="d prod__name">{p.name}</span>
+            <span class="prod__text">{cap(p.text)}{p.web && <> {p.web}</>}</span>
+            <span class="prod__more">Read the case <Icon name="arrowRight" size={16} /></span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="container skills" aria-labelledby="skills-title">
+    <h2 id="skills-title" class="d h-section">Skills</h2>
+    <dl class="skills__grid">
+      {CV.skills.map((s) => (
+        <div class="skills__row">
+          <dt class="lbl clay">{s.group}</dt>
+          <dd>
+            <ul class="skills__chips" role="list">
+              {s.items.map((x) => <li class="skill">{chipCase(x)}</li>)}
+            </ul>
+          </dd>
+        </div>
+      ))}
+      <div class="skills__row">
+        <dt class="lbl clay">Languages</dt>
+        <dd class="skills__lang">{CV.languages}</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="container edu" aria-labelledby="edu-title">
+    <div class="edu__head">
+      <h2 id="edu-title" class="d h-section">Education</h2>
+      <p class="edu__aside">The data science is mostly so my opinions come with confidence intervals.</p>
+    </div>
+    <div class="edu__cols">
+      <div class="edu__col">
+        <h3 class="lbl clay">Degrees</h3>
+        <ul class="edu__list" role="list">
+          {CV.education.map((e) => (
+            <li class="edu-item">
+              <span class="edu-item__logo"><img src={e.logo} alt="" loading="lazy" decoding="async" /></span>
+              <span class="edu-item__text">
+                <span class="edu-item__what">{e.what}</span>
+                <span class="muted">{e.where}</span>
+                {e.web && <span class="muted edu-item__note">{e.web}</span>}
+                <span class="lbl lbl--sm muted">{e.dates}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="edu__col">
+        <h3 class="lbl clay">Professional programs (online)</h3>
+        <ul class="edu__list" role="list">
+          {CV.programs.map((e) => (
+            <li class="edu-item">
+              <span class="edu-item__logo"><img src={e.logo} alt="" loading="lazy" decoding="async" /></span>
+              <span class="edu-item__text">
+                <span class="edu-item__what">{e.what}</span>
+                <span class="muted">{e.where}</span>
+                <span class="lbl lbl--sm muted">Completed {e.dates}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="container awards" aria-labelledby="awards-title">
+    <div class="awards__text">
+      <h2 id="awards-title" class="d h-section">Recognition</h2>
+      <ul class="awards__list" role="list">
+        {CV.awards.map((a) => (
+          <li class="award">
+            <span class="ic"><Icon name="award" /></span>
+            <span class="award__text">
+              <span class="award__title">{a.what}</span>
+              <span class="muted">{a.where}, {a.year}</span>
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class="awards__photo">
       <Polaroid
         src={teamPhoto}
         alt="Leo at a Xanh SM team session, sitting with colleagues in team shirts."
         caption="Xanh SM, with the team."
         rotate={2}
         maxWidth="320px"
-        class="story__polaroid"
       />
-      <div class="award">
-        <span class="ic"><Icon name="award" /></span>
-        <div class="award__text">
-          <span class="lbl clay">Recognition</span>
-          <span class="award__title">Advanced Employee of the Year 2025, Xanh SM</span>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -80,23 +200,6 @@ const studies = [
         ))}
       </ul>
     </div>
-  </section>
-
-  <section class="container study" aria-labelledby="study-title">
-    <div class="study__head">
-      <h2 id="study-title" class="d h-section">Currently studying</h2>
-      <p class="study__aside">Mostly so my opinions come with confidence intervals.</p>
-    </div>
-    <ul class="study__list" role="list">
-      {studies.map((s) => (
-        <li class="study__item">
-          <span class="lbl muted">{s.when}</span>
-          <span class="d study__what">{s.what}</span>
-          <span class="study__where muted">{s.where}</span>
-        </li>
-      ))}
-    </ul>
-    <p class="study__note muted">Before that: BA in International Business Management, University of the West of England, 2:1.</p>
   </section>
 
   <section class="container outside" aria-labelledby="outside-title">
@@ -129,42 +232,139 @@ const studies = [
   }
   .intro__text { display: flex; flex-direction: column; gap: 20px; }
   @media (min-width: 900px) { .intro__text { gap: 28px; } }
-  .intro__lead { font-size: 21px; line-height: 1.45; max-width: 620px; }
+  .intro__lead { font-size: 23px; line-height: 1.35; max-width: 620px; font-weight: 500; }
   .intro__body { font-size: 17px; line-height: 1.65; max-width: 620px; }
   @media (min-width: 900px) {
-    .intro__lead { font-size: 26px; }
+    .intro__lead { font-size: 28px; }
     .intro__body { font-size: 19px; }
   }
+  .intro__actions :global(.btn) { gap: 10px; }
   .intro__portrait { display: flex; justify-content: center; }
 
-  /* Story */
-  .story {
-    padding-block: 0 56px;
-    display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px;
-  }
-  @media (min-width: 900px) {
-    .story { padding-block: 24px 120px; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 64px; align-items: start; }
-  }
-  .story__text { display: flex; flex-direction: column; gap: 18px; }
-  @media (min-width: 900px) { .story__text { gap: 24px; } }
-  .story__text p { font-size: 17px; line-height: 1.65; max-width: 640px; }
-  @media (min-width: 900px) { .story__text p { font-size: 19px; } }
-  .story__logos { padding-top: 18px; border-top: 1px solid rgb(31 34 38 / 0.15); }
-  @media (min-width: 900px) { .story__logos { padding-top: 24px; } }
-  .story__aside { display: flex; flex-direction: column; align-items: center; gap: 24px; padding-top: 16px; }
-  @media (min-width: 900px) { .story__aside { gap: 32px; padding-top: 72px; } }
-  .story :global(.story__polaroid) { max-width: 260px; }
-  @media (min-width: 900px) { .story :global(.story__polaroid) { max-width: 320px; } }
-  .award {
-    width: 100%; max-width: 360px;
+  /* Experience */
+  .exp { padding-block: 8px 56px; display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 900px) { .exp { padding-block: 24px 120px; gap: 32px; } }
+  .grp {
     background: var(--color-white);
-    border: var(--line); border-radius: var(--radius-md);
-    padding: 16px;
-    display: flex; gap: 14px; align-items: flex-start;
+    border: var(--line); border-radius: var(--radius-lg);
+    overflow: hidden;
   }
-  @media (min-width: 900px) { .award { padding: 20px; } }
-  .award__text { display: flex; flex-direction: column; gap: 6px; }
-  .award__title { font-weight: 600; font-size: 17px; line-height: 1.35; }
+  .grp__head {
+    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 16px;
+    padding: 14px 16px;
+    background: var(--color-sand);
+    border-bottom: var(--line);
+  }
+  @media (min-width: 640px) { .grp__head { padding: 16px 28px; } }
+  .grp__name { font-weight: 600; font-size: 17px; }
+  .tl { list-style: none; margin: 0; padding: 0 16px; position: relative; }
+  @media (min-width: 640px) { .tl { padding: 0 28px; } }
+  /* The timeline rail runs behind the logo tiles on desktop. */
+  @media (min-width: 900px) {
+    .tl--rail::before {
+      content: ""; position: absolute; left: calc(28px + 36px); top: 64px; bottom: 64px;
+      border-left: 1.5px dashed var(--border-dashed);
+    }
+  }
+  .earlier { padding: 18px 16px 22px; border-top: 1px dashed var(--border-dashed); display: flex; flex-direction: column; gap: 12px; }
+  @media (min-width: 640px) { .earlier { padding: 22px 28px 26px; } }
+  @media (min-width: 900px) { .earlier { padding-left: calc(28px + 152px + 36px); } }
+  .earlier__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .earlier__item { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 2px 12px; align-items: center; font-size: 16px; line-height: 1.45; }
+  @media (min-width: 640px) { .earlier__item { grid-template-columns: 36px minmax(0, 1fr) auto; } }
+  .earlier__logo {
+    width: 36px; height: 36px; grid-row: span 2;
+    display: grid; place-items: center; padding: 4px;
+    border: var(--line); border-radius: 10px; background: var(--color-white);
+  }
+  @media (min-width: 640px) { .earlier__logo { grid-row: auto; } }
+  .earlier__logo :global(img) { width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; }
+  .earlier__dates { grid-column: 2; }
+  @media (min-width: 640px) { .earlier__dates { grid-column: auto; white-space: nowrap; } }
+
+  /* Products */
+  .prods { padding-block: 0 56px; display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 900px) { .prods { padding-block: 0 120px; gap: 32px; } }
+  .prods__grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  @media (min-width: 900px) { .prods__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; } }
+  .prods__grid > li { display: flex; }
+  .prod {
+    display: flex; flex-direction: column; gap: 12px; width: 100%;
+    padding: 20px; text-decoration: none;
+    background: var(--color-white); border: var(--line); border-radius: var(--radius-md);
+  }
+  @media (min-width: 900px) { .prod { padding: 28px; } }
+  .prod__mark {
+    height: 56px; width: fit-content; min-width: 56px; padding: 6px 10px;
+    display: grid; place-items: center;
+    border: var(--line); border-radius: 14px; background: var(--color-sun-soft);
+  }
+  .prod__mark :global(img) { height: 40px; width: auto; }
+  .prod__name { font-size: 26px; line-height: 1.1; }
+  .prod__text { font-size: 16px; line-height: 1.6; }
+  @media (min-width: 900px) { .prod__text { font-size: 17px; } }
+  .prod__more {
+    margin-top: auto; display: inline-flex; align-items: center; gap: 6px;
+    font-weight: 500; font-size: 15px;
+    text-decoration: underline; text-decoration-color: var(--color-clay); text-decoration-thickness: 2px; text-underline-offset: 4px;
+  }
+
+  /* Skills */
+  .skills { padding-block: 0 56px; display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 900px) { .skills { padding-block: 0 120px; gap: 32px; } }
+  .skills__grid { margin: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; }
+  @media (min-width: 900px) { .skills__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 48px; } }
+  .skills__row { display: flex; flex-direction: column; gap: 10px; padding: 16px 0; border-top: var(--line); }
+  .skills__row dd { margin: 0; }
+  .skills__chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill {
+    padding: 5px 12px; border: var(--line); border-radius: var(--radius-pill);
+    background: var(--color-white); font-size: 14px; line-height: 1.35;
+  }
+  @media (min-width: 900px) { .skill { font-size: 15px; } }
+  .skills__lang { font-size: 16px; line-height: 1.5; }
+
+  /* Education */
+  .edu { padding-block: 0 56px; display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 900px) { .edu { padding-block: 0 120px; gap: 32px; } }
+  .edu__head { display: flex; flex-direction: column; gap: 12px; }
+  @media (min-width: 900px) {
+    .edu__head { flex-direction: row; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px 48px; }
+  }
+  .edu__aside { font-size: 16px; line-height: 1.55; max-width: 460px; }
+  @media (min-width: 900px) { .edu__aside { font-size: 18px; } }
+  .edu__cols { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  @media (min-width: 900px) { .edu__cols { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; } }
+  .edu__col { display: flex; flex-direction: column; gap: 4px; }
+  .edu__list { list-style: none; margin: 0; padding: 0; }
+  .edu-item { display: flex; gap: 16px; padding: 16px 0; border-top: var(--line); align-items: flex-start; }
+  .edu-item__logo {
+    width: 104px; height: 52px; flex: 0 0 104px;
+    display: block; padding: 6px 8px;
+    background: var(--color-white); border: var(--line); border-radius: 12px;
+  }
+  @media (min-width: 900px) { .edu-item__logo { width: 140px; height: 62px; flex-basis: 140px; } }
+  .edu-item__logo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+  .edu-item__text { display: flex; flex-direction: column; gap: 4px; font-size: 15px; line-height: 1.5; min-width: 0; }
+  .edu-item__what { font-weight: 600; font-size: 17px; line-height: 1.35; }
+  .edu-item__note { font-size: 14px; }
+
+  /* Recognition */
+  .awards { padding-block: 0 56px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  @media (min-width: 900px) {
+    .awards { padding-block: 0 120px; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 64px; align-items: center; }
+  }
+  .awards__text { display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 900px) { .awards__text { gap: 32px; } }
+  .awards__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  @media (min-width: 640px) { .awards__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; } }
+  .award {
+    background: var(--color-white); border: var(--line); border-radius: var(--radius-md);
+    padding: 16px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .award__text { display: flex; flex-direction: column; gap: 4px; font-size: 15px; line-height: 1.45; }
+  .award__title { font-weight: 600; font-size: 17px; line-height: 1.3; }
+  .awards__photo { display: flex; justify-content: center; padding-inline: 24px; }
 
   /* Quotes */
   .people { padding-block: 48px; display: flex; flex-direction: column; gap: 16px; }
@@ -193,32 +393,6 @@ const studies = [
     border-top: 1px dashed var(--border-dashed);
     font-weight: 500;
   }
-
-  /* Study */
-  .study { padding-top: 56px; display: flex; flex-direction: column; gap: 14px; }
-  @media (min-width: 900px) { .study { padding-top: 120px; gap: 28px; } }
-  .study__head { display: flex; flex-direction: column; gap: 14px; }
-  @media (min-width: 900px) {
-    .study__head { flex-direction: row; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px 48px; }
-  }
-  .study__aside { font-size: 16px; line-height: 1.55; max-width: 500px; }
-  @media (min-width: 900px) { .study__aside { font-size: 18px; } }
-  .study__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-  @media (min-width: 900px) { .study__list { flex-direction: row; flex-wrap: wrap; gap: 0 32px; } }
-  .study__item {
-    display: flex; flex-direction: column; gap: 6px;
-    padding: 14px 0;
-    border-top: var(--line);
-  }
-  @media (min-width: 900px) { .study__item { flex: 1 1 260px; gap: 8px; padding: 20px 0; } }
-  .study__what { font-size: 21px; line-height: 1.15; }
-  .study__where { font-size: 15px; }
-  @media (min-width: 900px) {
-    .study__what { font-size: 24px; }
-    .study__where { font-size: 16px; }
-  }
-  .study__note { font-size: 14px; line-height: 1.5; }
-  @media (min-width: 900px) { .study__note { font-size: 16px; } }
 
   /* Outside work */
   .outside {

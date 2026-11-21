@@ -1,0 +1,220 @@
+---
+// Printable CV. scripts/cv/render-cv-pdf.cjs prints this page to public/leo-lam-nguyen-cv.pdf.
+// Not linked from the nav and kept out of search (noindex, left out of the sitemap).
+// Page breaks: a bullet never splits across pages, and a company or role heading always
+// stays with its first bullet (see the print rules at the bottom).
+import '@fontsource-variable/inter';
+import '@fontsource-variable/bricolage-grotesque';
+import '../styles/global.css';
+import { CV, CV_PDF, boldParts, pdfLines } from '../data/cv';
+
+const jobs = CV.group.jobs;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta name="author" content={CV.name} />
+    <title>Leo Lam Nguyen CV</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body class="cvp">
+    <nav class="cvp__bar" aria-label="CV">
+      <a href="/about" class="ul">About page</a>
+      <a href={CV_PDF} class="ul" download>Download the PDF</a>
+    </nav>
+
+    <main class="sheet">
+      <header class="top">
+        <h1 class="name">{CV.name}</h1>
+        <p class="headline">{CV.headline}</p>
+        <p class="contact">
+          {CV.location} | <a href={`mailto:${CV.email}`}>{CV.email}</a> | <a href={CV.linkedin.href}>{CV.linkedin.label}</a> | Portfolio: <a href={CV.portfolio.href}>{CV.portfolio.label}</a>
+        </p>
+      </header>
+
+      <section>
+        <h2>Summary</h2>
+        <p>{CV.summary}</p>
+      </section>
+
+      <section>
+        <h2>Experience</h2>
+        <div class="row group">
+          <span>{CV.group.label}: {CV.group.members}</span>
+          <span class="date">{CV.group.place} | {CV.group.dates}</span>
+        </div>
+        <div class="nest">
+          {jobs.map((job) => (
+            <article class="job">
+              <div class="job__head">
+                <div class="row co">
+                  <span><b>{job.company}</b>{job.title && <> | {job.title}</>}</span>
+                  <span class="date">{job.dates}</span>
+                </div>
+                {job.scope && <p class="scope">{job.scope}</p>}
+              </div>
+              {job.lines && (
+                <ul>
+                  {pdfLines(job.lines).map((l) => (
+                    <li>{boldParts(l.text).map((p) => (p.b ? <b>{p.t}</b> : p.t))}</li>
+                  ))}
+                </ul>
+              )}
+              {job.roles?.map((r) => (
+                <div class="role">
+                  <div class="row role__head">
+                    <span>{r.title}</span>
+                    <span class="date">{r.dates}</span>
+                  </div>
+                  <ul>
+                    {pdfLines(r.lines).map((l) => (
+                      <li>{boldParts(l.text).map((p) => (p.b ? <b>{p.t}</b> : p.t))}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </article>
+          ))}
+        </div>
+
+        {CV.jobs.map((job) => (
+          <article class="job keep">
+            <div class="job__head">
+              <div class="row co">
+                <span><b>{job.company}</b>{job.title && <> | {job.title}</>}</span>
+                <span class="date">{job.dates}</span>
+              </div>
+              {job.scope && <p class="scope">{job.scope}</p>}
+            </div>
+            <ul>
+              {pdfLines(job.lines).map((l) => (
+                <li>{boldParts(l.text).map((p) => (p.b ? <b>{p.t}</b> : p.t))}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+
+        <p class="earlier keep">
+          <b>Earlier:</b>{' '}
+          {CV.earlier.map((e, i) => (
+            <>{i > 0 && ' '}{e.company}, {e.text} ({e.dates}).</>
+          ))}
+        </p>
+      </section>
+
+      <section class="keep">
+        <h2>Independent products</h2>
+        <ul>
+          {CV.products.map((p) => (
+            <li><b>{p.name}</b>, {p.text}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="keep">
+        <h2>Skills</h2>
+        <dl class="skills">
+          {CV.skills.map((s) => (
+            <div><dt>{s.group}:</dt> <dd>{s.items.join(', ')}</dd></div>
+          ))}
+          <div><dt>Languages:</dt> <dd>{CV.languages}</dd></div>
+        </dl>
+      </section>
+
+      <section class="keep">
+        <h2>Education</h2>
+        {CV.education.map((e) => (
+          <div class="row edu">
+            <span><b>{e.what}</b> | {e.where}</span>
+            <span class="date">{e.dates}</span>
+          </div>
+        ))}
+      </section>
+
+      <section class="keep">
+        <h2>Professional programs (online)</h2>
+        {CV.programs.map((e) => (
+          <div class="row edu">
+            <span><b>{e.what}</b> | {e.where}</span>
+            <span class="date">{e.dates}</span>
+          </div>
+        ))}
+      </section>
+    </main>
+  </body>
+</html>
+
+<style>
+  /* Screen: the A4 sheet on a sand desk. Print: the sheet alone. */
+  :global(body.cvp) {
+    background: var(--color-sand);
+    color: var(--text);
+    font-size: 16px;
+  }
+  .cvp__bar {
+    max-width: 210mm; margin: 0 auto; padding: 16px var(--gutter);
+    display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    font-size: 15px;
+  }
+  .sheet {
+    width: 100%; max-width: 210mm;
+    margin: 0 auto 48px;
+    padding: 14mm 15mm;
+    background: var(--color-white);
+    border: var(--line);
+    /* Arial, not the site's Inter: Chrome prints the variable Inter so that PDF readers and
+       applicant tracking systems extract broken words ("Prod u c t"). Arial extracts cleanly. */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9.6pt;
+    line-height: 1.36;
+  }
+  .sheet a { color: inherit; text-decoration: none; }
+  .sheet b { font-weight: 700; }
+
+  .name { font-family: var(--font-display); font-weight: 700; font-size: 22pt; line-height: 1.05; letter-spacing: -0.02em; }
+  .headline { font-size: 10.6pt; margin-top: 5px; }
+  .contact { color: var(--text-muted); font-size: 8.8pt; margin-top: 3px; }
+
+  h2 {
+    font-size: 8.4pt; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--color-clay);
+    border-bottom: 0.75pt solid var(--color-graphite);
+    padding-bottom: 2px; margin: 12px 0 5px;
+  }
+
+  .row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .date { color: var(--text-muted); font-size: 8.8pt; white-space: nowrap; flex: 0 0 auto; }
+  .group { font-weight: 700; }
+  .nest { margin-left: 2px; padding-left: 10px; border-left: 1.5pt solid var(--color-silver); }
+  .job { margin-top: 7px; }
+  .co { font-size: 10pt; }
+  .scope { color: var(--text-muted); font-size: 9pt; margin-top: 1px; }
+  .role { margin-top: 5px; }
+  .role__head { font-weight: 700; }
+
+  /* Drawn bullets: a list marker sitting outside the text box gets clipped at the print margin. */
+  .sheet ul { margin: 3px 0 0; padding-left: 0; list-style: none; }
+  .sheet li { margin: 2px 0; padding-left: 14px; position: relative; }
+  .sheet li::before { content: "\2022"; position: absolute; left: 3px; top: 0; }
+  .earlier { margin-top: 8px; }
+
+  .skills { margin: 0; }
+  .skills div { margin: 2px 0; }
+  .skills dt { display: inline; font-weight: 700; }
+  .skills dd { display: inline; margin: 0; }
+  .edu { margin: 2px 0; }
+
+  /* Page breaks */
+  h2, .job__head, .role__head, .group { break-after: avoid; }
+  .sheet li, .keep, .edu { break-inside: avoid; }
+
+  @page { size: A4; margin: 13mm 15mm 15mm; }
+  @media print {
+    :global(body.cvp) { background: #fff; }
+    .cvp__bar { display: none; }
+    .sheet { max-width: none; margin: 0; padding: 0; border: 0; }
+  }
+</style>

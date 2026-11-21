@@ -7,6 +7,7 @@ Leo Lam Nguyen's portfolio. Astro 7 static site, deployed by Netlify from `main`
 - `npm run build`: static build into `dist/`. Must finish with no errors before any commit.
 - `npm run preview`: serve `dist/` locally.
 - `node scripts/og/render-og.cjs`: re-render `public/og/default.png` (needs Playwright, run locally, not on Netlify). `--slug x --title "..." --label "..."` renders `public/og/x.png` for a case. `--icons` renders `public/favicon.ico` (16, 32, 48) and `public/apple-touch-icon.png` from the logo files. OG images carry the logo mark next to the name, so re-render all six after a logo change.
+- `npm run build && node scripts/cv/render-cv-pdf.cjs && npm run build`: prints `/cv` to `public/leo-lam-nguyen-cv.pdf` (Playwright, run locally, commit the PDF). Run it after any change to `src/data/cv.ts`, which feeds both the About page and the PDF. The PDF body is Arial on purpose: the variable Inter prints as broken words for PDF readers and applicant tracking systems. Check the page break after rendering: no bullet may split across pages.
 - `python3 scripts/logo/build-logo.py`: rebuilds the `leo_` logo from the site's Bricolage font (needs `pip install fonttools brotli uharfbuzz`). Writes `src/data/logo.ts`, `public/favicon.svg` and `scripts/logo/out/*.svg`. Never edit those paths by hand. Then run `render-og.cjs --icons` and bump `?v=` on the icon links in `BaseLayout` so browsers drop the cached favicon.
 
 ## Sources of truth
@@ -74,7 +75,7 @@ The design canvas (Steps 1 to 4) is the visual reference. Desktop and mobile art
 
 ## Analytics (Umami Cloud)
 The script loads only when `PUBLIC_UMAMI_WEBSITE_ID` is set (Netlify environment variable; a redeploy is needed after changing it). Cookieless, so no consent banner. Events use `data-umami-event` attributes or `window.umami?.track()`:
-`case_card_click {case, from}`, `short_case_expand {item}`, `skip_to_result {case}`, `case_scroll {case, depth: 50|90}`, `next_case_click {from, to}`, `contact_click {channel, page}`, `lab_open`, `lab_start`, `lab_complete`, `lab_save`.
+`case_card_click {case, from}`, `short_case_expand {item}`, `skip_to_result {case}`, `case_scroll {case, depth: 50|90}`, `next_case_click {from, to}`, `contact_click {channel, page}`, `lab_open`, `lab_start`, `lab_complete`, `lab_save`, `cv_download {from}`.
 
 ## Before every commit
 1. `npm run build` with no errors or warnings.

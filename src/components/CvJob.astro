@@ -1,0 +1,146 @@
+---
+// One job on the About page timeline. Data from src/data/cv.ts.
+// Lines are grouped under their topic (with a case link); jobs with roles show each role in turn.
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import { LOGOS } from '../data/logos';
+import { boldParts, type CvJob } from '../data/cv';
+
+interface Props {
+  job: CvJob;
+}
+const { job } = Astro.props;
+const logo = job.logo ? LOGOS[job.logo] : undefined;
+// Scope lines (what Leo runs day to day) read as a lead sentence on the web; the PDF prints them as bullet 1.
+const lead = (job.lines ?? []).filter((l) => l.scope);
+const rest = (job.lines ?? []).filter((l) => !l.scope);
+const blocks = job.topics
+  ? job.topics
+      .map((topic) => ({ topic, lines: rest.filter((l) => l.topic === topic.key) }))
+      .filter((b) => b.lines.length > 0)
+  : rest.length
+    ? [{ topic: undefined, lines: rest }]
+    : [];
+const caseAttrs = (slug: string) => ({
+  'data-umami-event': 'case_card_click',
+  'data-umami-event-case': slug,
+  'data-umami-event-from': 'about',
+});
+---
+<li class="job">
+  <div class="job__meta">
+    {logo && (
+      <span class="job__logo">
+        <Image src={logo.src} alt="" width={144} />
+      </span>
+    )}
+    <span class="lbl muted job__dates">{job.dates}</span>
+  </div>
+  <div class="job__body">
+    <h3 class="job__title">
+      <span class="d job__co">{job.company}</span>
+      {job.title && <span class="job__role">{job.title}</span>}
+    </h3>
+    {job.scope && <p class="job__scope muted">{job.scope}</p>}
+    {lead.map((l) => <p class="job__lead">{l.text}</p>)}
+
+    {blocks.map((b) => (
+      <div class="block">
+        {b.topic && (
+          <div class="block__head">
+            <span class="lbl lbl--sm clay">{b.topic.label}</span>
+            <a href={`/work/${b.topic.case}`} class="block__link" {...caseAttrs(b.topic.case)}>
+              Read the case<span class="sr-only">: {b.topic.label}</span>
+              <Icon name="arrowRight" size={16} />
+            </a>
+          </div>
+        )}
+        <ul class="lines">
+          {b.lines.map((l) => (
+            <li>{boldParts(l.text).map((p) => (p.b ? <strong>{p.t}</strong> : p.t))}</li>
+          ))}
+        </ul>
+      </div>
+    ))}
+
+    {job.roles?.map((r) => (
+      <div class="block">
+        <div class="block__head">
+          <h4 class="role">{r.title}</h4>
+          <span class="lbl lbl--sm muted">{r.dates}</span>
+        </div>
+        {r.lines.filter((l) => l.scope).map((l) => <p class="job__lead">{l.text}</p>)}
+        <ul class="lines">
+          {r.lines.filter((l) => !l.scope).map((l) => (
+            <li>{boldParts(l.text).map((p) => (p.b ? <strong>{p.t}</strong> : p.t))}</li>
+          ))}
+        </ul>
+      </div>
+    ))}
+
+    {job.cases && (
+      <p class="job__cases">
+        {job.cases.map((c) => (
+          <a href={`/work/${c.slug}`} class="block__link" {...caseAttrs(c.slug)}>
+            Read the case<span class="sr-only">: {c.label}</span>
+            <Icon name="arrowRight" size={16} />
+          </a>
+        ))}
+      </p>
+    )}
+  </div>
+</li>
+
+<style>
+  .job {
+    display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px;
+    padding-block: 24px;
+    position: relative;
+  }
+  .job + .job { border-top: 1px dashed var(--border-dashed); }
+  @media (min-width: 900px) {
+    .job { grid-template-columns: 152px minmax(0, 1fr); gap: 36px; padding-block: 32px; }
+  }
+  .job__meta { display: flex; align-items: center; gap: 14px; }
+  @media (min-width: 900px) { .job__meta { flex-direction: column; align-items: flex-start; gap: 12px; } }
+  .job__logo {
+    width: 56px; height: 56px; flex: 0 0 56px;
+    display: grid; place-items: center;
+    padding: 6px;
+    background: var(--color-white);
+    border: var(--line); border-radius: 14px;
+    position: relative; z-index: 1;
+  }
+  @media (min-width: 900px) { .job__logo { width: 72px; height: 72px; flex-basis: 72px; padding: 8px; border-radius: var(--radius-md); } }
+  .job__logo :global(img) { width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; }
+
+  .job__body { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .job__title { display: flex; flex-direction: column; gap: 4px; }
+  .job__co { font-size: 26px; line-height: 1.1; }
+  @media (min-width: 900px) { .job__co { font-size: 30px; } }
+  .job__role { font-weight: 600; font-size: 17px; line-height: 1.35; }
+  .job__scope { font-size: 16px; line-height: 1.55; max-width: 720px; }
+  .job__lead { font-size: 17px; line-height: 1.55; font-weight: 500; max-width: 760px; }
+  @media (min-width: 900px) { .job__lead { font-size: 18px; } }
+
+  .block { display: flex; flex-direction: column; gap: 8px; padding-top: 6px; }
+  .block__head {
+    display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border-subtle);
+  }
+  .role { font-weight: 600; font-size: 17px; line-height: 1.35; }
+  .block__link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 15px; font-weight: 500;
+    text-decoration: underline; text-decoration-color: var(--color-clay);
+    text-decoration-thickness: 2px; text-underline-offset: 4px;
+    min-height: 24px;
+  }
+  .lines { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; max-width: 760px; }
+  .lines li { font-size: 16px; line-height: 1.6; padding-left: 2px; }
+  @media (min-width: 900px) { .lines li { font-size: 17px; } }
+  .lines li::marker { color: var(--color-clay); }
+  .lines strong { font-weight: 650; }
+  .job__cases { display: flex; flex-wrap: wrap; gap: 8px 20px; padding-top: 4px; }
+</style>
