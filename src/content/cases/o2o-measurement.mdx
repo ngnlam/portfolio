@@ -1,5 +1,5 @@
 ---
-title: "Every VinFast product page tagged, and a dashboard that matches the web lead total at 99.97%"
+title: "One event plan for every VinFast product page, and a lead dashboard whose page totals add up to the web total"
 seoTitle: "Lead and deposit measurement for VinFast's O2O team | Leo Lam Nguyen"
 description: "I audited VinFast's tracking, tagged every car and scooter product page, ran a deposit audit with AI agents, and built a self-checking daily lead report and a dashboard the team reads every morning."
 order: 8
@@ -12,8 +12,8 @@ stages: [Discover, Define, Decide, Ship, Measure]
 tools: [GA4, Google Tag Manager, Claude, Windsor.ai]
 tiles:
   - { value: "100%", label: "Product pages with lead tags", note: "up from 4 of 14 car pages and 9 of 21 scooter pages" }
-  - { value: "99.97%", label: "Dashboard lead totals matching the web total", note: "in a test run, 3 to 15 Nov 2026" }
-  - { value: "49%", label: "Car deposit sessions that start on the homepage", note: "found by an AI-agent audit; only 10% start on a product page" }
+  - { value: "99.97%", label: "Page-level lead totals that add up to the web total", note: "one test run, 3 to 15 Nov 2026; both sides from GA4" }
+  - { value: "About half", label: "GA4 car deposits that started on the homepage", note: "46% to 49%, against 10% on a product page; found by an AI-agent audit" }
 glance:
   problem: "VinFast's O2O site had more tags than anyone owned, ad platforms saw only part of the leads and none of the car deposits, and my manager rebuilt the daily lead report by hand."
   did: "I audited GA4 and the tag container, wrote one event plan for every product page, ran a deposit audit with AI agents, and built a self-checking daily report and a dashboard."
@@ -23,8 +23,8 @@ roles:
   team: "The web team shipped the code changes, the tag admin published the tags, and my manager owns the report. Claude agents did the audit legwork under my brief."
 next: zalo-showroom
 card:
-  teaser: "I rebuilt how VinFast's O2O team measures leads and deposits: every product page tagged, a deposit audit run with AI agents, a daily report that checks itself and a dashboard that matches the web lead total at 99.97%."
-  result: "Every product page tagged; 99.97% dashboard match"
+  teaser: "I reworked how VinFast's O2O team measures leads and deposits: every product page tagged, a deposit audit run with AI agents, a daily report that checks itself and a lead dashboard whose page-level totals add up to the web total."
+  result: "Every product page tagged; a self-checking lead dashboard"
   image: "../../assets/images/work/o2o-dashboard.png"
   imageAlt: "The O2O marketing dashboard with plan progress, spend, leads and deposits by car model; figures blurred."
   imageCaption: "The O2O dashboard, figures blurred."
@@ -47,7 +47,7 @@ VinFast's O2O team sells cars and scooters online. In September the site had mor
 - **The tag container had grown wild.** 212 tags, 81 of them paused, and lead tags on only 4 of 14 car product pages.
 - **GA4 had nine things working, eight broken and six missing,** from deposit events to the link between the main site and the shop.
 - **Deposits lost their source at checkout.** The payment step sends buyers through a payment gateway, and some deposits arrived in GA4 credited to the gateway instead of the ad that brought them.
-- **Buyers deposit from the homepage, not from product pages.** 49% of sessions with a car deposit started on the homepage and only 10% on a product page, yet the homepage sent no button events at all.
+- **Buyers deposit from the homepage, not from product pages.** About half (46% to 49%) of GA4 car deposits started on the homepage, against 10% on a product page, yet the homepage sent no button events at all.
 
 <Figure caption="My GA4 audit summary, in Vietnamese: 9 items working, 8 broken and hurting reporting, 6 missing. Account details blurred.">
   <Image src={ga4Audit} alt="Summary cards from my GA4 audit, in Vietnamese: 9 items working, 8 broken and hurting reporting and attribution, 6 missing and not yet built." widths={[600, 900, 1200]} sizes="(min-width: 1100px) 680px, 100vw" />
@@ -110,7 +110,7 @@ When a source drops out or a day's GA4 count falls below 30% of normal, the dash
   />
 </Figure>
 
-- **Accuracy:** lead totals by page in the dashboard match the web total at 99.97% in a test run, and Meta numbers sit within 0.5% of the connector's pull.
+- **Accuracy:** the dashboard's page-level lead totals add up to the web total (99.97% in a test run, both sides from GA4), and Meta numbers sit within 0.5% of the connector's pull.
 - **What the data changed:** the position tags made the 26-day read of the car pages possible, and the report showed that what looked like retail orders doubling was a handful of bulk orders.
 - **Next:** join leads to deposits in the sales system, so every channel is judged on deposits, not leads.
 

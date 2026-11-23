@@ -5,7 +5,7 @@ export const SITE = {
   role: 'AI Product Builder',
   location: 'Hanoi, Vietnam',
   email: 'lamnguyen.ptpl@gmail.com',
-  linkedin: 'https://www.linkedin.com/in/ngnlam',
+  linkedin: 'https://www.linkedin.com/in/leolamngn',
   defaultOg: '/og/default.png',
 } as const;
 

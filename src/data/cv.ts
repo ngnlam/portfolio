@@ -53,18 +53,18 @@ export const CV = {
   headline: 'Product and growth across AI agents and e-commerce | Vingroup: VinFast, VinDynamics, Xanh SM',
   location: 'Hanoi, Vietnam',
   email: 'lamnguyen.ptpl@gmail.com',
-  linkedin: { label: 'linkedin.com/in/ngnlam', href: 'https://www.linkedin.com/in/ngnlam' },
+  linkedin: { label: 'linkedin.com/in/leolamngn', href: 'https://www.linkedin.com/in/leolamngn' },
   portfolio: { label: 'leolamnguyen.netlify.app', href: 'https://leolamnguyen.netlify.app' },
 
   /** PDF summary, implied first person. */
   summary:
-    "Growth and product specialist with three years of experience, most recently in e-commerce, ride-hailing and robotics across the Vingroup ecosystem. Launched an AI sales agent on VinFast's Messenger sales page in six days, then fixed its weakest answers within two days, raising the share of complete installment answers from 0% to 84%+. Before that, wrote the requirements for an AI security robot at VinDynamics and built behavior-based rider journeys at Xanh SM.",
+    "Product and growth specialist with three years of experience, most recently in AI agents, e-commerce, robotics and ride-hailing across the Vingroup ecosystem. Launched an AI sales agent on VinFast's Messenger sales page in six days, with price answers grounded in approved product files; after a manager review found gaps in its installment answers, fixed them within two days, taking complete answers from 0% on launch day to between 84% and 93% a day. Before that, led requirements for two use cases of an AI security robot at VinDynamics and built behavior-based rider journeys at Xanh SM.",
 
   /** About page intro, first person. Same facts as the summary. */
   intro: {
-    lead: "Hi, I'm Leo, a growth and product specialist in Hanoi.",
+    lead: "Hi, I'm Leo, a product and growth specialist in Hanoi.",
     body:
-      "I've spent three years in growth and product, most recently in e-commerce, ride-hailing and robotics across the Vingroup ecosystem. At VinFast I launched an AI sales agent in six days and fixed its weakest answers within two days, raising the share of complete installment answers from 0% to 84%+. Before that I wrote the requirements for an AI security robot at VinDynamics and built behavior-based rider journeys at Xanh SM.",
+      "I've spent three years in product and growth, most recently in AI agents, e-commerce, robotics and ride-hailing across the Vingroup ecosystem. At VinFast I launched an AI sales agent in six days, with price answers grounded in approved product files; after a manager review found gaps in its installment answers, I fixed them within two days, taking complete answers from 0% on launch day to between 84% and 93% a day. Before that I led requirements for two use cases of an AI security robot at VinDynamics and built behavior-based rider journeys at Xanh SM.",
   },
 
   group: {
@@ -76,9 +76,9 @@ export const CV = {
       {
         company: 'VinFast',
         logo: 'vinfast',
-        title: 'Growth and Product Specialist',
+        title: 'Product and Growth Specialist',
         dates: 'Sep 2026 to present',
-        scope: "Vingroup's electric vehicle maker. On the O2O growth team.",
+        scope: "Vingroup's electric vehicle maker. Joined through the succession pool, on the O2O growth team.",
         topics: [
           { key: 'agent', label: 'AI sales agent', case: 'ai-sales-agent' },
           { key: 'pages', label: 'Car product pages', case: 'car-product-pages' },
@@ -88,49 +88,53 @@ export const CV = {
         lines: [
           {
             scope: true,
-            text: 'Own e-commerce and performance marketing for cars and scooters across five online sales channels: the website, two Vingroup apps, Shopee and an affiliate program.',
+            text: 'Work on the product and data side of five online sales channels for cars and scooters: page requirements, tracking and analysis, and the AI sales agent, working with the team that runs the ad accounts.',
           },
           {
             topic: 'agent',
-            text: "Launched an AI sales agent on VinFast's Messenger sales page in **six days**, grounding its price answers in approved product files and handing uncertain cases to the sales team.",
+            text: "Launched an AI sales agent (Meta Business Agent) on VinFast's Messenger sales page in **six days**; price answers come only from approved product files, and uncertain cases go to sales.",
           },
           {
             topic: 'agent',
-            text: "Fixed the agent's installment answers within two days of launch, lifting the daily share of complete answers from **0% to 84%+**, then set up an error analysis of the first week and a regression test.",
+            text: 'Fixed installment answers within two days of launch, after a manager review found the gap: complete answers went from 0% on launch day to between **84% and 93%** a day (5 to 9 Nov).',
+          },
+          {
+            topic: 'agent',
+            text: 'Ran an error analysis of the first week on **2,000** real conversations and a 23-question regression test, turning failures such as battery-fee questions sent to the hotline into a fix list.',
           },
           {
             topic: 'pages',
-            text: 'Specified new entry points for the car product pages after a site redesign cut leads; in the first month, **81%** of car-page leads came through the mid-page form and sticky bar.',
+            text: 'Diagnosed why car-page leads fell after a site redesign and specified new entry points; in the first month, **81%** of car-page leads started at them (a share, not a lift).',
           },
           {
             topic: 'pages',
-            text: 'Won director approval to fix two online purchase pages before buying more traffic, with **17 changes** ranked into three rounds, and for a car cost tool I prototyped.',
+            text: 'Won director approval for **17 fixes** to two online purchase pages, ranked into three rounds after arguing they should come before more ad spend, and for a car cost tool I prototyped.',
           },
           {
             topic: 'pages',
             web: true,
-            text: 'Kept a single deposit button in the car-page hero; people who tapped it reached payment **4x** as often as those who tapped the mid-page button (5.1% against 1.3%).',
+            text: 'Kept the deposit button in the car-page hero: in its first week, people who tapped it reached the payment step **4x** as often as mid-page tappers (5.1% against 1.3%), mostly returning visitors.',
           },
           {
             topic: 'zalo',
-            text: 'As the business owner, took a **29-model** showroom inside Zalo through legal review and acceptance testing, and chose a rule-based Zalo bot over AI to avoid a new data-processing agreement.',
+            text: 'Acted as business owner of a **29-model** showroom inside Zalo through legal review and acceptance testing, and separately chose a rule-based bot over AI for the Zalo Official Account, avoiding a new data-processing agreement.',
           },
           {
             topic: 'data',
             web: true,
-            text: 'Wrote one event plan for every car and scooter product page and built a self-checking lead dashboard that matches the web total at **99.97%**.',
+            text: 'Wrote one event plan for every car and scooter product page and built a self-checking lead dashboard whose page-level totals add up to the web total (**99.97%** in a test run).',
           },
           {
             topic: 'data',
             web: true,
-            text: 'Ran a deposit audit with AI agents, which found that **49%** of car-deposit sessions start on the homepage and only 10% on a product page.',
+            text: 'Ran a deposit audit with AI agents, which found that about half (**46% to 49%**) of GA4 car deposits started on the homepage, against 10% on a product page.',
           },
         ],
       },
       {
         company: 'VinDynamics',
         logo: 'vindynamics',
-        title: 'Growth and Product Specialist',
+        title: 'Product and Growth Specialist',
         dates: 'Apr 2026 to Sep 2026',
         scope: "Vingroup's humanoid robotics company, which also sells robot training data to AI labs.",
         topics: [
@@ -141,15 +145,15 @@ export const CV = {
         lines: [
           {
             scope: true,
-            text: 'Ran B2B growth for robot training data and robotics across SEO, LinkedIn and Google Ads, email automation and CRM, then moved into product requirements.',
+            text: 'Worked on product requirements for an AI security robot and on AI tools for the sales team, alongside B2B growth for robot training data across SEO, LinkedIn and Google Ads, and lead tracking.',
           },
           {
             topic: 'dyno',
-            text: 'Wrote the requirements for Dyno, an AI security robot, for its parking-lot use case, based on field research at the client site, cutting **18 user stories to the 6** that would change the build.',
+            text: "Led requirements for two of Dyno's five priority use cases (parking violations, trash and flammable items): site research, BRDs and user stories, cutting **18 parking stories to the 6** that would change the build.",
           },
           {
             topic: 'tools',
-            text: 'Built an AI research agent (n8n, Claude) that ranked prospects using data from 20+ live sources and drafted outreach for the sales team to send; it researched **52 prospects** in a two-week run.',
+            text: 'Built an AI research agent (n8n, Claude) that researched **52 prospects** in a two-week run; BD preferred writing their own messages, and the June review kept it for research context.',
           },
           {
             topic: 'tools',
@@ -158,11 +162,6 @@ export const CV = {
           {
             topic: 'web',
             text: 'Specified a buyer-intent lead path for the website and independently set up a four-layer BigQuery warehouse that joined web, ad and lead data daily.',
-          },
-          {
-            topic: 'web',
-            web: true,
-            text: 'My manager rated the warehouse, tracking and lead automation **5/5** at the mid-year review.',
           },
         ],
       },
@@ -180,13 +179,7 @@ export const CV = {
             lines: [
               {
                 scope: true,
-                text: 'Managed rider lifecycle CRM in CleverTap by segment, province and service (bike, car, express, food), and trained colleagues on the tool.',
-              },
-              {
-                text: 'Designed 30+ behavior-triggered rider journeys in CleverTap, measured weekly by trips rather than clicks; riders in the 14 journeys for new and lapsed riders took **1.7M trips** by September 2025.',
-              },
-              {
-                text: "Turned down the idea of booking new riders' first trips on their behalf, since it would shift demand rather than create it, and wrote the messaging rules all journeys followed.",
+                text: 'Analyzed rider funnels for product and UX proposals and managed rider lifecycle CRM in CleverTap by segment, province and service (bike, car, express, food), training colleagues on the tool.',
               },
               {
                 text: "Proposed a user-based Journey Funnel Index, from install to completed trip, for the Growth CX team's KPIs, plus six app UX changes for the product team.",
@@ -195,21 +188,27 @@ export const CV = {
                 text: 'Traced where food orders stalled across **211,272** add-to-cart events and planned four fixes, starting with a free-delivery prompt.',
               },
               {
+                text: "Turned down the idea of booking new riders' first trips on their behalf, since it would shift demand rather than create it, and wrote the messaging rules all journeys followed.",
+              },
+              {
+                text: 'Designed 30+ behavior-triggered rider journeys by April 2026, tracked weekly by trips rather than clicks; riders took **1.7M trips** while in the 14 journeys for new and lapsed riders by September 2025 (CleverTap count, no holdout).',
+              },
+              {
                 web: true,
                 text: 'Set up three journeys for the Xanh SM team in the Philippines.',
               },
             ],
           },
           {
-            title: 'Young Talent program: rider marketing, then driver supply',
+            title: 'Young Talent, Driver Supply and Brand',
             dates: 'Jul 2024 to Jul 2025',
             lines: [
               {
                 scope: true,
-                text: 'Planned and ran multichannel driver recruitment campaigns across seeding, landing pages, KOLs and offline events.',
+                text: 'Ran driver recruitment marketing across seeding, landing pages, KOLs, referral and offline events, judged by cost per lead and lead-to-interview rate.',
               },
               {
-                text: 'Led the organic side of the move to online recruitment for motorbike drivers; in June 2025 the share of new drivers recruited online rose from **24% to 53%** and cost per new driver fell 35%.',
+                text: "Led seeding content in the shift to online recruitment for motorbike drivers; online marketing's share of new Bike drivers rose from 24% (April and May) to **53%** (June 2025), and cost per new driver fell 34%.",
               },
               { text: 'Ran the Nữ Tài Xanh campaign for women drivers, from planning through the content brief.' },
             ],
@@ -227,7 +226,7 @@ export const CV = {
       dates: 'Oct 2023 to Feb 2024',
       lines: [
         {
-          text: 'Surveyed **15** pen retailers in Hanoi with store checks and customer interviews, then analyzed the results in SPSS to shape the 2024 pen line.',
+          text: 'Surveyed **15** pen retailers in Hanoi and analyzed the results in SPSS to shape the 2024 pen line, working with the OEM team.',
         },
         {
           text: 'Developed the concept, name and go-to-market plan for a mid-range gel pen, including support for dealers with slow-moving stock.',
@@ -252,7 +251,7 @@ export const CV = {
     },
     {
       name: 'AI work system',
-      text: 'a personal knowledge base I built with Claude Code from 2,002 AI chats. Nightly agents keep it current, and it holds 75 reusable skills.',
+      text: 'a personal knowledge base I built with Claude Code from 2,002 AI chats. Nightly agents keep it current, and it holds 75 skills I created or curated.',
       case: 'ai-work-system',
     },
   ],

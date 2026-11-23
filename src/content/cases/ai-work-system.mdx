@@ -14,7 +14,7 @@ tools: [Claude Code, Claude, Obsidian]
 tiles:
   - { value: "2,002", label: "AI chats turned into source files", note: "268 from Claude and 1,734 from ChatGPT" }
   - { value: "2,633", label: "Links between 221 notes", note: "every note has at least three, checked by a script on 20 Nov 2026" }
-  - { value: "75", label: "Reusable skills in my library", note: "methods written once, used across companies" }
+  - { value: "75", label: "Skills in my library, created or curated", note: "methods I reuse across companies" }
 glance:
   problem: "Three years of work and study lived in about 2,000 AI chats. Every new conversation started from zero, and I explained the same methods again and again."
   did: "I designed a three-layer knowledge base, had Claude Code build the converters, an agent that enforces how notes link, and nightly jobs that file new chats and documents."
@@ -94,7 +94,7 @@ The vault lives on my machine under git. I turned down sync extensions that coul
 - **Converters** for Claude and ChatGPT exports, Claude Code sessions and claude.ai projects, plus scripts that build the index, lint the vault and measure the link graph: 13 scripts in all.
 - **A link-keeper agent and five vault skills** for ingesting sources, saving a work session, syncing chats, linting and weaving links.
 - **Two scheduled jobs:** every night at 9:35 pm the system saves the day's chats and reads anything I drop in the inbox; every Sunday evening it syncs skills, re-links and cleans up. Each run ends with a git commit and a short report.
-- **A skill library of 75 methods**, from growth diagnosis to requirement writing, each written once and reused.
+- **A library of 75 skills I created or curated**, from growth diagnosis to requirement writing, reused across projects.
 
 <Figure caption="What the system holds, counted on 20 November 2026.">
   <DataTable

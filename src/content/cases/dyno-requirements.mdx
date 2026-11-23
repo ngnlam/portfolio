@@ -6,7 +6,7 @@ order: 5
 company: VinDynamics
 year: "2026"
 role: Requirements lead
-team: "Two teammates (site research, team BRD), a senior PM (review), engineering (build), VCS security staff (users)"
+team: "Two teammates (site research, team BRD), a senior PM (review), engineering (system requirements), VCS security staff (users)"
 timeline: "Aug 2026"
 status: "Requirements handed over, Aug 2026"
 stages: [Discover, Define, Decide]
@@ -17,10 +17,10 @@ tiles:
 glance:
   problem: "VCS wanted Dyno, VinDynamics' humanoid robot, to patrol its parking basements. The brief was a wish list, with nothing on how guards actually work."
   did: "I went on site, interviewed the guards, and specified what the robot must detect, what goes in each alert, and which calls stay with a person."
-  role: "I drove two of five priority use cases, including the parking spec."
+  role: "I led requirements for two of Dyno's five priority use cases: parking violations, and trash and flammable items."
 roles:
-  mine: "The parking and trash use cases, the parking requirement spec and the flow diagrams."
-  team: "Two teammates ran the site visit with me and co-own the combined BRD; a senior PM reviewed it; engineering builds; VCS guards were interviewed."
+  mine: "Site research, the BRDs and user stories for the parking and trash use cases, the parking requirement spec and the flow diagrams."
+  team: "Two teammates ran the site visit with me and co-own the combined BRD; a senior PM reviewed it; engineering wrote the system-level requirements; VCS guards were interviewed."
 next: car-product-pages
 card:
   teaser: "A client wanted Dyno, a humanoid robot with a perception model, to patrol its parking basements. I went on site, defined what it must detect and which calls stay with a guard, and handed engineering testable requirements."
@@ -78,7 +78,7 @@ Every BRD I wrote opens with how the work is done today, before any robot featur
 </Decision>
 <Decision title="Keep only stories that change the build">
 
-I cut 18 user stories to 13, then to 6, removing any story that would not change what engineering builds. The rest follow the life of an alert, from detection to closing the case.
+For the parking use case I cut 18 user stories to 13, then to 6, removing any story that would not change what engineering builds. The rest follow the life of an alert, from detection to closing the case.
 
 </Decision>
 <Decision title="Detect and alert, then let a person decide">
@@ -110,7 +110,7 @@ Detection rates and a 10-second alert time are marked as assumptions to confirm 
 
 <Section id="shipped" title="Two BRDs, one spec, one shared template">
 
-I delivered two BRDs, for parking violations and for trash or flammable items, and a parking spec that engineering could test against. The field work behind them: 72 minutes of recorded interviews with security staff and 54 site photos.
+I wrote the BRDs for my two use cases, parking violations and trash or flammable items, within the team's combined BRD, plus a parking spec that engineering could test against. The field work behind them: 72 minutes of recorded interviews with security staff and 54 site photos.
 
 <Figure caption="What the parking spec defines, counted.">
   <DataTable
@@ -129,10 +129,10 @@ I delivered two BRDs, for parking violations and for trash or flammable items, a
 
 </Section>
 
-<Section id="results" title="Handed to engineering, partly built">
+<Section id="results" title="Handed over in August, and the client project is still in R&D">
 
 - I handed the requirements over at the end of August, when I moved to VinFast.
-- The team's combined BRD carries my flow diagrams, and the project continued in R&D with the client.
+- The team's combined BRD carries my flow diagrams. It was not yet signed off when I left, and the client project is still in R&D.
 - **Next:** confirm detection accuracy on site against the targets in the spec.
 
 </Section>
