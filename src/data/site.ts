@@ -2,7 +2,7 @@
 export const SITE = {
   name: 'Leo Lam Nguyen',
   url: 'https://leolamnguyen.netlify.app',
-  role: 'AI Product Builder',
+  role: 'Digital Product Builder',
   location: 'Hanoi, Vietnam',
   email: 'lamnguyen.ptpl@gmail.com',
   linkedin: 'https://www.linkedin.com/in/leolamngn',

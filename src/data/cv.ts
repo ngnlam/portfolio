@@ -50,7 +50,7 @@ export interface CvJob {
 
 export const CV = {
   name: 'Leo Lam Nguyen',
-  headline: 'Product and growth across AI agents and e-commerce | Vingroup: VinFast, VinDynamics, Xanh SM',
+  headline: 'Product and growth: requirements, launches and measurement | Vingroup: VinFast, VinDynamics, Xanh SM',
   location: 'Hanoi, Vietnam',
   email: 'lamnguyen.ptpl@gmail.com',
   linkedin: { label: 'linkedin.com/in/leolamngn', href: 'https://www.linkedin.com/in/leolamngn' },
@@ -58,13 +58,13 @@ export const CV = {
 
   /** PDF summary, implied first person. */
   summary:
-    "Product and growth specialist with three years of experience, most recently in AI agents, e-commerce, robotics and ride-hailing across the Vingroup ecosystem. Launched an AI sales agent on VinFast's Messenger sales page in six days, with price answers grounded in approved product files; after a manager review found gaps in its installment answers, fixed them within two days, taking complete answers from 0% on launch day to between 84% and 93% a day. Before that, led requirements for two use cases of an AI security robot at VinDynamics and built behavior-based rider journeys at Xanh SM.",
+    "Product and growth specialist with over two years in the Vingroup ecosystem, across e-commerce, ride-hailing, robotics and AI. Works from where users get stuck to requirements and measurement. At VinFast, specified new entry points for the car pages after a redesign cut leads, acted as business owner of a 29-model showroom inside Zalo, and launched an AI sales agent in six days, then ran an error analysis of its first week and a 23-question regression test. Before that, led requirements for two use cases of an AI security robot at VinDynamics and built behavior-based rider journeys at Xanh SM, judged by trips rather than clicks.",
 
   /** About page intro, first person. Same facts as the summary. */
   intro: {
     lead: "Hi, I'm Leo, a product and growth specialist in Hanoi.",
     body:
-      "I've spent three years in product and growth, most recently in AI agents, e-commerce, robotics and ride-hailing across the Vingroup ecosystem. At VinFast I launched an AI sales agent in six days, with price answers grounded in approved product files; after a manager review found gaps in its installment answers, I fixed them within two days, taking complete answers from 0% on launch day to between 84% and 93% a day. Before that I led requirements for two use cases of an AI security robot at VinDynamics and built behavior-based rider journeys at Xanh SM.",
+      "I've spent over two years in the Vingroup ecosystem, across e-commerce, ride-hailing, robotics and AI, moving from growth into product. Much of my work is finding where users get stuck, writing it up for the build team and measuring what changed. At VinFast I specified new entry points for the car pages after a redesign cut leads, acted as business owner of a 29-model showroom inside Zalo, and launched an AI sales agent in six days, then ran an error analysis of its first week and a 23-question regression test. Before that I led requirements for two use cases of an AI security robot at VinDynamics and built behavior-based rider journeys at Xanh SM, judged by trips rather than clicks.",
   },
 
   group: {

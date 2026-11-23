@@ -12,7 +12,8 @@ import { SITE } from '../data/site';
 import vf9Hero from '../assets/images/home/vf9-live-hero.jpg';
 import agentFixes from '../assets/images/cases/ai-agent/real-installment-answer.png';
 import agentKnowledge from '../assets/images/cases/ai-agent/real-knowledge-test-chat.png';
-import factCard from '../assets/images/cases/vd-ai/fact-check-card.png';
+import dynoWide from '../assets/images/cases/dyno/dyno-wide.jpg';
+import { HOW_I_WORK } from '../data/how-i-work';
 
 const person = {
   '@context': 'https://schema.org',
@@ -32,15 +33,15 @@ const agentRules = [
 ];
 ---
 <BaseLayout
-  title="Leo Lam Nguyen | AI Product Builder"
-  description="I turn what users actually do into what a product should do next. AI agents, evals and product case studies from VinFast, VinDynamics and a product of my own."
+  title="Leo Lam Nguyen | Digital Product Builder"
+  description="I turn what users actually do into what a product should do next: requirements, launches and measurement at VinFast, VinDynamics and Xanh SM, plus a product of my own."
   jsonLd={person}
 >
   <section class="container hero" aria-labelledby="hero-title">
     <div class="hero__text">
-      <span class="lbl muted">AI product builder in Hanoi</span>
+      <span class="lbl muted">Digital product builder in Hanoi</span>
       <h1 id="hero-title" class="d h-hero">I turn what users <span class="hero__hl">actually do</span> into what a product should do next.</h1>
-      <p class="hero__sub">Then I ship it, measure it, and make it better. Lately that means an AI sales agent that answered 98% of messages from VinFast buyers in its first week, with the evals and guardrails that keep it honest.</p>
+      <p class="hero__sub">Then I turn it into requirements or a working build, and measure what changed. Recent work: entry points for VinFast's car pages, requirements for an AI security robot, rider journeys at Xanh SM judged by trips, and an AI sales agent with evals and guardrails.</p>
       <div class="hero__actions">
         <Button href="/work" variant="primary" block>See the work</Button>
         <Button href="#talk" variant="secondary" block>Say hello</Button>
@@ -114,24 +115,38 @@ const agentRules = [
         </a>
 
         <a
-          href="/work/bd-research-agent"
+          href="/work/dyno-requirements"
           class="card case-card"
           data-umami-event="case_card_click"
-          data-umami-event-case="bd-research-agent"
+          data-umami-event-case="dyno-requirements"
           data-umami-event-from="home"
         >
           <span class="case-card__brand">
             <Image src={LOGOS.vindynamics.src} alt="VinDynamics" height={32} densities={[1, 2]} class="case-card__logo case-card__logo--sm" />
             <span class="lbl lbl--sm muted">2026</span>
           </span>
-          <Image src={factCard} alt="A recreated Teams card from the document fact-checker: verdict USE_WITH_FIXES, score 62 with high confidence, the top concerns and a processing time of 79 seconds." widths={[400, 700, 1000]} sizes="(min-width: 900px) 360px, 90vw" class="dyno-media agent-media" />
-          <h3 class="d case-card__title">52 prospects researched in two weeks, and three more AI tools for a B2B team</h3>
-          <span class="case-card__result dash-top"><span class="lbl">Up to 20 researched prospects on BD's desk each morning</span></span>
+          <Image src={dynoWide} alt="Dyno standing in an underground car park, under pipes and lights, in front of a yellow and black striped wall." widths={[400, 700, 1000]} sizes="(min-width: 900px) 360px, 90vw" class="dyno-media" />
+          <h3 class="d case-card__title">Requirements for an AI security robot: what Dyno detects, and what stays with the guard</h3>
+          <span class="case-card__result dash-top"><span class="lbl">18 parking user stories cut to the 6 that would change the build</span></span>
         </a>
       </div>
     </div>
 
     <Button href="/work" variant="secondary" class="only-mobile-flex">See all work</Button>
+  </section>
+
+  <section class="container how section" aria-labelledby="how-title">
+    <h2 id="how-title" class="d h-section">How I take a feature from problem to launch</h2>
+    <ol class="how__list">
+      {HOW_I_WORK.map((step) => (
+        <li class="how__step">
+          <span class="lbl lbl--sm clay">{step.stage}</span>
+          <h3 class="d how__title">{step.title}</h3>
+          <p class="how__text">{step.text}</p>
+          <a class="ul how__link" href={`/work/${step.slug}`} data-umami-event="case_card_click" data-umami-event-case={step.slug} data-umami-event-from="home_how">{step.linkLabel}</a>
+        </li>
+      ))}
+    </ol>
   </section>
 
   <QuoteRotator />
@@ -271,6 +286,17 @@ const agentRules = [
   @media (min-width: 900px) { .case-card :global(.dyno-media) { height: 140px; } }
   .case-card :global(.agent-media) { object-position: center 38%; }
 
+  /* How I work */
+  .how { display: flex; flex-direction: column; gap: 24px; }
+  @media (min-width: 900px) { .how { gap: 40px; } }
+  .how__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  @media (min-width: 640px) { .how__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1100px) { .how__list { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; } }
+  .how__step { background: var(--color-white); border: var(--line); border-radius: var(--radius-md); padding: 20px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  @media (min-width: 900px) { .how__step { padding: 24px; } }
+  .how__title { font-size: 22px; line-height: 1.2; }
+  .how__text { font-size: 16px; line-height: 1.55; }
+  .how__link { margin-top: auto; font-weight: 500; }
   /* Lab teaser */
   .lab { display: flex; flex-direction: column; gap: 20px; }
   @media (min-width: 900px) { .lab { gap: 40px; } }
